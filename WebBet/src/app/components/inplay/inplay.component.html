@@ -1,0 +1,169 @@
+<ul id="inPlayTab" class="tab col3">
+    <li><a id="inplay" [ngClass]="{'select':selectedTab=='inplay'}" (click)="changeTab('inplay');">{{Update?.inplay}}</a></li>
+    <li><a id="today" [ngClass]="{'select':selectedTab=='today'}" (click)="changeTab('today');">{{Update?.today}}</a></li>
+    <li><a id="tomorrow" [ngClass]="{'select':selectedTab=='tomorrow'}" (click)="changeTab('tomorrow');">{{Update?.tomorrow}}</a>
+    </li>
+</ul>
+<div id="sportFilter" class="function-wrap" *ngIf="selectedTab!='inplay'">
+    <ul class="filter-list">
+        <li class="filter-head">Sport Filters:</li>
+        <li class="filter-content">
+            <ng-container *ngFor="let sport of sportListFilter;trackBy:trackBySport; let index = index;let first=first">
+                <span id="sport_{{sport.eventTypeId}}" *ngIf="sport.isShow"
+                    [ngClass]="{'filter-first':first}">{{sport.sportName | titlecase}}</span>
+            </ng-container>
+        </li>
+        <li class="filter-btn">
+            <a id="sportFilterPopup" class="btn" (click)="openFilter()">Filter</a>
+            <a id="sportFilterclosePopup" class="btn" (click)="closeFilter('cancel')" style="display: none;">Filter</a>
+        </li>
+    </ul>
+    <div id="sportFilterContainer" class="filter-pop" style="display: none;">
+        <ul>
+            <li>
+                <input name="sportsFilter" value="-1" id="filter-all" [(ngModel)]="selectedAll" type="checkbox"
+                    (change)="checkAll();"><label for="filter-all">All</label>
+            </li>
+
+            <ng-container *ngFor="let sport of sportListFilter;trackBy:trackBySport; let index = index;let first=first">
+                <li>
+                    <input name="sportsFilter" value="{{sport.eventTypeId}}" id="filter-{{sport.eventTypeId}}"
+                        [(ngModel)]="sport.selected" type="checkbox"><label
+                        for="filter-{{sport.eventTypeId}}">{{sport.sportName}}</label>
+                </li>
+            </ng-container>
+
+        </ul>
+        <div class="btn-wrap">
+            <a id="sportFilterSave" class="btn-send" (click)="closeFilter('save')">Save</a>
+            <a id="sportFilterCancel" class="btn" (click)="closeFilter('cancel')">Cancel</a>
+        </div>
+    </div>
+</div>
+
+<div id="overWrap" class="over-wrap"
+    [ngStyle]="{'height': selectedTab=='inplay'?'calc(100% - 74px)':'calc(100% - 129px)'}">
+    <!-- Sports List Wrap -->
+    <div id="sportListWrap" class="sport_list-wrap" *ngIf="selectedTab!='inplay'">
+
+        <div id="noDataDiv" class="no-data" style="display:none;">
+            <p>There are no events to be displayed.</p>
+        </div>
+        <ng-container *ngFor="let sport of sportList;trackBy:trackBySport; let index = index">
+            <ng-container *ngIf="sport.isShow">
+                <ng-container *ngFor="let match of sport.matches | sortByDate:'matchDate';trackBy:trackByEvent">
+                    <dl class="game-list-col" id="todayEvent_{{match.match}}">
+                        <dt id="openTime" class="time">{{match.time | date:'HH:mm'}}</dt>
+                        <dd id="eventDetail">{{match.sportName}}<img class="fromto"
+                                src="https://b2c.static112233.com/assets/images/transparent.gif">--<img class="fromto"
+                                src="https://b2c.static112233.com/assets/images/transparent.gif">
+                            <a [routerLink]="match.isTeenpatti ? ['/casino/',match.gameName] :['/fullmarkets',match.eventId]"
+                                (click)="toggleFavourite(match)" id="vsNameClick"><strong>{{match.home}}</strong>
+                                v
+                                <strong>{{match.away}}</strong>
+                            </a>
+                        </dd>
+                    </dl>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+
+    </div>
+    <ng-container *ngIf="selectedTab=='inplay'">
+        <ng-container *ngFor="let sport of sportList;trackBy:trackBySport; let index = index">
+            <div class="game-wrap col3" id="inPlayEventType_{{sport.eventTypeId}}">
+                <h3>
+                    <a id="eventType" class="to-expand" appToggleClass>{{sport.sportsName | titlecase}}</a>
+                </h3>
+
+                <ul class="slip-head">
+                    <li class="col-game"></li>
+                    <li class="col-visit">1</li>
+                    <li class="col-draw">x</li>
+                    <li class="col-home">2</li>
+                    <li class="col-info"></li>
+                </ul>
+
+                <div id="inplayGameList" class="game-list">
+                    <ng-container *ngFor="let match of sport.matches | sortByDate:'matchDate';trackBy:trackByEvent">
+                        <dl id="highLightEvent_{{match.eventId}}" class="game-list-col"
+                            [ngClass]="{'disabled':!match.isBettable}" style="display: block;">
+                            <dt id="eventInfo" style="cursor: pointer">
+                                <img id="playIcon"
+                                    [ngClass]="{'icon-in_play':match.inplay || match.isBettable,'icon-no_play':!match.inplay && !match.isBettable}"
+                                    src="https://b2c.static112233.com/assets/images/transparent.gif">
+                                <span id="lowLiquidityTag" class="game-low_liq" style="display: none;">Low
+                                    Liquidity</span>
+                                <a id="vsName"
+                                    [routerLink]="match.isTeenpatti ? ['/casino/',match.gameName] :['/fullmarkets',match.eventId]">{{match.home}}<span class="in_play" *ngIf="match.score">{{match.score?.score}}</span><span *ngIf="match.away && !match.score">v</span> {{match.away}}</a>
+                                <span id="dateTimeInfo" class="game-list-time">
+                                    <span class="in_play" *ngIf="match.inplay">In-Play {{match.score?.timeElapsed}}</span>
+                                    {{match.inplay?'':match.time | date:'yyyy-MM-dd HH:mm'}}
+                                    {{match.inplay?'':match.time | date:'yyyy-MM-dd HH:mm'}}
+                                </span>
+                                <span class="game-fancy in-play" id="fancyBetIcon"
+                                    style="cursor: pointer;display: inline-flex;" *ngIf="match.isFancy">Fancy</span>
+                                <!-- icon for fancy bet -->
+                                <span class="game-bookmaker in-play" id="bookMakerIcon"
+                                    style="cursor: pointer; display: inline-flex;" *ngIf="match.isBm">BookMaker</span>
+                                <!-- icon for fancy bet -->
+                                <span class="game-sportsbook" id="sportsBookIcon_2" style="display: inline-flex;"
+                                *ngIf="match.isPremium">Premium Cricket</span>
+                                <span class="game-sportsbook" id="feedingSiteIcon"
+                                    style="display: none;">Sportsbook</span>
+                                <span class="game-sportsbook" id="sportsBookIcon_1" style="display: none;">Premium
+                                    Tennis</span>
+                                <span class="game-sportsbook" id="sportsBookIcon_2" style="display: none;">Premium
+                                    Cricket</span>
+                                <span class="game-live" id="streamingIcon" *ngIf="match.videoEnabled">Live</span>
+                                <span class="game-E" id="sportsBookEIcon_1" style="display: none;"><i></i>Soccer</span>
+                                <span class="game-E" id="sportsBookEIcon_4" *ngIf="match.isVir || match.isSrl"><i></i>Cricket</span>
+                            </dt>
+
+                            <dd id="selectTemp" class="col-visit">
+                                <div class="suspend" style="display: none;">
+                                    <span>Suspend</span>
+                                </div>
+                                <a id="btnBack" class="btn-back" side="Back">{{match?.runners ?
+                                    match?.runners[0]?.backPrice:"--"}}&nbsp;</a>
+                                <a id="btnLay" class="btn-lay" side="Lay">{{match?.runners ?
+                                    match?.runners[0]?.layPrice:"--"}}&nbsp;</a>
+                            </dd>
+
+                            <dd class="col-draw">
+                                <div class="suspend" style="display: none;">
+                                    <span>Suspend</span>
+                                </div>
+                                <a id="btnBack" class="btn-back" side="Back">{{match?.runners ?
+                                    match?.runners[2]?.backPrice:"--"}}&nbsp;</a>
+                                <a id="btnLay" class="btn-lay" side="Lay">{{match?.runners ?
+                                    match?.runners[2]?.layPrice:"--"}}&nbsp;</a>
+                            </dd>
+
+                            <dd class="col-home">
+                                <div class="suspend" style="display: none;">
+                                    <span>Suspend</span>
+                                </div>
+                                <a id="btnBack" class="btn-back" side="Back">{{match?.runners ?
+                                    match?.runners[1]?.backPrice:"--"}}&nbsp;</a>
+                                <a id="btnLay" class="btn-lay" side="Lay">{{match?.runners ?
+                                    match?.runners[1]?.layPrice:"--"}}&nbsp;</a>
+                            </dd>
+
+
+                            <dd class="col-info">
+                                <a id="multiMarketPin_{{ match.eventId }}" style="cursor: pointer"
+                                    [ngClass]="{'delete-pin':checkIsMulti('market_'+match.eventId+'_'+match.marketId),'add-pin':!checkIsMulti('market_'+match.eventId+'_'+match.marketId)}"
+                                    (click)="toggleFavourite(match,'market_'+match.eventId+'_'+match.marketId)">Pin</a>
+                            </dd>
+
+
+                        </dl>
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+    <div id="contentBox" class="content-box"></div>
+
+</div>

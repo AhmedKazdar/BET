@@ -1,0 +1,123 @@
+<div class="overlay right-side" id="settingDiv">
+    <div class="side-wrap setting-wrap" id="settingSlide">
+        <div class="side-head">
+            <h3 class="a-setting"><img src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent">{{Update?.setting}}</h3>
+            <a class="close ui-link" id="settingClose" (click)="settingClose()"></a>
+        </div>
+        <div id="coinList" class="side-content">
+            <h3>{{Update?.stake || 'Stake'}}</h3>
+            <dl class="setting-block">
+                <dt>{{Update?.Defaultstake || 'Default Stake'}}<input type="number" id="userCoin" pattern="[0-9]*" data-role="none"></dt>
+            </dl>
+
+            <ng-container *ngIf="stakeSettingData">
+                <dl id="stakeSet" class="setting-block stake-setting">
+                    <dt>{{Update?.QuickStakes}}</dt>
+                    <dd><a id="coin_1" class="btn ui-link select">{{f.stake1.value}}</a></dd>
+                    <dd><a id="coin_2" class="btn ui-link select">{{f.stake2.value}}</a></dd>
+                    <dd><a id="coin_3" class="btn ui-link select">{{f.stake3.value}}</a></dd>
+                    <dd><a id="coin_4" class="btn ui-link select">{{f.stake4.value}}</a></dd>
+                    <dd><a id="coin_5" class="btn ui-link select">{{f.stake5.value}}</a></dd>
+                    <dd><a id="coin_6" class="btn ui-link select">{{f.stake6.value}}</a></dd>
+                    <dd><a id="coin_7" class="btn ui-link">{{f.stake7.value}}</a></dd>
+                    <dd><a id="coin_8" class="btn ui-link">{{f.stake8.value}}</a></dd>
+                    <dd class="col-stake_edit"><a id="edit" class="btn-edit ui-link" (click)="editStake()">{{Update?.EditStakes || 'Edit Stakes'}}</a>
+                    </dd>
+                </dl>
+                <form [formGroup]="StakeSettingForm" (ngSubmit)="SaveBetStakeSetting()">
+
+                    <dl id="editCustomizeStakeList" class="setting-block stake-setting" style="display: none;">
+                        <dt>{{Update?.QuickStakes || 'Quick Stakes'}}</dt>
+                        <dd>
+                            <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">
+                                <input id="stakeEdit_1" numberOnly type="text" pattern="[0-9]*" formControlName="stake1">
+                            </div>
+                        </dd>
+                        <dd>
+                            <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">
+                                <input id="stakeEdit_2" numberOnly type="text" pattern="[0-9]*" formControlName="stake2">
+                            </div>
+                        </dd>
+                        <dd>
+                            <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">
+                                <input id="stakeEdit_3" numberOnly type="text" pattern="[0-9]*" formControlName="stake3">
+                            </div>
+                        </dd>
+                        <dd>
+                            <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">
+                                <input id="stakeEdit_4" numberOnly type="text" pattern="[0-9]*" formControlName="stake4">
+                            </div>
+                        </dd>
+                        <dd>
+                            <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">
+                                <input id="stakeEdit_5" numberOnly type="text" pattern="[0-9]*" formControlName="stake5">
+                            </div>
+                        </dd>
+                        <dd>
+                            <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">
+                                <input id="stakeEdit_6" numberOnly type="text" pattern="[0-9]*" formControlName="stake6">
+                            </div>
+                        </dd>
+                        <dd>
+                            <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">
+                                <input id="stakeEdit_7" numberOnly type="text" pattern="[0-9]*" formControlName="stake7">
+                            </div>
+                        </dd>
+                        <dd>
+                            <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">
+                                <input id="stakeEdit_8" numberOnly type="text" pattern="[0-9]*" formControlName="stake8">
+                            </div>
+                        </dd>
+                        <dd class="col-stake_edit"><a id="ok" class="btn-send ui-link"
+                                (click)="StakeSettingForm.valid?SaveBetStakeSetting():''">{{Update?.ok || 'OK'}}</a></dd>
+                    </dl>
+                </form>
+            </ng-container>
+            <h3>{{Update?.odds || 'Odds'}}</h3>
+            <dl class="setting-block">
+                <dt>{{Update?.Highlightwhenoddschange || 'Highlight when odds change'}}</dt>
+                <dd><a [ngClass]="{'switch_on':isToggle,'switch_off':!isToggle}" id="enableSparkCheck" (click)="enableSparkCheck()"><input type="hidden" id="sparkValue"
+                            value="1"><span></span></a></dd>
+            </dl>
+            <ng-container *ngIf="Parlayenable">
+                <h3>parlay</h3>
+                <dl class="setting-block">
+                    <dt>{{Update?.Parlay || 'Parlay'}}</dt>
+                    <dd><a [ngClass]="{'switch_on':isparlay,'switch_off':!isparlay}" id="enableSparkCheck" (click)="enableparlay()"><input type="hidden" id="sparkValue"
+                                value="1"><span></span></a></dd>
+                </dl>
+            </ng-container>
+
+
+            <!-- <h3>FancyBet</h3>
+            <dl class="setting-block">
+                <dt>Accept Any Odds</dt>
+                <dd><a id="fancyBetAcceptAnyOddsCheckBox" class="switch_on"><span></span></a></dd>
+            </dl>
+
+
+            <h3>SportsBook</h3>
+            <dl class="setting-block">
+                <dt>Accept Any Odds</dt>
+                <dd><a id="sportsBookAcceptAnyOddsCheckBox" class="switch_on"><span></span></a></dd>
+            </dl>
+
+
+            <h3>Binary</h3>
+            <dl class="setting-block">
+                <dt>Accept Any Price</dt>
+                <dd><a id="financialAcceptAnyOddsCheckBox" class="switch_on"><span></span></a></dd>
+            </dl> -->
+
+
+            <ul class="btn-list">
+                <li>
+                    <a id="settingCancel" class="btn ui-link" [ngClass]="{'disable':isStakeEdited}" (click)="isStakeEdited?'':settingClose()">Cancel</a>
+                </li>
+                <li>
+                    <a id="settingSave" class="btn-send ui-link" [ngClass]="{'disable':isStakeEdited}" (click)="isStakeEdited?'':settingClose()">{{Update?.save}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

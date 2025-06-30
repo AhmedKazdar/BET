@@ -1,0 +1,257 @@
+html.cricbuzzer, 
+html.cricbuzzerlive,
+body.cricbuzzerlive,
+body.cricbuzzer {
+    background-color: #000 !important;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+
+
+
+.country-code{
+    height: 42px;
+    width: 60px;
+    border-radius: 1.6vw;
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    width: 20px;
+    height: 23px;
+    border: none;
+    border-radius: 50%;
+}
+
+.close:before {
+    filter: invert(1) !important;
+    background-size: cover !important;
+}
+
+.form-login .social-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.form-login .social-icon a img {
+    position: relative !important;
+    width: 100% !important;
+    height: 100%;
+    padding: 0px !important;
+    border: 2px solid gray;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+}
+
+.ctry {
+    text-align: center;
+    font-size: 15PX;
+    color: #666;
+    width: 23%;
+    height: auto;
+    margin-right: 5px;
+    border-radius: 8px;
+    border: 1px solid #666;
+}
+
+select {
+    height: 50px;
+    width: 25px;
+}
+
+.Dob {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+}
+.terms-anchor{
+  height: auto;
+    display: inline;
+}
+.t-c {
+    display: flex;
+    width: 100% !important;
+}
+
+.terms {
+    color: #000;
+    margin-left: 10px;
+}
+
+.checkbox {
+    width: 100% !important;
+    padding: 10px;
+    margin-left: 5px;
+    margin-top: 2px;
+}
+
+// hr tag
+
+.container {
+    max-width: 100%;
+}
+
+.hr-text {
+    line-height: 1em;
+    position: relative;
+    outline: 0;
+    border: 0;
+    color: black;
+    text-align: center;
+    height: 1.5em;
+    opacity: .5;
+}
+
+.hr-text:before {
+    content: '';
+    background: linear-gradient(to right, transparent, #818078, transparent);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+}
+
+.hr-text:after {
+    content: attr(data-content);
+    position: relative;
+    display: inline-block;
+    color: black;
+    padding: 0 .5em;
+    line-height: 1.5em;
+    color: #818078;
+    background-color: #f0ece1;
+}
+
+// Email popup css
+
+
+.form {
+    padding: 16px;
+    // text-align: center;
+    background-color: #F0ECE1;
+    // box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form button {
+    width: 100%;
+}
+
+
+.telegramFakeButton{
+    height: 42px;
+    background-color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+    padding: 13px 50px 13px 50px;
+    align-items: center;
+    margin: 2px;
+    z-index: 1;
+    pointer-events: none;
+    position: relative;
+    color: #000;
+}
+
+.telegramIcon{
+    background-image: url('data:image/svg+xml,<svg width="22" height="22" xmlns="http://www.w3.org/2000/svg"><g fill="rgb(166,166,166)" fill-rule="nonzero"><path d="M8.292 15.677v3.865a.626.626 0 001.128.37l2.26-3.077-3.388-1.158zM20.738 1.116a.625.625 0 00-.652-.045l-18.75 9.792a.627.627 0 00.087 1.145l5.212 1.782 11.1-9.492-8.59 10.35 8.737 2.985a.628.628 0 00.82-.5l2.291-15.416a.626.626 0 00-.255-.601z"/></g></svg>')
+}
+
+// click and icon changes from here
+
+.phone-popup {
+    height: auto;
+}
+
+.email-popup{
+    height: 24% !important;
+}
+
+.buttonIn {
+    display: flex;
+}
+
+.otp {
+    width: 38% !important;
+    height: 12% !important;
+    cursor: pointer;
+}
+
+.form input{
+    margin-bottom: 3.2vw;
+}
+
+input {
+    box-shadow: none !important;
+}
+
+// Social media css
+
+.float{
+	width:50px;
+	height:50px;
+	background-color:#fff;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;
+}
+
+.my-float{
+    color: #3d3d3d;
+    font-size: 24px;
+}
+
+.fa-google {
+    background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .footer-bottom ul{
+    display: flex;
+    list-style-type: none;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .footer-bottom ul li{
+    padding-right :2px; 
+    padding-left: 2px;
+  }
+
+  .checkbox{
+    background-color: initial;
+    cursor: default;
+    appearance: auto;
+    margin: 0px 3px 3px 3px;
+    padding: 18px;
+    border: initial;
+    width: 40px !important;
+    height: 18px !important;
+  }
+
+  .checkboxlable{
+    display: flex;
+    width: 100%;
+  }

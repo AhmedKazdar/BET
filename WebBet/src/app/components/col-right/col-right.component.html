@@ -1,0 +1,743 @@
+<div class="col-right">
+
+
+    <div class="slip-wrap" [ngClass]="{'no-open-bet_slip':eventBets.length==0}">
+        <h3>
+
+            <a class="to-expand" style="cursor:pointer;" appToggleClass>{{Update?.betslip}}</a>
+        </h3>
+
+
+        <ul id="loadingMsg" class="loading" *ngIf="showLoader">
+            <li><img src="https://b2c.static112233.com/assets/images/loading40.gif"></li>
+            <li id="countDownTime">Place Bets processing...</li>
+        </ul>
+
+
+
+        <div class="message-bet" *ngIf="msgData?.mtype=='exchange' || msgData?.mtype=='casino'">
+            <h4 id="errorMsg" class="{{status}}">{{!msgData.msg?msgData:msgData.msg}}</h4>
+            <p id="betMsg" class="warning" style="display: none"></p>
+        </div>
+
+
+
+        <p id="noBetSlipInfo" *ngIf="!openBet">{{Update?.clickodds}}.</p>
+
+        <ng-container *ngIf="openBet && !showLoader">
+
+            <form [formGroup]="OpenBetForm" (ngSubmit)="!f.odds?.value || !f.stake?.value || msgData?'':BetSubmit()">
+                <div id="betSlipBoard" class="bet_slip" style="display: block;">
+
+
+                    <div id="betList" class="slip-list" style="max-height:calc(100% - 86px);">
+
+
+                        <ng-container *ngIf="f.backlay?.value=='back'">
+                            <ul id="backSlipHeader" class="slip-head" name="slipHeader" style="display: block;">
+                                <li class="col-bet">{{f.backlay?.value | titlecase }} (Bet For)</li>
+                                <li id="oddsHeader" class="col-odd">{{Update?.odds}}</li>
+                                <li id="runsHeader" class="col-odd" style="display: none">Unit:Runs</li>
+                                <li class="col-stake">{{Update?.stake}}</li>
+                                <li class="col-profit">{{Update?.profit}}</li>
+                            </ul>
+                            <div id="header_Back_{{f.matchBfId?.value}}" style="display: block;" count="1">
+                                <h4><img [ngClass]="{'icon-in_play':f.isInplay?.value,'icon-no_play':!f.isInplay?.value}"
+                                        src="https://b2c.static112233.com/assets/images/transparent.gif"> {{f.matchName?.value}}
+                                </h4>
+                                <dl id="bet_{{f.matchBfId?.value}}_{{f.mktId?.value}}_{{f.selectionId?.value}}_1"
+                                    class="slip-back" style="display: block;">
+                                    <dt>
+                                        <a id="delete" class="delete" style="cursor:pointer;"
+                                            (click)="ClearAllSelection();">delete</a>
+                                        <span class="short-amount">{{f.runnerName?.value}}</span>
+                                        <span id="marketName">{{f.marketName?.value}}</span>
+                                    </dt>
+                                    <dd class="col-odd">
+                                        <input id="odds" type="text" maxlength="6" tabindex="0" numberOnly
+                                        *ngIf="f.mtype?.value=='casino'" formControlName="odds" disabled>
+                                        <input id="odds" type="text" maxlength="6" tabindex="0" numberOnly
+                                            *ngIf="f.mtype?.value=='exchange'" formControlName="odds" (keyup)="update()">
+
+                                        <ul class="odd-add">
+                                            <li><a id="oddsUp"  class="up" style="cursor:pointer;"
+                                                    (click)="f.mtype?.value=='exchange'?incOdds():''">up</a></li>
+                                            <li><a id="oddsDown"  class="down" style="cursor:pointer;"
+                                                    (click)="f.mtype?.value=='exchange'?decOdds():''">down</a></li>
+                                        </ul>
+
+                                        <ul id="oddsTipsPoint"></ul>
+
+                                    </dd>
+                                    <dd class="col-stake">
+                                        <input id="inputStake" type="text" value="" maxlength="7" tabindex="0" numberOnly
+                                            formControlName="stake" (keyup)="update()">
+                                        <ul id="listPoint"></ul>
+                                    </dd>
+                                    <dd id="profitLiability" class="col-profit">{{f.profit?.value | number:'1.2-2'}}</dd>
+                                    <dd id="stakePopupList" class="col-stake_list" stakepopuplisttype="extended"
+                                        style="display: block;"
+                                        bet="bet_{{f.matchBfId?.value}}_{{f.mktId?.value}}_{{f.selectionId?.value}}_1">
+                                        <ul>
+                                            <ng-container *ngFor="let stake of stakeSetting;let index=index;">
+                                                <li *ngIf="index<6">
+                                                    <a class="btn" id="selectStake_1" stake="{{stakeSetting[index]}}"
+                                                        style="cursor:pointer;"
+                                                        (click)="addStake(stake);">{{stakeSetting[index]}}</a>
+                                                </li>
+                                            </ng-container>
+                                        </ul>
+                                        <p id="totalStakeP" style="display: none;">Total Stake: <strong
+                                                id="totalStake"></strong>
+                                        </p>
+                                    </dd>
+                                    <!-- dynamic min bet for match odds -->
+                                    <dd class="keep-option">
+                                        <p class="dynamic-min-bet">Min Bet: <strong id="dynamicMinBet">20</strong></p>
+                                    </dd>
+
+                                    <dd id="inningsRuns" class="inn_runs" style="display: none;">
+                                        <dl>
+                                            <dt id="ifRuns"></dt>
+                                            <dd><span id="runsPL" class="green"></span></dd>
+                                            <dt id="ifLess"></dt>
+                                            <dd><span id="lessPL" class="green"></span></dd>
+                                        </dl>
+                                    </dd>
+
+
+                                </dl>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="f.backlay?.value=='lay'">
+                            <ul id="laySlipHeader" class="slip-head" name="slipHeader" style="display: block;">
+                                <li class="col-bet">{{Update?.lay}} (Bet Against)</li>
+                                <li id="oddsHeader" class="col-odd">{{Update?.odds}}</li>
+                                <li id="runsHeader" class="col-odd" style="display: none">Unit:Runs</li>
+                                <li class="col-stake">{{Update?.stake}}</li>
+                                <li class="col-profit">{{Update?.liability}}</li>
+                            </ul>
+                            <div id="header_Lay_{{f.matchBfId?.value}}" style="display: block;" count="1">
+                                <h4><img class="icon-in_play" src="https://b2c.static112233.com/assets/images/transparent.gif">
+                                    {{f.runnerName?.value}}
+                                </h4>
+                                <dl id="bet_{{f.matchBfId?.value}}_{{f.mktId?.value}}_{{f.selectionId?.value}}_1"
+                                    class="slip-lay" style="display: block;">
+                                    <dt>
+                                        <a id="delete" class="delete" style="cursor:pointer;"
+                                            (click)="ClearAllSelection();">delete</a>
+                                        <span class="short-amount">{{f.runnerName?.value}}</span>
+                                        <span id="marketName">{{f.marketName?.value}}</span>
+                                    </dt>
+                                    <dd class="col-odd"> 
+                                        <input id="odds" type="text" maxlength="6" tabindex="0" numberOnly
+                                        *ngIf="f.mtype?.value=='casino'" formControlName="odds" disabled>
+                                        <input id="odds" type="text" maxlength="6" tabindex="0" numberOnly
+                                            *ngIf="f.mtype?.value=='exchange'" formControlName="odds" (keyup)="update()">
+
+                                        <ul class="odd-add">
+                                            <li><a id="oddsUp"  class="up" style="cursor:pointer;"
+                                                    (click)="f.mtype?.value=='exchange'?incOdds():''">up</a></li>
+                                            <li><a id="oddsDown"  class="down" style="cursor:pointer;"
+                                                    (click)="f.mtype?.value=='exchange'?decOdds():''">down</a></li>
+                                        </ul>
+
+                                        <ul id="oddsTipsPoint"></ul>
+
+                                    </dd>
+                                    <dd class="col-stake">
+                                        <input id="inputStake" type="text" value="" maxlength="7" tabindex="0"
+                                            formControlName="stake" (keyup)="update()">
+                                        <ul id="listPoint"></ul>
+                                    </dd>
+                                    <dd id="profitLiability" class="col-profit">{{f.loss?.value | number:'1.2-2'}}</dd>
+                                    <dd id="stakePopupList" class="col-stake_list" stakepopuplisttype="extended"
+                                        style="display: block;"
+                                        bet="bet_{{f.matchBfId?.value}}_{{f.mktId?.value}}_{{f.selectionId?.value}}_1">
+                                        <ul>
+                                            <ng-container *ngFor="let stake of stakeSetting;let index=index;">
+                                                <li *ngIf="index<6">
+                                                    <a class="btn" id="selectStake_1" stake="{{stakeSetting[index]}}"
+                                                        style="cursor:pointer;"
+                                                        (click)="addStake(stake);">{{stakeSetting[index]}}</a>
+                                                </li>
+                                            </ng-container>
+                                        </ul>
+                                        <p id="totalStakeP" style="display: none;">Total Stake: <strong
+                                                id="totalStake"></strong>
+                                        </p>
+                                    </dd>
+                                    <!-- dynamic min bet for match odds -->
+                                    <dd class="keep-option">
+                                        <p class="dynamic-min-bet">Min Bet: <strong id="dynamicMinBet">20</strong></p>
+                                    </dd>
+
+                                    <dd id="inningsRuns" class="inn_runs" style="display: none;">
+                                        <dl>
+                                            <dt id="ifRuns"></dt>
+                                            <dd><span id="runsPL" class="green"></span></dd>
+                                            <dt id="ifLess"></dt>
+                                            <dd><span id="lessPL" class="green"></span></dd>
+                                        </dl>
+                                    </dd>
+
+
+                                </dl>
+                            </div>
+                        </ng-container>
+                    </div>
+
+                    <div id="betSlipFullBtn" class="full_btn">
+                        <dl class="sum">
+                            <dt>{{Update?.liability}}</dt>
+                            <dd>
+                                <span id="total" class="red">{{f.loss?.value | number:'1.2-2'}}</span>
+                            </dd>
+                        </dl>
+
+                        <ul class="btn-wrap">
+                            <li><a id="cancelAll" class="btn" style="cursor:pointer;" tabindex="0"
+                                    (click)="ClearAllSelection();">{{Update?.Cancelall}}</a></li>
+                            <!-- <li><a id="placeBets" class="btn-send" style="cursor:pointer;" tabindex="0"
+                                    (click)="!f.odds?.value || !f.stake?.value || msgData?'':BetSubmit()"
+                                    [ngClass]="{'disable':!f.odds?.value || !f.stake?.value}">Place Bets</a></li> -->
+                            <li><a id="placeBets" class="btn-send" style="cursor:pointer;" tabindex="0"
+                                    (click)="!f.odds?.value || !f.stake?.value?'':BetSubmit()"
+                                    [ngClass]="{'disable':!f.odds?.value || !f.stake?.value}">{{Update?.PlaceBets}}</a></li>
+                            <button type="submit" style="display: none;"></button>
+                        </ul>
+
+                        <ul class="slip-option">
+                            <li>
+                                <input id="comfirmBets" type="checkbox">
+                                <label for="comfirmBets">{{Update?.Pleaseconfirmyourbets}}</label>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </form>
+        </ng-container>
+
+        <div id="confirmBetList" class="slip-list" style="max-height: calc(100% - 96px); display: none">
+
+            <div class="message-bet">
+                <h4 class="warning">Please confirm your bets.</h4>
+                <p>A commission is charged on your net profit from each market.</p>
+            </div>
+
+            <ul id="backSlipHeader" class="slip-head" style="display: none">
+                <li class="col-bet">{{Update?.back}} (Bet For)</li>
+                <li class="col-odd">{{Update?.odds}}</li>
+                <li class="col-stake">{{Update?.stake}}</li>
+                <li class="col-profit">{{Update?.profit}}</li>
+            </ul>
+
+            <ul id="laySlipHeader" class="slip-head" style="display: none">
+                <li class="col-bet">{{Update?.lay}} (Bet Against)</li>
+                <li class="col-odd">{{Update?.odds}}</li>
+                <li class="col-stake">{{Update?.stake}}</li>
+                <li class="col-profit">{{Update?.liability}}</li>
+            </ul>
+
+
+            <div id="confirmHeader" style="display: none">
+                <h4>
+                    <img class="icon-in_play" src="https://b2c.static112233.com/assets/images/transparent.gif">
+                </h4>
+            </div>
+
+
+
+            <dl id="confirmBetTemplate" class="slip-back" style="display: none">
+                <dt>
+                    <span id="slipType" class="slip-type">--</span>
+                    <span id="selectionName">--</span>
+                    <span id="marketName">--</span>
+                </dt>
+                <dd id="price" class="col-odd">--</dd>
+                <dd id="size" class="col-stake">--</dd>
+                <dd id="profitLiability" class="col-profit">--</dd>
+            </dl>
+
+
+        </div>
+
+        <div id="confirmBetFullBtn" class="full_btn" style="display: none">
+            <dl class="sum">
+                <dt></dt>
+                <dd>
+                    <span></span>
+                </dd>
+            </dl>
+
+            <ul class="btn-wrap">
+                <li><a id="editBets" class="btn" style="cursor:pointer;">Edit Bets</a></li>
+                <li><a id="submitBets" class="btn-send" style="cursor:pointer;">Confirm Bets</a></li>
+            </ul>
+
+            <ul class="slip-option">
+                <li><input id="comfirmBets" type="checkbox" checked="checked"><label>Confirm bets before placing</label>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <div class="matched-wrap" style="height: calc(100% - 26px);">
+
+        <h3>
+            <a id="openBetsRefresh" class="slip_refresh" style="cursor:pointer;">Refresh</a>
+            <a class="to-expand" style="cursor:pointer;" appToggleClass>{{Update?.OpenBets}}</a>
+        </h3>
+
+
+        <div class="message-bet">
+            <h4 id="oneClickMsg" class="" style="display: none"></h4>
+        </div>
+
+
+        <div id="oneClickLoadingWrap" class="one_click-loading" style="display: none">
+            <div id="loadPending" class="load-pending" style="display: none">
+                <strong id="pendingNum"></strong>
+                pending...
+            </div>
+            <ul class="loading">
+                <li><img src="https://b2c.static112233.com/assets/images/loading40.gif"></li>
+                <li id="oneClickTime">Place Bets</li>
+            </ul>
+        </div>
+
+
+        <div class="message-bet">
+            <h4 id="editErrorMsg" class="error" style="display: none"></h4>
+            <p id="editBetMsg" class="warning" style="display: none"></p>
+        </div>
+
+
+
+        <ul id="processingImg" class="loading" style="display: none">
+            <li><img src="https://b2c.static112233.com/assets/images/loading40.gif"></li>
+            <li>Processing...</li>
+        </ul>
+
+        <!-- calc(100% - 25px) -->
+        <div id="matchSection" style="height: calc(100% - 0px)">
+
+
+            <div id="openBetSelectionBox" class="slip-sort">
+
+                <select id="selectMenu" name="" [(ngModel)]="selectedMarket" (change)="openMarketBets(selectedMarket)">
+                    <!-- <option value=""></option> -->
+                    <ng-container *ngFor="let match of eventBets;trackBy:trackByMatch">
+                        <ng-container *ngFor="let market of match.markets;trackBy:trackByMarket">
+                            <option [ngValue]="market">{{match.eventName}} - {{market.name}}</option>
+                        </ng-container>
+                    </ng-container>
+                </select>
+
+
+
+            </div>
+
+
+            <div id="openBetSlip" class="bet_slip over-wrap" style="height: calc(100% - 350px); display: block;">
+
+
+                <ul id="unMatchTicketHead" class="slip-head" style="display: none;">
+                    <li class="col-bet"><strong id="headerInfo">Unmatched</strong></li>
+
+                </ul>
+
+
+
+                <div id="unMatchTicketList" class="slip-list" style="display: none;">
+
+                    <ul id="backSlipHeader" class="matched-head" style="">
+                        <li class="col-bet">Back (Bet For)</li>
+                        <li class="col-odd">Odds</li>
+                        <li class="col-stake">Stake</li>
+                        <li class="col-profit">Profit</li>
+                    </ul>
+                    <dl id="unMatchTicket_316383629" class="slip-back" style="display: block;"
+                        unmatchticketid="316383629" eventid="30213405" marketid="1.177541656"
+                        betfairbetid="220954030366" sidetype="1" status="2" categorytype="1" persistencetype="0">
+                        <dd id="betInfo" class="refer" style="display: none;">
+                            <span id="betId">Ref: --</span>
+                            <span id="placeDate">xx-xx-2016 --:--</span>
+                        </dd>
+                        <dt id="marketNameDt">
+                            <a id="delete" class="delete" style="cursor:pointer;">delete</a>
+                            <span id="slipType" class="slip-type">Back</span><span class="short-amount">Melbourne
+                                Stars</span>
+                            <span id="marketName">Match Odds</span>
+                        </dt>
+                        <dd id="price" class="col-odd">15.5</dd>
+                        <dd id="size" class="col-stake" title="$10"> 10.00</dd>
+                        <dd id="profitLiability" class="col-profit"> 145.00</dd>
+
+
+                        <dd id="inningsRuns" class="inn_runs" style="display: none;">
+                            <dl>
+                                <dt id="ifRuns"></dt>
+                                <dd><span id="runsPL" class="green">$0.00</span></dd>
+                                <dt id="ifLess"></dt>
+                                <dd><span id="lessPL" class="green">$0.00</span></dd>
+                            </dl>
+                        </dd>
+
+
+                        <dd id="keepOption" class="keep-option" style="display: none;">
+                            At In-Play, this unmatched bet will be
+                            <span id="editKeepOption" class="edit">cancel</span>
+                        </dd>
+                    </dl>
+
+                    <ul id="laySlipHeader" class="matched-head" style="">
+                        <li class="col-bet">Lay (Bet Against)</li>
+                        <li class="col-odd">Odds</li>
+                        <li class="col-stake">Stake</li>
+                        <li class="col-profit">Liability</li>
+                    </ul>
+                    <dl id="unMatchTicket_316383652" class="slip-lay" style="display: block;"
+                        unmatchticketid="316383652" eventid="30213405" marketid="1.177541656"
+                        betfairbetid="220954046288" sidetype="2" status="2" categorytype="1" persistencetype="0">
+                        <dd id="betInfo" class="refer" style="display: none;">
+                            <span id="betId">Ref: --</span>
+                            <span id="placeDate">xx-xx-2016 --:--</span>
+                        </dd>
+                        <dt id="marketNameDt">
+                            <a id="delete" class="delete" style="cursor:pointer;">delete</a>
+                            <span id="slipType" class="slip-type">Lay</span><span class="short-amount">Melbourne
+                                Stars</span>
+                            <span id="marketName">Match Odds</span>
+                        </dt>
+                        <dd id="price" class="col-odd">1.01</dd>
+                        <dd id="size" class="col-stake" title="$60"> 60.00</dd>
+                        <dd id="profitLiability" class="col-profit"> 0.60</dd>
+
+
+                        <dd id="inningsRuns" class="inn_runs" style="display: none;">
+                            <dl>
+                                <dt id="ifRuns"></dt>
+                                <dd><span id="runsPL" class="green">$0.00</span></dd>
+                                <dt id="ifLess"></dt>
+                                <dd><span id="lessPL" class="green">$0.00</span></dd>
+                            </dl>
+                        </dd>
+
+
+                        <dd id="keepOption" class="keep-option" style="display: none;">
+                            At In-Play, this unmatched bet will be
+                            <span id="editKeepOption" class="edit">cancel</span>
+                        </dd>
+                    </dl>
+
+
+
+
+                    <dl id="unMatchTicketTemplate" class="slip-lay" style="display: none;">
+                        <dd id="betInfo" class="refer" style="display: none;">
+                            <span id="betId">Ref: --</span>
+                            <span id="placeDate">xx-xx-2016 --:--</span>
+                        </dd>
+                        <dt id="marketNameDt">
+                            <a id="delete" class="delete" style="cursor:pointer;">delete</a>
+                            <span id="slipType" class="slip-type">--</span>
+                            <span id="marketName">--</span>
+                        </dt>
+                        <dd id="price" class="col-odd">--</dd>
+                        <dd id="size" class="col-stake">--</dd>
+                        <dd id="profitLiability" class="col-profit">--</dd>
+
+
+                        <dd id="inningsRuns" class="inn_runs" style="display: none;">
+                            <dl>
+                                <dt id="ifRuns"></dt>
+                                <dd><span id="runsPL" class="green">$0.00</span></dd>
+                                <dt id="ifLess"></dt>
+                                <dd><span id="lessPL" class="green">$0.00</span></dd>
+                            </dl>
+                        </dd>
+
+
+                        <dd id="keepOption" class="keep-option" style="display: none;">
+                            At In-Play, this unmatched bet will be
+                            <span id="editKeepOption" class="edit">
+                            </span>
+                        </dd>
+                    </dl>
+
+
+                </div>
+
+
+                <div id="unMatchFullBtn" class="full_btn" style="display: none;">
+                    <dl class="sum">
+
+                    </dl>
+
+                    <ul class="btn-wrap">
+                        <li><a id="cancelAllUnMatch" class="btn" style="cursor:pointer;" tabindex="0">Cancel All</a>
+                        </li>
+                        <li><a id="editAllBets" class="btn-send" style="cursor:pointer;" tabindex="0">Edit Bets</a></li>
+                    </ul>
+                </div>
+
+
+
+
+                <ul id="stakePopupList" class="stake-popup" stakepopuplisttype="template" style="display: none;">
+                    <li><a id="selectStake_1" stake="5000" style="cursor:pointer;">5000</a></li>
+                    <li><a id="selectStake_2" stake="10000" style="cursor:pointer;">10000</a></li>
+                    <li><a id="selectStake_3" stake="20000" style="cursor:pointer;">20000</a></li>
+                    <li><a id="selectStake_4" stake="30000" style="cursor:pointer;">30000</a></li>
+                    <li><a id="selectStake_5" stake="50000" style="cursor:pointer;">50000</a></li>
+                    <li><a id="selectStake_6" stake="100000" style="cursor:pointer;">100000</a></li>
+                </ul>
+
+
+                <div id="oddsTipsPopup" class="tips-popup" style="display: none">min 1.01</div>
+
+
+                <div id="stakeTipsPopup" class="tips-popup" style="display: none">Min 4.00</div>
+
+                <div id="editUnMatchedList" class="slip-list" style="display: none;">
+
+
+
+                    <dd id="stakePopupList" class="col-stake_list" stakepopuplisttype="template" style="display: none;">
+                        <ul>
+                            <li><a class="btn" id="selectStake_1" stake="5000" style="cursor:pointer;">5000</a></li>
+                            <li><a class="btn" id="selectStake_2" stake="10000" style="cursor:pointer;">10000</a></li>
+                            <li><a class="btn" id="selectStake_3" stake="20000" style="cursor:pointer;">20000</a></li>
+                            <li><a class="btn" id="selectStake_4" stake="30000" style="cursor:pointer;">30000</a></li>
+                            <li><a class="btn" id="selectStake_5" stake="50000" style="cursor:pointer;">50000</a></li>
+                            <li><a class="btn" id="selectStake_6" stake="100000" style="cursor:pointer;">100000</a></li>
+                        </ul>
+                    </dd>
+
+
+                    <ul id="backSlipHeader" class="matched-head" style="display: none">
+                        <li class="col-bet">Back (Bet For)</li>
+                        <li class="col-odd">Odds</li>
+                        <li class="col-stake">Stake</li>
+                        <li class="col-profit">Profit</li>
+                    </ul>
+
+                    <ul id="laySlipHeader" class="matched-head" style="display: none">
+                        <li class="col-bet">Lay (Bet Against)</li>
+                        <li class="col-odd">Odds</li>
+                        <li class="col-stake">Stake</li>
+                        <li class="col-profit">Liability</li>
+                    </ul>
+
+
+                    <dl id="editUnMatchedTemplate" class="slip-lay" style="display: none;">
+                        <dd id="betInfo" class="refer" style="display: none;">
+                            <span id="betId">Ref: --</span>
+                            <span id="placeDate">xx-xx-2016 --:--</span>
+                        </dd>
+                        <dt id="marketNameDt">
+                            <a id="delete" class="delete" style="cursor:pointer;">delete</a>
+                            <span id="slipType" class="slip-type">--</span>
+                            <span id="marketName">--</span>
+                        </dt>
+                        <dd id="price" class="col-odd">
+                            <input id="odds" type="text" maxlength="6" numberOnly>
+                            <ul class="odd-add">
+                                <li><a id="oddsUp"  class="up" style="cursor:pointer;">up</a></li>
+                                <li><a id="oddsDown"  class="down" style="cursor:pointer;">down</a></li>
+                            </ul>
+                            <ul id="oddsTipsPoint"></ul>
+
+                        </dd>
+                        <dd id="size" class="col-stake">
+                            <input id="inputStake" type="text" value="" maxlength="10">
+                            <ul id="listPoint"></ul>
+
+                        </dd>
+                        <dd id="profitLiability" class="col-profit">--</dd>
+
+
+                        <dd id="inningsRuns" class="inn_runs" style="display: none;">
+                            <dl>
+                                <dt id="ifRuns"></dt>
+                                <dd><span id="runsPL" class="green">$0.00</span></dd>
+                                <dt id="ifLess"></dt>
+                                <dd><span id="lessPL" class="green">$0.00</span></dd>
+                            </dl>
+                        </dd>
+
+
+                        <dd id="keepOptionBox" class="keep-option" style="display: none;">
+                            At In-Play
+                            <input name="keepOption" id="cancel" type="checkbox"><label for="cancel">cancel</label>
+                            <input name="keepOption" id="keep" type="checkbox"><label for="keep">keep</label>
+                            <p class="dynamic-min-bet">Min Bet: <strong id="dynamicMinBet"></strong></p>
+                        </dd>
+                    </dl>
+
+
+                </div>
+
+
+                <div id="editUnMatchFullBtn" class="full_btn" style="display: none;">
+                    <dl class="sum">
+
+                    </dl>
+
+                    <ul class="btn-wrap">
+                        <li>
+                            <a id="cancelAllUnMatch" class="btn" style="cursor:pointer;" tabindex="0">Cancel All
+                                Bets</a>
+                        </li>
+                        <li class="edit-function">
+                            <a id="okBtn" class="btn-send" style="cursor:pointer;" tabindex="0">OK</a>
+                            <a id="resetBtn" class="btn" style="cursor:pointer;" tabindex="0">Reset</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <ul id="txnHead" class="slip-head" *ngIf="marketBets">
+                    <li class="col-bet"><strong>{{Update?.matched}}</strong></li>
+
+                </ul>
+
+
+
+                <div id="txnList" class="slip-list" name="txn" *ngIf="marketBets">
+                    <ng-container *ngFor="let betType of marketBets.betType;trackBy:trackByBetType">
+                        <ul id="backSlipHeader" class="matched-head"
+                            *ngIf="betType.betType=='back' && marketBets.marketType!=1">
+                            <li class="col-bet">{{Update?.back}} (Bet For)</li>
+                            <li class="col-odd">{{Update?.odds}}</li>
+                            <li class="col-stake">{{Update?.stake}}</li>
+                            <li class="col-profit">{{Update?.profit}}</li>
+                        </ul>
+                        <ng-container *ngFor="let bet of betType.bets;trackBy:trackByBet">
+                            <dl id="txn_415412346" class="slip-{{bet.betType | lowercase}}" style="display: block;"
+                                *ngIf="betType.betType=='back' && marketBets.marketType!=1">
+                                <dd id="betInfo" class="refer" style="display: block;" *ngIf="isCheckedBetInfo">
+                                    <span id="betId">Ref: {{bet.consolidateId}}</span>
+                                    <span id="placeDate">{{bet.betTime | date: "YYYY-MM-dd HH:mm:ss"}}</span>
+                                </dd>
+                                <dt [ngClass]="{'slip-inline':isCheckedBetInfo}">
+                                    <span id="slipType" class="slip-type">{{bet.type | titlecase}}</span>
+                                    <span class="short-amount">{{bet.selName}}</span>
+                                    <span id="marketName" *ngIf="!isCheckedBetInfo">{{marketBets.name}}</span>
+                                </dt>
+                                <dd id="price" class="col-odd">{{bet.odds}}</dd>
+                                <dd id="size" class="col-stake"> {{bet.stake | number:'1.2-2'}}</dd>
+                                <dd id="profitLiability" class="col-profit"> {{bet.profit | number:'1.2-2'}}</dd>
+                            </dl>
+                        </ng-container>
+
+                        <ul id="laySlipHeader" class="matched-head"
+                            *ngIf="betType.betType=='lay' && marketBets.marketType!=1">
+                            <li class="col-bet">{{Update?.lay}} (Bet Against)</li>
+                            <li class="col-odd">{{Update?.odds}}</li>
+                            <li class="col-stake">{{Update?.stake}}</li>
+                            <li class="col-profit">{{Update?.liability}}</li>
+                        </ul>
+                        <ng-container *ngFor="let bet of betType.bets;trackBy:trackByBet">
+                            <dl id="txn_415412346" class="slip-{{bet.betType | lowercase}}" style="display: block;"
+                                *ngIf="betType.betType=='lay' && marketBets.marketType!=1">
+                                <dd id="betInfo" class="refer" style="display: block;" *ngIf="isCheckedBetInfo">
+                                    <span id="betId">Ref: {{bet.consolidateId}}</span>
+                                    <span id="placeDate">{{bet.betTime | date: "YYYY-MM-dd HH:mm:ss"}}</span>
+                                </dd>
+                                <dt [ngClass]="{'slip-inline':isCheckedBetInfo}">
+                                    <span id="slipType" class="slip-type">{{bet.type | titlecase}}</span>
+                                    <span class="short-amount">{{bet.selName}}</span>
+                                    <span id="marketName" *ngIf="!isCheckedBetInfo">{{marketBets.name}}</span>
+                                </dt>
+                                <dd id="price" class="col-odd">{{bet.odds}}</dd>
+                                <dd id="size" class="col-stake"> {{bet.stake | number:'1.2-2'}}</dd>
+                                <dd id="profitLiability" class="col-profit"> {{bet.profit | number:'1.2-2'}}</dd>
+                            </dl>
+                        </ng-container>
+
+                        <ul id="fancyYesHeader" class="matched-head"
+                            *ngIf="betType.betType=='back' && marketBets.marketType==1">
+                            <li id="colBet" class="col-bet">Yes</li>
+                            <li id="runsOdds" class="col-odd">Runs/Odds</li>
+                            <li class="col-stake">Stake</li>
+                            <li class="col-profit">Profit</li>
+                        </ul>
+                        <ng-container *ngFor="let bet of betType.bets;trackBy:trackByBet">
+                            <dl id="txn_415412346" class="slip-{{bet.betType | lowercase}}" style="display: block;"
+                                *ngIf="betType.betType=='back' && marketBets.marketType==1">
+                                <dd id="betInfo" class="refer" style="display: block;" *ngIf="isCheckedBetInfo">
+                                    <span id="betId">Ref: {{bet.consolidateId}}</span>
+                                    <span id="placeDate">{{bet.betTime | date: "YYYY-MM-dd HH:mm:ss"}}</span>
+                                </dd>
+                                <dt [ngClass]="{'slip-inline':isCheckedBetInfo}">
+                                    <span id="slipType" class="slip-type">{{bet.type | titlecase}}</span>
+                                    <span class="short-amount">{{bet.selName}}</span>
+                                    <span id="marketName" *ngIf="!isCheckedBetInfo">{{marketBets.name}}</span>
+                                </dt>
+                                <dd id="price" class="col-odd">{{bet.odds}}</dd>
+                                <dd id="size" class="col-stake"> {{bet.stake | number:'1.2-2'}}</dd>
+                                <dd id="profitLiability" class="col-profit"> {{bet.profit | number:'1.2-2'}}</dd>
+                            </dl>
+                        </ng-container>
+
+                        <ul id="fancyNoHeader" class="matched-head"
+                            *ngIf="betType.betType=='lay' && marketBets.marketType==1">
+                            <li class="col-bet">No</li>
+                            <li id="runsOdds" class="col-odd">Runs/Odds</li>
+                            <li class="col-stake">Stake</li>
+                            <li class="col-profit">Liability</li>
+                        </ul>
+                        <ng-container *ngFor="let bet of betType.bets;trackBy:trackByBet">
+                            <dl id="txn_415412346" class="slip-{{bet.betType | lowercase}}" style="display: block;"
+                                *ngIf="betType.betType=='lay' && marketBets.marketType==1">
+                                <dd id="betInfo" class="refer" style="display: block;" *ngIf="isCheckedBetInfo">
+                                    <span id="betId">Ref: {{bet.consolidateId}}</span>
+                                    <span id="placeDate">{{bet.betTime | date: "YYYY-MM-dd HH:mm:ss"}}</span>
+                                </dd>
+                                <dt [ngClass]="{'slip-inline':isCheckedBetInfo}">
+                                    <span id="slipType" class="slip-type">{{bet.type | titlecase}}</span>
+                                    <span class="short-amount">{{bet.selName}}</span>
+                                    <span id="marketName" *ngIf="!isCheckedBetInfo">{{marketBets.name}}</span>
+                                </dt>
+                                <dd id="price" class="col-odd">{{bet.odds}}</dd>
+                                <dd id="size" class="col-stake"> {{bet.stake | number:'1.2-2'}}</dd>
+                                <dd id="profitLiability" class="col-profit"> {{bet.profit | number:'1.2-2'}}</dd>
+                            </dl>
+                        </ng-container>
+
+                    </ng-container>
+
+                </div>
+
+
+                <div class="full_btn">
+                    <ul class="slip-option">
+                        <li><input id="showBetInfo" type="checkbox" name="openOption" [checked]="isCheckedBetInfo"
+                                (click)="betInfo()"><label for="showBetInfo">Bet
+                                Info</label></li>
+                        <li name="txnOption" style="display: none;"><input id="consolidate" type="checkbox"
+                                name="openOption"><label for="consolidate">Consolidate</label></li>
+                        <li name="txnOption" style="display: none;"><input id="averageOdds" type="checkbox"
+                                name="openOption"><label for="averageOdds">Average Odds</label></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

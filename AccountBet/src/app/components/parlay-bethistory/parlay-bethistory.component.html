@@ -1,0 +1,157 @@
+<h2>Parlay Bets</h2>
+<ul class="tab col3">
+    <li><a class="select" routerLink="/parlay_bets_history">Parlay Bets History</a></li>
+
+    <li><a routerLink="/parlay_profit_loss">Parlay Profit &amp; Loss</a></li>
+</ul>
+<ul class="report-tab-wrap" style="display: block;">
+    <li id="reportType_exchange" class="report-tab select"> ALL </li>
+</ul>
+<div class="function-wrap">
+    <ul class="input-list">
+        <li><label>Period</label></li>
+        <li>
+            <input id="startDate" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                [(ngModel)]="selectfromdate" [minDate]="month" [maxDate]="selectfromdate"
+                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-default', isAnimated: true ,showWeekNumbers: false }">
+                <input id="startTime" disabled="" class="time-input disable" type="text" placeholder="00:00" maxlength="5">
+            to
+            <input id="endDate" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                [(ngModel)]="selecttodate" [minDate]="month" [maxDate]="selecttodate"
+                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-default', isAnimated: true ,showWeekNumbers: false  }">
+                <input id="endTime" disabled="" class="time-input disable" type="text" placeholder="23:59" maxlength="5">
+        </li>
+        <li style="display: none;">(TimeZone:IST)</li>
+    </ul>
+    <ul class="input-list">
+        <li><a id="today" (click)="selectTab('today')" class="btn">Just For Today</a></li>
+        <li><a id="yesterday" (click)="selectTab('yesterday')" class="btn">From Yesterday</a></li>
+        <li style="display: none;"><a id="last7days" (click)="selectTab('last7days')" class="btn">Last 7 days</a></li>
+        <li style="display: none;"><a id="last30days" (click)="selectTab('last30days')" class="btn">Last 30 days</a>
+        </li>
+        <li style="display: none;"><a id="last2months" (click)="selectTab('last2months')" class="btn">Last 2 Months</a>
+        </li>
+        <li style="display: none;"><a id="last3months" (click)="selectTab('last3months')" class="btn">Last 3 Months</a>
+        </li>
+        <li><a id="getPL" (click)="GetBetHistory()" class="btn-send">Get History</a></li>
+    </ul>
+</div>
+<div id="report" style="display: block;">
+    <table id="reportTable" class="table01 table-pnl" style="display: table;">
+        <tbody>
+            <tr>
+                <th width="" class="align-L">BetId </th>
+                <th width="15%">Start Time </th>
+                <th width="15%">Settled date </th>
+                <th width="15%">Stake </th>
+                <th width="15%">Odds </th>
+                <th width="18%">Profit/Loss </th>
+            </tr>
+            <ng-container *ngFor="let bet of bettingHistory;let index=index">
+                <tr id="summary{{index}}" style="display: table-row;">
+                    <td id="title" class="align-L">{{bet.betId}}
+                        <img class="fromto" src="assets/images/transparent.gif"><span class="count">{{bet.countName}}</span>
+                    </td>
+                    <td id="startTime">{{bet.betTime | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td id="settledDate">{{bet.settledDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td id="settledDate">{{bet.stake | number:'1.2-2'}}</td>
+                    <td id="settledDate">{{bet.odds }}</td>
+                    <td>
+                        <a id="pl0"
+                            [ngClass]="{'expand-open':srNo==index,'expand-close':srNo!=index,'win':bet.PL>0,'lose':bet.PL<0}"
+                            (click)="srNo==index?toggleDetail(null):toggleDetail(index)"
+                            href="javascript: void(0);">{{bet.PL | number:'1.2-2'}}</a>
+                    </td>
+                </tr>
+                <tr id="detail{{index}}" class="expand" style="display: table-row;" *ngIf="srNo==index">
+                    <td colspan="6">
+                        <img class="expand-arrow-R" src="assets/images/transparent.gif">
+
+                        <table class="table-commission">
+                            <tbody>
+                                <tr>
+                                    <th class="align-L" width="5%">Sport
+                                    </th>
+                                    <!-- <th width="20%" class="align-C">EventName
+                                    </th> -->
+                                    <th width="15%" class="align-C">SelName
+                                    </th>
+                                    <!-- <th width="10%" class="align-C">MarketName
+                                    </th> -->
+
+                                    <th width="5%">Odds
+                                    </th>
+                                    <!-- <th width="8%">Type
+                                    </th> -->
+                                    <th width="5%">WON/LOSS
+                                    </th>
+
+                                </tr>
+                                <ng-container
+                                    *ngFor="let bet of bet.listBets;let index2=index;let isOdd=odd;let isEven=even">
+                                    <tr id="txRow{{index2}}" style="display: table-row;"
+                                        [ngClass]="{'odd':isOdd,'even':isEven}">
+                                        <td style="white-space: nowrap;text-transform: capitalize;" id="matchTitle" class="align-L">{{bet.sport}}
+                                            <img class="fromto" src="assets/images/transparent.gif">
+                                            <strong>{{bet.eventName}}</strong>
+                                        
+                                            <img class="fromto" src="assets/images/transparent.gif">    <br>{{bet.betType=='yes'
+                                            || bet.betType=='no'?'Fancy
+                                            Bet':bet.marketName}}
+                                        </td>
+                                        <td id="txOddsMatched" class="align-C">{{bet.selName}}</td>
+                                        <td id="txOddsMatched">{{bet.odds}}</td>
+                                        <td id="placed"
+                                            [ngClass]="{'win':bet.result == 'WON','lose':bet.result == 'LOST'}">
+                                            {{bet.result}}</td>
+
+                                    </tr>
+                                </ng-container>
+                                <tr class="sum-pl" *ngIf="bet.betType != 'parlay' ">
+                                    <td colspan="7">
+
+                                        <dl>
+                                            <dt>{{Update?.totalstakes}}</dt>
+                                            <dd id="totalStakes">{{bet.totalStakes | number:'1.2-2'}}</dd>
+
+                                            <dt id="backSubTotalTitle">{{Update?.yessubtotal}}</dt>
+                                            <dd id="backSubTotal"
+                                                [ngClass]="{'win':bet.backTotal>0,'lose':bet.backTotal<0}">
+                                                {{bet.backTotal | number:'1.2-2'}}</dd>
+
+                                            <dt id="laySubTotalTitle">{{Update?.nosubtotal}}</dt>
+                                            <dd id="laySubTotal"
+                                                [ngClass]="{'win':bet.layTotal>0,'lose':bet.layTotal<0}">{{bet.layTotal
+                                                | number:'1.2-2'}}</dd>
+
+                                            <dt>{{Update?.marketsubtotal}}</dt>
+                                            <dd id="marketTotal" [ngClass]="{'win':bet.mktPnl>0,'lose':bet.mktPnl<0}">
+                                                {{bet.mktPnl | number:'1.2-2'}}</dd>
+
+                                            <dt id="commissionTitle">{{Update?.commission}}</dt>
+                                            <dd id="commission" style="color: red;">{{bet.commission | number:'1.2-2'}}
+                                            </dd>
+
+                                            <dt class="net_total">{{Update?.netmarkettotal}}</dt>
+                                            <dd id="netTotal" class="net_total"
+                                                [ngClass]="{'win':bet.netPL>0,'lose':bet.netPL<0}">{{bet.netPL |
+                                                number:'1.2-2'}}</dd>
+                                        </dl>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </td>
+                </tr>
+            </ng-container>
+
+        </tbody>
+    </table>
+</div>
+<div id="noReportMessage" *ngIf="bettingHistory.length==0 && !loader">
+    <p>Betting History enables you to review the bets you have placed. <br>Specify the time period during which your
+        bets were placed, the type of markets on
+        which the bets were placed, and the sport.</p>
+    <p>Betting History is available online for the past 30 days.</p>
+</div>

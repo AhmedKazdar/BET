@@ -1,0 +1,46 @@
+<div class="mian-wrap" >
+    <div class="gamehall">
+        <ng-container *ngIf="isLogin">
+            <a class="entrance-half" style="cursor: pointer;"
+                [routerLink]="isLogin?['/exchange/ex/blackjack']:['/login']">
+                <dl class="entrance-title">
+                    <dt>Black Jack</dt>
+                    <dd>Play Now</dd>
+                </dl><img class="tp_image" src="https://b2c.static112233.com/m/assets/images/mobile/gamehall/black_jack.jpg" alt="black_jack"
+                    draggable="false">
+            </a>
+            <a class="entrance-half" style="cursor: pointer;"
+                [routerLink]="isLogin?['/exchange/ex/blackjack-turbo']:['/login']">
+                <dl class="entrance-title">
+                    <dt>Black Jack turbo</dt>
+                    <dd>Play Now</dd>
+                </dl><img class="tp_image" src="https://b2c.static112233.com/m/assets/images/mobile/gamehall/black_jack.jpg" alt="black_jack"
+                    draggable="false">
+            </a>
+            <a class="entrance-half" style="cursor: pointer;"
+                [routerLink]="isLogin?['/exchange/ex/omaha-hi']:['/login']">
+                <dl class="entrance-title">
+                    <dt>OMAHA HI</dt>
+                    <dd>Play Now</dd>
+                </dl><img class="tp_image" src="https://b2c.static112233.com/m/assets/images/mobile/gamehall/omaha.jpg" alt="black_jack"
+                    draggable="false">
+            </a>
+            <a class="entrance-half" style="cursor: pointer;" [routerLink]="isLogin?['/exchange/ex/holdem']:['/login']">
+                <dl class="entrance-title">
+                    <dt>HOLD'EM</dt>
+                    <dd>Play Now</dd>
+                </dl><img class="tp_image" src="https://b2c.static112233.com/m/assets/images/mobile/gamehall/hold.jpg" alt="black_jack"
+                    draggable="false">
+            </a>
+            <a  class="entrance-half" style="cursor: pointer;"
+                [routerLink]="isLogin?['/exchange/ex/holdem-turbo']:['/login']">
+                <dl class="entrance-title">
+                    <dt>HOLD'EM turbo</dt>
+                    <dd>Play Now</dd>
+                </dl><img class="tp_image" src="https://b2c.static112233.com/m/assets/images/mobile/gamehall/hold.jpg" alt="black_jack"
+                    draggable="false">
+            </a>
+
+        </ng-container>
+    </div>
+</div>

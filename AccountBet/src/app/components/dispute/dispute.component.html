@@ -1,0 +1,31 @@
+
+<h2>{{Update?.dispute}}</h2>
+
+<div class="white-wrap">
+
+    <div class="function-wrap">
+        <form action="" class="contact-form" [formGroup]="DisputeForm">
+            <div>
+                <input type="text" class="form-control rounded border-white mb-3 form-input" id="name" placeholder="Email"
+                    required formControlName="email">
+            </div>
+            <div>
+                <input type="text" class="form-control rounded border-white mb-3 form-input" id="name" placeholder="Subject"
+                    required formControlName="subject">
+            </div>
+    
+            <div>
+                <textarea id="message" formControlName="description" class="form-control rounded border-white mb-3 form-text-area" rows="5" cols="30" placeholder="Message" required></textarea>
+            </div>
+            <div class="fileupload" onclick="document.getElementById('customfile').click()">
+                <img  *ngIf="!imageURL || imageURL == ''" class="attachfile"  src="https://img.icons8.com/ios/50/null/add-folder--v1.png"/> 
+                <input id="customfile" accept="image/*" type="file" style="display: none;" (change)="showPreview($event)">
+                <img *ngIf="imageURL && imageURL !== ''" [src]="imageURL" style="max-height: 112px;">      
+            </div>
+            <div>
+                <input type="submit" (click)="submitDispute()" class="form-control rounded border-white mb-3 form-input" id="subbtn" >
+            </div>
+    
+        </form>
+    </div>
+    </div>

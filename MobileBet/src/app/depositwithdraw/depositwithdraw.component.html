@@ -1,0 +1,283 @@
+<div>
+    <div class="overlay right-side" id="dwDiv">
+        <div class="side-wrap setting-wrap" id="dwSlide" style="height: 100%;">
+            <div class="side-head">
+                <h3><img  *ngIf="currency == 'USD'" style="width: 10.06667vw; height: 9.06667vw;"
+                        src="https://b2c.static112233.com/m/assets/images/mobile/cricbuzzer/shinydollar.gif"
+                        alt="transparent">
+                        <img *ngIf="currency =='INR' " class="rotating-rupee"  style="width: 8.06667vw; height: 7.06667vw;"
+                        src="https://b2c.static112233.com/m/assets/images/mobile/cricbuzzer/rupee.png"
+                        alt="transparent">
+                        {{Update?.DepositWithdraw}}</h3>
+                <a class="close ui-link" id="dwClose" (click)="dwClose()"></a>
+            </div>
+            <div id="coinList" class="side-content">
+                <!-- <h3>Select Type</h3> -->
+                <!-- <dl class="setting-block">
+                    <dt>{{isToggle?"Deposit":"Withdraw"}}</dt>
+                    <dd><a [ngClass]="{'switch_on':isToggle,'switch_off switch_off_dw':!isToggle}" id="changeType" (click)="changeType()"><input type="hidden" id="sparkValue"
+                                value="1"><span></span></a></dd>
+                </dl> -->
+                <ul id="inPlayTab" class="tab col3">
+                    <li style="width: 50%;" [ngClass]="{'select':isToggle}"><a
+                            (click)="changeType(0);">{{Update?.deposit}}</a></li>
+                    <li style="width: 50%;" [ngClass]="{'select':!isToggle}"><a
+                            (click)="changeType(1);">{{Update?.withdraw}}</a></li>
+                </ul>
+                <ul class="tab col3" *ngIf="isToggle && auto">
+                    <li style="width: 50%;" [ngClass]="{'select':Automanuals}" (click)="autoManual(0);">
+                        <a> Auto Deposit</a>
+                    </li>
+                    <li style="width: 50%;" (click)="autoManual(1);" [ngClass]="{'select':!Automanuals}"><a>
+                            Manual Deposit</a>
+                    </li>
+                </ul>
+
+                <div *ngIf="isToggle && Automanuals && auto" id="dwSlide">
+                    <h3 class="typecls">Deposit</h3>
+                    <form [formGroup]="getwayForm">
+                        <div class="field email-field">
+                            <div class="label"><label for="email">Deposit
+                                    Amount</label></div>
+                            <div class="input-field">
+                                <input type="number" formControlName="amount" placeholder="Enter Amount" class="amount">
+                            </div>
+                            <div class="field button-field input-field" style="display: flex;">
+                                <a class="btn-send" style="margin-left: 14px;margin-right: 4px;" (click)="inrAutoPayment()">Deposit</a>
+                                <a class="btn-send" style="margin-left: 4px;margin-right: 14px;" (click)="dwClose()">Cancel</a>
+                            </div>
+                            <ng-container *ngIf="f.amount.invalid && (f.amount.touched)">
+                                <p style="    text-align: center;
+                        color: red;"> Amount cannot be empty</p>
+                            </ng-container>
+                        </div>
+                    </form>
+                </div>
+
+                <div *ngIf="(isToggle && !auto) || (isToggle && !Automanuals)" id="depositDiv" class="side-content">
+                    <h3>{{Update?.deposit}}</h3>
+                    <form [formGroup]="DepositForm">
+                        <div class="field email-field">
+                            <div class="label">
+                                <label for="email">Deposit coins</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="number" formControlName="coins" placeholder="Enter Amount" #boxvalue
+                                    (keyup)="showdata($event.target.value)" class="amount" />
+                            </div>
+
+                        </div>
+    
+                        <div *ngIf="listData">
+    
+                            <div class="topic">
+                                <h3>Payment Method</h3>
+                            </div>
+
+                            <div class="p-method">
+                                <div (click)="boxvalue1()"
+                                    [ngClass]="{'beforeclick' : showqrcode, 'afterclick': !showqrcode}" class=" box qr">
+                                    <div class="method-logo">
+                                        <img src="https://img.icons8.com/material-outlined/24/null/qr-code.png" />
+                                    </div>
+                                    <h4>QR Code</h4>
+                                </div>
+                                <div  (click)="boxvalue2()" [ngClass]="{'beforeclick' : showupi, 'afterclick': !showupi}"
+                                    class=" box upi">
+                                    <div class="method-logo">
+                                        <img class="upi-img"
+                                            src="https://img.icons8.com/ios-filled/50/null/bhim-upi.png" />
+                                    </div>
+                                    <h4>UPI</h4>
+                                </div>
+                             
+                                <div (click)="boxvalue3()"
+                                    [ngClass]="{'beforeclick' : showbank, 'afterclick': !showbank}" class=" box bank">
+                                    <div class="method-logo">
+                                        <img src="https://img.icons8.com/windows/32/null/merchant-account.png" />
+                                    </div>
+                                    <h4>Bank</h4>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div *ngIf="showqrcode" class="section-2 QRcode">
+
+                            <h3> QR Code</h3>
+                            <ul style="margin: 10px;"><b><span>{{qrList.length>0?'Please Open the Qr Code and Scan to Pay.':'QR Code Not Found.'}}</span></b></ul>
+                            <div *ngIf="qrList.length>0" class="container qr-section">
+                                <div *ngIf="qrList.length>0">
+                                    <img style="max-height: 68px;max-width: 80px;"
+                                        (click)="showOverlayInfo('#showQRCode')"
+                                        src="https://sc.cricity.net/{{qrList[0].img}}" />
+                                </div>
+                                <div>
+                                    <form>
+                                        <div>
+                                            <label for="account-name">Display Name</label>
+                                        </div>
+                                        <div *ngIf="qrList.length>0">
+                                            <input type="text" value={{qrList[0].display_name}} readonly>
+                                        </div>
+                                        <div>
+                                            <button class="qr-btn" (click)="showOverlayInfo('#showQRCode')">Open
+                                                QR</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="showupi" class=" section-2 UPI">
+                            <h3> UPI</h3>
+
+                            <div class="bank-section">
+                                <ul style="margin: 10px;"><b><span>{{upiList.length>0?'Please send money on below mentioned UPI detail and attach screenshot here.':'UPI Details Not Found'}}</span></b></ul>
+                                <ul *ngIf="upiList.length>0" style="padding: 10px; background-color: #eeeeee;">
+                                    <!-- <ng-container *ngFor="let upi of upiList">
+                                        <li><b><span>{{siteName=='six6r'?'Payment Gateway':'Account Name'}}</span></b><b><span
+                                                    (click)="copytoclip(upi.name)">{{upi.name}}<img
+                                                        style="max-height: 12px;margin-left: 6px;"
+                                                        src="https://b2c.static112233.com/m/assets/images/Social-img/copy.png"></span></b></li>
+                                        <li><b><span>{{siteName=='six6r'?'Number':'Upi'}}</span></b><b><span
+                                                    (click)="copytoclip(upi.value)">{{upi.value}}<img
+                                                        style="max-height: 12px;margin-left: 6px;"
+                                                        src="https://b2c.static112233.com/m/assets/images/Social-img/copy.png"></span></b></li>
+                                    </ng-container> -->
+                                </ul>
+                            </div>
+
+
+                        </div>
+                        <div *ngIf="showbank" class=" section-2 BankTransfer">
+                            <h3> Bank Transfer</h3>
+                            <div class="bank-section">
+                                <ul style="margin: 10px;"><b><span>{{bankList.length>0?'Please send money on below mentioned Bank detail and attach screenshot here.':'Bank Details Not Found'}}</span></b></ul>
+                                <ul *ngIf="bankList.length>0" style="padding: 10px; background-color: #eeeeee;">
+                                    <ng-container *ngFor="let bank of bankList">
+                                        <li><b><span>Bank Name</span></b><b><span
+                                                    (click)="copytoclip(bank.bank_name)">{{bank.bank_name}}<img
+                                                        style="max-height: 12px;margin-left: 6px;"
+                                                        src="https://b2c.static112233.com/m/assets/images/Social-img/copy.png"></span></b></li>
+                                        <li><b><span>Account Number</span></b><b><span
+                                                    (click)="copytoclip(bank.account_number)">{{bank.account_number}}<img
+                                                        style="max-height: 12px;margin-left: 6px;"
+                                                        src="https://b2c.static112233.com/m/assets/images/Social-img/copy.png"></span></b>
+                                        </li>
+                                        <li><b><span>IFSC Code</span></b><b><span
+                                                    (click)="copytoclip(bank.ifsc_code)">{{bank.ifsc_code}}<img
+                                                        style="max-height: 12px;margin-left: 6px;"
+                                                        src="https://b2c.static112233.com/m/assets/images/Social-img/copy.png"></span></b></li>
+                                        <li><b><span>Account Holder
+                                                    Name</span></b><b><span
+                                                    (click)="copytoclip(bank.account_holder)">{{bank.account_holder}}<img
+                                                        style="max-height: 12px;margin-left: 6px;"
+                                                        src="https://b2c.static112233.com/m/assets/images/Social-img/copy.png"></span></b></li>
+                                    </ng-container>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="field email-field"  *ngIf="((showbank && bankList.length>0) || (showupi && upiList.length>0) || (showqrcode && qrList.length>0) )&& isTrnNo">
+                            <div class="label">
+                                <label for="email">Transaction ID</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="text" pattern="\d*" formControlName="trn_no" [maxlength]="12" placeholder="Enter Transaction ID" class="amount" />
+                            </div>
+
+                        </div>
+
+                        <div *ngIf="(showbank && bankList.length>0) || (showupi && upiList.length>0) || (showqrcode && qrList.length>0)" class="fileupload"
+                            onclick="document.getElementById('upicustomfile').click()">
+                            <input id="upicustomfile" accept="image/*" type="file" style="display: none;"
+                                (change)="showPreview($event)">
+                            <img *ngIf="!imageURL || imageURL == ''"
+                                src="https://img.icons8.com/material-rounded/24/null/plus--v1.png" /> <br>
+                            <img *ngIf="imageURL && imageURL !== ''" [src]="imageURL"
+                                style="max-height: 112px; max-width: 100%;">
+                            <button *ngIf="!imageURL || imageURL == ''" class="stylefile">Attach Payment Proof</button>
+                        </div>
+                        <div *ngIf="(showbank && bankList.length>0) || (showupi && upiList.length>0)  || (showqrcode && qrList.length>0)" class="field button-field input-field">
+                            <a class="btn-send" style="margin-left: 14px;margin-right: 14px;" (click)="doDeposit()">Deposit </a>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div *ngIf="!isToggle" id="withdrawDiv" class="side-content">
+                    <h3>{{Update?.withdraw}}</h3>
+                    <form [formGroup]="WithdrawForm">
+                        <div class="field email-field">
+                            <div class="input-field" style="margin-top: 8px;">
+                                <select id="select" formControlName="paid_to" class="select"
+                                    (change)="selectProvider($event.target.value)">
+                                    <option value="" disabled>Select Bank</option>
+                                    <option *ngFor="let name of preferredWithdraw" [value]="name">
+                                        {{name}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="input-field" style="margin-top: 8px;">
+                                <input  formControlName="coins" placeholder="enter amount" #boxvalue
+                                    (change)="showdata($event.target.value)" class="amount" />
+                            </div>
+
+                        </div>
+
+                        <div class="field button-field input-field">
+                            <a class="btn-send" style="margin-left: 4px;margin-right: 14px;" (click)="doWithdraw()">Withdraw</a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div id="dw_loading" class="loading-overlay" style="display: none;">
+            <div class="loading-wrap" style="display: flex;">
+                <div class="loading">
+                    <div></div>
+                    <div></div>
+                </div>
+                <p>Loading...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="addWithdrawDetails" class="overlay" style="display: none;">
+        <div class="frame-wrap">
+            <div class="news-wrap news-wrap-frame bankupidialog">
+                <div class="side-head">
+                    <h3>Add Withdrawal Details</h3>
+                </div>
+                <div style="margin: 12px 16px 24px 16px;
+                font-size: 19px;">
+                    <span>Please add your withdrawal details first.</span>
+                </div>
+                <div class="form-login" style="display: flex;width: 25vw;">
+                    <a class="btn-send" style="margin-left: 8px;width: inherit;" [routerLink]="['/withdrawaldetails']"
+                        (click)="hideOverlayInfo('#addWithdrawDetails');">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="showQRCode" class="overlay" style="display: none;" *ngIf="qrList.length>0">
+        <div class="frame-wrap">
+            <div class="news-wrap news-wrap-frame bankupidialog">
+                <div class="side-head">
+                    <h3>QR Code</h3>
+                </div>
+                <div style="text-align: center;">
+                    <img src="https://sc.cricity.net/{{qrList[0].img}}" height="100px"/>
+                </div>
+                <div class="form-login" style="display: flex;width: 25vw;">
+                    <a class="btn-send" style="margin-left: 8px;width: inherit;"
+                        (click)="hideOverlayInfo('#showQRCode');">Close</a>
+                </div>
+        </div>
+    </div>
+    </div>
+</div>

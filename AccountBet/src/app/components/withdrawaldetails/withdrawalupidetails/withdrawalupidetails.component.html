@@ -1,0 +1,121 @@
+<h2>{{Update?.withdrawaldetails}}</h2>
+<ul class="tab col3">
+    <li><a routerLink="/bank_details">{{Update?.bankdetail}}</a></li>
+
+    <li><a class="select" routerLink="/upi_details">{{Update?.upidetails}}</a></li>
+</ul>
+
+<div class="function-wrap">
+    <ul class="input-list">
+        <li><a class="btn-send" (click)="showOverlayInfo('#addUpiDialog');">{{Update?.addupidetails}}</a></li>
+    </ul>
+</div>
+
+<table id="table_log" class="table01">
+    <tbody>
+        <tr>
+            <th width="25%" class="align-L">UPI {{Update?.name}}</th>
+            <th width="25%" class="align-L">UPI {{Update?.type}}</th>
+            <th width="25%" class="align-L">UPI</th>
+            <th width="15%">Actions</th>
+        </tr>
+
+    </tbody>
+    <tbody id="content">
+
+        <ng-container *ngFor="let upi of upiList;let index=index">
+            <tr id="tempTr">
+                <td class="align-L">{{upi.name}}</td>
+                <td class="align-L"> {{upi.type}}</td>
+                <td class="align-L"> {{upi.value}}</td>
+                <td>
+                    <ul style="display: flex;float: right;">
+                        <button title="Preferred" class="btn_replay btn" (click)="showconfirmation('#confirmation','1',upi);"><img class="starimg" [src]= "upi.isPreferred=='1'?'https://b2c.static112233.com/myAccount/assets/images/cricbuzzer/star_fill.png':'https://b2c.static112233.com/myAccount/assets/images/cricbuzzer/star_outline.png'"></button>
+                        <button title="Edit" class="btn_replay btn" (click)="showEditUpi('#editUpiDialog',upi);"><img class="starimg" src= "https://b2c.static112233.com/myAccount/assets/images/cricbuzzer/edit.png"></button>
+                        <button title="Delete" class="btn_replay btn" (click)="showconfirmation('#confirmation','3',upi);"><img class="starimg" src= "https://b2c.static112233.com/myAccount/assets/images/cricbuzzer/trash.png"></button>
+                    </ul>
+                </td>
+            </tr>
+        </ng-container>
+
+        <tr id="noDataTempTr" *ngIf="upiList.length==0 && !loader">
+			<td class="no-data" colspan="5">
+				<p>{{Update?.nodata}}</p>
+			</td>
+		</tr>
+    </tbody>
+</table>
+
+
+
+
+<div id="addUpiDialog" class="overlay" style="display: none;">
+    <div class="frame-wrap pop_box">
+        <div class="news-wrap-frame">
+            <div class="side-head">
+                <h3>{{Update?.addyourupi}}</h3>
+            </div>
+            <div style="margin: 8px 8px 14px 8px;
+            font-size: 14px;">
+                <span>{{Update?.addingupidetailsismandatoryforprocessing}}</span>
+            </div>
+            <form [formGroup]="upiForm" class="form-login" (ngSubmit)="addUpi()">
+                <select formControlName="type" id="select" (change)="selectProvider($event.target.value)">
+                    <option value="" selected>{{Update?.selectprovider}}</option>
+                    <option *ngFor="let name of Provider" [value]="name">
+                        {{name}}
+                    </option>
+                </select>
+                <input formControlName="name" type="text" placeholder="Display Name" class="bankInput_1">
+                <input formControlName="value" type="text" placeholder="UPI" class="bankInput_2">
+                <div class="form-login" style="display: flex;margin-left: 40%;">
+                    <a class="btn-send" (click)="hideOverlayInfo('#addUpiDialog');">{{Update?.close}}</a>
+                    <a class="btn-send" style="margin-left: 8px;" (click)="addUpi()">{{Update?.save}}</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<div id="editUpiDialog" class="overlay" style="display: none;">
+    <div class="frame-wrap pop_box">
+        <div class="news-wrap-frame">
+            <div class="side-head">
+                <h3>{{Update?.edit}} UPI</h3>
+            </div>
+            <form [formGroup]="editUpiForm" class="form-login" style="margin: auto;padding: 8px;" (ngSubmit)="updateUpi()">
+                <select formControlName="type" id="select" (change)="selectProvider($event.target.value)">
+                    <option *ngFor="let name of Provider" [value]="name">
+                        {{name}}
+                    </option>
+                </select>
+                <input formControlName="name" type="text" placeholder="Display Name" class="bankInput_1">
+                <input formControlName="value" type="text" placeholder="UPI" class="bankInput_2">
+                <div class="form-login" style="display: flex;margin-left: 40%;">
+                    <a class="btn-send" (click)="hideOverlayInfo('#editUpiDialog');">{{Update?.close}}</a>
+                    <a class="btn-send" style="margin-left: 8px;" (click)="updateUpi()">{{Update?.save}}</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<div id="confirmation" class="overlay" style="display: none;">
+    <div class="frame-wrap pop_box">
+        <div class="news-wrap-frame">
+            <div class="side-head">
+                <h3>{{Update?.confirmation}}</h3>
+            </div>
+            <div class="dialogbody">
+                <span>{{from=='0'?'Are you sure you want to set this as your preferred bank.':from=='1'?'Are you sure you want to set this as your preferred UPI.':from=='2'?'Are you sure you want to delete this bank.':'Are you sure you want to delete this UPI.'}}</span>
+            </div>
+            <div class="form-login" style="display: flex;margin-left: 40%;">
+                <a class="btn-send" (click)="hideOverlayInfo('#confirmation');">{{Update?.no}}</a>
+                <a class="btn-send" style="margin-left: 8px;" (click)="from=='1'?setPreferredUpi():deleteUpi()">{{Update?.yes}}</a>
+            </div>
+        </div>
+    </div>
+</div>

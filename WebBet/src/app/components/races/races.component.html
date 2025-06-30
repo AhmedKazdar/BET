@@ -1,0 +1,85 @@
+<div id="overWrap" class="over-wrap" style="height: calc(100% - 26px)">
+    <div class="kv-wrap">
+        <img src="https://b2c.static112233.com/assets/images/kv/KV0{{eventTypeId?eventTypeId:''}}.jpg" alt="">
+    </div>
+    <!-- Horse Coming Up Start -->
+    <div class="upcome-wrap" id="upcomingHorseRace" style="">
+        <dl class="upcome-head" id="next">
+            <dt id="nextHeader">Next {{eventTypeName}} Race</dt>
+            <ng-container *ngFor="let race of nextRaces;let i =index">
+                <dd *ngIf="i<2">
+                    <a [routerLink]="['/fullmarkets',race.eventId,race.marketId,race.port]"
+                        id="upcoming_{{race.marketId}}">{{race.startTime | date: "HH:mm" }} {{race.eventName}}</a>
+                    <span>{{race.marketName}}</span>
+                </dd>
+            </ng-container>
+
+        </dl>
+
+        <dl class="upcome" id="upcoming">
+            <dt id="upcomeHeader">Coming Up</dt>
+            <ng-container *ngFor="let race of nextRaces;let i =index">
+                <dd *ngIf="i>2 && i<7">
+                    <a [routerLink]="['/fullmarkets',race.eventId,race.marketId,race.port]" id="upcoming_{{race.marketId}}">{{race.startTime | date: "HH:mm" }} {{race.marketName}}</a>
+                    <span></span>
+                </dd>
+            </ng-container>
+        </dl>
+    </div>
+    <dl id="upcomingRaceTempLate" style="display:none;">
+        <dd>
+            <a href="#"></a>
+            <span></span>
+        </dd>
+    </dl>
+    <!-- Horse Coming Up End -->
+    <ul id="daySelectTab" class="tab col3">
+        <li id="today">
+            <a (click)="changeTab('today');" [ngClass]="{'select':seletedTab=='today'}">{{Update?.today}}</a>
+        </li>
+        <li id="tomorrow">
+            <a (click)="changeTab('tomorrow');" [ngClass]="{'select':seletedTab=='tomorrow'}">{{Update?.tomorrow}}</a>
+        </li>
+        <li id="dayAfter"><a (click)="changeTab('dayAfter');" [ngClass]="{'select':seletedTab=='dayAfter'}">{{Update?.day}} {{Update?.after}}</a></li>
+    </ul>
+
+    <div id="noDataDiv" class="game-wrap-horse" *ngIf="todayRaces.length==0 && !listMeetingPending">
+        <div class="no-data">
+            <p>No races available yet.</p>
+        </div>
+    </div>
+
+    <div id="contentBox">
+        <div id="countryGroup_{{country.countryCode}}" class="game-wrap-horse" firstmarkettime="2021-12-21 18:00"
+            *ngFor="let country of todayRaces">
+            <h3>
+                <a class="to-expand">
+                    <span id="heading">{{country.countryCode}}</span>
+                    <span id="closeInfo" class="close-info" style="display:none;">Races 19 (Next in 7 mins)</span>
+                </a>
+            </h3>
+            <div id="gameList" class="game-list"></div>
+            <dl id="racingBox_" class="game-list-col" firstmarkettime="2021-12-21 18:00"
+                *ngFor="let venue of country.venueVo">
+                <dt>
+                    <a id="eventName" style="cursor: default">{{venue.venue}}</a>
+                    <span id="placeInfo" class="game-list-place" style="display: none;">--</span>
+
+                </dt>
+                <dd>
+                    <ul id="timeRacing" class="hs-time">
+
+                        <li *ngFor="let race of venue.races">
+                            <a id="market_{{race.marketId}}" title="{{race.marketName}}"
+                                marketdatetime="{{race.startTime}}" [ngClass]="{'in-play':race.isInplay}"
+                                [routerLink]="['/fullmarkets',race.eventId,race.marketId,race.port]">
+                                {{race.startTime | date: "HH:mm" }}</a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+        </div>
+
+    </div>
+
+</div>

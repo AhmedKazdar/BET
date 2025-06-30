@@ -1,0 +1,243 @@
+<h2>{{Update?.mybet}}</h2>
+<ul class="tab col3">
+    <li><a routerLink="/current_bets">{{Update?.currentbets}}</a></li>
+    <li><a routerLink="/bet_history">{{Update?.betshistory}}</a></li>
+    <li><a class="select" routerLink="/profit_loss">{{Update?.profitandloss}}</a></li>
+</ul>
+<div class="white-wrap">
+    <h3>{{Update?.profitandloss}} - {{Update?.mainwallet}}</h3>
+
+    <ul class="acc-info">
+        <li class="user">{{userInfo?.userName}}</li>
+        <li class="time">{{getToDateAndTime()}}</li>
+    </ul>
+
+    <!-- Tab -->
+
+
+
+    <ul class="report-tab-wrap" style="display:block">
+
+
+        <li class="report-tab " [ngClass]="{'select':stype==''}" id="reportType_exchange" (click)="changeSport('')" data-reporttabtype="0">
+            {{Update?.all}}
+        </li>
+        <li class="report-tab " [ngClass]="{'select':stype=='0'}" id="reportType_exchange" (click)="changeSport('0')" data-reporttabtype="0">
+            {{Update?.exchange}}
+        </li>
+        <li class="report-tab " [ngClass]="{'select':stype=='8'}" id="reportType_casino" (click)="changeSport('8')" data-reporttabtype="8">
+            {{Update?.casino}}
+        </li>
+        <li class="report-tab " [ngClass]="{'select':stype=='6'}" id="reportType_fancyBet" (click)="changeSport('6')" data-reporttabtype="6">
+            {{Update?.fancybet}}
+        </li>
+        <li class="report-tab " [ngClass]="{'select':stype=='7'}" id="reportType_bookMaker" (click)="changeSport('7')" data-reporttabtype="7">
+            {{Update?.bookmaker}}
+        </li>
+    
+        <li class="report-tab " [ngClass]="{'select':stype=='-1'}" (click)="changeSport('-1')" id="reportType_sportsBook" data-reporttabtype="4">
+            {{Update?.sportsbook}}
+        </li>
+    
+        <li class="report-tab " [ngClass]="{'select':stype=='-2'}" (click)="changeSport('-2')" id="reportType_binary" data-reporttabtype="2">
+            {{Update?.binary}}
+        </li>
+
+
+
+
+    </ul>
+
+    <!-- function -->
+
+    <div class="function-wrap">
+        <ul class="input-list">
+            <div id="statusCondition" style="display: none">
+                <li><label>{{Update?.betstatus}}:</label></li>
+                <li>
+                    <select name="betStatus" id="betStatus">
+                    </select>
+                </li>
+            </div>
+
+
+            <li><label>{{Update?.period}}</label></li>
+            <li>
+                <input id="startDate" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                    [(ngModel)]="selectfromdate" [minDate]="month"  [maxDate]="selectfromdate"
+                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-default', isAnimated: true }">
+                <input id="startTime" disabled="" class="time-input disable" type="text" placeholder="09:00"
+                    maxlength="5">
+                to
+                <input id="endDate" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                    [(ngModel)]="selecttodate" [minDate]="month"  [maxDate]="selecttodate"
+                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-default', isAnimated: true }">
+                <input id="endTime" disabled="" class="time-input disable" type="text" placeholder="08:59"
+                    maxlength="5">
+            </li>
+            <li style="display: none;">({{Update?.timezone}}:{{Update?.ist}})</li>
+        </ul>
+
+        <ul class="input-list">
+            <li><a id="today" (click)="selectTab('today')" class="btn">{{Update?.justfortoday}}</a></li>
+            <li><a id="yesterday" (click)="selectTab('yesterday')" class="btn">{{Update?.fromyesterday}}</a></li>
+            <li style="display: none;"><a id="last7days" (click)="selectTab('last7days')" class="btn">{{Update?.last7days}}</a>
+            </li>
+            <li style="display: none;"><a id="last30days" (click)="selectTab('last30days')" class="btn">{{Update?.last30days}}</a>
+            </li>
+            <li style="display: none;"><a id="last2months" (click)="selectTab('last2months')" class="btn">{{Update?.last2months}}</a></li>
+            <li style="display: none;"><a id="last3months" (click)="selectTab('last3months')" class="btn">{{Update?.last3months}}</a></li>
+            <li><a id="getPL" class="btn-send" (click)="GetProfitLoss()">Get P &amp; L</a></li>
+        </ul>
+    </div>
+    <!-- No Report Message -->
+    <div id="noReportMessage" *ngIf="ProfitLoss.length==0 && !loader">
+        <p>{{Update?.betprofit}} &amp; {{Update?.lossenablesyoutoreview}} <br>{{Update?.specifythetimeperiodduringwhichyour}}</p>
+        <p>{{Update?.betprofit}} &amp; {{Update?.lossavaliablefor14dayonline}}</p>
+    </div>
+
+
+</div>
+
+<div id="report" *ngIf="ProfitLoss.length>0">
+    <ul id="spotsUl" class="total-show">
+        <li id="totalPL">{{Update?.totalpl}}: {{userInfo?.currencyCode}} <span [ngClass]="{'win':totalPnl>0,'lose':totalPnl<0}">{{totalPnl | number:'1.2-2'}}</span></li>
+        <!-- <li id="sumOfQuery" class="sports-switch">{{userInfo?.currencyCode}} <span [ngClass]="{'win':totalPnl>0,'lose':totalPnl<0}">{{totalPnl | number:'1.2-2'}}</span></li> -->
+        <li class="sports-switch" *ngIf="stype=='0'">
+            <select name="sports" id="sports" [(ngModel)]="stype" (change)="changeSport(stype)">
+                <option value="0">{{Update?.all}}</option>
+                <option value="1">{{Update?.cricket}}</option>
+                <option value="2">{{Update?.tennis}}</option>
+                <option value="3">{{Update?.soccer}}</option>
+                <option value="4">{{Update?.HorseRacing}}</option>
+                <option value="5">{{Update?.GreyHoundRacing}}</option>
+
+                <!-- <option value="4">Casino</option>
+                <option value="5">Fancy</option> -->
+                <!-- <option value="0" selected="selected">ALL</option>
+                <option value="4">CRICKET</option> -->
+            </select>
+        </li>
+    </ul>
+    <ul id="binaryPL" class="total-show" style="display: none">
+        <li id="binaryTotalPL"></li>
+    </ul>
+
+    <table id="reportTable" class="table01 table-pnl" style="display: table;">
+        <tbody>
+            <tr>
+                <th width="" class="align-L">{{Update?.market}}
+                </th>
+                <th width="15%">{{Update?.starttime}}
+                </th>
+                <th width="15%">{{Update?.settleddate}}
+                </th>
+                <th width="18%">{{Update?.profitloss}}
+                </th>
+            </tr>
+
+            <ng-container *ngFor="let pnl of ProfitLoss;let index=index">
+                <tr id="summary{{index}}" style="display: table-row;">
+                    <td id="title" class="align-L">{{pnl.sportName}}
+                        <img class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">
+                        <strong>{{pnl.eventName}}</strong>
+                        <img class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">{{pnl.marketName}}
+                    </td>
+                    <td id="startTime">{{pnl.startTime | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td id="settledDate">{{pnl.settledDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>
+                        <a id="pl0" [ngClass]="{'expand-open':srNo==index,'expand-close':srNo!=index,'win':pnl.netPL>0,'lose':pnl.netPL<0}"
+                            (click)="srNo==index?toggleDetail(null):toggleDetail(index)"
+                            href="javascript: void(0);">{{pnl.netPL | number:'1.2-2'}}</a>
+                    </td>
+                </tr>
+                <tr id="detail{{index}}" class="expand" style="display: table-row;" *ngIf="srNo==index">
+                    <td colspan="4">
+                        <img class="expand-arrow-R" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">
+
+                        <table class="table-commission">
+                            <tbody>
+                                <tr>
+                                    <th width="14%">{{Update?.betid}}
+                                    </th>
+                                    <th width="">{{Update?.selection}}
+                                    </th>
+                                    <th width="9%">Odds
+                                    </th>
+                                    <th width="13%">{{Update?.stake}}
+                                    </th>
+                                    <th width="8%">{{Update?.type}}
+                                    </th>
+                                    <th width="16%">{{Update?.placed}}
+                                    </th>
+                                    <th width="23%">{{Update?.profitloss}}
+                                    </th>
+                                </tr>
+                                <ng-container
+                                    *ngFor="let bet of pnl.bets;let index2=index;let isOdd=odd;let isEven=even">
+                                    <tr id="txRow{{index2}}" style="display: table-row;"
+                                        [ngClass]="{'odd':isOdd,'even':isEven}">
+                                        <td id="betID">{{bet.betId}}</td>
+                                        <td id="matchSelection">{{bet.selName}}</td>
+                                        <td id="txOddsMatched">{{bet.odds}}</td>
+                                        <td id="txStake">{{bet.stake | number:'1.2-2'}}</td>
+                                        <td><span id="matchType" class="{{bet.betType}}">{{bet.betType}}</span>
+                                        </td>
+                                        <td id="placed">{{bet.betTime | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td id="txLiability">{{bet.netPl | number:'1.2-2'}}</td>
+                                    </tr>
+                                </ng-container>
+                                <tr class="sum-pl">
+                                    <td colspan="7">
+                                        
+                                        <dl>
+                                            <dt>{{Update?.totalstakes}}</dt>
+                                            <dd id="totalStakes">{{pnl.totalStakes | number:'1.2-2'}}</dd>
+
+                                            <dt id="backSubTotalTitle">{{Update?.yessubtotal}}</dt>
+                                            <dd id="backSubTotal">{{pnl.backTotal | number:'1.2-2'}}</dd>
+
+                                            <dt id="laySubTotalTitle">{{Update?.nosubtotal}}</dt>
+                                            <dd id="laySubTotal">{{pnl.layTotal | number:'1.2-2'}}</dd>
+
+                                            <dt>{{Update?.marketsubtotal}}</dt>
+                                            <dd id="marketTotal">{{pnl.mktPnl | number:'1.2-2'}}</dd>
+
+                                            <dt id="commissionTitle" style="display: none;">{{Update?.rebate}}</dt>
+                                            <dd id="commission">{{pnl.commission | number:'1.2-2'}}</dd>
+
+                                            <dt class="net_total">{{Update?.netmarkettotal}}</dt>
+                                            <dd id="netTotal" class="net_total">{{pnl.netPL | number:'1.2-2'}}</dd>
+                                        </dl>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+    <!-- <p class="table-other">
+        Profit and Loss is shown net of commission.
+    </p> -->
+</div>
+
+<!-- <div>
+    <ul style="display: none">
+        <li id="prev"><a href="javascript:void(0);">Prev</a></li>
+        <li id="next"><a href="javascript:void(0);">Next</a></li>
+        <li id="pageNumber"><a href="javascript:void(0);"></a></li>
+        <li id="more"><a href="javascript:void(0);">...</a></li>
+        <input type="text" id="goToPageNumber" onkeyup="return PageHandler.validatePageNumber(this)" maxlength="6"
+            size="4">
+        <li><a id="goPageBtn">GO</a></li>
+    </ul>
+
+    <ul id="pageNumberContent" class="pages">
+        <li id="prev"><a href="javascript:void(0);" class="disable" style="pointer-events: none;">Prev</a></li>
+        <li id="pageNumber"><a href="javascript:void(0);" class="select" style="pointer-events: none;">1</a></li>
+        <li id="next"><a href="javascript:void(0);" class="disable" style="pointer-events: none;">Next</a></li>
+    </ul>
+</div> -->

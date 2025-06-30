@@ -1,0 +1,49 @@
+<div class="one_click-wrap">
+
+    <div id="oneClickBetOverlay" class="overlay" name="oneClickBetDialog" style="display:none;"></div>
+
+
+    <div id="oneClickBetDialog" class="dialog-wrap" name="oneClickBetDialog" style="display:none;">
+        <h4>One Click Bet ON</h4>
+        <div class="dialog-content">
+            <p>Stake selected will be placed immediately once you click on the market odds.
+                <br><span class="attention">
+                    Attention: Back/Lay at your own risk</span>
+            </p>
+        </div>
+        <ul class="btn-wrap break">
+
+            <li><a id="ok" class="btn-send" style="cursor:pointer;" (click)="confirmOneClick()">OK</a></li>
+        </ul>
+        <img class="arrow-dialog" src="https://b2c.static112233.com/assets/images/transparent.gif">
+    </div>
+
+    <ng-container *ngIf="stakeSettingData">
+        <div id="oneClickBetStakeBox" class="one_click-setting" name="oneClickBetStakeBox" style="display: none;">
+
+            <h4>One Click Bet Stake</h4>
+            <ul class="one_click-stake">
+                <li><a class="btn" [ngClass]="{'select':selectedStake==0}" (click)="selectSatekIndex(0)" name="betStake" index="0" style="cursor:pointer;">{{f.stake9.value}}</a></li>
+                <li><a class="btn" [ngClass]="{'select':selectedStake==1}" (click)="selectSatekIndex(1)" name="betStake" index="1" style="cursor:pointer;">{{f.stake10.value}}</a></li>
+                <li><a class="btn" [ngClass]="{'select':selectedStake==2}" (click)="selectSatekIndex(2)" name="betStake" index="2" style="cursor:pointer;">{{f.stake11.value}}</a></li>
+                <li><a class="btn" [ngClass]="{'select':selectedStake==3}" (click)="selectSatekIndex(3)" name="betStake" index="3" style="cursor:pointer;">{{f.stake12.value}}</a></li>
+            </ul>
+            <a id="edit" class="a-edit" style="cursor:pointer;" (click)="editStake()">Edit<img src="https://b2c.static112233.com/assets/images/transparent.gif"></a>
+
+        </div>
+
+        <form [formGroup]="StakeSettingForm" (ngSubmit)="SaveBetStakeSetting()">
+            <div id="editOneClickBetStakeBox" class="one_click-setting" name="oneClickBetStakeBox"
+                style="display:none;">
+                <h4>Edit One Click Bet Stake</h4>
+                <ul class="one_click-stake">
+                    <li><input type="text" name="editBetStake" numberOnly index="0" value="" formControlName="stake9"></li>
+                    <li><input type="text" name="editBetStake" numberOnly index="1" value="" formControlName="stake10"></li>
+                    <li><input type="text" name="editBetStake" numberOnly index="2" value="" formControlName="stake11"></li>
+                    <li><input type="text" name="editBetStake" numberOnly index="3" value="" formControlName="stake12"></li>
+                </ul>
+                <a id="save" class="btn-send" style="cursor:pointer;" (click)="StakeSettingForm.valid?SaveBetStakeSetting():''">Save</a>
+            </div>
+        </form>
+    </ng-container>
+</div>

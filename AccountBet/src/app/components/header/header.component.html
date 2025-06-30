@@ -1,0 +1,218 @@
+<div class="top">
+
+    <div class="header full-wrap">
+
+        <h1>
+            <a (click)="goToPage('dash')">{{siteName}}</a>
+        </h1>
+
+        <app-search-wrap></app-search-wrap>
+        <select *ngIf="isTraslate" id="select" class="select2" style="margin-left: 10px;" (change)="selectlanguage($event.target.value)">
+            <option value="en" selected>Select language</option>
+            <option value="en">English</option>
+            <option value="bd">Bangala</option>
+            <option value="sp">Spanish</option>
+            <option value="pg">portuguese</option>
+            <option value="tu">Turkish</option>
+        </select>
+
+        <app-login *ngIf="!isLogin"></app-login>
+
+        <ul class="account-wrap" *ngIf="isLogin">
+            <li class="main-wallet">
+                <!-- 加open打開-->
+                <a id="multiWallet" class="a-wallet">
+                    <ul id="accountCredit" *ngIf="!isClicked">
+                        <li><span>{{Update?.MainBalance}}</span> <span id="betCredit"> {{accountInfo?.currencyCode}} {{fundInfo?.balance |
+                                number:'1.2-2'}}</span></li>
+                        <li><span>{{Update?.Exposure}} </span> <span id="totalExposure" [ngClass]="{'red':fundInfo?.exposure>0}">
+                                {{fundInfo?.exposure | number:'1.2-2'}}</span></li>
+                        <li class="nums" >+<span id="vendorQuantity">2</span></li>
+                    </ul>
+                    <!-- show wallet-->
+                    <div class="wallet-detail" id="multiBalancePop">
+                        <div class="wallet-detail-group">
+                            <dl class="wallet-detail-content">
+                                <dt>{{Update?.MainBalance}}</dt>
+                                <dd class="wallet-balance-num"> <span class="badge-currency"
+                                        id="currency">{{accountInfo?.currencyCode}}</span><span id="mainBalance">0.00</span></dd>
+                                <dd class="wallet-exposure">{{Update?.Exposure}} <span id="mainExposure">0.00</span></dd>
+                            </dl>
+                        </div>
+                        <div id="walletContent" class="wallet-detail-group">
+                            <dl id="tempDl" class="wallet-detail-content">
+                                <dt id="vendorTitle_3">B{{Udate?.pokerbalance}}</dt>
+                                <dd class="wallet-balance-num"> <span class="badge-currency"
+                                        id="vendorCurrency_3">{{accountInfo?.currencyCode}}</span><span id="vendorBalance_3">0 Points</span></dd>
+                                <dd class="wallet-recall"><button class="btn-recall" id="recall_3"
+                                        onclick="TopMenuHandler.recall('3')">{{Update?.recall}}</button></dd>
+                            </dl>
+                            <dl id="tempDl" class="wallet-detail-content">
+                                <dt id="vendorTitle_1">{{Update?.casinobalance}}</dt>
+                                <dd class="wallet-balance-num"> <span class="badge-currency"
+                                        id="vendorCurrency_1">{{accountInfo?.currencyCode}}</span><span id="vendorBalance_1">0</span></dd>
+                                <dd class="wallet-recall"><button class="btn-recall" id="recall_1"
+                                        onclick="TopMenuHandler.recall('1')">{{Update?.recall}}</button></dd>
+                            </dl>
+                            <dl id="recallAllDl" class="wallet-detail-content">
+                                <dd class="align-R"><button class="btn-recall" id="recallAll"
+                                        onclick="TopMenuHandler.recall('3,1')">{{Update?.recall}} {{Update?.all}}</button></dd>
+                            </dl>
+                        </div>
+                        <div id="walletTemp" class="wallet-detail-group" style="display: none;">
+                            <dl id="tempDl" class="wallet-detail-content">
+                                <dt id="vendorTitle">{{Update?.housebalance}}</dt>
+                                <dd class="wallet-balance-num"> <span class="badge-currency"
+                                        id="vendorCurrency">USD</span><span id="vendorBalance">$ 0.00</span></dd>
+                                <dd class="wallet-recall"><button class="btn-recall" id="recall">{{Update?.recall}}</button></dd>
+                            </dl>
+                            <dl id="recallAllDl" class="wallet-detail-content">
+                                <dd class="align-R"><button class="btn-recall" id="recallAll">{{Update?.recall}} {{Uupdate?.all}}</button></dd>
+                            </dl>
+                        </div>
+                        <div class="btn-box">
+                            <button class="btn" onclick="location.href='javascript:history.back();'">{{Update?.close}}</button>
+                        </div>
+                    </div>
+
+                    <p class="loading-bar" id="menuRefreshLoading" *ngIf="isClicked">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </p>
+                </a>
+                <a id="menuRefresh" class="a-refresh" (click)="FundExpo('refresh')" title="Refresh Main Wallet"><img
+                        src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif"></a>
+            </li>
+            <li class="account" (clickOutside)="onClickedOutside($event,true)">
+                <a id="accountPopup" class="rajbet" style="cursor: pointer" (click)="accountPopup()">{{Update?.myaccount}}</a>
+
+                <ul id="account_pop" style="display: none; z-index: 1;">
+                    <li>
+                        <h4>
+                            {{accountInfo?.userName}}
+                            <span class="gmt" title="Time Zone">GMT+5:30</span>
+                        </h4>
+                    </li>
+                    <!-- [routerLink]="isb2c ? '/kycdetail' : '/detail'" -->
+                    <li><a   routerLink="/detail"  target="_blank">{{Update?.myprofile}}</a></li>
+
+                    <li><a routerLink="/summary" target="_blank">{{Update?.balanceoverview}}</a></li>
+
+                    <li><a routerLink="/account_statement" target="_blank">{{Update?.Accountstatement}}</a></li>
+
+                    <li><a routerLink="/dw_requests" target="_blank">{{Update?.DwRequests}}
+                                </a></li>
+
+                    <li><a routerLink="/current_bets" target="_blank">{{Update?.mybet}}</a></li>
+                    <li><a routerLink="/bet_history" target="_blank">{{Update?.betshistory}}</a></li>
+
+
+                    <li><a routerLink="/profit_loss" target="_blank">{{Update?.profit}} &amp; {{Update?.loss}}
+                        </a></li>
+
+
+
+                    <li><a routerLink="/activityLog" target="_blank">{{Update?.activitylog}}
+                        </a></li>
+
+
+                    <li class="logout"><a id="logout" (click)="Logout()">{{Update?.logout}}<img
+                                src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif"></a></li>
+
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+
+    <!-- Menu Wrap -->
+    <div class="menu-wrap">
+        <div class="full-wrap" (clickOutside)="onOneClickOutsideSet($event,true)">
+
+            <ul id="tabMenu" class="menu">
+
+                <li>
+                    <a id="menu_Home" (click)="goToPage('dash')">{{Update?.home}}</a>
+                </li>
+
+                <li><a id="menu_InPlay" (click)="goToPage('inplay')">{{Update?.inplay}}</a></li>
+
+                <li><a id="menu_MultiMarkets" (click)="goToPage('multimarkets')">{{Update?.multimarkets}}</a></li>
+
+                <ng-container *ngFor="let sport of sportList;trackBy:trackBySport; let index = index">
+                    <li>
+                        <a id="menu_{{sport.sportsName}}" (click)="goToPage('highlight')"
+                           >
+                            <span id="tagLive" class="tag-live"><strong></strong>{{sport.inplayCounts}}</span>
+                            {{sport.sportsName | titlecase}}
+                        </a>
+                    </li>
+                </ng-container>
+
+                <ng-container *ngIf="isLogin">
+                    <li><a id="menu_HORSE_RACING" (click)="goToPage('races/7')">{{Update?.HorseRacing}}</a></li>
+                    <li><a id="menu_GREYHOUND_RACING" (click)="goToPage('races/4339')">{{Update?.GreyHoundRacing}}</a></li>
+                    <li class="dark_menu-li">
+                        <a class="casino tag-new tag-news" (click)="goToPage('casino')">
+                            {{Update?.casino}}
+                        </a>
+                    </li>
+
+                </ng-container>
+                <ng-container *ngIf="!isLogin">
+                    <li><a id="menu_HORSE_RACING" (click)="openLoginPop()">{{Update?.HorseRacing}}</a></li>
+                    <li><a id="menu_GREYHOUND_RACING" (click)="openLoginPop()">{{Update?.GreyHoundRacing}}</a></li>
+                    <li class="dark_menu-li" (click)="openLoginPop()">
+                        <a class="casino tag-new ">
+                            {{Update?.casino}}
+                        </a>
+                    </li>
+                </ng-container>
+                <!-- <li>
+                    <a id="menu_FANCYBET_-9999996">BBL
+                        2020
+                    </a>
+                </li>
+
+                <li>
+                    <a id="menu_CRICKET_27996014">BBL
+                        Winner</a>
+                </li>
+
+
+                <li><a id="menu_Binary" href="/exchange/member/financialMarket?periodType=1">Binary</a></li> -->
+
+            </ul>
+
+            <ul class="setting-wrap">
+
+                <li class="time_zone"><span>{{Update?.timezone}} :</span> GMT+5:30</li>
+                <li>&nbsp;&nbsp;&nbsp;</li>
+
+
+
+                <li>
+                    <a id="oneClickSetting" class="one_click" [ngClass]="{'select':OneClickBet?.isOneClickBet}"
+                        style="cursor: pointer;" (click)="openOneClickSet()">
+                        <img src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">{{Update?.OneClickBet}}</a>
+                </li>
+
+
+                <li>
+                    <a id="slipSet" class="setting" style="cursor: pointer" (click)="openSlipSet()">{{Update?.setting}}
+                        <img src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif"></a>
+                </li>
+            </ul>
+
+
+            <app-setting-pop></app-setting-pop>
+
+        </div>
+    </div>
+</div>

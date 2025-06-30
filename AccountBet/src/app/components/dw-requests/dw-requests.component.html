@@ -1,0 +1,112 @@
+<h2>{{Update?.DwRequests}}</h2>
+
+<div class="white-wrap">
+
+
+    <div class="function-wrap">
+        <ul class="input-list">
+
+            <li><label>{{Update?.period}}</label></li>
+            <li>
+                <input id="startDate" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                    [(ngModel)]="selectfromdate"[minDate]="month" [maxDate]="todaysDate" 
+                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-default', isAnimated: true }">
+                <input id="startTime" disabled=""  class="time-input disable" type="text" placeholder="09:00"
+                    maxlength="5">
+                to
+                <input id="endDate" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                    [(ngModel)]="selecttodate"  [minDate]="selectfromdate" [maxDate]="todaysDate"  
+                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-default', isAnimated: true }">
+                <input id="endTime" disabled="" class="time-input disable" type="text" placeholder="08:59"
+                    maxlength="5">
+            </li>
+            <li style="display: none;">({{Update?.timezone}}:IST)</li>
+            <div>
+                <li><label>{{Update?.requesttype}}:</label></li>
+                <li>
+                    <select (change)="selectTransactionType($event.target.value)">
+                        <option value="" selected=""> {{Update?.selecttype}} </option>
+                        <option *ngFor="let type of transactionType;" [value]="type.id">
+                          {{ type.name }}
+                        </option>
+                    </select>
+                </li>
+            </div>
+            <div>
+                <li><label>{{Update?.requeststatus}}:</label></li>
+                <li>
+                    <select (change)="selectTransactionStatus($event.target.value)">
+                        <option value="" selected=""> {{Update?.selectstatus}} </option>
+                        <option *ngFor="let status of transactionStatus;" [value]="status.id">
+                          {{ status.name }}
+                        </option>
+                    </select>
+                </li>
+            </div>
+        </ul>
+
+        <ul class="input-list">
+        
+            <li><a id="getPL" class="btn-send" (click)=" getRequests(selectedType,selectedStatus)">{{Update?.getrequest}}</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<table id="table_log" class="table01">
+    <tbody>
+        <tr>
+            <th width="15%" class="align-L">{{Update?.datetime}}</th>
+            <th width="18%" class="align-C">{{Update?.referenceno}}</th>
+            <th width="18%" class="align-C">{{Update?.type}}</th>
+            <th width="12%" class="align-C">{{Update?.deposit}}</th>
+            <th width="12%" class="align-C">{{Update?.withdraw}}</th>
+            <th width="12%" class="align-C">{{Update?.status}}</th>
+            <th width="15%" class="align-C">{{Update?.paymentmethod}}</th>
+            <th class="align-C">{{Update?.remarks}}</th>
+            <th>SS</th>
+
+
+            <!-- <th width="">From/To</th> -->
+        </tr>
+
+    </tbody>
+    <tbody id="content">
+
+        <ng-container *ngFor="let request of requestsData;let index=index">
+            <tr id="tempTr">
+                <td id="createDate" class="align-L">{{request.trn_date | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td id="ref_no" class="align-C">{{request.isAuto=='1'?request.trn_no:request.ref_no}}</td>
+                <td id="ref_no" class="align-C">{{request.trn_type==1?'Deposit':'Withdraw'}}</td>
+                <td id="deposit" class="align-C">{{request.coins<0?'--':request.coins}}</td>
+                <td id="withdraw" class="align-C">{{request.coins>0?'--':request.coins}}</td>
+                <td id="status" class="align-C" [ngClass]="request.status==0?'':request.status==1?'green':'red'"> {{request.isAuto==1?request.status==1?'Successfull':'Failed':request.status==0?'Pending':request.status==1?'Approved':'Rejected'}}</td>
+                <td id="remark" class="align-C">{{request.payment_method}}</td>
+                <td id="remark" class="align-C">{{request.remark==''|| request.remark==null?'--':request.remark}}</td>
+                <td *ngIf="request.isAuto=='0'">
+                    <a style="width: 40px;" id="ss" [ngClass]="request.trn_type===2 && (request.status==0 ||request.status==2)?'disbtn btn':'btn'" (click)="showSS(request.img)">SS</a></td>
+                <td *ngIf="request.isAuto=='1'" id="remark" class="align-C">{{'-'}}</td>
+                    <!-- <td>
+                    <span id="from">Master Agent</span>
+                    <img class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">
+                    <span id="to">yash50</span>
+                </td> -->
+            </tr>
+        </ng-container>
+
+        <tr id="noDataTempTr" *ngIf="requestsData.length==0 && !loader">
+			<td class="no-data" colspan="5">
+				<p>{{Update?.nodata}}</p>
+			</td>
+		</tr>
+    </tbody>
+</table>
+
+<div>
+    <div id="bigSS" class="pop_bg" >
+        <div class="pop_box">
+        <a class="close_pop" (click)="closeSS()">close_pop</a>
+        <img class="ss" [src]="imgURL">
+      </div>
+    </div>
+  </div>

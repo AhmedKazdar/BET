@@ -1,0 +1,9 @@
+<div class="f-back">
+    <h1>Feedback</h1>
+    <form class="Feedback-form" [formGroup]="FeedbackForm" (ngSubmit)="submitFeedback()">
+        <input type="text" placeholder="Email" formControlName="email">
+        <input type="text" placeholder="Subject" formControlName="subject">
+        <textarea name="" id="desciption" cols="30" rows="10" placeholder="Desciption...." formControlName="description"></textarea>
+        <input class="s-button" type="submit" placeholder="submit">
+    </form>
+</div>

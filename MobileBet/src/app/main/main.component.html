@@ -1,0 +1,63 @@
+<div class="ui-page ui-page-theme-a ui-page-active unselectable">
+
+    <app-open-bets></app-open-bets>
+  
+  
+    <app-header></app-header>
+    
+    <!-- <select id="select" style="margin-left: 10px;" (change)="selectlanguage($event.target.value)">
+      <option value="en" selected>Select language</option>
+      <option value="en">English</option>
+      <option value="bd">Bangala</option>
+      <option value="sp">Spanish</option>
+  </select> -->
+    <app-marquee *ngIf="isLogin"></app-marquee>
+    <app-marquee *ngIf="!isLogin"></app-marquee>
+    <app-promote-banner *ngIf="isBannerShow && !loader"></app-promote-banner>
+    <app-nav></app-nav>
+    <app-settings></app-settings>
+    <app-search></app-search>
+    <app-whatsapp *ngIf="isWhatsappShow"></app-whatsapp>
+    <div class="loading-overlay" style="display: none;" id="loading">
+      <div class="loading-wrap" style="display: flex;">
+        <div class="loading">
+          <div></div>
+          <div></div>
+        </div>
+        <p>Loading...</p>
+      </div>
+    </div>
+
+    <div id="verifyEmail" class="ageplus" style="z-index: 999; display: none;">
+
+      <div class="dialog" style="position: fixed;top: 27%;">
+        <div class="announce-wrap1">
+          <div class="announce-header1">
+            <h1>Verify Email</h1>
+          </div>
+          
+          <div class="tc-content" style="height: auto;">
+            <p>We have sent an email to your registered email id. Please check your inbox or spam to validate your email address.</p>
+          </div>
+          
+          <ul class="announce-footer1">
+            <a id="decline" class="btn-send secondary"  style="height: 34px;line-height: 1.8;width: 90%;" (click)="hideVerify()">Okay</a>
+          </ul>
+        
+        </div>
+      </div>
+    </div>
+  
+    <!-- <div class="loading-overlay" style="display: none;" id="page_loading">
+      <div class="loading-wrap" style="display: flex;">
+        <div class="loading">
+          <div></div>
+          <div></div>
+        </div>
+        <p>Loading...</p>
+      </div>
+    </div> -->
+  
+    <router-outlet></router-outlet>
+  
+  </div>

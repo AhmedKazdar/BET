@@ -1,0 +1,123 @@
+<div class="mian-wrap">
+    <ng-container *ngIf="isLogin">
+    <div class="activePlayer" *ngIf="siteName=='cricbuzzer' || siteName == 'cricbuzzerlive'">
+        <span class="cl1"> {{Update?.activeplayer}}</span>
+        <span class="cl2" id="activePlayer">{{activePlayer| number}}</span>
+    </div>
+</ng-container>
+    <ul id="inPlayTab" class="tab col3" *ngIf="siteName!='lionbook247'">
+        <div class="casino-box-tabs" style="background: #212121;">
+            <div class="casino-tabs-menu">
+                <a (click)="scrollLeft1()" class="arrow-tabs arrow-left"><i class="fas fa-chevron-left"></i></a>
+                <ul #tab2 class="nav nav-pills">
+                    <li class="select"><a id="inplay" [routerLink]="isLogin?['/cas/SEXYBCRT']:['/login']">AWC</a>
+                    </li>
+                    <li><a id="today" [routerLink]="isLogin?['/betgames']:['/login']">{{Update?.Betgames}}</a></li>
+                    <li><a id="today" [routerLink]="isLogin?['/twain']:['/login']">{{Update?.Twain}}</a></li>
+                    <li *ngIf="isaura || siteName =='cricbuzzercom'">
+                        <!-- <a id="today" [routerLink]="isLogin?['/casino/cas/aura']:['/login']">{{Update?.Aura}}</a> -->
+                        <a id="today" [routerLink]="isLogin?['/casino/aman']:['/login']">{{Update?.Aura}}</a>
+                    </li>
+                    <li *ngIf="siteName == 'cricbuzzer' || siteName=='cricbuzzercom' || siteName=='cricbuzzerlive' ">
+                        <a id="today" [routerLink]="isLogin?['/casino/cas/bo']:['/login']">All Providers</a>
+                    </li>
+                    <li style="height: 27px;">
+                        <a id="tomorrow" [routerLink]="isLogin?['/casino/cas/dia']:['/login']">
+                            <img src="https://b2c.static112233.com/m/assets/images/mobile/cricbuzzer/img12.gif" width="40px">
+                        </a>
+                    </li>
+                </ul>
+                <a (click)="scrollRight1()" class="arrow-tabs arrow-right"><i class="fas fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </ul>
+    <div class="gamehall">
+
+        <ng-container>
+            <a routerLink="{{inplayCom}}" class="">
+                <dl id="onLiveBoard" class="on_live">
+                    <dt>
+                        <p class="live_icon"><span></span> LIVE</p>
+                    </dt>
+                    <ng-container *ngFor="let sport of sportList;trackBy:trackBySport; let index = index">
+                        <dd id="onLiveCount_{{sport.sportsName}}" *ngIf="index<6">
+                            <p>{{sport.sportsName | titlecase}}</p><span id="count">{{sport.inplayCounts}}</span>
+                        </dd>
+                    </ng-container>
+                </dl>
+                <ng-container>
+                    <img src="https://b2c.static112233.com/m/assets/images/mobile/gamehall/banner_sports.jpg"
+                        alt="Sports" draggable="false">
+                    <dl class="entrance-title">
+                        <dt>Sports</dt>
+                        <div class="rotating-border rotating-border--google heart"><span>{{Update?.PlayNow}}<i
+                                    aria-hidden="true" class="fa fa-play" id="fa-play"></i></span></div>
+                        <!-- <dd>Play Now</dd> -->
+                    </dl>
+                </ng-container>
+            </a>
+            <ng-container *ngFor="let awc of AWC_games">
+                <ng-container *ngIf="awc.isEnable">
+                    <a class="entrance" [ngClass]="{'entrance-half':!awc.isBig}" style="cursor: pointer;"
+                        (click)="openTable(awc)">
+                        <dl class="entrance-title">
+                            <dt>{{awc.name | titlecase}}</dt>
+                            <div class="rotating-border rotating-border--google heart"><span>{{Update?.PlayNow}}<i
+                                aria-hidden="true" class="fa fa-play" id="fa-play"></i></span></div>
+                        </dl>
+                        <img *ngIf="awc.isAWC"
+                            src="https://b2c.static112233.com/assets/images/awc_images/{{awc.gameCode}}.webp?v=85249685">
+                        <img *ngIf="!awc.isAWC"
+                            src="https://b2c.static112233.com/assets/images/awc_banner/sitename_home/{{siteName}}/{{awc.name}}.webp">
+                    </a>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <app-support-wrap > </app-support-wrap>
+    <app-cricbuzzer-policy></app-cricbuzzer-policy>
+    <app-extra-wrap></app-extra-wrap>
+</div>
+
+
+<div id="YL" class="overlay" style="display: none;">
+    <div class="frame-wrap">
+        <div class="news-wrap news-wrap-frame">
+            <div class="side-content">
+                <h1 class="aligh">Notice</h1>
+                <p class="para" *ngIf="accountInfo?.currencyCode == 'INR'">
+                    1 MYR = 100 INR
+                </p>
+                <p class="para" *ngIf="accountInfo?.currencyCode == 'BDT'">
+                    100 BDT = 1 MYR
+                </p>
+                <p class="para" *ngIf="accountInfo?.currencyCode == 'USD'">
+                    1 USD = 1 / 0.66 = 1.66 MYR
+                </p>
+            </div>
+            <footer><a class="btn-send" (click)="hideOverlayInfo('#YL')">OK</a></footer>
+        </div>
+    </div>
+</div>
+<div id="coming_soon" class="overlay" style="display: none;">
+    <div class="frame-wrap">
+        <div class="news-wrap news-wrap-frame">
+            <div class="side-content">
+                <img src="https://b2c.static112233.com/m/assets/images/mobile/gamehall/coming_soon.jpg"
+                    alt="coming_soon" draggable="false">
+            </div>
+            <footer><a class="btn-send" (click)="hideOverlayInfo('#coming_soon')">CLOSE</a></footer>
+        </div>
+    </div>
+</div>

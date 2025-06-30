@@ -1,0 +1,16 @@
+.disclaimer{
+    padding: 0 8px 20px 8px;
+    text-align: center;
+    color: #787878;
+}
+select{
+    margin-left: 35%;
+    /* padding-bottom: 40px; */
+    background: #202020;
+    color: #fff;
+    padding: 4px;
+    border-radius: 4px;
+}
+.divpad{
+    padding: 0 8px 146px 8px;
+}

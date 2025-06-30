@@ -1,0 +1,47 @@
+<div class="col-left">
+
+	<!-- Sub Menu and Path -->
+	<div class="sub_path">
+		<!-- Path -->
+		<div class="path">
+			<a href="#path-pop" class="path-back">...</a>
+
+			<ul>
+				<li class="path-last"><a href="#">{{Update?.myaccount}}</a></li>
+			</ul>
+		</div>
+		<!-- Path Pop Up-->
+		<ul id="path-pop" class="path-pop">
+
+		</ul>
+
+		<!-- Sub Menu -->
+		<ul class="menu-list">
+
+			<li><a id="sub_menu_detail"   routerLink="/detail"  [routerLinkActive]="['select']">{{Update?.myprofile}}</a></li>
+
+			<li><a id="sub_menu_summary" routerLink="/summary" [routerLinkActive]="['select']">{{Update?.balanceoverview}}</a></li>
+
+			<li *ngIf="isb2c"><a id="sub_menu_withdrawaldetails" routerLink="/bank_details" [routerLinkActive]="['select']">{{Update?.withdrawaldetails}}</a></li>
+
+			<li><a id="sub_menu_accountCashStatement_log" routerLink="/account_statement" [routerLinkActive]="['select']">{{Update?.Accountstatement}}
+			</a></li>
+			<li *ngIf="isb2c"><a  id="sub_menu_dwRequests_log" routerLink="/dw_requests" [routerLinkActive]="['select']">{{Update?.DwRequests}}
+			</a></li>
+			<li><a id="sub_menu_my_bets" routerLink="/current_bets" [routerLinkActive]="['select']">{{Update?.mybet}}</a></li>
+			<li *ngIf="isParlay"><a id="sub_menu_my_bets" routerLink="/parlay_bet_history" [routerLinkActive]="['select']">
+				Parlay Bets</a></li>
+			<li><a id="sub_menu_my_bets" routerLink="/casino_bet_history" [routerLinkActive]="['select']">{{Update?.casinobets}}</a></li>
+			<li><a id="sub_menu_my_bets" routerLink="/betgames_bet_history" [routerLinkActive]="['select']">Betgames Bets</a></li>
+			<li *ngIf="isAwcbets"><a id="sub_menu_my_bets" routerLink="/awc_bet_history" [routerLinkActive]="['select']">AWC Bets</a></li>
+	        <li *ngIf="isBObets"><a id="sub_menu_my_bets" routerLink="/bo_bet_history" [routerLinkActive]="['select']"> {{Update?.BObets}}</a></li>
+			<li><a id="sub_menu_activity_log" routerLink="/activity_log" [routerLinkActive]="['select']">{{Update?.activitylog}}</a></li>
+			<li><a *ngIf="isb2c" id="sub_menu_dispute" routerLink="/dispute" [routerLinkActive]="['select']">{{Update?.dispute}}</a></li>
+			<li><a *ngIf="isb2c" id="sub_menu_feedback" routerLink="/feedback" [routerLinkActive]="['select']">{{Update?.feedback}}</a></li>
+
+			<!-- <li><a id="sub_menu_activity_log" routerLink="/casino_product" [routerLinkActive]="['select']">Casino Product</a></li> -->
+
+
+		</ul>
+	</div>
+</div>

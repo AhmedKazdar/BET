@@ -1,0 +1,21 @@
+<form>
+    <div id="searchWrap" class="search-wrap">
+        <div>
+            <input id="searchInput" class="search-input" type="text" placeholder="{{Update?.searchevent}}" appInputRestriction="noSpecialChars"
+                [(ngModel)]="searchText" (keyup)="keyupSearch($event)" [ngModelOptions]="{standalone: true}">
+            <button id="searchClear" class="search-clear" *ngIf="searchText" (click)="searchClear()"></button>
+        </div>
+        <div id="searchResult" class="suggestion-wrap" *ngIf="searchText.length>=3">
+            <ul id="searchList">
+                <li id="noMatching" *ngIf="searchResult.length==0">
+                    <p class="no-matching">No events found matching ...</p>
+                </li>
+                <li id="result_{{match.eventId}}_{{match.eventTypeId}}_{{match.competitionId}}" style="display: list-item;"
+                    *ngFor="let match of searchResult">
+                    <a [routerLink]="['/fullmarkets',match.eventId]"
+                        (click)="toggleFavourite(match)">{{match.time.split('T')[1]}} {{match.eventName}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>

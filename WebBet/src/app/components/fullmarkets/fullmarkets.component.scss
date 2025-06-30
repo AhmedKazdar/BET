@@ -1,0 +1,59 @@
+
+.ball-runs {
+    background: #3d405b;
+    margin-left: 3px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+    line-height: 25px;
+    text-align: center;
+    color: #fff !important;
+    font-weight: 700;
+    font-size: 12px;
+  }
+  .ball-runs.wicket {
+    background: red
+  }
+
+  .increase{
+   height: 460px !important;
+  }
+
+ 
+  .ball-runs.four {
+    background: #087f23
+  }
+  
+  .ball-runs.six {
+    background: #883997
+  }
+  .tooltip1 {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    // border-bottom: 1px dotted black;
+  }
+  .tooltip1 .tooltip1text {
+    visibility: hidden;
+    width: 200px;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    border-radius: 0px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    font-weight: 300;
+    margin-left: 16px;
+    top: 20px;
+    border: 1px solid #3d405b;
+  }
+  
+  .tooltip1:hover .tooltip1text {
+    visibility: visible;
+  }
+
+  table{
+    font-size: 12px !important;
+  }

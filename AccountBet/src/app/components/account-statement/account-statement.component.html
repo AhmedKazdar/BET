@@ -1,0 +1,79 @@
+<h2>{{Update?.Accountstatement}}</h2>
+
+<div class="white-wrap">
+
+
+    <div class="function-wrap">
+        <ul class="input-list">
+
+            <li><label>{{Update?.period}}</label></li>
+            <li>
+                <input id="startDate" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                    [(ngModel)]="selectfromdate"[minDate]="month" [maxDate]="selectfromdate" 
+                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-default', isAnimated: true }">
+                <input id="startTime" disabled=""  class="time-input disable" type="text" placeholder="09:00"
+                    maxlength="5">
+                to
+                <input id="endDate" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                    [(ngModel)]="selecttodate"  [minDate]="month" [maxDate]="selecttodate"  
+                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-default', isAnimated: true }">
+                <input id="endTime" disabled="" class="time-input disable" type="text" placeholder="08:59"
+                    maxlength="5">
+            </li>
+            <li style="display: none;">({{Update?.timezone}}:IST)</li>
+        </ul>
+
+        <ul class="input-list">
+            <li><a id="today" (click)="selectTab('today')" class="btn">{{Update?.justfortoday}}</a></li>
+            <li><a id="yesterday" (click)="selectTab('yesterday')" class="btn">{{Update?.fromyesterday}}</a></li>
+            <li style="display: none;"><a id="last7days" (click)="selectTab('last7days')" class="btn">{{Update?.last7days}}</a>
+            </li>
+            <li style="display: none;"><a id="last30days" (click)="selectTab('last30days')" class="btn">{{Update?.last30days}}</a>
+            </li>
+            <li style="display: none;"><a id="last2months" (click)="selectTab('last2months')" class="btn">{{Update?.last2months}}</a></li>
+            <li style="display: none;"><a id="last3months" (click)="selectTab('last3months')" class="btn">{{Update?.last3months}}</a></li>
+            <li><a id="getPL" class="btn-send" (click)="AccountStatement()">{{Update?.getstatement}}</a></li>
+        </ul>
+    </div>
+
+
+</div>
+
+<table id="table_log" class="table01">
+    <tbody>
+        <tr>
+            <th width="15%" class="align-L">{{Update?.datetime}}</th>
+            <th width="18%">{{Update?.deposit}}</th>
+            <th width="18%">{{Update?.withdraw}}</th>
+            <th width="18%">{{Update?.balance}}</th>
+            <!-- <th width="16%">Remark</th> -->
+            <th>{{Update?.remarks}}</th>
+
+            <!-- <th width="">From/To</th> -->
+        </tr>
+
+    </tbody>
+    <tbody id="content">
+
+        <ng-container *ngFor="let statement of statementsData;let index=index">
+            <tr id="tempTr">
+                <td id="createDate" class="align-L">{{statement.settlementDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td id="deposit" class="green">{{statement.credit=='0'?'--':statement.credit | number:'1.2-2'}}</td>
+                <td id="withdraw" class="red">{{statement.debit=='0'?'--':statement.debit | number:'1.2-2'}}</td>
+                <td id="balance"> {{statement.runningBalance | number:'1.2-2'}}</td>
+                <td id="remark">{{statement.narration}}</td>
+                <!-- <td>
+                    <span id="from">Master Agent</span>
+                    <img class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">
+                    <span id="to">yash50</span>
+                </td> -->
+            </tr>
+        </ng-container>
+
+        <tr id="noDataTempTr" *ngIf="statementsData.length==0 && !loader">
+			<td class="no-data" colspan="5">
+				<p>{{Update?.nodata}}</p>
+			</td>
+		</tr>
+    </tbody>
+</table>

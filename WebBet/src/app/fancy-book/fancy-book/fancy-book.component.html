@@ -1,0 +1,40 @@
+<div id="logWrap" class="log-wrap" style="width: 600px">
+    <table class="game-team">
+        <tbody>
+            <tr>
+                <td class="game-name">
+                    Runs Position
+                    <a class="pop-close" onclick="window.open('', '_self', ''); window.close();">
+                        <img class="icon-back" src="https://b2c.static112233.com/assets/images/transparent.gif">Close</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pop-content">
+        <table id="table" class="table01 tab-depth" *ngIf="fancyBookData">
+            <tbody>
+                <tr>
+                    <th width="100%" colspan="2" class="align-L">{{fancyName}}</th>
+                </tr>
+                <tr>
+                    <th width="50%" class="align-L">Runs</th>
+                    <th width="50%" class="border-l">Amount</th>
+                </tr>
+           
+                <tr id="trTemp" style="display: table-row;" *ngFor="let book of fancyBookData;let index=index">
+                    <td id="runs" class="align-L"[ngClass]="{'back': book[1] >= 0, 'lay': book[1] < 0}">
+                        <strong>{{book[0]}}</strong>
+                    </td>
+                    <td id="exposure" [ngClass]="{'back': book[1] >= 0, 'lay': book[1] < 0}"><strong
+                            [ngClass]="{'green': book[1] >= 0, 'red': book[1] < 0}"> {{book[1] |
+                            number:'1.2-2'}}</strong></td>
+                </tr>
+                <!-- <tr id="trTemp" style="display: table-row;" *ngFor="let book of fancyBookData.data">
+                    <td id="runs" class="align-L" [ngClass]="{'back': book.Value >= 0, 'lay': book.Value < 0}">{{book.Key}}</td>
+                    <td id="exposure" [ngClass]="{'back': book.Value >= 0, 'lay': book.Value < 0}"> {{book.Value | number:'1.2-2'}}</td>
+                </tr> -->
+        
+            </tbody>
+        </table>
+    </div>
+</div>

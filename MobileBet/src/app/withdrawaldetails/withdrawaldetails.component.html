@@ -1,0 +1,171 @@
+<div class="side-content">
+    <div>
+        <dl class="main setting-block">
+            <dt>Bank Details</dt>
+            <dd>
+                <a id="addBank" class="btn-send" (click)="showOverlayInfo('#addBankDialog');" >Add</a>
+                <a *ngIf="!noBank" id="showBank" class="btn-send fa" [ngClass]="{'fa-angle-up' : showBankList, 'fa-angle-down': !showBankList}" (click)="showBanks()" style="color: #ffb80c; margin-left: 4px;"></a>
+            </dd>
+        </dl>
+        <dl *ngIf="showBankList" class="accordion">
+            <ng-container *ngFor="let bank of bankList ;let i =index">
+                <dl class="setting-block">
+                    <a [ngClass]= "bank.isPreferred=='1'?'fa fa-star star':'fa fa-star-o star'" (click)="showconfirmation('#confirmation','0',bank);" aria-hidden="true"></a>
+                    <dt>{{bank.account_holder}} ({{bank.account_number}})</dt>
+                    <dd>
+                        <a class="fa fa-pencil" style="font-size:20px;color:#ffb80c;" (click)="showEditBank('#editBankDialog',bank);"></a>
+                        <a class="fa fa-trash" style="font-size:20px;color:#ffb80c" (click)="showconfirmation('#confirmation','2',bank);"></a>
+
+                    </dd>
+                </dl>
+            </ng-container>
+        </dl>
+    </div>
+    <div>
+        <dl class="main setting-block">
+            <dt>UPI Details</dt>
+            <dd>
+                <a id="addUpi" class="btn-send" (click)="showOverlayInfo('#addUpiDialog');">Add</a>
+                <a *ngIf="!noUPI" id="showUpi" class="btn-send fa" [ngClass]="{'fa-angle-up' : showUpiList, 'fa-angle-down': !showUpiList}" (click)="showUpis()" style="color: #ffb80c; margin-left: 4px;"></a>
+            </dd>
+        </dl>
+        <dl *ngIf="showUpiList" class="accordion">
+            <ng-container *ngFor="let upi of upiList ;let i =index">
+                <dl class="setting-block">
+                    <a [ngClass]= "upi.isPreferred=='1'?'fa fa-star star':'fa fa-star-o star'" aria-hidden="true" (click)="showconfirmation('#confirmation','1',upi);"></a>
+                    <dt>{{upi.value}} ({{upi.type}})</dt>
+                    <dd>
+                        <a class="fa fa-pencil" style="font-size:20px;color:#ffb80c" (click)="showEditUpi('#editUpiDialog',upi);"></a>
+                        <a class="fa fa-trash" style="font-size:20px;color:#ffb80c" (click)="showconfirmation('#confirmation','3',upi);"></a>
+                    </dd>
+                </dl>
+            </ng-container>
+        </dl>
+    </div>
+</div>
+
+<div id="addBankDialog" class="overlay" style="display: none;">
+    <div class="frame-wrap">
+        <div class="news-wrap news-wrap-frame bankupidialog">
+            <div class="side-head">
+                <h3>Add Your Bank Account</h3>
+            </div>
+            <div style="margin: 8px 16px 24px 16px;
+            font-size: 19px;">
+                <span>Adding Bank Details is mandatory for processing withdrawals.</span>
+            </div>
+            <form [formGroup]="BankForm" class="form-login" (ngSubmit)="addBank()">
+                <select id="select"  formControlName="bank_name"  (change)="selectBank($event.target.value)">
+                    <option value="" selected>Select Bank</option>
+                    <option *ngFor="let name of Banks" [value]="name">
+                        {{name}}
+                    </option>
+                </select>
+                <input type="number" formControlName="account_number" placeholder="Account Number"  style="margin: 16px 0 0 0;">
+                <input oninput="this.value = this.value.toUpperCase()" formControlName="ifsc_code" type="text" placeholder="IFSC" style="margin: 16px 0 16px 0;">
+                <input formControlName="account_holder" type="text" placeholder="Account Holder Name">
+                <div style="display:flex;margin-top: 12px;">
+                    <a class="btn-send" style="width: 50%;" (click)="hideOverlayInfo('#addBankDialog');">CLOSE</a>
+                    <a class="btn-send" type="submit" style="margin-left: 8px;width: 50%;" (click)="addBank()">SAVE</a>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+<div id="addUpiDialog" class="overlay" style="display: none;">
+    <div class="frame-wrap">
+        <div class="news-wrap news-wrap-frame bankupidialog">
+            <div class="side-head">
+                <h3>Add Your UPI</h3>
+            </div>
+            <div style="margin: 8px 16px 24px 16px;
+            font-size: 19px;">
+                <span>Adding UPI Details is mandatory for processing withdrawals.</span>
+            </div>
+            <form [formGroup]="upiForm" class="form-login" (ngSubmit)="addUpi()">
+                <select formControlName="type" id="select" (change)="selectProvider($event.target.value)">
+                    <option value="" selected>Select Provider</option>
+                    <option *ngFor="let name of Provider" [value]="name">
+                        {{name}}
+                    </option>
+                </select>
+                <input formControlName="name" type="text" placeholder="Display Name" style="margin: 16px 0 16px 0;">
+                <input formControlName="value" type="text" placeholder="UPI">
+                <div style="margin-top: 12px; display: flex;">
+                    <a class="btn-send" style="width: 50%;" (click)="hideOverlayInfo('#addUpiDialog');">CLOSE</a>
+                    <a class="btn-send" style="margin-left: 8px;width: 50%;" (click)="addUpi()">SAVE</a>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+<div id="editBankDialog" class="overlay" style="display: none;">
+    <div class="frame-wrap">
+        <div class="news-wrap news-wrap-frame bankupidialog">
+            <div class="side-head">
+                <h3>Edit Bank Account</h3>
+            </div>
+            <form [formGroup]="editBankForm" class="form-login" style="margin: auto;padding: 8px;" (ngSubmit)="updateBank()">
+                <select id="select"  formControlName="bank_name"  (change)="selectBank($event.target.value)">
+                    <option *ngFor="let name of Banks" [value]="name">
+                        {{name}}
+                    </option>
+                </select>
+                <input type="number" formControlName="account_number" placeholder="Account Number"  style="margin: 16px 0 0 0;">
+                <input oninput="this.value = this.value.toUpperCase()" formControlName="ifsc_code" type="text" placeholder="IFSC" style="margin: 16px 0 16px 0;">
+                <input formControlName="account_holder" type="text" placeholder="Account Holder Name">
+                <div style="margin-top: 12px; display: flex;">
+                    <a class="btn-send" style="width: 50%;" (click)="hideOverlayInfo('#editBankDialog');">CLOSE</a>
+                    <a class="btn-send" type="submit" style="margin-left: 8px; width: 50%;" (click)="updateBank()">SAVE</a>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+<div id="editUpiDialog" class="overlay" style="display: none;">
+    <div class="frame-wrap">
+        <div class="news-wrap news-wrap-frame bankupidialog">
+            <div class="side-head">
+                <h3>Edit UPI</h3>
+            </div>
+            <form [formGroup]="editUpiForm" class="form-login" style="margin: auto;padding: 8px;" (ngSubmit)="updateUpi()">
+                <select formControlName="type" id="select" (change)="selectProvider($event.target.value)">
+                    <option *ngFor="let name of Provider" [value]="name">
+                        {{name}}
+                    </option>
+                </select>
+                <input formControlName="name" type="text" placeholder="Display Name" style="margin: 16px 0 16px 0;">
+                <input formControlName="value" type="text" placeholder="UPI">
+                <div style="margin-top: 12px; display: flex;">
+                    <a class="btn-send" style="width: 50%;" (click)="hideOverlayInfo('#editUpiDialog');">CLOSE</a>
+                    <a class="btn-send" style="margin-left: 8px; width: 50%;" (click)="updateUpi()">SAVE</a>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+<div id="confirmation" class="overlay" style="display: none;">
+    <div class="frame-wrap">
+        <div class="news-wrap news-wrap-frame bankupidialog">
+            <div class="side-head">
+                <h3>Confirmation</h3>
+            </div>
+            <div style="margin: 8px 16px 24px 16px;
+            font-size: 19px;">
+                <span>{{from=='0'?'Are you sure you want to set this as your preferred bank.':from=='1'?'Are you sure you want to set this as your preferred UPI.':from=='2'?'Are you sure you want to delete this bank.':'Are you sure you want to delete this UPI.'}}</span>
+            </div>
+            <div class="form-login" style="display: flex;">
+                <a class="btn-send" style="width: inherit;" (click)="hideOverlayInfo('#confirmation');">No</a>
+                <a class="btn-send" style="margin-left: 8px;width: inherit;" (click)="from=='0'?setPreferredBank():from=='1'?setPreferredUpi():from=='2'?deleteBank():deleteUpi()">Yes</a>
+            </div>
+        </div>
+    </div>
+</div>

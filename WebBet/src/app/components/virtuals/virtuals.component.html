@@ -1,0 +1,263 @@
+<div _ngcontent-vbd-c62="" id="overWrap" class="over-wrap live-match" style="height: calc(100% - 26px);">
+    <ul id="daySelectTab" class="tab col3">
+        <li id="livenow" (click)="sportsid(0)"><a [ngClass]="{'select':id==0}">Horse Racing!</a></li>
+        <li id="Horses-jumps" (click)="sportsid(100)"><a [ngClass]="{'select':id==100}">Horses-jumps</a> </li>
+        <li id="Horses-sprint" (click)="sportsid(10)"><a [ngClass]="{'select':id==10}">Horses-sprint</a> </li>
+        <li id="Club Football" (click)="sportsid(9)"><a [ngClass]="{'select':id==9}">Club Football</a> </li>
+        <li id="World Cup" (click)="sportsid(4)"><a [ngClass]="{'select':id==4}">World Cup</a> </li>
+        <li id="GreyHounds" (click)="sportsid(1)"><a [ngClass]="{'select':id==1}">GreyHounds</a> </li>
+        <li id="Motar Racing" (click)="sportsid(3)"><a [ngClass]="{'select':id==3}">Motar Racing</a> </li>
+    </ul>
+
+    <div class="function-wrap">
+        <div id="tv-wrap" class="game-streaming-wrap" style="display: block;">
+            <div id="tv" class="tv">
+                <ul class="tv-control">
+                    <li><a id="closeStreamingBox" class="close" style="display: none;">Close</a></li>
+                </ul>
+                <ul class="tv-control" style="display: none;">
+                    <li><a id="mute" class="btn-volume_off" style="display: none;">volume</a></li>
+                    <li><a id="changeLineBtn" class="btn-line" style="display: none;"><span id="tvLine">1</span></a>
+                    </li>
+                </ul>
+                <iframe allowfullscreen="true" style="background-color: #000000; width: 100%; height: 96%;"
+                    src=""></iframe>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="game-wrap-horse">
+                    <div class="game-list"></div>
+                    <dl class="game-list-col m-t-10">
+                        <dd>
+                            <ul #widgetsContent1 id="timeRacing" class="hs-time">
+                                <li *ngFor="let sport of Resultdata" (click)="geteventidResult(sport.eventId)"><a class="event" [ngClass]="{'select':sport?.eventId==event}">
+                                        {{sport.openDate | date: "HH:mm"}}<span><i class="fa fa-check-circle"
+                                                aria-hidden="true"></i></span></a></li>
+
+                            </ul>
+
+                        </dd>
+                        <div class="hidemob">
+                            <div class="custom-slider-arrow mt-sm arrowleft " style="float: right;">
+                                <i class="fa fa-angle-double-right" (click)="scrollRightResult()"></i>
+                            </div>
+                            <div class="custom-slider-arrow mt-sm arrowright" style="float:left;">
+                                <i class="fa fa-angle-double-left" (click)="scrollLeftResult()"></i>
+                            </div>
+
+                        </div>
+                    </dl>
+
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="game-wrap-horse">
+                    <div class="game-list"></div>
+                    <dl class="game-list-col m-t-10">
+                        <dd>
+                            <ul #widgetsContent id="timeRacing" class="hs-time1" >
+                                <li *ngFor="let sport of racedata" (click)="geteventid(sport.event.eventId)" ><a class="event" [ngClass]="{'select':sport?.event?.eventId==m}">
+                                        {{sport.event.openDate | date: "HH:mm"}}</a></li>
+
+                            </ul>
+
+                        </dd>
+                        <div class="hidemob">
+                            <div class="custom-slider-arrow mt-sm arrowleft " style="float: right;">
+                                <i class="fa fa-angle-double-right" (click)="scrollRight()"></i>
+                            </div>
+                            <div class="custom-slider-arrow mt-sm arrowright" style="float:left;">
+                                <i class="fa fa-angle-double-left" (click)="scrollLeft()"></i>
+                            </div>
+
+                        </div>
+                    </dl>
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-4">
+                <ng-container *ngFor="let sport of Resultdata">
+                    <div *ngIf="sport.eventId==event">
+                        <div id="gameHead" class="game-head">
+
+                            <table id="gameTeam" class="game-team">
+                                <tbody>
+                                    <tr id="noTeam">
+                                        <td class="game-name">Quick Results</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="fullMarketBetsWrap" class="bets-wrap">
+                            <table id="fullMarketBoard" class="bets-HS bg">
+                                <table id="gameTeam" class="game-team1">
+                                    <tbody>
+                                        <tr id="noTeam">
+                                            <td class="game-name">{{sport.openDate | date:
+                                                "HH:mm"}}&nbsp;{{sport.eventName}}<span> {{sport.distance}}</span></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                <tbody>
+                                    <tr class="bet-all">
+                                        <td></td>
+                                        <td id="backPercent" colspan="2" class="refer-bet"></td>
+                                        <td><a id="backAll" class="back">
+                                                <img src="https://b2c.static112233.com/assets/images/transparent.gif">
+                                                <span style="color: black;"></span></a></td>
+                                        <td></td>
+                                    </tr>
+                                    <ng-container *ngFor="let data of sport.resultsDetails">
+                                        <tr id="fullSelection" style="display: table-row;">
+                                            <th style="width: 100%;">
+                                                <dl id="horseInfo" class="horse-info">
+                                                    <dt>
+                                                        <a id="marketDepthBtn"><img src="https://b2c.static112233.com/assets/images/transparent.gif"
+                                                                class="icon-predict"></a>
+                                                        <ul id="horseBox" class="horse-box tooltip1">
+                                                            <li id="clothNumberAlpha" *ngIf="data.racerIndex">
+                                                                {{data.racerIndex}} </li>
+                                                            <li id="stallDraw" style="display: none;"></li>
+                                                        </ul>
+                                                        <div id="uniform" class="saddle_ uniform">
+                                                            <img
+                                                                src="https://content-cache.cdnbf.net/feeds_images/Horses/SilkColours/20220509ctt150005.png">
+                                                        </div>
+                                                    </dt>
+                                                    <dd class="tooltip1">
+                                                        <ul id="horseName" class="horse-name">
+                                                            <li id="runnerName">{{data.selectionName}}</li>
+                                                            <li id="jockyName">{{data.humanName}}</li>
+                                                        </ul>
+                                                    </dd>
+                                                </dl>
+                                                <span id="withoutBet" class="black"></span>
+                                            </th>
+                                            <!-- <td ><a ><span ></span></a></td>
+                                     <td ><a ><span ></span></a></td>
+                                     <td ><a ><span ></span></a></td>
+                                     <td ><a ><span ></span></a></td>
+                                     <td ><a ><span ></span></a></td> -->
+                                        </tr>
+                                    </ng-container>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </ng-container>
+            </div>
+            <div class="col-6">
+                <ng-container *ngFor="let sport of racedata">
+                    <div *ngIf="sport.event.eventId==m">
+                        <div id="gameHead" class="game-head">
+
+                            <table id="gameTeam" class="game-team">
+                                <tbody>
+                                    <tr id="noTeam">
+                                        <td class="game-name">{{sport.event.openDate | date:
+                                            "HH:mm"}}&nbsp;{{sport.event.eventName}}<span>
+                                                {{sport.event.distance}}</span></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <ng-container *ngFor="let data of sport.markets">
+                            <table id="gameTeam" class="game-team">
+                                <tbody>
+                                    <tr id="noTeam">
+                                        <td class="game-name">{{data.marketName}}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <div class="game-info-wrap">
+                                <ul class="game-info">
+                                    <li> {{sport.markets[0].eachWayPlaces}}&nbsp;Places
+                                    </li>
+                                </ul>
+                                <a id="openStreaming" class="open-tv-wrap" style="display: none;">Live</a>
+                                <dl class="game-matched" style="display: block;" *ngIf="sport.markets[0].eachWay==true">
+                                    <dt id="gameMatchedName">EW Terms:</dt>
+                                    <dd id="gameMatched">1/{{sport.markets[0].eachWayFraction}} </dd>
+                                </dl>
+                            </div>
+                            <div id="fullMarketBetsWrap" class="bets-wrap">
+
+                                <span id="selectionCounts" class="refer_only"></span>
+                                <table id="fullMarketBoard" class="bets-HS">
+                                    <tbody>
+                                        <tr class="bet-all">
+                                            <td></td>
+                                            <td><a id="backAll" class="back"><img
+                                                        src="https://b2c.static112233.com/assets/images/transparent.gif"><span
+                                                        style="color: black;">Odds</span></a></td>
+                                        </tr>
+                                        <ng-container *ngFor="let runner of data.selections">
+                                            <tr id="fullSelection" style="display: table-row;">
+                                                <th>
+                                                    <dl id="horseInfo" class="horse-info">
+                                                        <dt>
+                                                            <a id="marketDepthBtn"><img
+                                                                    src="https://b2c.static112233.com/assets/images/transparent.gif"
+                                                                    class="icon-predict"></a>
+                                                            <ul id="horseBox" class="horse-box tooltip1">
+                                                                <li id="clothNumberAlpha" *ngIf="runner.racerIndex">
+                                                                    {{runner.racerIndex}} </li>
+                                                                <li id="stallDraw" style="display: none;"></li>
+                                                            </ul>
+                                                            <div id="uniform" class="saddle_ uniform"><img
+                                                                    src="https://content-cache.cdnbf.net/feeds_images/Horses/SilkColours/20220509ctt150005.png">
+                                                            </div>
+                                                        <dd class="tooltip1">
+
+                                                            <ul id="horseName" class="horse-name">
+                                                                <li id="runnerName">{{runner.selectionName}}</li>
+                                                                <li id="jockyName">{{runner.humanName}}</li>
+                                                            </ul>
+
+                                                        </dd>
+                                                    </dl>
+                                                    <span id="withoutBet" class="black"></span>
+                                                </th>
+
+                                                <!-- <td><a><span></span></a></td>
+                                        <td><a><span></span></a></td> -->
+
+                                                <td class="back-1" id="back_1"><a style="height: 40px;font-size: 12px;"
+                                                        [ngClass]="{'disabled':data.marketStatus!='OPEN'}">{{runner.odds.numerator}}/{{runner.odds.denominator}}<span></span></a>
+                                                </td>
+                                                <!-- <td><a><span></span></a></td>
+                                        <td><a><span></span></a></td> -->
+                                            </tr>
+                                        </ng-container>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+</div>

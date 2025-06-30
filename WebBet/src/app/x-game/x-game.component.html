@@ -1,0 +1,50 @@
+
+<div id="overWrap" class="over-wrap" style="height: calc(100% - 26px)">
+
+
+
+
+    <div class="gamehall-wrap-simple">
+
+<a  class="entrance-half casino" style="cursor: pointer;" [ngClass]="loadrainbow?'rotating-border rotating-border--google':''"
+[routerLink]="isLogin?['/exchange/ex/blackjack']:['/login']">
+    <dl  class="entrance-title">
+        <dt >Black Jack</dt>
+        <dd >{{Update?.playnow}}</dd>
+    </dl><img  draggable="false" class="tp_image" src="https://b2c.static112233.com/assets/images/mobile/gamehall/black_jack.jpg" (load)="dosomething()"
+        alt="black_jack">
+</a>
+<a  class="entrance-half casino" style="cursor: pointer;" [ngClass]="loadrainbow?'rotating-border rotating-border--google':''"
+[routerLink]="isLogin?['/exchange/ex/blackjack-turbo']:['/login']">
+    <dl  class="entrance-title">
+        <dt >Black Jack Turbo</dt>
+        <dd >{{Update?.playnow}}</dd>
+    </dl><img  draggable="false" class="tp_image" src="https://b2c.static112233.com/assets/images/mobile/gamehall/black_jack.jpg" (load)="dosomething()"
+        alt="black_jack-turbo">
+</a>
+<a  class="entrance-half casino" style="cursor: pointer;" [ngClass]="loadrainbow?'rotating-border rotating-border--google':''"
+[routerLink]="isLogin?['/exchange/ex/omaha-hi']:['/login']">
+    <dl  class="entrance-title">
+        <dt >Omaha Hi</dt>
+        <dd >{{Update?.playnow}}</dd>
+    </dl><img  draggable="false" class="tp_image" src="https://b2c.static112233.com/assets/images/mobile/gamehall/omaha.jpg" (load)="dosomething()"
+        alt="omaha">
+</a>
+<a   class="entrance-half casino" style="cursor: pointer;" [ngClass]="loadrainbow?'rotating-border rotating-border--google':''"
+[routerLink]="isLogin?['/exchange/ex/holdem']:['/login']">
+    <dl  class="entrance-title">
+        <dt >Hold'Em</dt>
+        <dd >{{Update?.playnow}}</dd>
+    </dl><img  draggable="false" class="tp_image" src="https://b2c.static112233.com/assets/images/mobile/gamehall/hold.jpg" (load)="dosomething()"
+        alt="hold">
+</a>
+<a  class="entrance-half casino" style="cursor: pointer;" [ngClass]="loadrainbow?'rotating-border rotating-border--google':''"
+[routerLink]="isLogin?['/exchange/ex/holdem-turbo']:['/login']">
+    <dl  class="entrance-title">
+        <dt >Hold'Em Turbo</dt>
+        <dd >{{Update?.playnow}}</dd>
+    </dl><img  draggable="false" class="tp_image diaimg" src="https://b2c.static112233.com/assets/images/mobile/gamehall/hold.jpg" (load)="dosomething()"
+        alt="hold">
+</a>
+</div>
+</div>

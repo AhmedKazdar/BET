@@ -1,0 +1,40 @@
+<!-- WhatsApp Button and Chat -->
+<div id="whatsapp" style="position: fixed; bottom: 30px; right: 30px; z-index: 999999 !important;">
+  <!-- WhatsApp Floating Button -->
+  <button class="whatsapp-button" (click)="openWhatsapp()" style="width: 60px; height: 60px; border: none; background: #25D366; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: center;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white">
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 1.96.55 3.8 1.5 5.36L2 22l4.64-1.5c1.56.95 3.4 1.5 5.36 1.5 5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.66 0-3.22-.48-4.55-1.31l-.3-.18-3.12.82.83-3.04-.2-.31A7.92 7.92 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.5-11.5c-.25-.14-1.47-.72-1.7-.8-.23-.08-.4-.12-.57.12-.17.25-.64.8-.78.97-.15.17-.29.19-.53.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.15-.25-.02-.38.11-.51.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.3-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.42 1.41.54.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.27z"></path>
+    </svg>
+  </button>
+
+  <!-- Chat Window -->
+  <div class="whatsapp-chat-window" [class.open]="whatsappOpen" style="position: fixed; bottom: 100px; right: 30px; width: 300px; background: white; color: #000; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); z-index: 999999 !important; overflow: hidden; display: block !important; opacity: 1 !important; visibility: visible !important; transform: none !important; height: 400px; flex-direction: column;">
+    <div class="chat-header" style="background: #075e54; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; font-weight: bold;">
+      <span>{{ siteName }} Support</span>
+      <button (click)="openWhatsapp()" style="background: none; border: none; color: white; font-size: 20px; cursor: pointer; padding: 0 5px;">×</button>
+    </div>
+    
+    <div class="chat-body" style="flex: 1; overflow-y: auto; padding: 15px; background: #f8f9fa;">
+      <div *ngFor="let msg of messages" class="message" [class.user-message]="msg.sender === 'You'" style="margin-bottom: 15px;">
+        <div class="message-sender" style="font-weight: bold; color: #075e54; margin-bottom: 4px; font-size: 12px;">{{ msg.sender }}</div>
+        <div class="message-content" style="color: #000; background: #e5e5ea; padding: 8px 12px; border-radius: 15px; display: inline-block; max-width: 80%; word-wrap: break-word; font-size: 14px; line-height: 1.4;">
+          <span [innerHTML]="formatMessageContent(msg.content)"></span>
+        </div>
+        <div class="message-time" style="font-size: 10px; color: #666; margin-top: 4px; text-align: right;">{{ msg.time }}</div>
+      </div>
+    </div>
+    
+    <div class="chat-footer" style="padding: 12px 15px; background: #f0f0f0; display: flex; gap: 10px; border-top: 1px solid #e1e1e1;">
+      <input type="text" 
+             placeholder="Type a message..." 
+             (keyup.enter)="sendMessage($event)"
+             style="flex: 1; padding: 10px 15px; border: 1px solid #ddd; border-radius: 20px; outline: none; color: #000; background: #fff; font-size: 14px; transition: all 0.3s ease;"
+             #messageInput>
+      <button (click)="sendMessage($event)" style="background: #075e54; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; flex-shrink: 0;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
+          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

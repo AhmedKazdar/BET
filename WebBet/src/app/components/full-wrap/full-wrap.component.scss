@@ -1,0 +1,85 @@
+.tp_image {
+    height: auto;
+  }
+  .entrance-title {
+    background-image: linear-gradient(270deg, rgb(41 42 42 / 62%) 4%, #000 97%);
+  }
+  .casino.entrance-half:before{
+      padding-top: 65.17778%;
+  }
+  .casino.entrance-half{
+      // height: 190px;
+  }
+  
+  #coming_soon img {
+    // height: 125px;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  #coming_soon .news-wrap.news-wrap-frame{
+    height: auto;
+  }
+  .overlay .frame-wrap {
+    width: 89.33333vw;
+    height: 90%;
+  }
+  #coming_soon .news-wrap.news-wrap-frame {
+    height: auto;
+  }
+  
+  #Evolution img {
+    // height: 125px;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  #Evolution .news-wrap.news-wrap-frame{
+    height: auto;
+  }
+  .overlay .frame-wrap {
+    width: 89.33333vw;
+    height: 90%;
+  }
+  #Evolution .news-wrap.news-wrap-frame {
+    height: auto;
+  }
+  
+  
+  .news-wrap.news-wrap-frame {
+    position: relative;
+    width: 39%;
+    height: 100%;
+    margin-left: 37%;
+  }
+  .news-wrap {
+    position: relative;
+    flex-direction: column;
+    width: 89.33333vw;
+    height: 90%;
+    border-radius: 1.33333vw;
+    background: #fff;
+  }
+  .side-content {
+    flex: 1;
+    border-radius: 0 0 1.6vw 0;
+  }
+  
+  .news-wrap footer {
+    position: relative;
+    border-radius: 0 0 1.33333vw 1.33333vw;
+  }
+  
+  
+   .btn-send {
+    margin: 0px;
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 60%);
+    z-index: 53;
+  }

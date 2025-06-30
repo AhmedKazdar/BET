@@ -1,0 +1,32 @@
+
+> skyexch-mobile@0.0.0 build
+> ng build --aot --output-hashing=all
+
+- Generating browser application bundles (phase: setup)...
+✔ Browser application bundle generation complete.
+✔ Browser application bundle generation complete.
+- Copying assets...
+✔ Copying assets complete.
+- Generating index html...
+✔ Index html generation complete.
+
+Initial Chunk Files               | Names         |      Size
+main.8a2f4f87ede976296abf.js      | main          |   2.59 MB
+styles.0b0259ca01b6f2d96508.css   | styles        |   1.08 MB
+scripts.b501be85ac852d20ee85.js   | scripts       | 203.13 kB
+polyfills.628033247ad9f972a7ea.js | polyfills     |  36.21 kB
+runtime.72d131d75b253eb45a41.js   | runtime       |   3.25 kB
+
+| Initial Total |   3.90 MB
+
+Lazy Chunk Files                  | Names         |      Size
+213.f08e38a1b0cc3ea2bf0a.js       | -             | 615.62 kB
+119.143156dc43bfb84f8b9f.js       | -             | 102.00 kB
+726.7ad469bc8d7e6892f6d2.js       | -             |  42.83 kB
+212.744d9e13fa446ebbf99d.js       | -             |  36.10 kB
+110.d9589fd9e0724ca55c7b.js       | -             |   5.38 kB
+657.a8e49d8f07f2f1d55fe9.js       | -             |   4.90 kB
+868.64bd1f69240cbc3b701e.js       | -             |   4.03 kB
+common.6180760d4f66ff780668.js    | common        | 950 bytes
+
+Build at: 2025-06-16T14:16:33.474Z - Hash: 0b0daa5e5a5aa1f29400 - Time: 27784ms

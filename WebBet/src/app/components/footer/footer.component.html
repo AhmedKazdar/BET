@@ -1,0 +1,86 @@
+<div class="footer">
+
+        <app-support-wrap
+             ></app-support-wrap>
+
+
+        <!-- Browser Support -->
+        <div class="browser-wrap">
+                <img src="https://b2c.static112233.com/assets/images/transparent.gif"><br>
+                {{Update?.Browservirsion}}
+        </div>
+
+
+        <app-policy-link></app-policy-link>
+
+
+
+        <div class="app-link" style="display:block;">
+                <div class="power-wrap" style="width: 290px; text-align:left;">
+                        <h3 id="powerWrapW"><span>{{Update?.poweredby}}</span><img src="https://b2c.static112233.com/assets/images/transparent.gif">
+                        </h3>
+                        <div class="licence_embed">
+                                <a href="assets/apk/{{siteName}}.apk"><img src="https://b2c.static112233.com/assets/images/btn-appdl.png" alt=""></a>
+                                <p>v1.07 - 2020-11-11 - 8.2MB</p>
+                        </div>
+                </div>
+
+        </div>
+        <div class="app-link" style="display:block;
+        margin-bottom: 10px;
+    " *ngIf="siteName=='cricbuzzer' || siteName=='cricbuzzerlive'">
+                <a target="_blank" href="https://www.gamblingcommission.gov.uk">
+                        <img style="width:35px;margin-left: 5px;" src="https://b2c.static112233.com/assets/images/gamblingcomm.png">
+                </a>
+                <a target="_blank" href="https://gordonmoody.org.uk/">
+                        <img style="width:35px;margin-left: 8px;" src="https://b2c.static112233.com/assets/images/gordonmoody.png">
+                </a>
+                <a target="_blank" href="https://www.gamcare.org.uk/get-support/talk-to-us-now/">
+                        <img style="width:30px;;margin-left: 8px;" src="https://b2c.static112233.com/assets/images/gamecare.png">
+                </a>
+
+                <a target="_blank" href="https://www.begambleaware.org/">
+                        <img style="width:35px;margin-left: 5px;" src="https://b2c.static112233.com/assets/images/gamblingaware.png">
+
+                </a>
+                <a target="_blank" href="https://www.gamstop.co.uk/">
+                        <img style="width:35px;margin-left: 5px;" src="https://b2c.static112233.com/assets/images/gamestop.png">
+                </a>
+
+                <a target="_blank" href="https://www.safergamblingstandard.org.uk/certified-businesses/">
+                        <img style="width:35px;margin-left: 5px;" src="https://b2c.static112233.com/assets/images/safegambling.png">
+
+                </a>
+
+                <a target="_blank" href="https://www.taketimetothink.co.uk/">
+                        <img style="width:28px;;margin-left: 5px;" src="https://b2c.static112233.com/assets/images/taketimetothink.png">
+
+                </a>
+
+                <a target="_blank" href="https://www.netnanny.com/">
+                        <img style="width:35px;margin-left: 5px;" src="https://b2c.static112233.com/assets/images/netnanny.png">
+                </a>
+
+                <a target="_blank" href="https://gamban.com/">
+                        <img style="width:35px;margin-left: 5px;" src="https://b2c.static112233.com/assets/images/gameban.png">
+
+                </a>
+
+                <a target="_blank" href="https://betblocker.org/">
+                        <img style="width:35px;margin-left: 5px;" src="https://b2c.static112233.com/assets/images/betblocker.png">
+
+
+                </a>
+
+                <a target="_blank" href="https://www.gamblock.com/">
+                        <img style="width:35px;margin-left: 5px;" src="https://b2c.static112233.com/assets/images/gameblock.png">
+
+                </a>
+        </div>
+
+        <div class="browser-wrap">
+                {{Update?.Disclaimer}}
+        </div>
+
+
+</div>

@@ -1,0 +1,34 @@
+<div id="searchWrap" class="overlay" style="display: none;">
+    <div id="searchPop" class="search-pop">
+        <!-- <form> -->
+        <div>
+
+            <a id="searchBack" class="search-back ui-link" (click)="searchBack()">{{Update?.back}}</a>
+            <input id="searchInput" appInputRestriction="noSpecialChars" class="search-input" data-role="none" type="text" autocapitalize="off"
+                autocomplete="off" autocorrect="off" placeholder="{{Update?.SearchEvents}}" [(ngModel)]="searchText"
+                (keyup)="keyupSearch($event)" (click)="removeExpand()">
+            <button id="searchClear" class="search-clear ui-btn ui-shadow ui-corner-all" type="reset"
+                (click)="searchClear()">Reset</button>
+            <button id="searchBtn" class="search-collapse ui-btn ui-shadow ui-corner-all"
+                (click)="addExpand()">Search</button>
+        </div>
+
+        <!-- </form> -->
+        <div id="searchResult" class="suggestion-wrap" *ngIf="searchText.length>=3">
+            <dl id="noMatching" class="no-matching" *ngIf="searchResult.length==0">
+                <dt></dt>
+                <dd>No events found matching ...</dd>
+            </dl>
+            <ul id="searchList" *ngIf="searchResult.length>0">
+
+                <li id="result_{{match.eventId}}_{{match.eventTypeId}}_{{match.competitionId}}" style="display: list-item;"
+                    *ngFor="let match of searchResult">
+                    <a class="ui-link"
+                        [routerLink]="['/event',match.eventId]"
+                        (click)="toggleFavourite(match)"><span id="marketTime"
+                            class="time">{{match.time.split('T')[1]}}</span>{{match.eventName}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

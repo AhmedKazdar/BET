@@ -1,0 +1,15 @@
+<div class="f-back main-wrap">
+    <h1>Dispute</h1>
+    <form class="Feedback-form" [formGroup]="DisputeForm" >
+        <input type="text" placeholder="Email" formControlName="email">
+        <input type="text" placeholder="Subject" formControlName="subject">
+        <textarea name="" id="desciption" cols="30" rows="10" placeholder="Desciption...." formControlName="description"></textarea>
+        <div class="fileupload" onclick="document.getElementById('customfile').click()">
+            <input id="customfile" accept="image/*" type="file" style="display: none;" (change)="showPreview($event)">
+            <img *ngIf="!imageURL || imageURL == ''" src="https://img.icons8.com/material-rounded/24/null/plus--v1.png"/> <br>
+            <img *ngIf="imageURL && imageURL !== ''" [src]="imageURL" style="max-height: 112px;">
+        </div>
+        <input id="submit" class="s-button" type="submit" (click)="submitDispute()" placeholder="submit">
+    </form>
+</div>
+

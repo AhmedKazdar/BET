@@ -1,0 +1,1343 @@
+<div class="mian-wrap">
+
+  <section class="pb-20" data-v-12195be7="">
+    <section class="casino-category sticky py-2.5 bg-opacity-80">
+      <div class="swiper swiper-initialized swiper-horizontal swiper-ios my-swiper">
+        
+        
+        <div
+          class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal swiper-pagination-lock">
+          <span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
+        </div>
+        <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
+          <div class="swiper-slide slide flex justify-center items-center cursor-pointer swiper-slide-active"
+            style="width: 75px;" (click)="selectTab('popular')">
+            <div class="h-full flex flex-1 flex-col justify-center items-center text-center w-53px">
+              <div class="leading-tight font-bold text-12" [ngClass]="{'text-casino-gold-light':selectedTab=='popular','text-casino-gold-dark':selectedTab!='popular'}">Popular</div>
+              <div class="w-53px m-auto flex-1 flex items-center"><img width="53" height="40"
+                  class="img mt-0.5" [ngClass]="{'animate-select':selectedTab=='popular','animate-deselect':selectedTab!='popular'}" src="https://b2c.static112233.com/m/assets/images/mobile/awc/{{selectedTab=='popular'?'hover':'icon'}}-popular.svg"></div>
+            </div>
+          </div>
+          <div class="swiper-slide slide flex justify-center items-center cursor-pointer swiper-slide-next"
+            style="width: 75px;" (click)="selectTab('live')">
+            <div class="h-full flex flex-1 flex-col justify-center items-center text-center w-53px">
+              <div class="leading-tight font-bold text-12" [ngClass]="{'text-casino-gold-light':selectedTab=='live','text-casino-gold-dark':selectedTab!='live'}">Live</div>
+              <div class="w-53px m-auto flex-1 flex items-center"><img width="53" height="40"
+                  class="img mt-0.5 h-40px" [ngClass]="{'animate-select':selectedTab=='live','animate-deselect':selectedTab!='live'}" src="https://b2c.static112233.com/m/assets/images/mobile/awc/{{selectedTab=='live'?'hover':'icon'}}-live.svg"></div>
+            </div>
+          </div>
+          <div class="swiper-slide slide flex justify-center items-center cursor-pointer" style="width: 75px;" (click)="selectTab('table')">
+            <div class="h-full flex flex-1 flex-col justify-center items-center text-center w-53px">
+              <div class="leading-tight font-bold text-12" [ngClass]="{'text-casino-gold-light':selectedTab=='table','text-casino-gold-dark':selectedTab!='table'}">Table</div>
+              <div class="w-53px m-auto flex-1 flex items-center"><img width="53" height="40"
+                  class="img mt-0.5 h-40px" [ngClass]="{'animate-select':selectedTab=='table','animate-deselect':selectedTab!='table'}" src="https://b2c.static112233.com/m/assets/images/mobile/awc/{{selectedTab=='table'?'hover':'icon'}}-table.svg"></div>
+            </div>
+          </div>
+          <div class="swiper-slide slide flex justify-center items-center cursor-pointer" style="width: 75px;" (click)="selectTab('slot')">
+            <div class="h-full flex flex-1 flex-col justify-center items-center text-center w-53px">
+              <div class="leading-tight font-bold text-12" [ngClass]="{'text-casino-gold-light':selectedTab=='slot','text-casino-gold-dark':selectedTab!='slot'}">Slot</div>
+              <div class="w-53px m-auto flex-1 flex items-center"><img width="53" height="40"
+                  class="img mt-0.5 h-40px" [ngClass]="{'animate-select':selectedTab=='slot','animate-deselect':selectedTab!='slot'}" src="https://b2c.static112233.com/m/assets/images/mobile/awc/{{selectedTab=='slot'?'hover':'icon'}}-slot.svg"></div>
+            </div>
+          </div>
+          <div class="swiper-slide slide flex justify-center items-center cursor-pointer" style="width: 75px;" (click)="selectTab('fishing')">
+            <div class="h-full flex flex-1 flex-col justify-center items-center text-center w-53px">
+              <div class="leading-tight font-bold text-12" [ngClass]="{'text-casino-gold-light':selectedTab=='fishing','text-casino-gold-dark':selectedTab!='fishing'}">Fishing</div>
+              <div class="w-53px m-auto flex-1 flex items-center"><img width="53" height="40"
+                  class="img mt-0.5 h-40px" [ngClass]="{'animate-select':selectedTab=='fishing','animate-deselect':selectedTab!='fishing'}" src="https://b2c.static112233.com/m/assets/images/mobile/awc/{{selectedTab=='fishing'?'hover':'icon'}}-fishing.svg"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <div class="casino-content p-2">
+      <!-- <section data-v-b40aedd7="" style="--055ab79c:76px; --dd493698:translateX(4px);">
+        <div class="flex pb-3 pt-1" data-v-b40aedd7="">
+          <div class="sport-type-filter-ul flex-1 flex flex-wrap divide-x divide-black divide-opacity-30 relative"
+            data-v-b40aedd7="">
+            <div class="z-10" data-v-b40aedd7=""><span
+                class="px-3 mx-2 h-20px text-13 flex items-center font-bold rounded ml-1" data-v-b40aedd7=""><span
+                  class="text-market-name" data-v-b40aedd7="">Catalog</span></span></div>
+            <div class="z-10" data-v-b40aedd7=""><span
+                class="px-3 mx-2 h-20px text-13 flex items-center font-bold rounded" data-v-b40aedd7=""><span
+                  class="text-black" data-v-b40aedd7="">Latest</span></span></div>
+            <div class="z-10" data-v-b40aedd7=""><span
+                class="px-3 mx-2 h-20px text-13 flex items-center font-bold rounded" data-v-b40aedd7=""><span
+                  class="text-black" data-v-b40aedd7="">A-Z</span></span></div>
+            <div class="tab-indicator absolute left-0 top-0 z-0 rounded-full bg-primary" data-v-b40aedd7=""></div>
+          </div>
+          <div class="flex items-center" data-v-b40aedd7=""><span class="icon-search text-18 mr-4"
+              data-v-b40aedd7=""></span></div>
+        </div>
+      </section> -->
+      <section>
+        <section class="relative">
+          
+        </section>
+        <section class="relative" *ngIf="selectedTab=='popular' || selectedTab=='live'">
+          <div class="group bg-white rounded-tl rounded-tr-2xl rounded-bl-2xl p-2 flex flex-wrap mb-3 pt-10">
+            <header class="label absolute -left-2 top-0 bg-primary w-40 h-30px rounded-r-full flex items-center">
+              <div class="pl-4 font-bold text-14 text-market-name">Live</div><span
+                class="icon-triangle-shadow absolute left-0 top-full"></span>
+            </header>
+             <!-- <ng-container *ngFor="let awc of awcCasinoLists">
+              <div class="p-1 cursor-pointer w-full" *ngIf="awc.prod_type==1" (click)="awc_login_direct(awc.prod_code,awc.prod_type,awc.prod_name,null)">
+                <div
+                  class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-auto rounded-tr-2xl rounded-bl-2xl h-111px"
+                  data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PP-LIVE-001.png?22991474665189361"
+                  data-loaded="true"
+                  style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PP-LIVE-001.png?22991474665189361&quot;);">
+             
+                </div>
+              </div>
+            </ng-container> -->
+            <ng-container *ngFor="let awc of awcCasinoLists">
+              <div class="p-1 cursor-pointer w-1/3" *ngIf="awc.prod_type==1" (click)="awc_login_direct(awc.prod_code,awc.prod_type,awc.prod_name,null)">
+                <div
+                  class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-auto rounded-tr-2xl rounded-bl-2xl h-111px"
+                  data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/awc_poster/{{awc.name}}.png"
+                  data-loaded="true"
+                  style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/awc_poster/{{awc.name}}.png?22991474665189361&quot;);">
+                </div>
+              </div>
+            </ng-container>
+            
+            <!-- <div class="p-1 cursor-pointer w-full" (click)="awc_login_direct(71,1,'PLAYTECH',null)">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-auto rounded-tr-2xl rounded-bl-2xl h-111px"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-LIVE-001.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-LIVE-001.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-full" (click)="awc_login_direct(3,1,'SEXY BACCARAT',null)">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-auto rounded-tr-2xl rounded-bl-2xl h-111px"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/MX-LIVE-002.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/MX-LIVE-002.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-full" (click)="awc_login_direct(94,1,'VENUS',null)">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-auto rounded-tr-2xl rounded-bl-2xl h-111px"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/VN-LIVE-001.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/VN-LIVE-001.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div> -->
+          </div>
+        </section>
+        <section class="relative" *ngIf="selectedTab=='popular' || selectedTab=='table'">
+          <div class="group bg-white rounded-tl rounded-tr-2xl rounded-bl-2xl p-2 flex flex-wrap mb-3 pt-10">
+            <header class="label absolute -left-2 top-0 bg-primary w-40 h-30px rounded-r-full flex items-center">
+              <div class="pl-4 font-bold text-14 text-market-name">Table</div><span
+                class="icon-triangle-shadow absolute left-0 top-full"></span>
+            </header>
+
+            <ng-container *ngFor="let awc of awcCasinoLists">
+              <div class="p-1 cursor-pointer w-1/3" *ngIf="awc.prod_type==12" (click)="awc_login_direct(awc.prod_code,awc.prod_type,awc.prod_name,awc?.game_code)">
+                <div
+                  class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-auto rounded-tr-2xl rounded-bl-2xl h-111px"
+                  data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/{{awc.game_code}}.jpg"
+                  data-loaded="true"
+                  style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/{{awc.game_code}}.jpg?22991474665189361&quot;);">
+                </div>
+              </div>
+            </ng-container>
+         
+          </div>
+        </section>
+        <section class="relative" style="display: none;">
+          <div class="group bg-white rounded-tl rounded-tr-2xl rounded-bl-2xl p-2 flex flex-wrap mb-3 pt-10">
+            <header class="label absolute -left-2 top-0 bg-primary w-40 h-30px rounded-r-full flex items-center">
+              <div class="pl-4 font-bold text-14 text-market-name">Table</div><span
+                class="icon-triangle-shadow absolute left-0 top-full"></span>
+            </header>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,1,'KINGMAKER','KM-TABLE-048')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-048.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-048.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-049')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-049.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-049.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-040')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-040.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-040.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-043')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-043.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-043.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-018')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-018.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-018.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-045')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-045.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-045.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-015')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-015.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-015.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-028')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-028.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-028.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-036')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-036.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-036.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-037')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-037.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-037.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-039')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-039.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-039.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-022')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-022.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-022.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-021')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-021.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-021.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-032')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-032.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-032.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-038')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-038.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-038.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-042')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-042.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-042.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-035')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-035.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-035.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(117,2,'KINGMAKER','KM-TABLE-030')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-030.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-030.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(59,2,'JILI','JILI-TABLE-005')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-005.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-005.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3" (click)="awc_login_direct(59,2,'JILI','JILI-TABLE-006')">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-006.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-006.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-007.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-007.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-003.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-003.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-001.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-001.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-004.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-004.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-002.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-002.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-008.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-008.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-009.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-009.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-011.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-011.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-010.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-010.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-012.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-012.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-013.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-013.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-017.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-017.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-016.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-016.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-018.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-018.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-015.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-015.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-014.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-TABLE-014.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-050.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/KM-TABLE-050.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="relative" style="display: none;">
+          <div class="group bg-white rounded-tl rounded-tr-2xl rounded-bl-2xl p-2 flex flex-wrap mb-3 pt-10">
+            <header class="label absolute -left-2 top-0 bg-primary w-40 h-30px rounded-r-full flex items-center">
+              <div class="pl-4 font-bold text-14 text-market-name">Slot</div><span
+                class="icon-triangle-shadow absolute left-0 top-full"></span>
+            </header>
+
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-106.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-106.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-074.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-074.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-116.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-116.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-069.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-069.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-112.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-112.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-076.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-076.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-110.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-110.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-081.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-081.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-077.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-077.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-095.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-SLOT-095.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-014.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-014.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/FC-SLOT-001.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/FC-SLOT-001.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-013.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-013.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-070.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-070.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-SLOT-023.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-SLOT-023.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-029.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-029.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-024.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-024.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-023.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-023.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/FC-SLOT-003.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/FC-SLOT-003.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-077.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-077.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-017.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-017.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/FC-SLOT-002.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/FC-SLOT-002.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-067.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-067.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/FC-SLOT-012.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/FC-SLOT-012.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-005.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-005.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-SLOT-001.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-SLOT-001.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-064.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-064.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-026.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-026.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-065.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-065.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-075.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-075.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-027.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-027.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-004.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-004.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-021.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-021.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-084.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-084.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-099.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-099.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-066.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-066.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-095.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-095.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-009.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-009.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-028.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-028.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-006.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-006.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-047.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-047.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-043.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-043.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-094.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-094.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-093.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-093.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-074.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-074.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-SLOT-022.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-SLOT-022.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-076.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-076.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-051.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-051.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-007.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-007.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-SLOT-012.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-SLOT-012.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-038.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-038.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/FC-SLOT-009.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/FC-SLOT-038.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/FC-SLOT-005.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/FC-SLOT-005.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-SLOT-006.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-SLOT-006.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-002.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-002.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-008.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-008.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-030.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-030.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-015.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-015.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-044.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-044.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-022.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-022.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-SLOT-005.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-SLOT-005.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-SLOT-009.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-SLOT-009.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-045.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-045.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-SLOT-031.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/PT-SLOT-031.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-020.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-020.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-079.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-079.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-046.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-SLOT-046.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-098.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-098.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-020.jpg?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JDB-SLOT-020.jpg?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="relative" *ngIf="selectedTab=='popular' || selectedTab=='slot'">
+          <div class="group bg-white rounded-tl rounded-tr-2xl rounded-bl-2xl p-2 flex flex-wrap mb-3 pt-10">
+            <header class="label absolute -left-2 top-0 bg-primary w-40 h-30px rounded-r-full flex items-center">
+              <div class="pl-4 font-bold text-14 text-market-name">Slot</div><span
+                class="icon-triangle-shadow absolute left-0 top-full"></span>
+            </header>
+
+            <ng-container *ngFor="let awc of awcCasinoLists">
+              <div class="p-1 cursor-pointer w-1/3" *ngIf="awc.prod_type==2" (click)="awc_login_direct(awc.prod_code,awc.prod_type,awc.prod_name,null)">
+                <div
+                  class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-auto rounded-tr-2xl rounded-bl-2xl h-111px"
+                  data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/awc_poster/{{awc.name}}.png"
+                  data-loaded="true"
+                  style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/awc_poster/{{awc.name}}.png?22991474665189361&quot;);">
+                </div>
+              </div>
+            </ng-container>
+         
+          </div>
+        </section>
+        <section class="relative" style="display: none;">
+          <div class="group bg-white rounded-tl rounded-tr-2xl rounded-bl-2xl p-2 flex flex-wrap mb-3 pt-10">
+            <header class="label absolute -left-2 top-0 bg-primary w-40 h-30px rounded-r-full flex items-center">
+              <div class="pl-4 font-bold text-14 text-market-name">Fishing</div><span
+                class="icon-triangle-shadow absolute left-0 top-full"></span>
+            </header>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-FISH-001.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-FISH-001.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-FISH-002.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-FISH-002.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-FISH-003.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-FISH-003.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-FISH-004.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/SG-FISH-004.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-FISH-008.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-FISH-008.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-FISH-001.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-FISH-001.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-FISH-004.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-FISH-004.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-FISH-002.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-FISH-002.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-FISH-007.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-FISH-007.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-FISH-006.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-FISH-006.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+            <div class="p-1 cursor-pointer w-1/3">
+              <div
+                class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-square rounded-tr-2xl rounded-bl-2xl"
+                data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-FISH-005.png?22991474665189361"
+                data-loaded="true"
+                style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/gameIcon/JILI-FISH-005.png?22991474665189361&quot;);">
+                
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="relative" *ngIf="selectedTab=='popular'">
+          <div class="group bg-white rounded-tl rounded-tr-2xl rounded-bl-2xl p-2 flex flex-wrap mb-3 pt-10">
+            <header class="label absolute -left-2 top-0 bg-primary w-40 h-30px rounded-r-full flex items-center">
+              <div class="pl-4 font-bold text-14 text-market-name">SportBook</div><span
+                class="icon-triangle-shadow absolute left-0 top-full"></span>
+            </header>
+
+            <ng-container *ngFor="let awc of awcCasinoLists">
+              <div class="p-1 cursor-pointer w-1/3" *ngIf="awc.prod_type==3" (click)="awc_login_direct(awc.prod_code,awc.prod_type,awc.prod_name,null)">
+                <div
+                  class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-auto rounded-tr-2xl rounded-bl-2xl h-111px"
+                  data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/awc_poster/{{awc.name}}.png"
+                  data-loaded="true"
+                  style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/awc_poster/{{awc.name}}.png?22991474665189361&quot;);">
+                </div>
+              </div>
+            </ng-container>
+         
+          </div>
+        </section>
+        <section class="relative" *ngIf="selectedTab=='popular' || selectedTab=='fishing'">
+          <div class="group bg-white rounded-tl rounded-tr-2xl rounded-bl-2xl p-2 flex flex-wrap mb-3 pt-10">
+            <header class="label absolute -left-2 top-0 bg-primary w-40 h-30px rounded-r-full flex items-center">
+              <div class="pl-4 font-bold text-14 text-market-name">Fishing</div><span
+                class="icon-triangle-shadow absolute left-0 top-full"></span>
+            </header>
+
+            <ng-container *ngFor="let awc of awcCasinoLists">
+              <div class="p-1 cursor-pointer w-1/3" *ngIf="awc.prod_type==6" (click)="awc_login_direct(awc.prod_code,awc.prod_type,awc.prod_name,null)">
+                <div
+                  class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-auto rounded-tr-2xl rounded-bl-2xl h-111px"
+                  data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/awc_poster/{{awc.name}}.png"
+                  data-loaded="true"
+                  style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/awc_poster/{{awc.name}}.png?22991474665189361&quot;);">
+                </div>
+              </div>
+            </ng-container>
+         
+          </div>
+        </section>
+        <section class="relative" *ngIf="selectedTab=='popular'">
+          <div class="group bg-white rounded-tl rounded-tr-2xl rounded-bl-2xl p-2 flex flex-wrap mb-3 pt-10">
+            <header class="label absolute -left-2 top-0 bg-primary w-40 h-30px rounded-r-full flex items-center">
+              <div class="pl-4 font-bold text-14 text-market-name">Card and Board</div><span
+                class="icon-triangle-shadow absolute left-0 top-full"></span>
+            </header>
+
+            <ng-container *ngFor="let awc of awcCasinoLists">
+              <div class="p-1 cursor-pointer w-1/3" *ngIf="awc.prod_type==5" (click)="awc_login_direct(awc.prod_code,awc.prod_type,awc.prod_name,null)">
+                <div
+                  class="lozad relative w-full bg-black-300 bg-cover bg-center bg-no-repeat aspect-auto rounded-tr-2xl rounded-bl-2xl h-111px"
+                  data-background-image="https://b2c.static112233.com/m/assets/images/awc_banner/awc_poster/{{awc.name}}.png"
+                  data-loaded="true"
+                  style="background-image: url(&quot;https://b2c.static112233.com/m/assets/images/awc_banner/awc_poster/{{awc.name}}.png?22991474665189361&quot;);">
+                </div>
+              </div>
+            </ng-container>
+         
+          </div>
+        </section>
+        <section class="relative">
+          
+        </section>
+        <section class="relative">
+          
+        </section>
+        <section class="relative">
+          
+        </section>
+        <section class="relative">
+          
+        </section>
+        <section class="relative">
+          
+        </section>
+        <section class="relative">
+          
+        </section>
+      </section>
+      
+      
+      
+      <div class="p-36" style="display: none;">
+        <div class="pt-6 pb-5 bg-white text-center text-black-700 text-base rounded-xl leading-tight">
+          <div alt="" class="icon-empty text-40 text-black-300 m-auto mb-2.5"></div> No Data
+        </div>
+      </div>
+    </div>
+    
+  </section>
+</div>

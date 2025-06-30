@@ -1,0 +1,67 @@
+<h2>{{Update?.BObets}}</h2>
+<ul class="tab col3">
+    <li><a class="select" routerLink="/bo_bets_history">{{Update?.bobetshistory}}</a></li>
+
+    <li><a routerLink="/bo_profit_loss">{{Update?.BOprofit}} &amp; {{Update?.loss}}</a></li>
+</ul>
+<ul class="report-tab-wrap" style="display: block;">
+    <li id="reportType_exchange" class="report-tab select"> {{Update?.all}} </li>
+</ul>
+<div class="function-wrap">
+    <ul class="input-list">
+        <li><label>{{Update?.period}}</label></li>
+        <li>
+            <input id="startDate" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                [(ngModel)]="selectfromdate" [minDate]="month" [maxDate]="selectfromdate"
+                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-default', isAnimated: true }">
+                <input id="startTime" disabled="" class="time-input disable" type="text" placeholder="00:00" maxlength="5">
+            to
+            <input id="endDate" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                [(ngModel)]="selecttodate" [minDate]="month" [maxDate]="selecttodate"
+                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-default', isAnimated: true }">
+            <input id="endTime" disabled="" class="time-input disable" type="text" placeholder="23:59" maxlength="5">
+        </li>
+        <li style="display: none;">({{Update?.timezone}}:IST)</li>
+    </ul>
+    <ul class="input-list">
+        <li><a id="today" (click)="selectTab('today')" class="btn">{{Update?.justfortoday}}</a></li>
+        <li><a id="yesterday" (click)="selectTab('yesterday')" class="btn">{{Update?.fromyesterday}}</a></li>
+        <li style="display: none;"><a id="last7days" (click)="selectTab('last7days')" class="btn">{{Update?.last7days}}</a></li>
+        <li style="display: none;"><a id="last30days" (click)="selectTab('last30days')" class="btn">{{Update?.last30days}}</a>
+        </li>
+        <li style="display: none;"><a id="last2months" (click)="selectTab('last2months')" class="btn">{{Update?.last2months}}</a>
+        </li>
+        <li style="display: none;"><a id="last3months" (click)="selectTab('last3months')" class="btn">{{Update?.last3months}}</a>
+        </li>
+        <li><a id="getPL" (click)="GetBetHistory()" class="btn-send">{{Update?.gethistory}}</a></li>
+    </ul>
+</div>
+<div id="report" style="display: block;">
+    <table id="matchTable" class="table-s" style="display: table;">
+        <tbody>
+            <tr>
+                <th width="11%" class="align-L">{{Update?.betid}} </th>
+                <th width="11%" class="align-L">{{Update?.event}} </th>
+                <th width="8%" class="align-L">{{Update?.betplaced}} </th>
+                <th width="7%" class="align-L">{{Update?.betsettled}} </th>
+                <th width="8%" >{{Update?.stake}} </th>
+                <th width="10%" >{{Update?.profitloss}} </th>
+            </tr>
+            <tr style="display: table-row;" id="matchRow0" *ngFor="let bet of bettingHistory">
+                <td class="align-L"> {{ bet.betId }}</td>
+                <td class="align-L"> {{ bet.provider }}<img class="fromto" src="assets/images/transparent.gif">{{ bet.gameType }}<img class="fromto" src="assets/images/transparent.gif">{{ bet.gameName }} <img class="fromto" src="assets/images/transparent.gif">{{bet.gameCode}}</td>
+                <td class="align-L"> {{ bet.betTime | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                <td class="align-L"> {{ bet.settledDate | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                <td >{{ bet.stake | number: '0.2' }}</td>
+                <td [ngClass]="{'red': bet.roundPL<0,'green': bet.roundPL>0}">{{ bet.roundPL| number: '0.2' }}</td>
+ 
+
+
+
+        </tbody>
+    </table>
+</div>
+<div id="noReportMessage" *ngIf="bettingHistory.length==0 && !loader">
+    <p>{{Update?.bethistoryenableyou}}<br>{{Update?.specifythetimeperiodduringwhichyour}}</p>
+    <p>{{Update?.bettinghistoryisavailableonlineforthepast30days}}</p>
+</div>

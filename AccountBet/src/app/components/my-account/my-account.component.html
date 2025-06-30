@@ -1,0 +1,96 @@
+<h2>{{Update?.accountdetails}}</h2>
+<div class="event-left">
+    <div class="profile-wrap">
+        <h3>{{Update?.aboutyou}}</h3>
+        <dl>
+            <dt>{{Update?.firstname}}</dt>
+            <dd>{{userInfo?.name}}</dd>
+
+            <dt>{{Update?.lastname}}</dt>
+            <dd></dd>
+
+            <dt>{{Update?.birthday}}</dt>
+            <dd>
+
+                --
+            </dd>
+
+            <dt>{{Update?.Email}}</dt>
+            <dd>A@gmail.com</dd>
+
+
+            <dt>{{Update?.pasword}}</dt>
+            <dd>********************************
+
+                <a class="favor-set" (click)="showDialog()">{{Update?.edit}}</a>
+
+            </dd>
+
+
+          <dt>{{Update?.languages}}</dt>
+            <dd>
+                <select id="lang">
+
+                    <option value="en" selected="">{{Update?.english}}
+                    </option>
+
+                    <!-- <option value="cn">中文
+                    </option> -->
+
+                </select>
+            </dd>
+        </dl>
+    </div>
+
+    <div class="profile-wrap">
+        <h3>{{Update?.address}}</h3>
+        <dl>
+            <dt>{{Update?.address}}</dt>
+            <dd>--</dd>
+
+            <dt>{{Update?.towncity}}</dt>
+            <dd>--</dd>
+
+            <dt>{{Update?.country}}</dt>
+            <dd>--</dd>
+
+            <dt>{{Update?.countrystate}}</dt>
+            <dd>--</dd>
+
+            <dt>{{Update?.postcode}}</dt>
+            <dd>--</dd>
+
+            <dt>{{Update?.timezone}}</dt>
+            <dd>IST</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="event-right">
+    <div class="profile-wrap">
+        <h3>{{Update?.contactdetails}}</h3>
+        <dl>
+            <dt>{{Update?.primarynumber}}</dt>
+            <dd>--</dd>
+        </dl>
+    </div>
+
+    <div class="profile-wrap">
+        <h3>{{Update?.setting}}</h3>
+        <dl>
+            <dt>{{Update?.currency}}</dt>
+            <dd>{{userInfo?.currencyCode}}</dd>
+
+            <dt>{{Update?.oddsformat}}</dt>
+            <dd>--</dd>
+        </dl>
+    </div>
+
+    <div class="profile-wrap">
+        <h3>{{Update?.commission}}</h3>
+        <dl>
+            <dt>{{Update?.commcharged}}</dt>
+            <dd>0.0 %</dd>
+        </dl>
+    </div>
+</div>

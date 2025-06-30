@@ -1,0 +1,112 @@
+import { EventEmitter, Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ShareDataService {
+
+
+  private _sportData = new BehaviorSubject<any>(null);
+  sportData$ = this._sportData.asObservable();
+
+  private _listGamesData = new BehaviorSubject<any>(null);
+  listGamesData$ = this._listGamesData.asObservable();
+
+  private _casinoList = new BehaviorSubject<any>(null);
+  casinoList$ = this._casinoList.asObservable();
+
+  private _oddsDataSub = new BehaviorSubject<any>(null);
+  oddsData$ = this._oddsDataSub.asObservable();
+
+  private _updateFundExpoSub = new BehaviorSubject<any>(null);
+  updateFundExpo$ = this._updateFundExpoSub.asObservable();
+
+  private _listawcsSub = new BehaviorSubject<any>(null);
+  _listawcs$ = this._listawcsSub.asObservable();
+
+  private _listawcsLocalSub = new BehaviorSubject<any>(null);
+  listawcsLocal$ = this._listawcsLocalSub.asObservable();
+
+  private _listBetsSub = new BehaviorSubject<any>(null);
+  listBets$ = this._listBetsSub.asObservable();
+
+
+  private _stakeButton = new BehaviorSubject<any>(null);
+  stakeButton$ = this._stakeButton.asObservable();
+
+  private _parlayvalue= new BehaviorSubject<any>(null);
+  parlayvalue$ = this._parlayvalue.asObservable();
+
+  private _betExpoData = new BehaviorSubject<any>(null);
+  betExpoData$ = this._betExpoData.asObservable();
+  
+  private _lagugageSub = new BehaviorSubject<any>(null);
+  _lagugageSub$ = this._lagugageSub.asObservable();
+
+  private _getgameStatus = new BehaviorSubject<any>(null);
+  getgameStatus$ = this._getgameStatus.asObservable();
+  
+  // private _showLiveTv = new BehaviorSubject<any>(null);
+  // showLiveTv$ = this._showLiveTv.asObservable();
+
+  showLiveTv = new EventEmitter<boolean>();
+  activeMatch = new EventEmitter<any>();
+  seletedSport = new EventEmitter<any>();
+
+
+
+  constructor() { }
+
+
+
+  shareSportData(data: any) {
+    this._sportData.next(data);
+  }
+
+  shareListGamesData(data: any) {
+    this._listGamesData.next(data);
+  }
+
+  shareCasinoList(data: any) {
+    this._casinoList.next(data);
+  }
+
+  shareOddsData(data: any) {
+    this._oddsDataSub.next(data);
+  }
+
+  shareStakeButton(data: any) {
+    this._stakeButton.next(data);
+  }
+  shareparlayvalue(data: any) {
+    this._parlayvalue.next(data);
+  }
+
+  shareUpdateFundExpo(data: any) {
+    this._updateFundExpoSub.next(data);
+  }
+  shareListBets(data: any) {
+    this._listBetsSub.next(data);
+  }
+  shareBetExpoData(data: any) {
+    this._betExpoData.next(data);
+  }
+  sharelanguage(data: any) {
+    this._lagugageSub.next(data);
+  }
+  shareawcList(data: any) {
+    this._listawcsSub.next(data);
+  }
+  shareawcLocalList(data: any) {
+    this._listawcsLocalSub.next(data);
+  }
+
+  sharegamestatus(data: any) {
+    this._getgameStatus.next(data);
+  }
+  // shareLiveTv(data: any) {
+  //   this._showLiveTv.next(data);
+  // }
+
+}

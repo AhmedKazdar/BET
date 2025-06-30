@@ -1,0 +1,86 @@
+<div id="supportWrap" class="support-wrap">
+  <div class="support-service">
+    <ng-container>
+      <a id="support_whatsapp" (click)="openSupport('whatsapp')" class="support-whatsapp"
+        [ngClass]="{'open':supportOpen=='whatsapp'}">
+        <img src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="whatsApp" title="WhatsApp"></a>
+
+
+      <a id="support_fb" (click)="openSupport('fb')" class="support-fb" [ngClass]="{'open':supportOpen=='fb'}">
+        <img src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="facebook" title="facebook"></a>
+
+
+    </ng-container>
+
+
+    <a
+      id="support_email" (click)="openSupport('email')" class="support-mail" [ngClass]="{'open':supportOpen=='email'}">
+      <img src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="Email" title="Email"></a>
+
+    <a 
+      id="support_telegram" (click)="openSupport('telegram')" class="support-telegram"
+      [ngClass]="{'open':supportOpen=='telegram'}">
+      <img src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="Telegram" title="Telegram">
+    </a>
+
+
+
+    <a 
+      id="support_skype" (click)="openSupport('skype')" class="support-skype" [ngClass]="{'open':supportOpen=='skype'}">
+      <img src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="Skype" title="Skype">
+    </a>
+
+
+    <a 
+      id="support_instagram" (click)="openSupport('instagram')" class="support-ig"
+      [ngClass]="{'open':supportOpen=='instagram'}">
+      <img src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="Instagram" title="Instagram">
+    </a>
+
+  </div>
+  <div class="support-info">
+    <div id="supportDetail_whatsapp" class="support-detail" [ngClass]="{'open':supportOpen=='whatsapp'}" *ngIf="siteName != 'cricbuzzercom'">
+      <a 
+        href="https://wa.me/{{ whatsapp }}"><span>{{whatsapp}}</span></a>
+      <a href="https://wa.me/{{ whatsapp1 }}" *ngIf="whatsapp1"><span>{{whatsapp1}}</span></a>
+      <a target="_blank" href="https://api.whatsapp.com/send?phone={{ whatsapp2 }}&text=Hi,%20I%20want%20to%20play"
+        *ngIf="whatsapp2"><span>{{whatsapp2}}</span></a>
+      <a target="_blank" href="https://wa.me/message/55E5GRJJSBHKB1" *ngIf="whatsapp3"><span>{{whatsapp3}}</span></a>
+    </div>
+
+    <div id="supportDetail_whatsapp" class="support-detail" [ngClass]="{'open':supportOpen=='whatsapp'}" *ngIf="siteName == 'cricbuzzer' || siteName == 'cricbuzzerlive' ">
+    <ng-container *ngFor="let number of WhatsappNumber">
+      <a href="https://wa.me/{{ number.whatsappNo }}"><span>{{number.whatsappNo}}</span></a>
+    </ng-container>
+    </div>
+
+    <div id="supportDetail_fb" class="support-detail" [ngClass]="{ open: supportOpen == 'fb' }" >
+      <a *ngIf="siteName == 'cricbuzzer' || siteName == 'cricbuzzerlive'" href="https://www.facebook.com/profile.php?id=100089185596523">Cricbuzzerfbgroup</a>
+     
+    </div>
+
+  
+    <div id="supportDetail_email" class="support-detail"
+    [ngClass]="{ open: supportOpen == 'email' }">
+    <a *ngIf="siteName == 'cricbuzzer' || siteName == 'cricbuzzerlive'" href="mailto:support@cricity.net">support@cricity.net</a>
+  </div>
+
+    <div id="supportDetail_telegram" class="support-detail" [ngClass]="{ open: supportOpen == 'telegram' }">
+     
+      <a *ngIf="siteName == 'cricbuzzer' || siteName == 'cricbuzzerlive'" href="https://t.me/cricbuzzerio" class="ui-link"><span>cricbuzzerofficial</span></a>
+
+    </div>
+
+  
+    <div  id="supportDetail_skype" class="support-detail" [ngClass]="{ open: supportOpen == 'skype' }">
+      <a  *ngIf="siteName == 'cricbuzzer' || siteName == 'cricbuzzerlive'" href="skype:live:.cid.6947ef09d098019f?chat">{{ siteName }}official</a>
+    </div>
+    <div id="supportDetail_instagram" class="support-detail" [ngClass]="{ open: supportOpen == 'instagram' }">
+        <a *ngIf="siteName == 'cricbuzzer' || siteName == 'cricbuzzerlive'" href="https://www.instagram.com/cricity.net/" class="ui-link"
+        target="_blank">official{{ siteName }}</a>
+
+     
+    </div>
+    
+  </div>
+</div>

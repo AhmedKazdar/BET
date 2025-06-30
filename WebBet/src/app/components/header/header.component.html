@@ -1,0 +1,945 @@
+<div id="loginToGoApi" class="overlay" style="display: none;">
+    <div class="dialog-wrap-w message-to-login">
+        <h4>Please login to proceed</h4>
+
+        <ul class="btn-wrap break">
+            <li><a class="btn-send" (click)="closeLoginApi();">OK</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="top">
+
+    <div class="header full-wrap" >
+
+        <h1 >
+            <a routerLink="/dash">{{siteName}}</a>
+        </h1>
+
+
+        <app-search-wrap ></app-search-wrap>
+
+        <app-login *ngIf="!isLogin "></app-login>
+        <select *ngIf="isTraslate" id="select" class="select2" style="margin-left: 10px;"
+            (change)="selectlanguage($event.target.value)">
+            <option value="en" selected>Select language</option>
+            <option value="en">English</option>
+            <option value="bd">Bangla</option>
+            <option value="sp">Spanish</option>
+            <option value="pg">portuguese</option>
+            <option value="tu">Turkish</option>
+        </select>
+        <ul class="account-wrap" *ngIf="isLogin">
+            <li class="main-wallet">
+                <!-- 加open打開-->
+                <a id="multiWallet" class="a-wallet">
+                    <ul id="accountCredit" *ngIf="!isClicked">
+                        <li><span>{{Update?.MainBalance}}</span> <span id="betCredit"> {{accountInfo?.currencyCode}}
+                                {{fundInfo?.balance |
+                                number:'1.2-2'}}</span></li>
+                        <li><span>{{Update?.Exposure}} </span> <span id="totalExposure"
+                                [ngClass]="{'red':fundInfo?.exposure>0}">
+                                {{fundInfo?.exposure | number:'1.2-2'}}</span></li>
+                        <li class="nums">+<span id="vendorQuantity">2</span></li>
+                    </ul>
+                    <!-- show wallet-->
+                    <div class="wallet-detail" id="multiBalancePop">
+                        <div class="wallet-detail-group">
+                            <dl class="wallet-detail-content">
+                                <dt>{{Update?.MainBalance}}</dt>
+                                <dd class="wallet-balance-num"> <span class="badge-currency"
+                                        id="currency">{{accountInfo?.currencyCode}}</span><span
+                                        id="mainBalance">0.00</span></dd>
+                                <dd class="wallet-exposure">{{Update?.Exposure}} <span id="mainExposure">0.00</span>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div id="walletContent" class="wallet-detail-group">
+                            <dl id="tempDl" class="wallet-detail-content">
+                                <dt id="vendorTitle_3">BPoker Balance</dt>
+                                <dd class="wallet-balance-num"> <span class="badge-currency"
+                                        id="vendorCurrency_3">{{accountInfo?.currencyCode}}</span><span
+                                        id="vendorBalance_3">0 Points</span></dd>
+                                <dd class="wallet-recall"><button class="btn-recall" id="recall_3"
+                                        onclick="TopMenuHandler.recall('3')">Recall</button></dd>
+                            </dl>
+                            <dl id="tempDl" class="wallet-detail-content">
+                                <dt id="vendorTitle_1">Casino Balance</dt>
+                                <dd class="wallet-balance-num"> <span class="badge-currency"
+                                        id="vendorCurrency_1">{{accountInfo?.currencyCode}}</span><span
+                                        id="vendorBalance_1">0</span></dd>
+                                <dd class="wallet-recall"><button class="btn-recall" id="recall_1"
+                                        onclick="TopMenuHandler.recall('1')">Recall</button></dd>
+                            </dl>
+                            <dl id="recallAllDl" class="wallet-detail-content">
+                                <dd class="align-R"><button class="btn-recall" id="recallAll"
+                                        onclick="TopMenuHandler.recall('3,1')">Recall All</button></dd>
+                            </dl>
+                        </div>
+                        <div id="walletTemp" class="wallet-detail-group" style="display: none;">
+                            <dl id="tempDl" class="wallet-detail-content">
+                                <dt id="vendorTitle">Housie Balance</dt>
+                                <dd class="wallet-balance-num"> <span class="badge-currency"
+                                        id="vendorCurrency">USD</span><span id="vendorBalance">$ 0.00</span></dd>
+                                <dd class="wallet-recall"><button class="btn-recall" id="recall">Recall</button></dd>
+                            </dl>
+                            <dl id="recallAllDl" class="wallet-detail-content">
+                                <dd class="align-R"><button class="btn-recall" id="recallAll">Recall All</button></dd>
+                            </dl>
+                        </div>
+                        <div class="btn-box">
+                            <button class="btn" onclick="location.href='javascript:history.back();'">Close</button>
+                        </div>
+                    </div>
+
+                    <p class="loading-bar" id="menuRefreshLoading" *ngIf="isClicked">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </p>
+                </a>
+                <a id="menuRefresh" class="a-refresh" (click)="FundExpo('refresh')" title="Refresh Main Wallet"><img
+                        src="https://b2c.static112233.com/assets/images/transparent.gif"></a>
+            </li>
+            <li *ngIf="isb2c && currency == 'USD' " class="deposit" (click)="opendepositepopup()">
+                <a class="rajbet" style="cursor: pointer"><img style="width: 24px;"
+                        src="https://b2c.static112233.com/assets/images/cricbuzzer/shinydollar.gif"></a>
+            </li>
+            <li *ngIf="isb2c && currency == 'INR'" class="deposit " (click)="opendepositepopup()">
+                <a class="rajbet" style="cursor: pointer"><img class="rotating-rupee" style="width: 18px;"
+                        src="https://b2c.static112233.com/assets/images/cricbuzzer/rupee.png"></a>
+            </li>
+            <li class="account" (clickOutside)="onClickedOutside($event,true)">
+                <a id="accountPopup" class="rajbet" style="cursor: pointer"
+                    (click)="accountPopup()">{{isIcasino?accountInfo?.userName:Update?.myaccount}}</a>
+
+                <ul id="account_pop" style="display: none;z-index: 99;">
+                    <li>
+                        <h4>
+                            {{accountInfo?.userName}}
+                            <span class="gmt" title="Time Zone">GMT+5:30</span>
+                        </h4>
+                    </li>
+                    <!-- [href]="isb2c ? 'myAccount/#/kycdetail' : 'myAccount/#/detail'" -->
+                    <li><a href="myAccount/#/detail" target="_blank">{{Update?.myprofile}}</a></li>
+
+                    <li><a href="myAccount/#/summary" target="_blank">{{Update?.balanceoverview}}</a></li>
+
+                    <li *ngIf="isb2c"><a href="myAccount/#/bank_details"
+                            target="_blank">{{Update?.withdrawaldetails}}</a></li>
+
+                    <li><a href="myAccount/#/account_statement" target="_blank">{{Update?.Accountstatement}}
+                        </a></li>
+
+                    <li *ngIf="isb2c"><a href="myAccount/#/dw_requests" target="_blank">{{Update?.DwRequests}}</a></li>
+
+                    <li><a href="myAccount/#/current_bets" target="_blank">{{Update?.mybet}}</a></li>
+                    <li><a href="myAccount/#/bet_history" target="_blank">{{Update?.betshistory}}</a></li>
+
+
+                    <li><a href="myAccount/#/profit_loss" target="_blank">{{Update?.profitandloss}}
+                        </a></li>
+
+
+
+                    <li><a href="myAccount/#/activity_log" target="_blank">{{Update?.activitylog}}
+                        </a></li>
+
+                    <li><a   *ngIf="isb2c" href="myAccount/#/dispute" target="_blank">{{Update?.dispute}}
+                        </a></li>
+
+                    <li><a  *ngIf="isb2c" href="myAccount/#/feedback" target="_blank">{{Update?.feedback}}
+                        </a></li>
+
+
+                    <li class="logout"><a id="logout" (click)="Logout()">{{Update?.logout}}<img
+                                src="https://b2c.static112233.com/assets/images/transparent.gif"></a></li>
+
+                </ul>
+            </li>
+        </ul>
+        <ul class="setting-wrap" *ngIf="cricbuzzerheader&& isLogin" style="padding-top: 4px;">
+
+            <li class="time_zone" style="color:#fff;"><span>{{Update?.timezone}} :</span> GMT+5:30</li>
+            <li>&nbsp;&nbsp;&nbsp;</li>
+
+
+
+            <li style="height: 22px;">
+                <a id="oneClickSetting" class="one_click cricclass" [ngClass]="{'select':OneClickBet?.isOneClickBet}"
+                    style="cursor: pointer;" (click)="openOneClickSet()">
+                    <img
+                        src="https://b2c.static112233.com/assets/images/transparent.gif"><span>{{Update?.OneClickBet}}</span></a>
+            </li>
+
+        </ul>
+    </div>
+ 
+
+    <!-- Menu Wrap -->
+    <div class="menu-wrap">
+        <div class="full-wrap" (clickOutside)="onOneClickOutsideSet($event,true)">
+
+            <ul id="tabMenu" class="menu" *ngIf="siteName!='lionbook247'&& siteName!='cricbuzzercom'">
+
+                <li>
+                    <a id="menu_Home" routerLink="/dash" [routerLinkActive]="['select']">{{Update?.home}}</a>
+                </li>
+
+                <li><a id="menu_InPlay" routerLink="/running" [routerLinkActive]="['select']">{{Update?.inplay}}</a>
+                </li>
+
+                <li><a id="menu_MultiMarkets" routerLink="/multimarkets" [routerLinkActive]="['select']">Multi Markets</a></li>
+
+                <!-- <ng-container *ngIf="winnerMarket">
+                    <li *ngFor="let data of winnerMarket"><a id="menu_winner" [routerLink]="['/fullmarkets',data?.eventId]" [routerLinkActive]="['select']">{{data.eventName}}</a></li>
+                </ng-container> -->
+
+                <ng-container>
+                    <ng-container *ngFor="let sport of sportList;trackBy:trackBySport; let index = index">
+                        <li *ngIf="index<3">
+                            <a id="menu_{{sport.sportsName}}" [routerLink]="['/sport',sport.eventTypeId]"
+                                [routerLinkActive]="['select']">
+                                <span id="tagLive" class="tag-live"><strong></strong>{{sport.inplayCounts}}</span>
+                                {{sport.sportsName | titlecase}}
+                            </a>
+                        </li>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container *ngIf="isLogin">
+                    <!-- <li *ngIf="isaura"> <a id="diamond_casino" [routerLink]="['/casino/Indian-casino']" [routerLinkActive]="['select']">{{Update?.Aura}}</a></li> -->
+                    <li> <a id="diamond_casino" [routerLink]="['/casino/aman']" [routerLinkActive]="['select']">AURA</a></li>
+                    <!-- <li *ngIf="GameStatus[6].blocked" (click)="showalertmsg(GameStatus[6])"> <a id="diamond_casino">AURA</a></li> -->
+
+                    <li style="height: 30px;"> <a id="diamond_casino" class="diamond_cas" [routerLink]="['/casino']"><img src="https://b2c.static112233.com/assets/images/cricbuzzer/img12.gif"></a> </li>
+                    <!-- <li style="height: 30px;" *ngIf="GameStatus[7].blocked" (click)="showalertmsg(GameStatus[7])"> <a id="diamond_casino" class="diamond_cas" ><img src="https://b2c.static112233.com/assets/images/cricbuzzer/img12.gif"></a> </li> -->
+
+                    <li ><a [routerLink]="['betgames']" [routerLinkActive]="['select']">{{Update?.Betgames}}</a></li>
+                    <!-- <li *ngIf="GameStatus[10].blocked" (click)="showalertmsg(GameStatus[10])"><a>{{Update?.Betgames}}</a></li> -->
+                    
+                    <li class="dark_menu-li"><a class="casino tag-new" [routerLink]="['cas/KINGMAKER']">AWC</a></li>
+                    <!-- <li class="dark_menu-li" *ngIf="GameStatus[8].blocked" (click)="showalertmsg(GameStatus[8])"><a class="casino tag-new">AWC</a></li> -->
+
+                    <li><a [routerLink]="['twain']" [routerLinkActive]="['select']">{{Update?.Twain}}</a></li>
+                    <!-- <li *ngIf="GameStatus[10].blocked" (click)="showalertmsg(GameStatus[10])"><a>{{Update?.Twain}}</a></li> -->
+
+                    <li *ngIf="isBlueOcean"><a [routerLink]="['bo/ezugi']" [routerLinkActive]="['select']">All Providers</a></li>
+                    <!-- <li *ngIf="GameStatus[9].blocked" (click)="showalertmsg(GameStatus[10])"><a >All Providers</a></li> -->
+
+
+                    <li>
+                        <a class="menu-drop">
+                            {{Update?.othersports}}
+                        </a>
+                        <ul>
+
+                            <ng-container *ngFor="let sport of sportList;trackBy:trackBySport; let index = index">
+                                <li *ngIf="index>3">
+                                    <a id="menu_{{sport.sportsName}}" [routerLink]="['/sport',sport.eventTypeId]"
+                                        title="{{sport.sportsName}}">{{sport.sportsName | titlecase}}
+                                    </a>
+                                </li>
+                            </ng-container>
+                            <ng-container *ngIf="!GameStatus[5].blocked">
+                            <li> <a id="menu_HorseRacing" [routerLink]="['/races',7]"
+                                    title="Horse Racing">{{Update?.HorseRacing}}
+                                </a></li>
+                            <li> <a id="menu_HorseRacing" [routerLink]="['/races',4339]"
+                                    title="Horse Racing">{{Update?.GreyHoundRacing}}
+
+                                </a>
+                            </li>
+                        </ng-container>
+                        <ng-container *ngIf="GameStatus[5].blocked">
+                            <li> <a id="menu_HorseRacing"
+                                    title="Horse Racing" (click)="showalertmsg(GameStatus[5])">{{Update?.HorseRacing}}
+                                </a></li>
+                            <li> <a id="menu_HorseRacing"
+                                    title="Horse Racing" (click)="showalertmsg(GameStatus[5])">{{Update?.GreyHoundRacing}}
+
+                                </a>
+                            </li>
+                        </ng-container>
+                            <!-- <li><a id="menu_HorseRacing" [routerLink]="['x-game']"
+                                    title="Horse Racing">{{Update?.ExchangeGames}}
+                                </a></li> -->
+                        </ul>
+                    </li>
+                    <li *ngIf="isLogin  && siteName!='cricbuzzercom'">
+                        <a class="menu-drop">
+                            {{Update?.Interface}}
+                        </a>
+                        <ul>
+                            <div class="container">
+                                <a href="/">
+                                    <li>
+                                        <div class="radio" [ngClass]="{'checked': clickevent=='sky'}"
+                                            (click)="changeExpo('sky')">
+                                            <input id="radio-1" name="radio" type="radio" checked>
+                                            <label for="radio-1" class="radio-label" style="display: flex;">
+                                                <span style="    padding: 2px;"><img
+                                                        src="https://b2c.static112233.com/assets/images/sky.png" alt=""
+                                                        width="25px"></span>
+                                                <a style="display: contents;"
+                                                    href="/">{{Update?.SKYInterface}}</a></label>
+                                        </div>
+                                    </li>
+                                </a>
+                                <a>
+                                    <div class="radio" [ngClass]="{'checked': clickevent=='diamond'}"
+                                        (click)="changeExpo('diamond')">
+                                        <input id="radio-2" name="radio" type="radio">
+                                        <label for="radio-2" class="radio-label" style="display: flex;">
+                                            <span style="    padding: 2px;"><img
+                                                    src="https://b2c.static112233.com/assets/images/diamond.png" alt=""
+                                                    width="25px"></span>
+                                            <a style="display: contents;">{{Update?.DiamondInterface}}
+                                            </a></label>
+                                    </div>
+                                </a>
+                                <a href="lotusWeb">
+                                    <div class="radio" [ngClass]="{'checked': clickevent=='lotus'}"
+                                        (click)="changeExpo('lotus')">
+                                        <input id="radio-3" name="radio" type="radio">
+                                        <label for="radio-3" class="radio-label" style="display: flex;">
+                                            <span style="    padding: 2px;"><img
+                                                    src="https://b2c.static112233.com/assets/images/lotus.png" alt=""
+                                                    width="25px"></span>
+
+                                            <a style="display: contents;"
+                                                href="lotusWeb">{{Update?.LotusInterface}}</a></label>
+                                    </div>
+                                </a>
+                                <a href="Lcexch" [ngClass]="{'checked': clickevent=='lc'}" (click)="changeExpo('lc')">
+                                    <div class="radio">
+                                        <input id="radio-" name="radio" type="radio">
+                                        <label for="radio-" class="radio-label" style="display: flex;">
+
+                                            <span style="    padding: 2px;"><img
+                                                    src="https://b2c.static112233.com/assets/images/lc.png" alt=""
+                                                    width="20px"></span>
+                                            <a style="display: contents;"
+                                                href="Lcexch">{{Update?.LcInterface}}</a></label>
+                                    </div>
+                                </a>
+                            </div>
+
+
+                        </ul>
+                    </li>
+
+
+
+
+
+                </ng-container>
+                <ng-container *ngIf="!isLogin">
+                    <li style="height: 30px;" >
+                        <a id="diamond_casino" class="diamond_cas" (click)="openLoginPop()"><img
+                                src="https://b2c.static112233.com/assets/images/cricbuzzer/img12.gif"></a>
+                    </li>
+                    <li><a (click)="openLoginPop()">AURA</a></li>
+
+                    
+                    <li><a (click)="openLoginPop()">{{Update?.Betgames}}</a></li>
+                    <li class="dark_menu-li"><a class="casino tag-new" (click)="openLoginPop()"
+                        [routerLinkActive]="['select']">AWC</a></li>
+                    <li><a (click)="openLoginPop()">{{Update?.Twain}}</a></li>
+                    
+                    <!-- <li *ngIf="!isIcasino && isExchangeGames && siteName!='cricbuzzer'"><a (click)="openLoginPop()">Exchange-Games</a></li> -->
+                    <li><a (click)="openLoginPop()" >All Providers</a></li> 
+
+
+
+                    <li>
+                        <a class="menu-drop">
+                            {{Update?.othersports}}
+                        </a>
+                        <ul>
+                            <ng-container *ngFor="let sport of sportList;trackBy:trackBySport; let index = index">
+                                <li *ngIf="index>3">
+                                    <a id="menu_{{sport.sportsName}}" [routerLink]="['/sport',sport.eventTypeId]"
+                                        title="{{sport.sportsName}}">{{sport.sportsName | titlecase}}
+                                    </a>
+                                </li>
+                            </ng-container>
+                            <li> <a id="menu_HorseRacing" (click)="openLoginPop()"
+                                    title="Horse Racing">{{Update?.HorseRacing}}
+                                </a></li>
+                            <li> <a id="menu_HorseRacing" (click)="openLoginPop()"
+                                    title="Horse Racing">{{Update?.GreyHoundRacing}}
+                                </a></li>
+                            <!-- <li><a id="menu_HorseRacing" (click)="openLoginPop()"
+                                    title="Horse Racing">{{Update?.ExchangeGames}}
+                                </a></li> -->
+                        </ul>
+                    </li>
+
+
+                </ng-container>
+
+
+            </ul>
+
+            <ul id="tabMenu" class="menu" *ngIf="siteName=='lionbook247' || siteName=='cricbuzzercom'">
+
+                <li>
+                    <a id="menu_Home" routerLink="/dash" [routerLinkActive]="['select']">{{Update?.home}}</a>
+                </li>
+
+                <li><a id="menu_InPlay" routerLink="/running" [routerLinkActive]="['select']">{{Update?.inplay}}</a>
+                </li>
+
+                <li><a id="menu_MultiMarkets" routerLink="/multimarkets"
+                  [routerLinkActive]="['select']">Multi Markets</a></li>
+                <ng-container>
+                    <ng-container *ngFor="let sport of sportList;trackBy:trackBySport; let index = index">
+                        <li *ngIf="index<3">
+                            <a id="menu_{{sport.sportsName}}" [routerLink]="['/sport',sport.eventTypeId]"
+                                [routerLinkActive]="['select']">
+                                <span id="tagLive" class="tag-live"><strong></strong>{{sport.inplayCounts}}</span>
+                                {{sport.sportsName | titlecase}}
+                            </a>
+                        </li>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container *ngIf="isLogin">
+
+                    <li style="height: 30px;">
+                        <a id="diamond_casino" class="diamond_cas" [routerLink]="['/casino']"><img
+                                src="https://b2c.static112233.com/assets/images/cricbuzzer/img12.gif"></a>
+                    </li>
+                    <li *ngIf="siteName=='cricbuzzercom'"> <a id="diamond_casino" [routerLink]="['/casino/aman']" [routerLinkActive]="['select']">AURA</a></li>
+
+                    <!-- <li><a [routerLink]="['betgames']" [routerLinkActive]="['select']">{{Update?.Betgames}}</a></li> -->
+                    <li *ngIf="siteName=='cricbuzzercom'" class="dark_menu-li"><a class="casino tag-new" [routerLink]="['cas/KINGMAKER']">AWC</a></li>
+                    <!-- <li *ngIf="siteName=='cricbuzzercom' && GameStatus[8].blocked" (click)="showalertmsg(GameStatus[8])" class="dark_menu-li"><a class="casino tag-new">AWC</a></li> -->
+
+                    <li>
+                    <!-- <li><a [routerLink]="['twain']" [routerLinkActive]="['select']">{{Update?.Twain}}</a></li> -->
+
+
+                    <li>
+                        <a class="menu-drop">
+                            {{Update?.othersports}}
+                        </a>
+                        <ul>
+
+                            <ng-container *ngFor="let sport of sportList;trackBy:trackBySport; let index = index">
+                                <li *ngIf="index>3">
+                                    <a id="menu_{{sport.sportsName}}" [routerLink]="['/sport',sport.eventTypeId]"
+                                        title="{{sport.sportsName}}">{{sport.sportsName | titlecase}}
+                                    </a>
+                                </li>
+                            </ng-container>
+                            <ng-container *ngIf="!GameStatus[5].blocked">
+                            <li> <a id="menu_HorseRacing" [routerLink]="['/races',7]"
+                                    title="Horse Racing">{{Update?.HorseRacing}}
+                                </a></li>
+                            <li> <a id="menu_HorseRacing" [routerLink]="['/races',4339]"
+                                    title="Horse Racing">{{Update?.GreyHoundRacing}}
+
+                                </a>
+                            </li>
+                        </ng-container>
+                        <ng-container *ngIf="GameStatus[5].blocked">
+                            <li> <a id="menu_HorseRacing"
+                                    title="Horse Racing" (click)="showalertmsg(GameStatus[5])">{{Update?.HorseRacing}}
+                                </a></li>
+                            <li> <a id="menu_HorseRacing" 
+                                    title="Horse Racing" (click)="showalertmsg(GameStatus[5])">{{Update?.GreyHoundRacing}}
+
+                                </a>
+                            </li>
+                        </ng-container>
+                            <!-- <li><a id="menu_HorseRacing" [routerLink]="['x-game']"
+                                    title="Horse Racing">{{Update?.ExchangeGames}}
+                                </a></li> -->
+                        </ul>
+                    </li>
+
+                    <!-- <li *ngIf=" isBlueOcean"><a [routerLink]="['bo/ezugi']" [routerLinkActive]="['select']">All Providers</a></li>  -->
+                    <li *ngIf=" isBlueOcean"><a [routerLink]="['bo/ezugi']" [routerLinkActive]="['select']">All Providers</a></li> 
+                    <!-- <li *ngIf="GameStatus[9].blocked" (click)="showalertmsg(GameStatus[9])"><a >All Providers</a></li>  -->
+
+
+            
+                    <li *ngIf="isLogin && siteName!='cricbuzzercom'">
+                        <a class="menu-drop">
+                            {{Update?.Interface}}
+                        </a>
+                        <ul>
+                            <div class="container">
+                                <a href="/">
+                                    <li>
+                                        <div class="radio" [ngClass]="{'checked': clickevent=='sky'}"
+                                            (click)="changeExpo('sky')">
+                                            <input id="radio-1" name="radio" type="radio" checked>
+                                            <label for="radio-1" class="radio-label" style="display: flex;">
+                                                <span style="    padding: 2px;"><img
+                                                        src="https://b2c.static112233.com/assets/images/sky.png" alt=""
+                                                        width="25px"></span>
+                                                <a style="display: contents;"
+                                                    href="/">{{Update?.SKYInterface}}</a></label>
+                                        </div>
+                                    </li>
+                                </a>
+                                <a>
+                                    <div class="radio" [ngClass]="{'checked': clickevent=='diamond'}"
+                                        (click)="changeExpo('diamond')">
+                                        <input id="radio-2" name="radio" type="radio">
+                                        <label for="radio-2" class="radio-label" style="display: flex;">
+                                            <span style="    padding: 2px;"><img
+                                                    src="https://b2c.static112233.com/assets/images/diamond.png" alt=""
+                                                    width="25px"></span>
+                                            <a style="display: contents;">{{Update?.DiamondInterface}}
+                                            </a></label>
+                                    </div>
+                                </a>
+                                <a href="lotusWeb">
+                                    <div class="radio" [ngClass]="{'checked': clickevent=='lotus'}"
+                                        (click)="changeExpo('lotus')">
+                                        <input id="radio-3" name="radio" type="radio">
+                                        <label for="radio-3" class="radio-label" style="display: flex;">
+                                            <span style="    padding: 2px;"><img
+                                                    src="https://b2c.static112233.com/assets/images/lotus.png" alt=""
+                                                    width="25px"></span>
+
+                                            <a style="display: contents;"
+                                                href="lotusWeb">{{Update?.LotusInterface}}</a></label>
+                                    </div>
+                                </a>
+                                <a href="Lcexch" [ngClass]="{'checked': clickevent=='lc'}" (click)="changeExpo('lc')">
+                                    <div class="radio">
+                                        <input id="radio-" name="radio" type="radio">
+                                        <label for="radio-" class="radio-label" style="display: flex;">
+
+                                            <span style="    padding: 2px;"><img
+                                                    src="https://b2c.static112233.com/assets/images/lc.png" alt=""
+                                                    width="20px"></span>
+                                            <a style="display: contents;"
+                                                href="Lcexch">{{Update?.LcInterface}}</a></label>
+                                    </div>
+                                </a>
+                            </div>
+
+
+                        </ul>
+                    </li>
+
+
+
+
+
+                </ng-container>
+                <ng-container *ngIf="!isLogin">
+                    <li style="height: 30px;" >
+                        <a id="diamond_casino" class="diamond_cas" (click)="openLoginPop()"><img
+                                src="https://b2c.static112233.com/assets/images/cricbuzzer/img12.gif"></a>
+                    </li>
+                    <li *ngIf="siteName=='cricbuzzercom'"><a (click)="openLoginPop()">AURA</a></li>
+                    <!-- <li><a (click)="openLoginPop()">{{Update?.Betgames}}</a></li> -->
+                    <li *ngIf="siteName=='cricbuzzercom'" class="dark_menu-li"><a class="casino tag-new" (click)="openLoginPop()"
+                        [routerLinkActive]="['select']">AWC</a></li>
+                    <!-- <li><a (click)="openLoginPop()">{{Update?.Twain}}</a></li> -->
+
+                    <li>
+                        <a class="menu-drop">
+                            {{Update?.othersports}}
+                        </a>
+                        <ul>
+                            <ng-container *ngFor="let sport of sportList;trackBy:trackBySport; let index = index">
+                                <li *ngIf="index>3">
+                                    <a id="menu_{{sport.sportsName}}" [routerLink]="['/sport',sport.eventTypeId]"
+                                        title="{{sport.sportsName}}">{{sport.sportsName | titlecase}}
+                                    </a>
+                                </li>
+                            </ng-container>
+                            <li> <a id="menu_HorseRacing" (click)="openLoginPop()"
+                                    title="Horse Racing">{{Update?.HorseRacing}}
+                                </a></li>
+                            <li> <a id="menu_HorseRacing" (click)="openLoginPop()"
+                                    title="Horse Racing">{{Update?.GreyHoundRacing}}
+                                </a></li>
+                            <!-- <li><a id="menu_HorseRacing" (click)="openLoginPop()"
+                                    title="Horse Racing">{{Update?.ExchangeGames}}
+                                </a></li> -->
+                        </ul>
+                    </li>
+
+
+<!-- <li *ngIf=" isBlueOcean"><a [routerLink]="['bo/ezugi']" [routerLinkActive]="['select']">All Providers</a></li> -->
+
+<li *ngIf="isBlueOcean"><a (click)="openLoginPop()" >All Providers</a></li> 
+
+
+
+
+                </ng-container>
+
+
+            </ul>
+
+            <ul class="setting-wrap" *ngIf="cricbuzzerheader&& !isLogin">
+
+                <li class="time_zone"><span>{{Update?.timezone}} :</span> GMT+5:30</li>
+                <li>&nbsp;&nbsp;&nbsp;</li>
+
+
+
+                <li>
+                    <a id="oneClickSetting" class="one_click" [ngClass]="{'select':OneClickBet?.isOneClickBet}"
+                        style="cursor: pointer;" (click)="openOneClickSet()">
+                        <img
+                            src="https://b2c.static112233.com/assets/images/transparent.gif">{{Update?.OneClickBet}}</a>
+                </li>
+                <li>
+                    <a id="slipSet" class="setting" style="cursor: pointer" (click)="openSlipSet()">{{Update?.setting}}
+                        <img src="https://b2c.static112233.com/assets/images/transparent.gif"></a>
+                </li>
+
+            </ul>
+            <ul class="setting-wrap" *ngIf="cricbuzzerheader&& isLogin">
+
+                <li>
+                    <a id="slipSet" class="setting" style="cursor: pointer" (click)="openSlipSet()">{{Update?.setting}}
+                        <img src="https://b2c.static112233.com/assets/images/transparent.gif"></a>
+                </li>
+            </ul>
+
+            <app-setting-pop></app-setting-pop>
+
+        </div>
+    </div>
+</div>
+
+<app-change-password></app-change-password>
+
+<div id="ageDialog" class="overlay" style="display: none;z-index: 999;">
+    <div class="announce-wrap1">
+        <div class="announce-header1">
+            <h1>AGE RESTRICTION DISCLAIMER</h1>
+        </div>
+
+        <div class="tc-content1">
+            <p>To play at this site, your age should be 18 years or above.</p>
+
+            <p>You are required to truthfully state your age while registering. Minors and underage are strictly
+                prohibited to participate in any activity
+                on this site.</p>
+
+            <p>Your account with this site may stand suspended till satisfactory documentation to prove your age is
+                provided to us. If we find later that
+                you are underage or minor we reserve the right to suspend or deactivate your account whichever we find
+                appropriate.</p>
+
+        </div>
+
+        <ul class="announce-footer1 age_box">
+            <a class="btn-send secondary btn-s" (click)="Logout()"><i class="fa fa-times crossIcon"
+                    aria-hidden="true"></i>I am below 18</a>
+            <a class="btn-send btn-s" (click)="closeagePop()"><i class="fa fa-check checkIcon" aria-hidden="true"></i>I
+                am 18 or above</a>
+        </ul>
+
+    </div>
+</div>
+
+<div id="lowBalance" class="overlay" style="display: none;">
+    <div class="dialog-wrap-w login_to_go" style=" height: auto;top: 35% !important;background-color: antiquewhite;">
+        <a style="cursor: pointer" class="close" (click)="closeLowBalance()" style="right: 6px"></a>
+        <div style="display: flex;">
+            <div class="depositblock dwblock scroll" style="width: 67%;">
+                <div style="padding: 20px 5px 12px 20px;">
+                    <h3 style="padding: 9px 0;">{{Update?.lowbalance}}</h3>
+                    {{Update?.lowbalance1}}
+                </div>
+                <div style="padding: 0px 48% 20px 20px;">
+                    <a class="btn-send" style="width: -webkit-fill-available;" (click)="gotoDeposit()">
+                        {{Update?.depositebalance}}</a>
+                </div>
+            </div>
+            <img style="height: 87px;align-self: center;float: right;"
+                src="https://b2c.static112233.com/assets/images/cricbuzzer/wallet.png">
+        </div>
+    </div>
+</div>
+
+
+<div id="depositeBox" class="overlay" style="display: none;">
+    <div id="login_loading" class="loading-wrap" style="top: 40%;">
+        <ul class="loading">
+            <li><img src="https://b2c.static112233.com/assets/images/loading40.gif"></li>
+            <li>{{Update?.loading}}</li>
+        </ul>
+    </div>
+    <div class="dialog-wrap-w login_to_go" style=" height: 98%;">
+        <a id="close" style="cursor: pointer" class="close" (click)="dwClose()" style="right: 6px"></a>
+        <h3 style="background: #ffb80c;color: #333; padding: 9px;">{{Update?.deposit}}/{{Update?.withdrawal}}</h3>
+        <div class="depositblock dwblock scroll" id="dwSlide">
+            <div id="coinList" class="">
+                <ul id="inPlayTab" class="tab col3" style="display: flex;">
+                    <li style="width: 50%;margin-top: 0px;"><a [ngClass]="{'select':isToggle}"
+                            (click)="changeType(0);">{{Update?.deposit}}</a></li>
+                    <li style="width: 50%;"><a [ngClass]="{'select':!isToggle}"
+                            (click)="changeType(1);">{{Update?.withdrawal}}</a>
+                    </li>
+                </ul>
+                <ul class="tab col3" style="display: flex;" *ngIf="isToggle && auto">
+                    <li style="width: 50%;" (click)="autoManual(0);">
+                        <a [ngClass]="{'select':Automanuals}">
+                            Auto Deposit</a>
+                    </li>
+                    <li style="width: 50%;" (click)="autoManual(1);"><a [ngClass]="{'select':!Automanuals}">
+
+                            Manual Deposit</a>
+                    </li>
+                </ul>
+                <div *ngIf="isToggle && Automanuals && auto" id="dwSlide">
+                    <h3 class="typecls">Deposit</h3>
+                    <form [formGroup]="getwayForm">
+                        <div class="field email-field">
+                            <div class="label"><label for="email">Deposit
+                                    Amount</label></div>
+                            <div class="input-field">
+                                <input type="number" formControlName="amount" placeholder="Enter Amount" class="amount">
+                            </div>
+                            <div class="field button-field input-field" style="display: flex;">
+                                <a class="btn-send btn-dw" style="margin-left: 14px;margin-right: 4px;"
+                                    (click)="currency=='INR'?inrAutoPayment():paymentGetway()">Deposit</a>
+                                <a class="btn-send btn-dw" style="margin-left: 4px;margin-right: 14px;"
+                                    (click)="dwClose()">Cancel</a>
+                            </div>
+                            <ng-container *ngIf="f.amount.invalid && (f.amount.touched)">
+                                <p style="    text-align: center;
+                        color: red;"> Amount cannot be empty</p>
+                            </ng-container>
+                        </div>
+                    </form>
+                </div>
+
+                <div *ngIf="(isToggle && !auto) || (isToggle && !Automanuals)" id="depositDiv" class="">
+                    <h3 class="typecls">Deposit</h3>
+                    <form [formGroup]="DepositForm">
+                        <div class="field email-field">
+                            <div class="label">
+                                <label for="email">{{Update?.depositcoin}}</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="number" formControlName="coins" placeholder="{{Update?.enteramount}}"
+                                    #boxvalue (keyup)="showdata($event.target.value)" class="amount" />
+                            </div>
+
+                        </div>
+                        <!-- PAYMENT METHOD SECTION START -->
+
+                        <div *ngIf="listdata" class="main">
+
+                            <div class="">
+                                <h3 class="typecls">{{Update?.paymentmethod}}</h3>
+                            </div>
+
+                            <div class="p-method">
+                                <div (click)="boxvalue1()"
+                                    [ngClass]="{'beforeclick' : showqrcode, 'afterclick': !showqrcode}" class=" box qr">
+                                    <div class="method-logo">
+                                        <img src="https://img.icons8.com/material-outlined/24/null/qr-code.png" />
+                                    </div>
+                                    <h4>{{Update?.qrcode}}</h4>
+                                </div>
+                                <div  (click)="boxvalue2()"
+                                    [ngClass]="{'beforeclick' : showupi, 'afterclick': !showupi}" class=" box upi">
+                                    <div class="method-logo">
+                                        <img class="upi-img lazy"
+                                            src="https://b2c.static112233.com/assets/images/cricbuzzer/bhim-upi.png" />
+                                    </div>
+                                    <h4>{{Update?.UPI}}</h4>
+                                </div>
+                               
+                                <div (click)="boxvalue3()"
+                                    [ngClass]="{'beforeclick' : showbank, 'afterclick': !showbank}" class=" box bank">
+                                    <div class="method-logo">
+                                        <img
+                                            src="https://b2c.static112233.com/assets/images/cricbuzzer/merchant-account.png" />
+                                    </div>
+                                    <h4>{{Update?.Bank}}</h4>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div *ngIf="showqrcode" class="section-2 QRcode">
+
+                            <h3 class="typecls">{{Update?.qrcode}}</h3>
+                            <ul style="margin: 10px;"><b><span>{{qrList.length>0?Update?.openqrtopay:'QR Code Not
+                                        Found.'}}</span></b></ul>
+                            <div *ngIf="qrList.length>0" class="container qr-section">
+                                <div>
+                                    <img style="max-height: 68px;max-width: 80px;"
+                                        (click)="showOverlayInfo('#showQRCode')"
+                                        src="https://sc.cricbuzzer.io/{{qrList[0].img}}" />
+                                </div>
+                                <div>
+                                    <form>
+                                        <div>
+                                            <label for="account-name">{{Update?.Displayname}}</label>
+                                        </div>
+                                        <div style="margin-top: 4px;margin-bottom: 4px;">
+                                            <input type="text" value={{qrList[0].display_name}} readonly>
+                                        </div>
+                                        <div>
+                                            <button class="qr-btn" (click)="showOverlayInfo('#showQRCode')">
+                                                {{Update?.openqr}}</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="showupi" class=" section-2 UPI">
+                            <h3 class="typecls"> {{Update?.UPI}}</h3>
+
+                            <div class="bank-section">
+                                <ul style="margin: 10px;"><b><span>{{upiList.length>0?Update?.sendssUPI:'UPI Details Not
+                                            Found'}}</span></b></ul>
+                                <ul *ngIf="upiList.length>0" style="margin: 10px;">
+                                    <ng-container *ngFor="let upi of upiList">
+                                        <!-- <li><b><span>{{siteName=='six6r'?'Payment
+                                                    Gateway':(Update?.accountname)}}</span></b><b><span
+                                                    (click)="copytoclip(upi.name)">{{upi.name}}<img
+                                                        style="max-height: 12px;margin-left: 6px;"
+                                                        src="https://b2c.static112233.com/assets/images/copy.png"></span></b>
+                                        </li>
+                                        <li><b><span>{{siteName=='six6r'?'Number':Upi}}</span></b><b><span
+                                                    (click)="copytoclip(upi.value)">{{upi.value}}<img
+                                                        style="max-height: 12px;margin-left: 6px;"
+                                                        src="https://b2c.static112233.com/assets/images/copy.png"></span></b>
+                                        </li> -->
+                                    </ng-container>
+                                </ul>
+                            </div>
+
+
+                        </div>
+                        <div *ngIf="showbank" class=" section-2 BankTransfer">
+                            <h3 class="typecls"> {{Update?.banktransfer}}</h3>
+                            <div class="bank-section">
+                                <ul style="margin: 10px;"><b><span>{{bankList.length>0?Update?.sendmoney:'Bank Details
+                                            Not Found'}}</span></b></ul>
+                                <ul *ngIf="bankList.length>0" style=" margin: 10px;">
+                                    <ng-container *ngFor="let bank of bankList">
+                                        <li><b><span>{{Update?.bankname}}</span></b><b><span
+                                                    (click)="copytoclip(bank.bank_name)">{{bank.bank_name}}<img
+                                                        style="max-height: 12px;margin-left: 6px;"
+                                                        src="https://b2c.static112233.com/assets/images/copy.png"></span></b>
+                                        </li>
+                                        <li><b><span>{{Update?.accountnumber}}</span></b><b><span
+                                                    (click)="copytoclip(bank.account_number)">{{bank.account_number}}<img
+                                                        style="max-height: 12px;margin-left: 6px;"
+                                                        src="https://b2c.static112233.com/assets/images/copy.png"></span></b>
+                                        </li>
+                                        <li><b><span>{{Update?.ifsc}}</span></b><b><span
+                                                    (click)="copytoclip(bank.ifsc_code)">{{bank.ifsc_code}}<img
+                                                        style="max-height: 12px;margin-left: 6px;"
+                                                        src="https://b2c.static112233.com/assets/images/copy.png"></span></b>
+                                        </li>
+                                        <li><b><span>{{Update?.accountholdername}}</span></b><b><span
+                                                    (click)="copytoclip(bank.account_holder)">{{bank.account_holder}}<img
+                                                        style="max-height: 12px;margin-left: 6px;"
+                                                        src="https://b2c.static112233.com/assets/images/copy.png"></span></b>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="field email-field"  *ngIf="((showbank && bankList.length>0) || (showupi && upiList.length>0) || (showqrcode && qrList.length>0) )&& isTrnNo">
+                            <div class="label">
+                                <label for="email">Transaction ID</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="text" pattern="\d*" formControlName="trn_no" [maxlength]="12" placeholder="Enter Transaction ID" class="amount" />
+                            </div>
+
+                        </div>
+                        <div *ngIf="(showbank && bankList.length>0) || (showupi && upiList.length>0) || (showqrcode && qrList.length>0)"
+                            class="fileupload" onclick="document.getElementById('upicustomfile').click()">
+                            <input id="upicustomfile" accept="image/*" type="file" style="display: none;"
+                                (change)="showPreview($event)">
+                            <img *ngIf="!imageURL || imageURL == ''"
+                                src="https://img.icons8.com/material-rounded/24/null/plus--v1.png" /> <br>
+                            <img *ngIf="imageURL && imageURL !== ''" [src]="imageURL" style="max-height: 112px;">
+                            <button *ngIf="!imageURL || imageURL == ''"
+                                class="stylefile">{{Update?.attachprrof}}</button>
+                        </div>
+                        <div *ngIf="(showbank && bankList.length>0) || (showupi && upiList.length>0) || (showqrcode && qrList.length>0)"
+                            class="field button-field input-field">
+                            <a class="btn-send" style="margin-left: 14px;margin-right: 14px;padding: 8px 0 8px 0;"
+                                (click)="doDeposit()">Deposit </a>
+                        </div>
+                        <!-- bank code section end  -->
+                        <!-- PAYMENT METHOD SECTION  END -->
+
+                    </form>
+                </div>
+
+                <div *ngIf="!isToggle" id="withdrawDiv" class="side-content">
+                    <h3 class="typecls">{{Update?.withdraw}}</h3>
+                    <form [formGroup]="WithdrawForm">
+                        <div class="field email-field">
+                            <div class="input-field" style="margin-top: 8px;">
+                                <select id="select" formControlName="paid_to" class="select1"
+                                    (change)="selectProvider($event.target.value)">
+                                    <option value="" selected>{{Update?.selectbank}}</option>
+                                    <option *ngFor="let name of preferredWithdraw" [value]="name">
+                                        {{name}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="input-field" style="margin-top: 8px;">
+                                <input type="number" formControlName="coins" placeholder="{{Update?.enteramount}}"
+                                    #boxvalue (keyup)="showdata($event.target.value)" class="amount" />
+                            </div>
+
+                        </div>
+
+                        <div class="field button-field input-field">
+                            <a class="btn-send" style="margin-left: 14px;margin-right: 14px;padding: 8px 0 8px 0;"
+                                (click)="doWithdraw()">Withdraw</a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="showQRCode" class="overlay" style="display: none;" *ngIf="qrList.length>0">
+    <div class="dialog-wrap-w login_to_go"
+        style="height: auto;top: 15% !important;background-color: antiquewhite;width: 330px !important;  left: 57% !important;">
+        <a class="close" (click)="hideOverlayInfo('#showQRCode');" style="right: 16px;
+        top: 12px;cursor: pointer"></a>
+        <div style="    text-align: center;        ">
+            <div class="depositblock dwblock scroll">
+                <div style="padding: 12px 5px 12px 12px;">
+                    <h3 style="padding: 9px 0;">{{Update?.qrcode}}</h3>
+                </div>
+                <div style="text-align: center;">
+                    <img style="max-width: 256px;" src="https://sc.cricbuzzer.io/{{qrList[0]?.img}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

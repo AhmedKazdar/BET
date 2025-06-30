@@ -1,0 +1,19 @@
+
+<div id="overWrap" class="over-wrap" style="height: calc(100% - 26px)">
+    <h4 class="sport-list-title">{{Update?.DiamondLiveCasinos}}</h4>
+
+    <div class="gamehall-wrap-simple">
+
+        <a class="entrance-half" (click)="showalertmsg(GameStatus[7])" [routerLink]="!GameStatus[7].blocked ? ['tp',casino.tableId,casino.tableName,casino.oddsUrl.replace('/d_rate/','')] : null"
+        *ngFor="let casino of casinoList"
+            style="cursor: pointer">
+            <dl class="entrance-title">
+                <dt>{{casino.tableName}}</dt>
+                <div class="rotating-border rotating-border--google heart"><span>{{Update?.playnow}} <i aria-hidden="true"
+                    class="fa fa-play"></i></span></div>
+                    <!-- <dd>{{Update?.playnow}}</dd> -->
+            </dl>
+            <img class="tp_image diaimg" src="https://b2c.static112233.com/assets/images/casino_new/{{casino.tableName}}.jpg" alt="{{casino.tableName}}" draggable="false" >
+        </a>
+    </div>
+</div>

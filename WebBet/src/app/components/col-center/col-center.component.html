@@ -1,0 +1,11 @@
+
+<div id="centerColumn" style="z-index: 0;" class="col-center" [ngClass]="{'gamehall':isHome,'gamehallcasino':iscasino,'inplay':isInplay,'markets':isMarkets}">
+  <!-- <div id="page_loading" class="loading-wrap" style="display: none;">
+        <ul class="loading">
+          <li>Loading...</li>
+        </ul>
+      </div> -->
+    <app-marquee *ngIf="isLogin"></app-marquee>
+    <router-outlet></router-outlet>
+    <app-one-click-wrap></app-one-click-wrap>
+</div>

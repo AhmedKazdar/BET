@@ -1,0 +1,142 @@
+<nav>
+  <ul>
+
+    <li id="mini" class="main-nav" *ngIf="siteName == 'cricbuzzer' || siteName == 'cricbuzzerlive'">
+      <a style="
+      padding-top: 0;
+      padding: 1.86667vw 1.66667vw 0;" (click)="openMiniGame()" class="ui-link">
+        <img class="icon-promote" src="https://b2c.static112233.com/assets/entrance.svg" alt="mini">
+      </a>
+    </li>
+    <li id="sports" [routerLinkActive]="['select']" >
+      <a class="ui-link" [routerLink]="[highCom]">
+        <img class="icon-sports" src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="Sports">{{Update?.sports}}
+      </a>
+    </li>
+  
+    <li id="inPlay" [routerLinkActive]="['select']">
+      <a class="ui-link" [routerLink]="[inplayCom]">
+        <img class="icon-inplay"  src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="In-Play">{{Update?.inplay}}
+      </a>
+    </li>
+
+    <li id="home" class="main-nav" [routerLinkActive]="['select']" *ngIf="siteName != 'cricbuzzer' && siteName != 'cricbuzzerlive'">
+      <a class="ui-link" [routerLink]="[homeCom]">
+        <img class="icon-home" src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="Home">{{Update?.home}}
+      </a>
+    </li>
+
+    <li id="home" [routerLinkActive]="['select']" *ngIf="siteName == 'cricbuzzer' || siteName == 'cricbuzzerlive'">
+      <a class="ui-link" [routerLink]="[homeCom]">
+        <img class="icon-home" src="https://www.static112233.com/m/assets/images/mobile/transparent.gif"
+          alt="transparent" alt="Home">{{Update?.home}}
+      </a>
+    </li>
+
+    <!-- <li id="multiMarket" *ngIf="!isLogin" [routerLinkActive]="['select']">
+        <a class="ui-link" [routerLink]="['/multimarkets']">
+          <img class="icon-pin" src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="Multi Markets">Multi Markets
+        </a>
+      </li> -->
+
+      <li id="multiMarket" [routerLinkActive]="['select']"
+        *ngIf="isMultiMarket  && !isparlay">
+        <a class="ui-link" [routerLink]="['/multimarkets']">
+          <img class="icon-pin" src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="Multi Markets">Multi Markets
+        </a>
+      </li>
+      <li id="multiMarket" [routerLinkActive]="['select']" *ngIf="isMultiMarket && isparlay">
+        <a class="ui-link" style="color:rgb(155,155,155)">
+          <img class="icon-pin-disable" src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif"
+            alt="transparent" alt="Multi Markets">Multi Markets
+        </a>
+      </li>
+      <li id="casino" [routerLinkActive]="['select']"
+      *ngIf="isCasinoTab && isEtgcasino">
+        <a class="ui-link" [routerLink]="isLogin?['/casino/cas/dia']:['/login']">
+          <img class="icon-casino" src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="Casinos">{{Update?.casino}}
+        </a>
+      </li>
+      <li id="casino" [routerLinkActive]="['select']"
+      *ngIf="isCasinoTab && !isEtgcasino">
+        <a class="ui-link" [routerLink]="isLogin?['/casino/cas/SEXYBCRT']:['/login']">
+          <img class="icon-casino" src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="Casinos">{{Update?.casino}}
+        </a>
+      </li>
+      <li id="account" [routerLinkActive]="['select']">
+        <a class="ui-link" [routerLink]="isLogin?['/account']:['/login']">
+          <img class="icon-account" src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="Account">Account
+        </a>
+      </li>
+
+
+
+  </ul>
+</nav>
+
+<div id="luckco7-frame" class="luckco7-frame" style="z-index: 9998;">
+  <div id="luckco7-frame-close-X" (click)="closeMiniGame();"
+    style="height: 34px; width: 56px; aspect-ratio: auto 100 / 60; right: 0px; background: transparent; position: absolute; z-index: 9999; display: block;">
+  </div>
+  <div id="app" data-v-app="">
+    <div class="container">
+      <div class="lobby">
+        <div class="header">
+          <div class="header__img">
+            <div class="header__img__title">
+              <picture class="pictureClass">
+                <source srcset="https://b2c.static112233.com/assets/icon-title.webp?v=" type="image/webp"><img class="titleimg"
+                  src="https://b2c.static112233.com/assets/icon-title.webp?v=" width="286" height="60" alt="">
+              </picture><span class="header__number">6</span>
+            </div>
+          </div><!--v-if-->
+          <div class="header__close">
+            <picture class="pictureClass">
+              <source srcset="https://static112233.com/m/assets/icon-close.webp" type="image/webp"><img class="iconclose"
+                src="https://static112233.com/m/assets/icon-close.webp" width="100" height="60" alt="">
+            </picture>
+          </div>
+        </div>
+     
+        <div class="main">
+          <div class="left">
+            <i (click)="scrollLeft()" class="fas fa-chevron-left"></i>
+        </div>
+          <div class="card-wrapper" #widgetsContent>
+         
+            <ng-container *ngFor="let data of awc_filterList">
+            <div [class.game-card]="true" [class.gameCard]="true" [class.slide-in1]="isFirstBoxOpen"
+              class="game-card gameCard" 
+             >
+              <div class="game-img"
+              (click)="openAWC(data.gameType,data.Platform,data.gameCode)">
+                <picture class="pictureClass">
+                  <source srcset="https://b2c.static112233.com/assets/images/awc_images/{{data.gameCode}}.webp?v=85249685" type="image/webp"><img class="game-img__img"
+                    src="https://b2c.static112233.com/assets/images/awc_images/{{data.gameCode}}.webp?v=85249685" width="240" height="240" alt="">
+                </picture>
+              </div>
+              <div class="player">
+                <div class="player__icon">
+                  <picture class="pictureClass">
+                    <source srcset="https://static112233.com/m/assets/icon-player.webp" type="image/webp"><img class="player__icon__img"
+                      src="https://static112233.com/m/assets/icon-player.png" width="28" height="28" alt="">
+                  </picture>
+                </div><span class="player__number">{{randomNumber1}}</span>
+              </div>
+              <div class="game-name">
+                <p class="game-name__text">{{data.name}}</p>
+              </div>
+            </div>
+          </ng-container>
+
+     
+          </div>
+          <div class="right" (click)="scrollRight()">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

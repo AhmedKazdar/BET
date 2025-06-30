@@ -1,0 +1,828 @@
+<h2 id="header">Multi Markets
+</h2>
+<div id="multiMarketsWrap" *ngIf="matchData.length==0">
+    <p id="noMultiMarkets">There are currently no followed multi markets.
+    </p>
+</div>
+<div id="overWrap" class="over-wrap" style="height: calc(100% - 26px)">
+
+    <!-- Game Bets Table -->
+    <ng-container *ngFor="let match of matchData; trackBy:trackByEvent">
+        <ng-container *ngIf="match.isMulti">
+            <div id="multiMarketsWrap">
+
+
+                <ng-container *ngIf="match.Fancymarket && match.isFancyMulti">
+                    <div class="game-wrap" id="fancyBetTable_{{match.eventId}}" name="multiMarketItem"
+                        *ngIf="match.Fancymarket.length>0">
+
+                        <h3 id="fancyBetHead" class="multi_h3">
+                            <a id="multiMarketPin" [ngClass]="{'delete-pin':match.isMulti,'add-pin':!match.isMulti}"
+                                (click)="toggleFavourite(match,'fancy_'+match.eventId+'_'+match.marketId)">Pin
+                                to
+                                Muilti Markets</a>
+                            <a id="multiMarketRefresh" class="multi_refresh">Refresh</a>
+                            <a class="multi_name"
+                                [routerLink]="match.isTeenpatti ? ['/casino/',match.gameName] :['/fullmarkets',match.eventId]">
+                                <span id="eventName">{{match.eventName}}</span> <span class="game-fancy in-play">Fancy
+                                    Bet</span>
+
+                            </a>
+                        </h3>
+
+                        <div id="fancyBetWrap" class="bets-wrap fancy_bet">
+
+
+                            <div id="multiMarketLoading" class="loading-wrap multi-load" style="display:none;">
+                                <ul class="loading">
+                                    <li><img src="https://statics3.skyexch.art/images/loading40.gif"></li>
+                                    <li>Loading...
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <p id="fancyBetNoBet" class="no_bet" style="display:none;"></p>
+
+                            <table id="fancyBetMarketList" class="bets">
+                                <colgroup>
+                                    <col span="1" width="280">
+                                    <col span="1" width="70">
+                                    <col span="1" width="70">
+                                    <col span="1" width="70">
+                                    <col span="1" width="70">
+                                    <col span="1" width="70">
+                                    <col span="1" width="70">
+                                </colgroup>
+                                <tbody>
+                                    <tr class="colgroup-adjust">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="bet-all">
+                                        <td></td>
+                                        <td class="refer-bet" colspan="2"></td>
+                                        <td>No</td>
+                                        <td>Yes</td>
+                                        <td class="refer-book" colspan="2"></td>
+                                    </tr>
+
+                                    <ng-container
+                                        *ngFor="let fancy of match.Fancymarket | orderByFancy:fSource; trackBy:trackByFancy;let isFirst=first">
+
+                                        <tr id="delayTemplate" class="fancy-suspend-tr" *ngIf="fancy.gstatus!=''">
+                                            <th></th>
+                                            <td colspan="2"></td>
+                                            <td class="fancy-suspend-td" colspan="2">
+                                                <div class="fancy-suspend"><span id="info">{{fancy.gstatus}}</span>
+                                                </div>
+                                            </td>
+                                            <td colspan="2"></td>
+                                        </tr>
+
+
+                                        <ng-container *ngIf="openBet">
+                                            <tr id="delayBetting_{{fancy.sid}}" class="fancy-suspend-tr"
+                                                *ngIf="showLoader && openBet.runnerName==fancy.nat && openBet.mtype=='fancy'">
+                                                <th></th>
+                                                <td colspan="2"></td>
+                                                <td class="fancy-suspend-td" colspan="2">
+                                                    <div class="fancy-suspend"><span class="info"></span></div>
+                                                </td>
+                                                <td colspan="2"></td>
+                                            </tr>
+                                        </ng-container>
+                                        <tr id="fancyBetMarket_{{fancy.sid}}">
+                                            <th colspan="3">
+                                                <dl class="fancy-th-layout">
+                                                    <dt>
+                                                        <p id="marketName">{{fancy.nat}}</p>
+                                                        <span id="before"
+                                                            [ngClass]="{'win': fancy.pnl >= 0, 'lose': fancy.pnl < 0}">{{fancy.pnl
+                                                            |
+                                                            number:'1.2-2'}}</span>
+                                                        <span id="after" class="to-lose" style="display: none;"></span>
+                                                    </dt>
+                                                    <dd class="dd-tips">
+                                                        <ul class="fancy-tips">
+                                                            <li id="remarkFirstRow" style="display: none;"></li>
+                                                            <li id="remarkSecondRow" style="display: none;"></li>
+                                                        </ul>
+                                                        <a id="fancyBetBookBtn" class="btn-book" *ngIf="fancy.pnl"
+                                                            (click)="getFancyBook(fancy)">Book</a>
+                                                    </dd>
+                                                </dl>
+                                            </th>
+                                            <td id="lay_1" class="lay-1"
+                                                (click)="fancy.gstatus!=''?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,fancy.mid,fancy.sid,match.eventName,null,match.inplay,fancy.nat,null,'lay',fancy.l1,fancy.ls1,fancy.sid,null,null,null)">
+                                                <a id="runsInfo" style="cursor: pointer">{{fancy.l1 |
+                                                    number}}<span>{{fancy.ls1 |
+                                                        number}}</span></a>
+                                            </td>
+                                            <td id="back_1" class="back-1"
+                                                (click)="fancy.gstatus!=''?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,fancy.mid,fancy.sid,match.eventName,null,match.inplay,fancy.nat,null,'back',fancy.b1,fancy.bs1,fancy.sid,null,null,null)">
+                                                <a id="runsInfo" style="cursor: pointer">{{fancy.b1 |
+                                                    number}}<span>{{fancy.bs1 |
+                                                        number}}</span></a>
+                                            </td>
+                                            <td class="td-fancy_merge" colspan="2">
+                                                <!-- <dl class="fancy-info">
+                                                    <dt>Min/Max</dt>
+                                                    <dd id="minMax"> {{fMin}} / {{fMax}}</dd>
+                                                </dl> -->
+                                                <dl class="fancy-info">
+                                                    <dt id="rebateName" style="display: none;">Rebate</dt>
+                                                    <dd id="rebate" style="display: none;"></dd>
+                                                </dl>
+                                            </td>
+                                        </tr>
+                                        <ng-container *ngIf="openBet">
+                                            <tr id="fancyBetBar_{{match.eventId}}_{{fancy.sid}}" class="fancy-quick-tr"
+                                                *ngIf="showLoader && openBet.runnerName==fancy.nat && openBet.mtype=='fancy'">
+                                                <td colspan="7">
+                                                    <dl class="quick_bet-wrap quick_bet-progress">
+                                                        <dd id="progressBar" class="progress-bar" style="width: 100%;">
+                                                        </dd>
+                                                        <dd class="progress-bar-txt">Placing your bets, Please wait
+                                                            <!-- <span id="secRemain">0 sec remaining…</span> -->
+                                                        </dd>
+                                                    </dl>
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+                                        <ng-container *ngIf="msgData">
+                                            <tr id="fancyBetMessage_{{fancy.sid}}" class="fancy-quick-tr"
+                                                *ngIf="!showLoader && msgData.runnerName==fancy.nat && msgData.mtype=='fancy'">
+                                                <td colspan="7">
+                                                    <dl id="classWrap"
+                                                        class="quick_bet-wrap quick_bet-message {{status}}">
+                                                        <dd class="info">
+                                                            <strong
+                                                                id="header">{{!msgData.msg?msgData:msgData.msg}}</strong>
+                                                            <a id="close" class="btn-close" style="cursor:pointer;"
+                                                                (click)="removeMsg()">Close</a>
+                                                        </dd>
+                                                    </dl>
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="openBet && fancy.gstatus=='' && !showLoader">
+
+                                            <tr id="fancyBetBoard_{{match.eventId}}_{{match.eventId}}_{{fancy.sid}}"
+                                                class="fancy-quick-tr" style="display: table-row;"
+                                                *ngIf="openBet.runnerName==fancy.nat && openBet.mtype=='fancy'">
+                                                <td colspan="7">
+                                                    <form [formGroup]="OpenBetForm" (ngSubmit)="BetSubmit()">
+                                                        <dl id="classWrap"
+                                                            class="quick_bet-wrap slip-{{f.backlay.value}}">
+                                                            <dt id="fancyBetHeader" class="">
+
+                                                                <span id="fancyBetAcceptCheck" class="bet-check"
+                                                                    style="display: none;">
+                                                                    <input id="fancyBetAcceptAnyOdds" type="checkbox">
+                                                                    <label for="fancyBetAcceptAnyOdds">Accept Any
+                                                                        Odds</label>
+                                                                </span>
+
+                                                            </dt>
+                                                            <dd class="col-btn"><a id="cancel" class="btn"
+                                                                    style="cursor:pointer;"
+                                                                    (click)="ClearAllSelection();">Cancel</a>
+                                                            </dd>
+                                                            <dd id="oddsHeader" class="col-odd">
+                                                                <ul class="quick-bet-confirm">
+                                                                    <li id="runs">{{f.score.value}}</li>
+                                                                    <li id="odds" class="quick-bet-confirm-title">
+                                                                        {{f.rate.value}}</li>
+                                                                </ul>
+                                                            </dd>
+                                                            <dd class="col-stake">
+                                                                <input id="inputStake" type="text" value=""
+                                                                    formControlName="stake" numberOnly>
+                                                            </dd>
+                                                            <dd class="col-send">
+                                                                <a id="placeBet" class="btn-send"
+                                                                    style="cursor:pointer;"
+                                                                    (click)="!f.score.value || !f.stake.value?'':BetSubmit()"
+                                                                    [ngClass]="{'disable':!f.score.value || !f.stake.value}">Place
+                                                                    Bets</a>
+                                                            </dd>
+                                                            <dd id="stakePopupList" class="col-stake_list"
+                                                                style="display: block;">
+                                                                <ul>
+                                                                    <ng-container
+                                                                        *ngFor="let stake of stakeSetting;let index=index;">
+                                                                        <li *ngIf="index<6">
+                                                                            <a class="btn" id="selectStake_{{index}}"
+                                                                                stake="{{stakeSetting[index]}}"
+                                                                                style="cursor:pointer;"
+                                                                                (click)="addStake(stake);">{{stakeSetting[index]}}</a>
+                                                                        </li>
+                                                                    </ng-container>
+
+                                                                </ul>
+                                                                <p id="totalStakeP" style="display: none;">Total Stake:
+                                                                    <strong id="totalStake"></strong>
+                                                                </p>
+                                                            </dd>
+                                                        </dl>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+                                    </ng-container>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="match.BMmarket && match.isBmMulti">
+                    <div class="game-wrap" id="bookMakerTable_{{match.eventId}}" name="multiMarketItem"
+                        *ngIf="match.BMmarket.bm1">
+
+                        <h3 id="bookMakerHead" class="multi_h3">
+
+                            <a id="multiMarketPin" [ngClass]="{'delete-pin':match.isMulti,'add-pin':!match.isMulti}"
+                                (click)="toggleFavourite(match,'bookmaker_'+match.eventId+'_'+match.marketId)">Pin
+                                to
+                                Muilti Markets</a>
+                            <a id="multiMarketRefresh" class="multi_refresh">Refresh</a>
+                            <a class="multi_name"
+                                [routerLink]="match.isTeenpatti ? ['/casino/',match.gameName] :['/fullmarkets',match.eventId]">
+                                <span id="eventName">{{match.eventName}}</span> <span
+                                    class="game-bookmaker in-play">BookMaker</span>
+
+                            </a>
+                            <!-- <dl class="fancy-info">
+                                <dt><span>Min</span></dt>
+                                <dd id="min">5.00</dd>
+                                <dt><span>Max</span></dt>
+                                <dd id="max">7,000.00</dd>
+                                <dt id="rebateName" style="display: none;"><span>Rebate</span></dt>
+                                <dd id="rebate" style="display: none;"></dd>
+                            </dl> -->
+                        </h3>
+                        <div id="bookMakerWrap" class="bets-wrap fancy_bet bookmaker_bet" *ngIf="match.BMmarket">
+                            <ng-container *ngIf="match.BMmarket.bm1">
+
+
+                                <div id="multiMarketLoading" class="loading-wrap multi-load" style="display:none;">
+                                    <ul class="loading">
+                                        <li><img src="https://statics3.skyexch.art/images/loading40.gif"></li>
+                                        <li>Loading...
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <p id="bookMakerNoBet" class="no_bet" style="display:none;"></p>
+
+                                <table id="bookMakerMarketList" class="bets bets-bookmaker">
+                                    <colgroup>
+                                        <col span="1" width="280">
+                                        <col span="1" width="70">
+                                        <col span="1" width="70">
+                                        <col span="1" width="70">
+                                        <col span="1" width="70">
+                                        <col span="1" width="70">
+                                        <col span="1" width="70">
+                                    </colgroup>
+
+                                    <tbody id="bookMakerMarket_{{match.eventId}}_" style="display: table-row-group;">
+                                        <tr class="colgroup-adjust">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr class="bet-all">
+                                            <td colspan="3"></td>
+                                            <td>Back</td>
+                                            <td>Lay</td>
+                                            <td class="refer-book" colspan="2"></td>
+                                        </tr>
+
+                                        <ng-container
+                                            *ngFor="let runner of match.BMmarket.bm1 | orderByBook; trackBy:trackByBookRunner">
+                                            <tr id="bookMakerSuspend_{{match.eventId}}_{{runner.mid}}_{{runner.sid}}"
+                                                class="fancy-suspend-tr" *ngIf="runner.s!='ACTIVE'">
+                                                <th colspan=""></th>
+                                                <td class="fancy-suspend-td" colspan="6">
+                                                    <div id="suspendClass" class="fancy-suspend"><span
+                                                            class="info">{{runner.s}}</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <ng-container *ngIf="openBet">
+                                                <tr id="delayBetting_{{match.eventId}}_{{runner.mid}}_{{runner.sid}}"
+                                                    class="fancy-suspend-tr"
+                                                    *ngIf="showLoader && openBet.runnerName==runner.nat && openBet.mtype=='book'">
+                                                    <th></th>
+                                                    <td colspan="2"></td>
+                                                    <td class="fancy-suspend-td" colspan="2">
+                                                        <div class="fancy-suspend"><span class="info"></span></div>
+                                                    </td>
+                                                    <td colspan="2"></td>
+                                                </tr>
+                                            </ng-container>
+                                            <tr id="bookMakerSelection_{{match.eventId}}_{{runner.mid}}_{{runner.sid}}"
+                                                style="display: table-row;">
+                                                <th class="predict">
+                                                    <p id="runnerName">{{runner.nat}}</p>
+                                                    <span id="before" *ngIf="!match.BMmarket.newpnl"
+                                                        [ngClass]="getPnlClass(runner,match.BMmarket.pnl)">
+                                                        {{getPnlValue(runner,match.BMmarket.pnl) |
+                                                        number:'1.2-2'}}</span>
+                                                    <span id="after" *ngIf="match.BMmarket.newpnl"
+                                                        [ngClass]="getPnl2Class(runner,match.BMmarket.newpnl)">
+                                                        {{getPnlValue(runner,match.BMmarket.newpnl) |
+                                                        number:'1.2-2'}}</span>
+                                                </th>
+                                                <td class="" colspan="3">
+                                                    <dl class="back-gradient">
+                                                        <dd id="back_3" style="cursor: pointer">
+                                                            <p></p>
+                                                        </dd>
+                                                        <dd id="back_2" style="cursor: pointer">
+                                                            <p></p>
+                                                        </dd>
+                                                        <dd id="back_1" style="cursor: pointer"
+                                                            (click)="(runner.s=='ACTIVE' && runner.b1!='0')?OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,runner.mid,runner.sid,match.eventName,runner.mname,match.inplay,runner.nat,runner.b1,'back',null,null,null,'bm_'+runner.mid,runner.sid,runner.mname):''">
+                                                            <a>{{runner.b1.replace('.00','')}}</a>
+                                                        </dd>
+                                                    </dl>
+                                                </td>
+                                                <td class="" colspan="3">
+                                                    <dl class="lay-gradient">
+                                                        <dd id="lay_1" style="cursor: pointer"
+                                                            (click)="(runner.s=='ACTIVE' && runner.l1!='0')?OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,runner.mid,runner.sid,match.eventName,runner.mname,match.inplay,runner.nat,runner.l1,'lay',null,null,null,'bm_'+runner.mid,runner.sid,runner.mname):''">
+                                                            <a>{{runner.l1.replace('.00','')}}</a>
+                                                        </dd>
+                                                        <dd id="lay_2" style="cursor: pointer">
+                                                            <p></p>
+                                                        </dd>
+                                                        <dd id="lay_3" style="cursor: pointer">
+                                                            <p></p>
+                                                        </dd>
+                                                    </dl>
+                                                </td>
+                                            </tr>
+                                            <ng-container *ngIf="openBet">
+                                                <tr id="bookMakerBetBar_{{match.eventId}}_{{runner.mid}}_{{runner.sid}}"
+                                                    class="fancy-quick-tr"
+                                                    *ngIf="showLoader && openBet.runnerName==runner.nat && openBet.mtype=='book'">
+                                                    <td colspan="7">
+                                                        <dl class="quick_bet-wrap quick_bet-progress">
+                                                            <dd id="progressBar" class="progress-bar"
+                                                                style="width: 100%;"></dd>
+                                                            <dd class="progress-bar-txt">Placing your bets, Please wait
+                                                                <!-- <span id="secRemain">0 sec remaining…</span> -->
+                                                            </dd>
+                                                        </dl>
+                                                    </td>
+                                                </tr>
+                                            </ng-container>
+                                            <ng-container *ngIf="msgData">
+                                                <tr id="bookMakerBetMessage_{{runner.mid}}_{{runner.sid}}"
+                                                    class="fancy-quick-tr"
+                                                    *ngIf="!showLoader && msgData.runnerName==runner.nat && msgData.mtype=='book'">
+                                                    <td colspan="7">
+                                                        <dl id="classWrap"
+                                                            class="quick_bet-wrap quick_bet-message {{status}}">
+                                                            <dd class="info">
+                                                                <strong
+                                                                    id="header">{{!msgData.msg?msgData:msgData.msg}}</strong>
+                                                                <a id="close" class="btn-close" style="cursor:pointer;"
+                                                                    (click)="removeMsg()">Close</a>
+                                                            </dd>
+                                                        </dl>
+                                                    </td>
+                                                </tr>
+                                            </ng-container>
+
+                                            <ng-container *ngIf="openBet && !showLoader">
+
+                                                <tr id="bookMakerBetBoard{{match.eventId}}_{{runner.mid}}_{{runner.sid}}"
+                                                    class="fancy-quick-tr" style="display: table-row;"
+                                                    *ngIf="openBet.runnerName==runner.nat && openBet.mtype=='book'">
+                                                    <td colspan="7">
+                                                        <form [formGroup]="OpenBetForm" (ngSubmit)="BetSubmit()">
+                                                            <dl id="classWrap"
+                                                                class="quick_bet-wrap slip-{{f.backlay.value}}">
+                                                                <dt id="bookMakerBetHeader" class="">
+
+                                                                    <span id="bookMakerBetAcceptCheck" class="bet-check"
+                                                                        style="display: none;">
+                                                                        <input id="bookMakerBetAcceptAnyOdds"
+                                                                            type="checkbox">
+                                                                        <label for="bookMakerBetAcceptAnyOdds">Accept
+                                                                            Any Odds</label>
+                                                                    </span>
+
+                                                                </dt>
+                                                                <dd class="col-btn"><a id="cancel" class="btn"
+                                                                        style="cursor:pointer;"
+                                                                        (click)="ClearAllSelection();">Cancel</a>
+                                                                </dd>
+                                                                <dd id="oddsHeader" class="col-odd">
+                                                                    <ul class="quick-bet-confirm">
+                                                                        <li id="odds">{{f.odds.value}}</li>
+                                                                    </ul>
+                                                                </dd>
+                                                                <dd class="col-stake">
+                                                                    <input id="inputStake" type="text" value=""
+                                                                        formControlName="stake" numberOnly>
+                                                                </dd>
+                                                                <dd class="col-send">
+                                                                    <a id="placeBet" class="btn-send"
+                                                                        style="cursor:pointer;"
+                                                                        (click)="!f.odds.value || !f.stake.value?'':BetSubmit()"
+                                                                        [ngClass]="{'disable':!f.odds.value || !f.stake.value}">Place
+                                                                        Bets</a>
+                                                                </dd>
+                                                                <dd id="stakePopupList" class="col-stake_list"
+                                                                    style="display: block;">
+                                                                    <ul>
+                                                                        <ng-container
+                                                                            *ngFor="let stake of stakeSetting;let index=index;">
+                                                                            <li *ngIf="index<6">
+                                                                                <a class="btn"
+                                                                                    id="selectStake_{{index}}"
+                                                                                    stake="{{stakeSetting[index]}}"
+                                                                                    style="cursor:pointer;"
+                                                                                    (click)="addStake(stake);">{{stakeSetting[index]}}</a>
+                                                                            </li>
+                                                                        </ng-container>
+
+                                                                    </ul>
+                                                                    <p id="totalStakeP" style="display: none;">Total
+                                                                        Stake: <strong id="totalStake"></strong></p>
+                                                                </dd>
+                                                            </dl>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </ng-container>
+                                        </ng-container>
+                                    </tbody>
+                                </table>
+                            </ng-container>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngFor="let market of match.markets; trackBy:trackByMkt;let index=index">
+                    <div id="multiMarket_{{match.eventId}}" class="game-wrap" style="display: block;"
+                        eventtype="{{match.eventTypeId}}" eventid="{{match.eventId}}" marketid="{{market.MarketId}}"
+                        name="multiMarketItem" *ngIf="market.isMulti">
+                        <h3 class="multi_h3">
+                            <a id="multiMarketPin" style="cursor: pointer" title="Remove from Multi Markets"
+                                [ngClass]="{'delete-pin':match.isMulti,'add-pin':!match.isMulti}"
+                                (click)="toggleFavourite(match,'market_'+match.eventId+'_'+market.MarketId)"></a>
+                            <a id="multiMarketRefresh" class="multi_refresh" style="cursor: pointer"></a>
+                            <a id="eventHeader"
+                                [routerLink]="match.isTeenpatti ? ['/casino/',match.gameName] :['/fullmarkets',match.eventId]"
+                                class="multi_name" style="cursor: pointer">{{match.eventName}}<span id="marketName"
+                                    class="multi-event_type">Match Odds</span><img class="icon-irun"
+                                    src="assets/images/transparent.gif"></a>
+                            <span id="lowLiquidityTag" class="game-low_liq" style="display: none;">Low Liquidity</span>
+                        </h3>
+
+                        <div id="multiMarketBetsWrap" class="bets-wrap" [ngClass]="{'disabled':!market.isBettable}">
+
+                            <span id="selectionCounts" class="refer_only">{{market.Runners?.length}} selections</span>
+
+                            <div id="multiMarketLoading" class="loading-wrap multi-load" style="display:none;">
+                                <ul class="loading">
+                                    <li><img src="https://statics3.skyexch.art/images/loading40.gif"></li>
+                                    <li>Loading...
+                                    </li>
+                                </ul>
+                            </div>
+                            <table id="multiMarketBoard" class="bets">
+                                <tbody>
+                                    <tr class="bet-all">
+                                        <td></td>
+                                        <td id="backPercent" class="refer-bet" colspan="2">&nbsp; </td>
+                                        <td><a id="backAll" class="back-all"><img
+                                                    src="assets/images/transparent.gif"><span>Back
+                                                    all</span></a></td>
+                                        <td><a id="layAll" class="lay-all"><img
+                                                    src="assets/images/transparent.gif"><span>Lay
+                                                    all</span></a></td>
+                                        <td id="layPercent" class="refer-book" colspan="2">&nbsp; </td>
+                                    </tr>
+                                    <ng-container *ngIf="!match.isManualEvent && !match.isSrl && !market.removeMarket">
+                                        <ng-container *ngFor="let runner of market.Runners; trackBy:trackByRunner">
+                                            <tr id="fullSelection_{{market.MarketId | removeSpace}}_{{runner.selectionId}}"
+                                                style="display: table-row;">
+                                                <th class="">
+
+
+
+                                                    <p><a></a>{{runner.runnerName}}
+                                                    </p>
+                                                    <span id="withoutBet" *ngIf="!market.newpnl"
+                                                        [ngClass]="getPnlClass(runner,market.pnl)">
+                                                        {{getPnlValue(runner,market.pnl) | number:'1.2-2'}}</span>
+                                                    <span id="lossWithoutBet" class="win" style="display: none;"></span>
+                                                    <span id="withBet" *ngIf="market.newpnl"
+                                                        [ngClass]="getPnl2Class(runner,market.newpnl)">
+                                                        {{getPnlValue(runner,market.newpnl) | number:'1.2-2'}}</span>
+                                                    <span id="lossWithBet" class="win" style="display: none;"></span>
+                                                    <span id="zeroProfit" class="win" style="display: none;"></span>
+                                                    <span id="zeroLiability" class="win" style="display: none;"></span>
+                                                    <span id="zeroProfitWithBet" class="win"
+                                                        style="display: none;"></span>
+                                                    <span id="zeroLiabilityWithBet" class="win"
+                                                        style="display: none;"></span>
+                                                </th>
+                                                <td id="suspend" colspan="6" class="suspend"
+                                                    *ngIf="market.Status!='OPEN'">
+                                                    <span>{{market.Status}}</span>
+                                                </td>
+
+                                                <td id="back_3" class="back-3" *ngIf="market.Status=='OPEN'"
+                                                    (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToBack[2]?.price,'back',null,null,null,null,null,null)">
+                                                    <a>{{runner.ExchangePrices?.AvailableToBack[2]?.price}}<span>{{runner.ExchangePrices?.AvailableToBack[2]?.size}}</span></a>
+                                                </td>
+                                                <td id="back_2" class="back-2" *ngIf="market.Status=='OPEN'"
+                                                    (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToBack[1]?.price,'back',null,null,null,null,null,null)">
+                                                    <a>{{runner.ExchangePrices?.AvailableToBack[1]?.price}}<span>{{runner.ExchangePrices?.AvailableToBack[1]?.size}}</span></a>
+                                                </td>
+                                                <td id="back_1" class="back-1" *ngIf="market.Status=='OPEN'"
+                                                    (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToBack[0]?.price,'back',null,null,null,null,null,null)">
+                                                    <a>{{runner.ExchangePrices?.AvailableToBack[0]?.price}}<span>{{runner.ExchangePrices?.AvailableToBack[0]?.size}}</span></a>
+                                                </td>
+                                                <td id="lay_1" class="lay-1" *ngIf="market.Status=='OPEN'"
+                                                    (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToLay[0]?.price,'lay',null,null,null,null,null,null)">
+                                                    <a>{{runner.ExchangePrices?.AvailableToLay[0]?.price}}<span>{{runner.ExchangePrices?.AvailableToLay[0]?.size}}</span></a>
+                                                </td>
+                                                <td id="lay_2" class="lay-2" *ngIf="market.Status=='OPEN'"
+                                                    (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToLay[1]?.price,'lay',null,null,null,null,null,null)">
+                                                    <a>{{runner.ExchangePrices?.AvailableToLay[1]?.price}}<span>{{runner.ExchangePrices?.AvailableToLay[1]?.size}}</span></a>
+                                                </td>
+                                                <td id="lay_3" class="lay-3" *ngIf="market.Status=='OPEN'"
+                                                    (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToLay[2]?.price,'lay',null,null,null,null,null,null)">
+                                                    <a>{{runner.ExchangePrices?.AvailableToLay[2]?.price}}<span>{{runner.ExchangePrices?.AvailableToLay[2]?.size}}</span></a>
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+                                    </ng-container>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </ng-container>
+                <!-- Game Bets Table -->
+                <ng-container *ngIf="match.sportsBookMarket">
+                    <div id="sportsBookWrap">
+                        <ng-container
+                            *ngFor="let sportBook of match.sportsBookMarket; trackBy:trackBySportBook;let isFirst=first">
+                            <div class="game-wrap" id="sportsBookTable_{{match.eventTypeId}}_2860435_364135784"
+                                name="multiMarketItem" *ngIf="sportBook.isMulti">
+
+                                <h3 id="sportsBookHead" class="multi_h3">
+                                    <a [ngClass]="{'delete-pin':sportBook.isMulti,'add-pin':!sportBook.isMulti}"
+                                        id="multiMarketPin" title="Remove from Multi Markets"
+                                        (click)="toggleFavourite(match,'premium_'+match.eventId+'_'+sportBook.id)">Add
+                                        Pin</a>
+                                    <a id="multiMarketRefresh" class="multi_refresh">Refresh</a>
+                                    <a class="multi_name">
+                                        <span
+                                            [routerLink]="match.isTeenpatti ? ['/casino/',match.gameName] :['/fullmarkets',match.eventId]"
+                                            id="eventName">{{match.eventName}}</span>
+                                        <span id="sportsBookEIcon_1" class="game-E"
+                                            style="display: none;"><i></i>Soccer</span>
+                                        <span id="sportsBookEIcon_137" class="game-E"
+                                            style="display: none;"><i></i>e-Soccer</span>
+                                        <span id="sportsBookEIcon_4" class="game-E"
+                                            style="display: none;"><i></i>Cricket</span>
+                                        <span id="sportsBookEIcon_2" class="game-E"
+                                            style="display: none;"><i></i>Tennis</span>
+                                        <span id="icon" class="game-sportsbook">Premium Cricket</span>
+                                        <span id="marketName" class="multi-event_type">{{sportBook.marketName}}</span>
+                                    </a>
+                                </h3>
+                                <div class="bets-wrap sportsbook_bet">
+
+                                    <div id="multiMarketLoading" class="loading-wrap multi-load" style="display:none;">
+                                        <ul class="loading">
+                                            <li><img src="https://statics3.skyexch.art/images/loading40.gif"></li>
+                                            <li>Loading...
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- Sportsbook bet head end -->
+                                    <table id="sportsBookMarket_2_2860435_364135784" class="bets">
+                                        <colgroup>
+                                            <col span="1" width="280">
+                                            <col span="1" width="70">
+                                            <col span="1" width="70">
+                                            <col span="1" width="70">
+                                            <col span="1" width="70">
+                                            <col span="1" width="70">
+                                            <col span="1" width="70">
+                                        </colgroup>
+                                        <tbody>
+                                            <tr class="colgroup-adjust">
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="special_bet">
+                                                <td colspan="7"></td>
+                                            </tr>
+
+                                            <ng-container
+                                                *ngFor="let selection of sportBook.sportsBookSelection; trackBy:trackBySportBook;">
+                                                <tr id="sportsBookSuspend_2_2860435_364135784_1948344626"
+                                                    class="fancy-suspend-tr" *ngIf="selection.isActive!=1"
+                                                    eventid="2860435" isactive="1" status="1">
+                                                    <th colspan="3"></th>
+                                                    <td class="fancy-suspend-td" colspan="2">
+                                                        <div id="suspendClass" class="fancy-suspend-white">
+                                                            <span>Suspend</span>
+                                                        </div>
+                                                    </td>
+                                                    <td colspan="2"></td>
+                                                </tr>
+                                                <tr id="sportsBookSuspend_2_2860435_364135784_1948344626"
+                                                    class="fancy-suspend-tr"
+                                                    *ngIf="sportBook.marketStatus==2 && match.eventTypeId==4"
+                                                    eventid="2860435" isactive="1" status="1">
+                                                    <th colspan="3"></th>
+                                                    <td class="fancy-suspend-td" colspan="2">
+                                                        <div id="suspendClass" class="fancy-suspend-white"><span>Ball
+                                                                Run</span>
+                                                        </div>
+                                                    </td>
+                                                    <td colspan="2"></td>
+                                                </tr>
+                                                <tr id="sportsBookSuspend_2_2860435_364135784_1948344626"
+                                                    class="fancy-suspend-tr"
+                                                    *ngIf="sportBook.marketStatus==2 && match.eventTypeId!=4"
+                                                    eventid="2860435" isactive="1" status="1">
+                                                    <th colspan="3"></th>
+                                                    <td class="fancy-suspend-td" colspan="2">
+                                                        <div id="suspendClass" class="fancy-suspend-white">
+                                                            <span>Suspend</span>
+                                                        </div>
+                                                    </td>
+                                                    <td colspan="2"></td>
+                                                </tr>
+                                                <tr id="sportsBookSelection_2_2860435_364135784_1948344625"
+                                                    style="display: table-row;" marketpk="2_2860435_364135784"
+                                                    isactive="1" status="1">
+                                                    <th class="" colspan="3">
+                                                        <dl class="fancy-th-layout">
+                                                            <dt>
+                                                                <p id="selectionName">{{selection.selectionName}}</p>
+                                                                <span id="before" class="win" *ngIf="!sportBook.newpnl"
+                                                                    [ngClass]="getPnlClass(selection,sportBook.pnl)">
+                                                                    {{getPnlValue(selection,sportBook.pnl) |
+                                                                    number:'1.2-2'}}</span>
+                                                                <span id="after" class="to-lose"
+                                                                    style="display: none;"></span>
+                                                            </dt>
+                                                        </dl>
+                                                    </th>
+                                                    <td id="back_1" class="back-1 no-liq" colspan="2"
+                                                        (click)="selection.isActive!=1?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,selection.marketId,selection.id,match.eventName,sportBook.marketName,match.inplay,selection.selectionName,selection.odds,'back',null,null,null,null,null,null,'premium')">
+                                                        <a id="info">{{selection.odds}}</a>
+                                                    </td>
+                                                    <td class="refer-book" colspan="2"></td>
+                                                </tr>
+
+                                                <ng-container *ngIf="openBet">
+                                                    <tr id="sportsBookBetBar_{{sportBook.betfairEventId}}_{{selection.id}}"
+                                                        class="fancy-quick-tr"
+                                                        *ngIf="showLoader && openBet.SelectionId==selection.id && openBet.mtype=='premium'">
+                                                        <td colspan="7">
+                                                            <dl class="quick_bet-wrap quick_bet-progress">
+                                                                <dd id="progressBar" class="progress-bar"
+                                                                    style="width: 100%;"></dd>
+                                                                <dd class="progress-bar-txt">Placing your bets, Please
+                                                                    wait
+                                                                    <!-- <span id="secRemain">0 sec remaining…</span> -->
+                                                                </dd>
+                                                            </dl>
+                                                        </td>
+                                                    </tr>
+                                                </ng-container>
+                                                <ng-container *ngIf="msgData">
+                                                    <tr id="sportsBookBetMessage_{{selection.id}}"
+                                                        class="fancy-quick-tr"
+                                                        *ngIf="!showLoader && msgData.selId==selection.id && msgData.mtype=='premium'">
+                                                        <td colspan="7">
+                                                            <dl id="classWrap"
+                                                                class="quick_bet-wrap quick_bet-message {{status}}">
+                                                                <dd class="info">
+                                                                    <strong
+                                                                        id="header">{{!msgData.msg?msgData:msgData.msg}}</strong>
+                                                                    <a id="close" class="btn-close"
+                                                                        style="cursor:pointer;"
+                                                                        (click)="removeMsg()">Close</a>
+                                                                </dd>
+                                                            </dl>
+                                                        </td>
+                                                    </tr>
+                                                </ng-container>
+
+                                                <ng-container *ngIf="openBet && !showLoader">
+
+                                                    <tr id="sportsBookBetBoard_{{sportBook.betfairEventId}}_{{match.eventId}}_{{selection.id}}"
+                                                        class="fancy-quick-tr" style="display: table-row;"
+                                                        *ngIf="openBet.SelectionId==selection.id && openBet.mtype=='premium'">
+                                                        <td colspan="7">
+                                                            <form [formGroup]="OpenBetForm" (ngSubmit)="BetSubmit()">
+                                                                <dl id="classWrap"
+                                                                    class="quick_bet-wrap slip-{{f.backlay.value}}">
+                                                                    <dt id="fancyBetHeader" class="">
+
+                                                                        <span id="fancyBetAcceptCheck" class="bet-check"
+                                                                            style="display: none;">
+                                                                            <input id="fancyBetAcceptAnyOdds"
+                                                                                type="checkbox">
+                                                                            <label for="fancyBetAcceptAnyOdds">Accept
+                                                                                Any Odds</label>
+                                                                        </span>
+
+                                                                    </dt>
+                                                                    <dd class="col-btn"><a id="cancel" class="btn"
+                                                                            style="cursor:pointer;"
+                                                                            (click)="ClearAllSelection();">Cancel</a>
+                                                                    </dd>
+                                                                    <dd id="oddsHeader" class="col-odd">
+                                                                        <ul class="quick-bet-confirm">
+                                                                            <li id="odds">{{f.odds.value}}</li>
+                                                                            <li class="quick-bet-confirm-title">odds
+                                                                            </li>
+                                                                        </ul>
+                                                                    </dd>
+                                                                    <dd class="col-stake">
+                                                                        <input id="inputStake" type="text" value=""
+                                                                            formControlName="stake" numberOnly>
+                                                                    </dd>
+                                                                    <dd class="col-send">
+                                                                        <a id="placeBet" class="btn-send"
+                                                                            style="cursor:pointer;"
+                                                                            (click)="!f.odds.value || !f.stake.value?'':BetSubmit()"
+                                                                            [ngClass]="{'disable':!f.odds.value || !f.stake.value}">Place
+                                                                            Bets</a>
+                                                                    </dd>
+                                                                    <dd id="stakePopupList" class="col-stake_list"
+                                                                        style="display: block;">
+                                                                        <ul>
+                                                                            <ng-container
+                                                                                *ngFor="let stake of stakeSetting;let index=index;">
+                                                                                <li *ngIf="index<6">
+                                                                                    <a class="btn"
+                                                                                        id="selectStake_{{index}}"
+                                                                                        stake="{{stakeSetting[index]}}"
+                                                                                        style="cursor:pointer;"
+                                                                                        (click)="addStake(stake);">{{stakeSetting[index]}}</a>
+                                                                                </li>
+                                                                            </ng-container>
+
+                                                                        </ul>
+                                                                        <p id="totalStakeP" style="display: none;">Total
+                                                                            Stake: <strong id="totalStake"></strong></p>
+                                                                    </dd>
+                                                                </dl>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                </ng-container>
+                                            </ng-container>
+                                        </tbody>
+                                    </table>
+                                    <p id="sportsBookNoBet" class="no_bet" *ngIf="match.sportsBookMarket.length==0">has
+                                        no Sports Book market </p>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+
+            </div>
+        </ng-container>
+    </ng-container>
+
+
+</div>

@@ -1,0 +1,287 @@
+.circle {
+  margin-bottom: 0px;
+  display: inline-block;
+  border-radius: 6px;
+  width: 6px;
+  height: 6px;
+  background-color: #0c0;
+  margin-left: 5px;
+}
+
+
+.ball-runs {
+  background: #3d405b;
+  margin-left: 3px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  line-height: 20px;
+  text-align: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+}
+.ball-runs.wicket {
+  background: red
+}
+
+.ball-runs.four {
+  background: #087f23
+}
+
+.ball-runs.six {
+  background: #883997
+}
+.tooltip1 {
+  position: unset;
+  display: inline-block;
+  cursor: pointer;
+  // border-bottom: 1px dotted black;
+}
+
+.tooltip1 .tooltip1text {
+  visibility: hidden;
+  width: 200px;
+  background-color: #fff;
+  color: #000;
+  text-align: center;
+  border-radius: 0px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  font-weight: 300;
+  margin-left: 16px;
+  top: 20px;
+  border: 1px solid #3d405b;
+}
+
+.tooltip1:hover .tooltip1text {
+  visibility: visible;
+}
+
+.unselectable{
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+//   parlay 
+.isparlay{
+  background-color: #cdd7d1;
+}
+.parlay-overlay{
+  // top: 400px !important;
+  // height: 48.3% !important;
+  bottom: 0;
+}
+.parlay-overlay{
+  // top: 400px !important;
+  // height: 48.3% !important;
+  bottom: 0;
+  background: none;
+}
+
+.fixed-icon {
+  position: fixed;
+  bottom: 70px;
+  left: 11px;
+  background: rgb(255,88,0);
+background: linear-gradient(47deg, rgba(255,88,0,1) 0%, rgba(255,106,0,1) 47%, rgba(255,108,0,1) 50%, rgba(255,103,0,1) 51%, rgba(255,146,68,1) 51%, rgba(246,120,36,1) 83%, rgba(255,119,34,0.8239670868347339) 100%);
+  color: #fff; /* Text color for the div */
+  padding: 8px; /* Adjust padding as needed */
+  border-radius: 9999px;;
+}
+.fa-icon {
+  font-size: 24px; 
+  margin-right: 5px;
+}
+.length {
+  font-size: 16px; 
+}
+
+.subttl{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1rem;
+  height: 1rem;
+  position: absolute;
+  top: -0.1rem;
+  right: -0.31rem;
+  background: red;
+    border-radius: 50%;
+    padding: 2px;
+}
+.parlay-log{
+  position: absolute;
+}
+.parlay-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  position: relative;
+  width: 3rem;
+}
+.mx-4px {
+  margin-left: 0.2857142857142857rem;
+  margin-right: 0.2857142857142857rem;
+}
+.leading-16px {
+  line-height: 1.1428571428571428rem;
+}
+.break-all {
+  word-break: break-all;
+}
+.text-black-400 {
+  --tw-text-opacity: 1;
+  color: #6b7d87;
+}
+.py-4px {
+  padding-bottom: 0.2857142857142857rem;
+  padding-top: 0.2857142857142857rem;
+}
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+.w-full {
+  width: 99%;
+}
+.rounded-b-lg {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.bg-black-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(238 246 251/var(--tw-bg-opacity));
+}
+.p-2 {
+  padding: 0.5rem;
+}
+.content-p2{
+  padding:0.5rem 0 0.5rem 0.5rem !important;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.flex {
+  display: flex;
+}
+.break-all {
+  word-break: break-all;
+}
+.w-48px {
+  width: 3.4285714285714284rem;
+}
+.h-27px {
+  height: 1.9285714285714286rem;
+}
+.bg-black-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(212 224 229/var(--tw-bg-opacity));
+}
+.rounded {
+  border-radius: 0.25rem;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.bg-black-300 {
+  --tw-bg-opacity: 1;
+  background-color: #9ad0f0;
+}
+.w-10\/12 {
+  width: 83.333333%;
+}
+.parlay-input{
+  height: 9.66667vw;
+  width: 6rem;
+}
+.text-18 {
+  font-size: 1.2857142857142858rem;
+}
+.text-base {
+  font-size: 1.1rem;
+  line-height: 1.5rem;
+}
+.mr-2 {
+  margin-right: 0.5rem;
+}
+.py-2 {
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+}
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.bg-black-600{
+  --tw-bg-opacity: 1;
+  background-color: rgb(111 136 152/1);
+}
+.leading-5 {
+  line-height: 1.25rem;
+}
+.text-black-300 {
+  --tw-text-opacity: 1;
+  color: rgb(212 224 229/1);
+}
+.font-bold {
+  font-weight: 700;
+}
+.py-1 {
+  padding-bottom: 0.25rem;
+  padding-top: 0.25rem;
+}
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem
+}
+.rounded {
+  border-radius: 0.25rem;
+}
+.my-4px {
+  margin-bottom: 0.2857142857142857rem;
+  margin-top: 0.2857142857142857rem;
+}
+.mb-2{
+  margin-bottom: 0.2rem;
+}
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+.max-h-72 {
+  max-height: 18rem;
+}
+#fancyBetAcceptAnyOdds{
+  // position: absolute !important;
+  //    background: none !important; 
+  //    border: none !important; 
+  //    box-shadow:none !important; 
+  //    border-radius: none !important; 
+  //    color: none !important; 
+  //    font-size: none !important;  
+  //    padding:0 !important; 
+  //    margin-bottom: none !important;
+     -webkit-appearance: auto;
+}
+
+.acceptanyod{
+  padding-left: 4px;
+}
+
+.accept-content{
+  padding: 6px;
+  border-top: 1px solid #0000001a;
+}
+
+

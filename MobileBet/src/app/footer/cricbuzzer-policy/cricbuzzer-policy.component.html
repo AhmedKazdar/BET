@@ -1,0 +1,2004 @@
+<div data-role="page" tabindex="0" class="ui-page ui-page-theme-a ui-page-active">
+    <!-- <app-policy-link></app-policy-link> -->
+    <div>
+        <ul class="policy-link">
+            <li (click)="showOverlayInfo('#footer-policy1');"><a>{{Update?.PrivacyPolicy}}</a></li>
+            <li (click)="showOverlayInfo('#footer-term-Condition');"><a>{{Update?.TermsandConditions}}</a></li>
+            <li (click)="showOverlayInfo('#footer-fairness-RNG');"><a>{{Update?.fairnessandRNGTesting}}</a></li>
+            <li (click)="showOverlayInfo('#footer-KYC');"><a>{{Update?.KYC}}</a></li>
+            <li (click)="showOverlayInfo('#footer-Responsible-Gaming');"><a>{{Update?.responsiblegambling}}</a></li>
+            <li (click)="showOverlayInfo('#footer-AML');"><a>{{Update?.AML}}</a></li>
+            <li (click)="showOverlayInfo('#footer-AU');"><a>About Us</a></li>
+            <li (click)="showOverlayInfo('#footer-Self-Exclusion');"><a>{{Update?.SelfExclusionPolicy}}</a></li>
+            <li (click)="showOverlayInfo('#footer-Dispute-Resolution');"><a>{{Update?.DisputeResolution}}</a></li>
+            <li *ngIf="isAffiliate" (click)="showOverlayInfo('#footer-Skyaff');"><a>{{Update?.AffiliateProgram}}</a></li>
+            <!--ng-container--><!--bindings={"ng-reflect-ng-if": "true"}-->
+        </ul>
+
+        <div id="footer-policy1" class="overlay" style="display: none;">
+            <div class="frame-wrap">
+                <div class="news-wrap news-wrap-frame">
+                    <div class="side-head">
+                        <h3>Privacy Policy</h3>
+                    </div>
+                    <div class="announce-wrap">
+                        <h3>1.PRIVACY</h3>
+                        <p>Privacy Policy Introduction {{domain}} (the Company) takes
+                            protecting your privacy very seriously.</p>
+
+                        <p> We implement suitable technical
+                            live chat or internal support ticket. When you supply us with your
+                            personal information, you are agreeing that you do not consider our use of
+                            such personal information in accordance with this Privacy Policy as any
+                            breach of your rights under the Data Protection Act.At any time, you have
+                            the right to opt out from receiving any promotional and/or marketing
+                            materials that we may send you.</p>
+
+                        <h3>2.You are encouraged to contact us should</h3>
+                        <p>you wish to do so. Disclosing personal information to third parties The
+                            Company policy is that your personal information will not be disclosed to
+                            anyone other than employees of the Company that require access to your
+                            data in order to provide you with a service, with the exception where the
+                            Company may be required by law or legal process to disclose your personal
+                            information to relevant authorities. </p>
+
+                        <h3>3.Protection of your personal</h3>
+                        <p> information The Company employs physical, electronic and managerial
+                            procedures to safeguard the security of the data you provide to us. SSL
+                            encryption is used on our Website for all sensitive data. The Company
+                            advises you to take any and all precautions you can to protect your
+                            personal data while using the Internet. </p>
+
+                        <h3>4.Access to your personal</h3>
+                        <p>information You have the right to access any information we hold about
+                            you
+                            at any time. You can log in into our Website using your username and
+                            password at any time and review your Account page. You can also update or
+                            edit your information from this page. You may also contact the company
+                            service department at the Company and ask for details of any information
+                            we hold about you. You have the right to request any incorrect information
+                            to be corrected or, where applicable, removed. The Company reserves the
+                            right to ask you for a written request for any information we hold about
+                            you. Your right to be forgotten You have the right to have your personal
+                            data deleted in certain situations. Your 'right to be forgotten' is in
+                            support of your freedom of expression. </p>
+
+                        <h3>5.If you want to have your personal</h3>
+                        <p>data deleted, you should contact us at _________ and we will
+                            respond to you within a month. If we agree to erase your data we will also
+                            notify any relevant third party, where possible, and inform you who they
+                            are. Should your request be denied, you will be informed why and you have
+                            the right to complain to the supervisory authority. Cookies A cookie is a
+                            data packet which is used solely for web analytic purposes. Our Website
+                            uses cookies to recognise visitors and facilitate the login process.
+                            Cookies used by the Company are only set if the user agrees and expire
+                            within a maximum of four weeks. Privacy Commitment In order to ensure that
+                            your personal information remains confidential our privacy guidelines are
+                            communicated to every employee of the Company. Where the Website of the
+                            Company contains links to other sites, the Company does not share your
+                            personal information with those sites and is in no way responsible for the
+                            privacy policies of those sites. We would advise you to make yourself
+                            aware of the privacy policies of any such site. If our privacy policy
+                            changes and we plan to use your personal information in a way that is
+                            different from stated to you at the time of collection, you will be
+                            informed accordingly. The Privacy Policy of the Company is subject to
+                            change at any time and it is advised that you review the Privacy Policy
+                            periodically to check for changes.</p>
+                    </div>
+                    <footer><a class="btn-send" (click)="hideOverlayInfo('#footer-policy1');">CLOSE</a></footer>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-term-Condition" class="overlay" style="display: none;">
+            <div class="frame-wrap">
+                <div class="news-wrap news-wrap-frame">
+                    <div class="side-head">
+                        <h3>Terms & Conditions</h3>
+                    </div>
+                    <div class="announce-wrap">
+                        <h3>General Terms &amp; Conditions</h3>
+                        <p>Last updated: 24th of November 2022.</p>
+                        <p>
+                            In order to place bets with real money, which includes Bitcoins or
+                            fractions thereof, you will first need to open an account on <a href="https://{{domain}}">{{domain}}</a>.
+                            By using <a href="https://{{domain}}">{{domain}}</a> (the "Website") and/or opening an account with
+                            <a href="https://{{domain}}">{{domain}}</a>, you are deemed to have understood, accepted and agreed to be
+                            bound by these Terms and Conditions.
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2>Definitions</h2>
+                          <p>
+                            <a href="https://{{domain}}">{{domain}}</a> &ndash; is referred to as "we" or "us"<br />Player &ndash; is
+                            referred to as "you" or "the Player"<br />Games &ndash; means Casino and
+                            other RNG (Random Number Generator) games, which may become available from
+                            time to time on the website<br />The Website &ndash; <a href="https://{{domain}}">{{domain}}</a> through
+                            desktop, mobile or other platforms utilised by the Player<br />BTC&nbsp;&ndash;
+                            Bitcoin (1 BTC = 1,000 mBTC = &nbsp;1,000,000 uBTC)<br />Fiat money - any
+                            money that the government declares as legal tender (USD, BRL, JPY, CNY)
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2>1. General</h2>
+                          <p>
+                            1.1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;These terms and conditions ("Terms and
+                            Conditions") apply to both wagering sports and the use of casino-style
+                            games accessible through <a href="https://{{domain}}">www.{{domain}}</a>.&nbsp;
+                          </p>
+                          <p>
+                            1.2. <a href="https://{{domain}}">{{domain}}</a> is owned and operated by <a href="https://vrnl.net/">vrnl.net</a>. 
+                          </p>
+                          <p>
+                            1.3. These Terms and Conditions come into force as soon as you complete
+                            the registration process, which includes checking the box accepting these
+                            Terms and Conditions and successfully creating an account. By using any
+                            part of the Website following account creation, you agree to these Terms
+                            and Conditions.
+                          </p>
+                          <p>
+                            1.4. You must read these Terms and Conditions carefully in their entirety
+                            before creating an account. If you do not agree with any provision of
+                            these Terms and Conditions, you must not create an account or continue to
+                            use the Website.
+                          </p>
+                          <p>
+                            1.5. We are entitled to make amendments to these Terms and Conditions at
+                            any time and without advanced notice. If we make such amendments, we may
+                            take appropriate steps to bring such changes to your attention (such as by
+                            email or placing a notice on a prominent position on the Website, together
+                            with the amended terms and conditions) but it shall be your sole
+                            responsibility to check for any amendments, updates and/or modifications.
+                            Your continued use of the <a href="https://{{domain}}">{{domain}}</a> services and Website after any such
+                            amendment to the Terms and Conditions will be deemed as your acceptance
+                            and agreement to be bound by such amendments, updates and/or
+                            modifications.
+                          </p>
+                          <p>
+                            1.6. These Terms and Conditions may be published in several languages for
+                            informational purposes and ease of access by players. The English version
+                            is the only legal basis of the relationship between you and us and in the
+                            case of any discrepancy with respect to a translation of any kind, the
+                            English version of these Terms and Conditions shall prevail.
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2>2. Binding Declarations</h2>
+                          <p>
+                            By agreeing to be bound by these Terms and Conditions, you also agree to
+                            be bound by the <a href="https://{{domain}}">{{domain}}</a> Rules and Privacy Policy that are hereby
+                            incorporated by reference into these Terms and Conditions. In the event of
+                            any inconsistency, these Terms and Conditions will prevail.<br />You
+                            hereby represent and warrant that:
+                          </p>
+                          <p>
+                            2.1. You are over (a) 18 or (b) such other legal age or age of majority as
+                            determined by any laws which are applicable to you, whichever age is
+                            greater;
+                          </p>
+                          <p>
+                            2.2. You have full capacity to enter into a legally binding agreement with
+                            us and you are not restricted by any form of limited legal capacity;
+                          </p>
+                          <p>
+                            2.3. You participate in the Games strictly in your personal and
+                            non-professional capacity; and participate for recreational and
+                            entertainment purposes only;
+                          </p>
+                          <p>
+                            2.4. You participate in the Games and make bets on your own behalf and not
+                            on the behalf of any other person;
+                          </p>
+                          <p>
+                            2.5. All information that you provide to us during the term of validity of
+                            this agreement is true, complete, correct, and that you shall immediately
+                            notify us of any change of such information;
+                          </p>
+                          <p>
+                            2.6. You are solely responsible for reporting and accounting for any taxes
+                            applicable to you under relevant laws for any winnings that you receive
+                            from us;
+                          </p>
+                          <p>
+                            2.7. You understand that by using our services you take the risk of losing
+                            money deposited into your Member Account and accept that you are fully and
+                            solely responsible for any such loss;
+                          </p>
+                          <p>
+                            2.8. You will not use our services while located in any jurisdiction that
+                            prohibits the placing and/or accepting of bets denominated in Bitcoin
+                            online, and/or playing casino and/or live games for and/or with Bitcoin;
+                          </p>
+                          <p>
+                            2.9. You are permitted in the jurisdiction in which you are located to use
+                            online sports betting and casino services;
+                          </p>
+                          <p>
+                            2.10. In relation to deposits and withdrawals of funds into and from your
+                            Member Account, you shall only use Bitcoins that are valid and lawfully
+                            belong to you;
+                          </p>
+                          <p>
+                            2.11. You understand that the value of Bitcoin can change dramatically
+                            depending on the market value;
+                          </p>
+                          <p>
+                            2.12. The computer software, the computer graphics, the Websites and the
+                            user interface that we make available to you is owned by <a href="https://{{domain}}">{{domain}}</a> or
+                            its associates and is protected by copyright laws. You may only use the
+                            software for your own personal, recreational uses in accordance with all
+                            rules, terms and conditions we have established and in accordance with all
+                            applicable laws, rules and regulations;
+                          </p>
+                          <p>
+                            2.13. You understand that Bitcoin is not considered a legal currency or
+                            tender and as such on the Website they are treated as virtual funds with
+                            no intrinsic value.
+                          </p>
+                          <p>
+                            2.14. You affirm that you are not an officer, director, employee,
+                            consultant or agent of <a href="https://{{domain}}">{{domain}}</a> or working for any company related to
+                            <a href="https://{{domain}}">{{domain}}</a>, or a relative or spouse of any of the foregoing;
+                          </p>
+                          <p>
+                            2.15. You are not diagnosed or classified as a compulsive or problem
+                            gambler. We are not accountable if such problem gambling arises whilst
+                            using our services, but will endeavour to inform of relevant assistance
+                            available. We reserve the right to implement cool off periods if we
+                            believe such actions will be of benefit.
+                          </p>
+                          <p>
+                            2.16. You accept and acknowledge that we reserve the right to detect and
+                            prevent the use of prohibited techniques, including but not limited to
+                            fraudulent transaction detection, automated registration and signup,
+                            gameplay and screen capture techniques. These steps may include, but are
+                            not limited to, examination of Players device properties, detection of
+                            geo-location and IP masking, transactions and blockchain analysis;
+                          </p>
+                          <p>
+                            2.17. You accept our right to terminate and/or change any games or events
+                            being offered on the Website, and to refuse and/or limit bets;
+                          </p>
+                          <p>
+                            2.18&nbsp; If you are a politically exposed person or a family member of a
+                            politically exposed person, you accept and acknowledge that we may need to
+                            review or suspend your account without prior notice to you in order for us
+                            to fulfill any due diligence obligations we may have. You acknowledge that
+                            any decisions made regarding the status of your account are made solely at
+                            our own discretion, which may include permanent closure of your account;
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2>3. Registration and Opening of Your Member Account</h2>
+                          <p>
+                            3.1. In order for you to be able to place bets on our websites, you must
+                            first personally register an account with us ("Member Account").
+                          </p>
+                          <p>
+                            3.2. We do not wish to and shall not accept registration from persons
+                            resident in jurisdictions that prohibit you from participating in online
+                            sports betting, gambling, gaming, and/or games of skill, for and/or with
+                            bitcoin.
+                          </p>
+                          <p>
+                            3.3. You are aware that the right to access and use the website and any
+                            products there offered, may be considered illegal in certain countries. We
+                            are not able to verify the legality of service in each and every
+                            jurisdiction, consequently, you are responsible in determining whether
+                            your accessing and using our website is compliant with the applicable laws
+                            in your country and you warrant to us that gambling is not illegal in the
+                            territory where you reside. For various legal or commercial reasons, we do
+                            not permit accounts to be opened or used by customers resident in certain
+                            jurisdictions, including the United States of America (and her
+                            dependencies, military bases and territories), Australia, United Kingdom,
+                            Estonia, Lithuania, Netherlands, Belgium, France, Germany, Portugal,
+                            Serbia, Afghanistan, Democratic People&rsquo;s Republic of Korea, Iran,
+                            Iraq, Israel, Malta, Myanmar, Syria, Trinidad and Tobago, Yemen or other
+                            restricted jurisdictions ("Restricted Jurisdiction") as communicated by us
+                            from time to time. By using the Website you confirm you are not a resident
+                            in a Restricted Jurisdiction.
+                          </p>
+                          <p>
+                            3.4 When attempting to open an account or using the Website, it is the
+                            responsibility of the player to verify whether gambling is legal in that
+                            particular jurisdiction. If you open or use the Website while residing in
+                            a Restricted Jurisdiction: your account may be closed by us immediately;
+                            any winnings and bonuses will be confiscated and remaining balance
+                            returned (subject to reasonable charges), and any returns, winnings or
+                            bonuses which you have gained or accrued will be forfeited by you and may
+                            be reclaimed by us; and you will return to us on demand any such funds
+                            which have been withdrawn.
+                          </p>
+                          <p>
+                            3.5. You are allowed to have only one Member Account. If you attempt to
+                            open more than one Member Account, all of your accounts may be blocked,
+                            suspended or closed and any funds credited to your account/s will be
+                            frozen.
+                          </p>
+                          <p>
+                            3.6. If you notice that you have more than one registered Member Account
+                            you must notify us immediately. Failure to do so may lead to your Member
+                            Account being blocked.
+                          </p>
+                          <p>
+                            3.7. You will inform us as soon as you become aware of any errors with
+                            respect to your account or any calculations with respect to any bet you
+                            have placed. We reserve the right to declare null and void any bets that
+                            are subject to such an error.
+                          </p>
+                          <p>
+                            3.8. If you do not use your account that has deposited funds for 3 months,
+                            you will receive a notice from us. If you do not use your deposits after
+                            our notice within 1 month, we reserve the right to deduct monthly
+                            administrative costs from your deposit remaining on your account. The
+                            administrative cost may be up to 15% from your deposited funds remaining
+                            on your account. After 180 days we may remove the balance from your
+                            account to increase security on the funds. If this happens contact us at
+                            hello@<a href="https://{{domain}}">{{domain}}</a> to reopen your account.
+                          </p>
+                          <p>
+                            3.9. You must enter all mandatory information requested into the
+                            registration form, including a valid e-mail address. If you do not enter a
+                            valid email address, we will be unable to help you recover any "forgotten
+                            passwords". It is your sole responsibility to ensure that the information
+                            you provide is true, complete and correct.
+                          </p>
+                          <p>
+                            3.10. We have the right to carry out "KYC" (Know Your Customer)
+                            verification procedures and access to your Member Account may be blocked
+                            or closed if we determine that you have supplied false or misleading
+                            information.
+                          </p>
+                          <p>
+                            3.11. As part of the registration process, you will have to choose a
+                            username and password for your login into the Website(s). You will have to
+                            choose a username which is not disruptive or offensive. It is your sole
+                            and exclusive responsibility to ensure that your login details are kept
+                            securely. You must not disclose your login details to anyone. We are not
+                            liable or responsible for any abuse or misuse of your Member Account by
+                            third parties due to your disclosure, whether intentional, accidental,
+                            active or passive, of your login details to any third party.
+                          </p>
+                          <p>
+                            3.12. If you change your password, you will be unable to withdraw for 48
+                            hours due to security reasons.
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2>4. Security</h2>
+                          <p>
+                            4.1. On registration via the Website, you will be required to choose a
+                            password to authenticate your Member Account for use on the Website.
+                          </p>
+                          <p>
+                            4.2. You agree to keep your password confidential and that you are
+                            responsible for any misuse of your password. Any losses suffered due to a
+                            third party using your account in any circumstances will not be refunded
+                            by us and furthermore, you shall have full responsibility for any third
+                            party using your login details and shall hold us harmless in respect of
+                            any damages arising as a consequence.
+                          </p>
+                          <p>
+                            4.3. You agree to inform us at once by email if you believe that your
+                            account information is being misused by a third party so that we may
+                            suspend your account. We recommend that you disable any automatic password
+                            memory in your browser, use Two Step Verification and other such measures
+                            to limit the risk of unauthorised use of your account.
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2>5. Bitcoin Funds</h2>
+                          <p>
+                            5.1. Customers cannot move or convert funds between wallets and
+                            currencies.
+                          </p>
+                          <p>
+                            5.2 The details you will need to make your bitcoin deposits are available
+                            on the Website in the My Account and Deposit pages.
+                          </p>
+                          <p>5.3. We do not extend credit for the use of our services.</p>
+                          <p>
+                            5.4. You will not earn any interest on outstanding amounts and acknowledge
+                            that the Company is not a financial institution.
+                          </p>
+                          <p>
+                            5.5. Should your account become overdrawn due to any sort of error or if a
+                            withdrawal request is processed twice or more for any reason, you agree to
+                            fully reimburse <a href="https://{{domain}}">{{domain}}</a> for any such overdrawn amounts.
+                          </p>
+                          <p>
+                            5.6. If we determine, in our sole discretion, that you are using the
+                            "Double Spend" methodology, <a href="https://{{domain}}">{{domain}}</a> shall void all bets and winnings.
+                            Specifically, if you win, then confirm your deposit on the Blockchain and
+                            attempt to withdraw, all winnings will be confiscated and your account
+                            will be closed permanently. We shall also exercise this right where
+                            similar activities are attempted from any connected accounts.
+                          </p>
+                          <p>
+                            5.7. You accept and acknowledge that cryptocurrencies&rsquo; value can
+                            change dramatically depending on the market value.
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2>6. Account Balance</h2>
+                          <p>
+                            6.1. Our calculations of your Account Balance, Bonus Balance and amounts
+                            owed by you under these Terms and Conditions will be final and, in the
+                            absence of any manifest error, will not be subject to amendment based on
+                            enquiry, external auditing or investigation.
+                          </p>
+                          <p>
+                            6.2. If you do not use your account which has deposited funds in it, for 3
+                            months you will receive a notice from us. If you do not use your deposits
+                            within 1 month following our notice, we reserve the right to deduct
+                            monthly administrative costs from the deposits remaining In your account.
+                            The administrative cost is 15% monthly from the deposited funds remaining
+                            in your account.
+                          </p>
+                          <p>
+                            6.3. We reserve the right to close player accounts that have been inactive
+                            for more than 12 months. In case your account has deposited funds after
+                            the 12-month inactive period, we reserve the right to use the remaining
+                            deposited funds for administrative costs for closing the account.
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2>7. Client Account Management</h2>
+                          <p>
+                            7.1. All winnings will be credited to your account balance following
+                            confirmation of the relevant result.
+                          </p>
+                          <p>
+                            7.2. Any amounts which are mistakenly credited as winnings to your account
+                            remain the property of <a href="https://{{domain}}">{{domain}}</a> and will automatically be deducted
+                            from your account upon the error being detected. Any winnings mistakenly
+                            credited to your account and subsequently withdrawn by you will constitute
+                            a valid legally-enforceable debt owed by you to <a href="https://{{domain}}">{{domain}}</a> in the amount
+                            of such wrongfully attributed winnings. We reserve the right to instigate
+                            debt recovery procedures in such circumstances if you fail to voluntarily
+                            satisfy the outstanding debt.
+                          </p>
+                          <p>
+                            7.3. Payment of any taxes, fees, charges or levies that may apply to your
+                            winnings under any applicable laws shall be your sole responsibility.
+                          </p>
+                          <p>
+                            7.4. We reserve the right to block / delay processing of withdrawal
+                            requests until requested copies of valid photographic identification,
+                            proof of address and/or credit/debit card are provided to our satisfaction
+                            (KYC).
+                          </p>
+                          <h2>8. Deposits into your Member Account</h2>
+                          <p>
+                            8.1. You may make deposits in cryptocurrencies or FIAT.
+                            <!-- The
+                            minimum deposit amount for other currencies can be found on our FAQ page .
+                            All minimum deposit amounts specified are per single transaction. Smaller
+                            deposits will not be summed. Any deposits below the specified minimum
+                            deposit amounts are void and will not be credited to your user account
+                            balance or returned to the source. <a href="https://{{domain}}">{{domain}}</a> shall not be held liable
+                            if deposits do not meet our listed minimum deposit requirements. -->
+                          </p>
+                          <p>
+                            8.2. To deposit funds into your Member Account, you can transfer funds
+                            from crypto-wallets and credit cards under your control, deposits can only
+                            be made with your own funds.
+                          </p>
+                          <p>
+                            8.3. <a href="https://{{domain}}">{{domain}}</a> cannot guarantee that all currencies will be natively
+                            supported in games and betting platforms. Some platforms may reflect
+                            available balance in a different currency.
+                          </p>
+                          <p>
+                            8.4. Upon your first deposit and throughout the lifetime of your account,
+                            we reserve the right to use additional procedures and means to verify your
+                            identity when processing deposits into your Member Account. Verification
+                            will involve personal identity documents. We may also require an
+                            additional document confirming ownership of your payment instrument and
+                            address as well as part of verification process.
+                          </p>
+                          <p>
+                            8.5. All transactions shall be checked in order to prevent money
+                            laundering. If you become aware of any suspicious activity relating to any
+                            of the Games on the Website, you must report this to us immediately.
+                            <a href="https://{{domain}}">{{domain}}</a> may suspend, block or close your Member Account and withhold
+                            funds if requested to do so in accordance with the Prevention of Money
+                            Laundering Act. Enhanced due diligence may be done in respect of
+                            withdrawals of funds not used for wagering and we reserve the right to
+                            decline processing withdrawals if you fail to comply with such additional
+                            due diligence requests.
+                          </p>
+                          <p>
+                            8.6. Note that your bank or payment service provider may charge you
+                            additional fees for deposits, withdrawals of currency conversion according
+                            to their terms and conditions and your user agreement.
+                          </p>
+                          <p>
+                            8.7. Note that some payment methods may include an additional fee. In this
+                            case, the fee will be clearly visible for you in the cashier.
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2>9. Withdrawals</h2>
+                          <p>
+                            9.1. All withdrawals shall be processed in accordance with our withdrawal
+                            policy. Bitcoin withdrawals will be made to your stated Bitcoin wallet
+                            address when making a valid withdrawal request. To make a withdrawal, you
+                            first need to verify your registered email address from your account
+                            profile. To withdraw any funds which have been deposited, we require there
+                            to be at least 3 blockchain confirmations of the deposit before a
+                            withdrawal can be requested. All fiat currency withdrawals shall be
+                            processed in accordance with our withdrawal policy.
+                             <!-- Euro withdrawals will
+                            be made to your personal Euro account when making a valid withdrawal
+                            request. -->
+                             The minimum fiat currency withdrawal amount is &euro;20 (or an
+                            equivalent in alternative fiat currency). Fiat currency withdrawal may
+                            take up to 3 working days from the moment they are approved depending on
+                            payment service provider.
+                          </p>
+                          <p>
+                            9.2. <a href="https://{{domain}}">{{domain}}</a> reserve the right to carry out additional KYC
+                            verification procedures for any withdrawals exceeding the equivalent of 1
+                            Bitcoin or &euro;2000 as regulated by our gaming license. Account Holders
+                            who wish to recover funds held in a closed, locked or excluded account are
+                            advised to contact our Customer Support.
+                          </p>
+                          <p>
+                            9.3. We reserve the right to apply a wagering requirement of at least 5
+                            (five) times the deposit amount if we suspect the user in using our
+                            service as a mixer. It is strictly forbidden to use our service for any
+                            other purpose than entertainment
+                          </p>
+                          <p>
+                            9.4 For FIAT withdrawals, <a href="https://{{domain}}">{{domain}}</a> reserves the right to require 1x
+                            wagering of the amount equivalent to the deposit(s) before accepting a
+                            withdrawal request.
+                          </p>
+                          <p>
+                            9.5. Where possible, all withdrawals will be processed to the payment
+                            account from which the deposits were made. Withdrawal payments can only be
+                            made in the name of and to the registered account holder.
+                          </p>
+                          <p>
+                            9.6. You acknowledge that the funds in your account are expended
+                            immediately upon placing a bet and we do not provide return of goods,
+                            refunds or retrospective cancellation of your account.
+                          </p>
+                          <p>
+                            9.7. In the event of a large withdrawal request, we may elect to process
+                            no more than 50 BTC per week until the full amount is settled.
+                          </p>
+                          <p>
+                            9.8. We reserve the right to deduct any incurred transaction fees or other
+                            costs from any amount that you withdraw.
+                          </p>
+                          <p>
+                            9.9. Note that some payment methods may include an additional fee. In this
+                            case, the fee will be clearly visible for you in the cashier.
+                          </p>
+                          <p>
+                            9.10. Note that your bank or payment service provider may charge you
+                            additional fees for deposits, withdrawals of currency conversion according
+                            to their terms and conditions and your user agreement.
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2>10. Closing of Member Accounts</h2>
+                          <p>
+                            10.1. If you wish to close your member account, you may do so at any time
+                            by contacting Customer Support in written form via email. The effective
+                            closure of the Account will correspond to the termination of the Terms and
+                            Conditions. If the reason behind the closure of the Account is related to
+                            problem gambling, you shall indicate this in writing when requesting the
+                            account closure.
+                          </p>
+                          <p>
+                            10.2. <a href="https://{{domain}}">{{domain}}</a> reserves the right to refuse or close a Member Account
+                            at its sole discretion, without prior notice or obligation to state or
+                            justify the reason. In the absence of suspected fraud, money laundering or
+                            unlawful conduct, we shall transfer your account balance to a Bitcoin
+                            wallet of your choosing prior to the closure of your account. Your account
+                            balance in fiat money will be returned in the same way which you used to
+                            make a deposit. If you used a deposit-only method (for example, Boleto or
+                            CashtoCode), we will contact you and find a different way to return your
+                            funds prior to account closure.
+                          </p>
+                          <h2 id="privacy">11. Privacy Policy</h2>
+                          <p>
+                            <span
+                              >11.1. You hereby acknowledge and accept that if we deem necessary, we
+                              are able to collect and otherwise use your personal data in order to
+                              allow you access and use of the Websites and in order to allow you to
+                              participate in Games.</span
+                            >
+                          </p>
+                          <p>&nbsp;</p>
+                          <p>
+                            11.2. We hereby acknowledge that in collecting your personal details as
+                            stated in the previous provision, we are bound by the Data Protection Act.
+                            We will protect your personal information and respect your privacy in
+                            accordance with best business practices and applicable laws.
+                          </p>
+                          <p>
+                            11.3. We will use your personal data to allow you to participate in the
+                            Games and to carry out operations relevant to your participation in the
+                            Games. By opening your Member Account, you acknowledge and accept that
+                            employees of <a href="https://{{domain}}">{{domain}}</a> shall have access to your personal data for the
+                            purpose of executing their duties and providing you with the best possible
+                            assistance and service. We may also use your personal data to inform you
+                            of changes, new services and promotions. You may opt out of receiving
+                            marketing emails at any time.
+                          </p>
+                          <p>
+                            11.4. Your personal data will not be disclosed to third parties, unless
+                            such a disclosure is either required by law or is necessary for the use of
+                            our service, in which case, you are deemed to have consented to such
+                            disclosures to a third party.
+                          </p>
+                          <p>
+                            11.5. We shall keep all information provided as personal data
+                            indefinitely, unless we elect to destroy such information after the
+                            expiration of application data-retention periods or where we are required
+                            to destroy such information by law.
+                          </p>
+                          <p>
+                            11.6. You accept that our website uses cookies and we therefore collect
+                            certain basic information transmitted to our server from your browser.
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2>12. Bonuses and Promotions</h2>
+                          <p>
+                            12.1. <a href="https://{{domain}}">{{domain}}</a> reserves the right to cancel any promotion, bonus or
+                            bonus program with immediate effect if we believe the bonus has been set
+                            up incorrectly or is being abused, and if said bonus has been paid out, we
+                            reserve the right to decline any withdrawal request and to deduct such
+                            amount from your account. Whether or not a bonus is deemed to be set up
+                            incorrectly or abused shall be determined solely by <a href="https://{{domain}}">{{domain}}</a>.
+                          </p>
+                          <p>
+                            12.2. If you use a Deposit Bonus, no withdrawal of your original deposit
+                            will be accepted before you have reached the requirements stipulated under
+                            the terms and conditions of the Deposit Bonus.
+                          </p>
+                          <p>
+                            12.3. Where any term of the offer or promotion is breached or there is any
+                            evidence of a series of bets placed by a customer or group of customers,
+                            which due to a deposit bonus, enhanced payments, free bets, risk free bets
+                            or any other promotional offer results in guaranteed customer profits
+                            irrespective of the outcome, whether individually or as part of a group,
+                            <a href="https://{{domain}}">{{domain}}</a> reserves the right to reclaim the bonus element of such
+                            offers and in their absolute discretion either settle bets at the correct
+                            odds, void the free bet bonus and risk free bets or void any bet funded by
+                            the deposit bonus. In addition, <a href="https://{{domain}}">{{domain}}</a> reserves the right to levy an
+                            administration charge on the customer up to the value of the deposit
+                            bonus, free bet bonus, risk free bet or additional payment to cover
+                            administrative costs. We further reserve the right to ask any customer to
+                            provide sufficient documentation for us to be satisfied in our absolute
+                            discretion as to the customer's identity prior to us crediting any bonus,
+                            free bet, risk free bet or offer to their account.
+                          </p>
+                          <p>
+                            12.4. All <a href="https://{{domain}}">{{domain}}</a> offers are intended for recreational players and
+                            <a href="https://{{domain}}">{{domain}}</a> may in its sole discretion limit the eligibility of customers
+                            to participate in all or part of any promotion.
+                          </p>
+                          <p>
+                            12.5. <a href="https://{{domain}}">{{domain}}</a> reserves the right to amend, cancel, reclaim or refuse
+                            any promotion at its own discretion.
+                          </p>
+                          <p>
+                            12.6. Bonuses can only be received once per person/account, family,
+                            household, address, e-mail address, IP addresses and environments where
+                            computers are shared (university, fraternity, school, public library,
+                            workplace, etc.). The Operator reserves the right to close your account
+                            and confiscate any existing funds if evidence of abuse/fraud is found.
+                          </p>
+                          <p>
+                            12.7. You acknowledge and understand that separate terms and conditions
+                            exist with respect to promotions, bonuses and special offers, and are in
+                            addition to these terms and conditions. These terms and conditions are set
+                            forth in the respective content page on this website (<a href="https://{{domain}}">www.{{domain}}</a>),
+                            or have been made available to you personally, as the case may be. In the
+                            event of a conflict between the provisions of such promotions, bonuses and
+                            special offers, and the provisions of these terms and conditions, the
+                            provisions of such promotions, bonuses and special offers will prevail.
+                          </p>
+                          <p>
+                            12.8. We may insist that you bet a certain amount of your own deposit
+                            before you can bet with any free/bonus funds we credit to your account.
+                          </p>
+                          <p>
+                            12.9 You accept that certain promotions may be subject to withdrawal
+                            restrictions and/or requirements which need to be met before funds
+                            credited under the promotion can be withdrawn. Such terms shall be duly
+                            published and made available as part of the promotion. If you opt to make
+                            a withdrawal before the applicable wagering requirements are fulfilled, we
+                            will deduct the whole bonus amount as well as any winnings connected with
+                            the use of the bonus amounts before approving any withdrawal.
+                          </p>
+                          <p>
+                            12.10 Winnings from wagers placed using a free bet are calculated as the
+                            'total returns less the amount staked (including the amount of the free
+                            bet staked). The value of your free bet is therefore not included in, nor
+                            cannot be withdrawn as part of, any winnings you make from a free bet.
+                          </p>
+                          <p>
+                            12.11. Please note that in the event of a void bet, stakes are not
+                            returned on Free Bets.
+                          </p>
+                          <p>
+                            12.12. You must use all bonuses and/ or bonus programs within 48 hours
+                            from receiving the bonus on your Member Account. When a bonus and/ or
+                            bonus program have not been used within 48 hours of receiving it,
+                            <a href="https://{{domain}}">{{domain}}</a> reserves the right to cancel any such bonus and/ or bonus
+                            program and may deduct the bonus or bonus-like reward or free spin
+                            immediately after the lapse of the 48 hours period.
+                          </p>
+                          <p>
+                            12.13. When incentives (including but not limited to free bets or free
+                            spins) are being offered in exchange for customer views, opinions,
+                            feedback or actions such as completing customer surveys, these incentives
+                            will be strictly limited to one per user during the relevant time period
+                            of the survey/promotion.
+                          </p>
+                          <p>
+                            12.14. Promotions may be published in several languages for informational
+                            purposes and ease of access by players. The English version is the only
+                            legal basis of the relationship between you and us and in the case of any
+                            discrepancy with respect to a translation of any kind, the English version
+                            of these Terms and Conditions shall prevail.
+                          </p>
+                          <p>
+                            12.15. The maximum win amount for the Cash Galaxy game (by OneTouch) is
+                            capped at &euro;500,000 or equivalent amount in other currencies.
+                          </p>
+                          <!-- <p>12.16. Following casino games are excluded from the wagering:</p>
+                          <table class="table table-bordered">
+                            <tbody>
+                              <tr>
+                                <th>Provider</th>
+                                <th>Games</th>
+                              </tr>
+                              <tr>
+                                <td>Turbo Games</td>
+                                <td>All Games</td>
+                              </tr>
+                              <tr>
+                                <td>Spribe Gaming</td>
+                                <td>All Games</td>
+                              </tr>
+                              <tr>
+                                <td>Spade Gaming</td>
+                                <td>Alien Hunter, Fish God, Fishing War, Zombie Party</td>
+                              </tr>
+                              <tr>
+                                <td>Pragmatic Play</td>
+                                <td>Spaceman</td>
+                              </tr>
+                              <tr>
+                                <td>Onlyplay</td>
+                                <td>F777 Fighter, Limbo Cat 2</td>
+                              </tr>
+                              <tr>
+                                <td>Hacksaw</td>
+                                <td>Boxes Dare2Win, Coins Dare2Win, Mines Dare2Win</td>
+                              </tr>
+                              <tr>
+                                <td>Golden Race</td>
+                                <td>All Games</td>
+                              </tr>
+                              <tr>
+                                <td>Fugaso</td>
+                                <td>Magnify Man</td>
+                              </tr>
+                              <tr>
+                                <td>Evolution</td>
+                                <td>
+                                  Benelux Slingshot (Auto-Roulette La Partage), French Roulette Gold,
+                                  Ruleta en Vivo
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>eBet</td>
+                                <td>All Games</td>
+                              </tr>
+                              <tr>
+                                <td>7Mojos</td>
+                                <td>All Games</td>
+                              </tr>
+                              <tr>
+                                <td>Asia Gaming</td>
+                                <td>All games</td>
+                              </tr>
+                              <tr>
+                                <td>OneTouch</td>
+                                <td>Roulette, Roulette Pro, Roulette High Roller</td>
+                              </tr>
+                              <tr>
+                                <td>Bet Games.TV</td>
+                                <td>
+                                  <p>All Games</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Bgaming</td>
+                                <td>
+                                  <p>Heads and Tails. Minesweeper XY, Plinko, Space XY, Plinko XY</p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table> -->
+                          <p>
+                            12.17. For bonus money with wagering requirements, players must turn over
+                            the bonus and its winnings a specified number of times before being able
+                            to make a withdrawal.
+                          </p>
+                          <p>
+                            The wagering contribution of bonus money depends on the game category. The
+                            breakdown is as follows:
+                          </p>
+                          <p>Slots &ndash; 100%</p>
+                          <p>Table games &ndash; 20%</p>
+                          <p>Live-dealer games &ndash; 20%</p>
+                          <p>&nbsp;</p>
+                          <h2>13. General Betting Rules</h2>
+                          <p>
+                            13.1 A bet, which has been placed and accepted, cannot be amended,
+                            withdrawn or cancelled by you. The list of all the bets, their status and
+                            details are available to you on the Website.
+                          </p>
+                          <p>
+                            13.2. Winnings will be paid into your account after the final result is
+                            confirmed by the official governing authority of the relevant sport or
+                            competition. However, <a href="https://{{domain}}">{{domain}}</a> reserves the right to set aside any
+                            winnings should there be any investigation resulting from suspicion of
+                            criminal activities or any manipulation that may have affected the result.
+                            If an irregularity is in either betting patterns or event outcome is
+                            confirmed by the governing authority, third party or <a href="https://{{domain}}">{{domain}}</a>,
+                            <a href="https://{{domain}}">{{domain}}</a> retains the right to void and/or refund any staked amount
+                            placed on the event at our discretion. In the case that any bets have
+                            already been resulted, <a href="https://{{domain}}">{{domain}}</a> retains the right to resettle the
+                            event outcome and confiscate any winnings associated.
+                          </p>
+                          <p>
+                            13.3. Should <a href="https://{{domain}}">{{domain}}</a> become aware that you have placed a number of
+                            bets from different accounts you have irregularly opened, all bets will be
+                            voidable at the unfettered discretion of <a href="https://{{domain}}">{{domain}}</a>. <a href="https://{{domain}}">{{domain}}</a>
+                            retains the right to take further action as it deems necessary.
+                          </p>
+                          <p>
+                            13.4. If bets which exceed the stated maximum bet amounts, are erroneously
+                            accepted by <a href="https://{{domain}}">{{domain}}</a>, the excess amount will be disregarded and the
+                            bet amount placed will be revised accordingly and the difference shall be
+                            refunded/credited to your account.
+                          </p>
+                          <p>
+                            13.5. Live video streaming, statistics, live scores, live betting or
+                            editorial text published on the <a href="https://{{domain}}">{{domain}}</a> site is added information and
+                            <a href="https://{{domain}}">{{domain}}</a> does not acknowledge or accept any liability whatsoever if
+                            the information is incorrect.
+                          </p>
+                          <p>
+                            13.6. If a match does not start on the scheduled starting date or starts
+                            but is later postponed and/or abandoned and is not completed (resumed) by
+                            the end of the next calendar date, all bets will be void except for any
+                            bets determined to be unconditional under the rules of the relevant
+                            market, in which case, the bet may stand.
+                          </p>
+                          <p>
+                            13.7. <a href="https://{{domain}}">{{domain}}</a> reserves the right to adopt special rules, applicable
+                            for particular matches or events that may be contradictory to the
+                            Sportsbook Rules. Such special rules may be published in conjunction with
+                            published odds for particular regions, customers, matches and/or events.
+                          </p>
+                          <p>
+                            13.8. Should there be a break in communication after you place your bet
+                            and/or you receive no visual confirmation that a bet has been successfully
+                            placed, but the bet is correctly received on our servers, the bet shall be
+                            deemed as valid and accepted. You will be informed whether you have won or
+                            lost once communication is re-established and result determined. If the
+                            bet is not received correctly on our servers due to a communication error,
+                            it shall not be regarded as valid and accepted; and the failed bet shall
+                            be returned to your account balance.
+                          </p>
+                          <p>
+                            13.9. If you are unsatisfied with any matter relating to a bet with
+                            <a href="https://{{domain}}">{{domain}}</a>, please notify <a href="https://{{domain}}">{{domain}}</a> within 7 days in writing after
+                            the transaction has occurred. Notifications made after the 7 day period
+                            will be disregarded. In the unlikely event of a discrepancy between the
+                            result that appears on your device and the results in the transaction logs
+                            in our system, you agree that the results in our system's transaction logs
+                            verified by an officer of <a href="https://{{domain}}">{{domain}}</a> shall be final, conclusive and
+                            binding.
+                          </p>
+                          <p>
+                            13.10. You confirm and accept that you will be adequately informed of your
+                            possible exposure by the details provided on the online betting
+                            confirmation issued by us (if you are in any doubt about this, you should
+                            contact <a href="https://{{domain}}">{{domain}}</a> Customer Support).
+                          </p>
+                          <p>
+                            13.11. You may only place bets with a minimum stake of 0.01 mBTC in odds
+                            betting.
+                          </p>
+                          <p>
+                            13.12. Any bets Back and Lay on the same market within 2 minutes would be Voided.
+                          </p>
+                          <p>
+                            13.13. In the event where external sources present different statistics
+                            for a match, the prevailing source for statistics are the ones listed
+                            under our General Sports Betting Rules page.
+                          </p>
+                          <p>
+                            13.14. The maximum stake is dependent on the amount <a href="https://{{domain}}">{{domain}}</a> accepts
+                            at the time of your bet. If a bet amount is higher than the automatic
+                            acceptance level set out on the betslip offered on the Website (which is
+                            subject to change without prior notice), such a bet will be manually
+                            reviewed and approved or declined and we reserve the right to decline any
+                            bet or part thereof that is subject to such manual verification. Any bet
+                            that has not been manually approved before the game has started is voided
+                            in full. You have the right to void any bet that is subject to manual
+                            approval until such bet has been accepted by <a href="https://{{domain}}">{{domain}}</a>.
+                          </p>
+                          <p>13.15. The following relates to the Cash Out feature</p>
+                          <ul>
+                            <li>
+                              Cash Out is available on selected events, fixtures and markets both
+                              pre-match and In-Play, on single and multiple bets.
+                            </li>
+                            <li>
+                              A time delay in accepting a Cash Out request is in place. If a price
+                              changes or a market suspends then the Cash Out request may not be
+                              successful.
+                            </li>
+                            <li>
+                              If the Cash Out request is successful, this will be displayed and the
+                              bet will be settled immediately. The actual final result of the original
+                              bet will have no impact on the Cash Out amount.
+                            </li>
+                            <li>
+                              The Cash Out amount offered at any time is the total amount that will be
+                              returned to your account if the Cash Out request is successful.
+                            </li>
+                            <li>
+                              <a href="https://{{domain}}">{{domain}}</a> cannot guarantee that the Cash Out feature will be
+                              available on your bet selection. Where Cash Out is available pre-event
+                              and we do not cover or we stop covering the event In-Play, then Cash Out
+                              will be unavailable once the event starts or when our In-Play coverage
+                              stops. Cash Out will not be available when a market is suspended.
+                            </li>
+                            <li>
+                              <a href="https://{{domain}}">{{domain}}</a> reserves the right to remove all or part of the Cash Out
+                              feature for any customer or group of customers where it has reasonable
+                              grounds to believe that the customer or group of customers is misusing
+                              Cash Out by frequently using the feature to take advantage of pre-event
+                              price movements and closing their bets through the Cash Out feature
+                              before the event has started.
+                            </li>
+                            <li>
+                              <a href="https://{{domain}}">{{domain}}</a> will not be responsible if the Cash Out feature is not
+                              available for technical reasons and bets will stand as originally placed
+                              during any such period.
+                            </li>
+                            <li>
+                              <a href="https://{{domain}}">{{domain}}</a> reserves the right to accept or decline any bet/wager
+                              requested for any sport, competition, market or bet type that is
+                              included in the Cash Out feature.
+                            </li>
+                            <li>
+                              <a href="https://{{domain}}">{{domain}}</a> reserves the right to amend, suspend or remove the Cash Out
+                              feature (or any part of it) at any time for any event, fixture, market
+                              or customer.
+                            </li>
+                            <li>
+                              Any bets placed on such events, fixtures or markets will stand as
+                              originally placed.
+                            </li>
+                            <li>
+                              <a href="https://{{domain}}">{{domain}}</a> reserves the right to reverse the settlement of a Cash Out
+                              if the bet or a market is settled in error.
+                            </li>
+                            <li>
+                              Some <a href="https://{{domain}}">{{domain}}</a> promotion offers will not be applied where the Cash
+                              Out feature has been used to close all or part of a bet. See Terms and
+                              Conditions for each promotion offer for details.
+                            </li>
+                            <li>
+                              Pay-outs to customers in respect of cashed out transactions will occur
+                              at the time of cash out, however delays may occur from time to time in
+                              settling funds.
+                            </li>
+                          </ul>
+                          <p>&nbsp;</p>
+                          <h2>14. Sports Maximum Winnings</h2>
+                          <p>
+                            14.1. The maximum winnings in any 24-hour period for each sport are
+                            detailed below and are exclusive of stake. 
+                            <!-- The maximum winnings are quoted
+                            in Euros as a base currency to ensure consistency across the world, but
+                            currency equivalents apply for actual pay-outs. -->
+                             Where a multiple bet has
+                            been placed which involves events with different maximum winnings limits
+                            then the lowest limit will apply. All maximum winnings limits apply to all
+                            our customers, or group of customers, who have placed bets containing the
+                            same selections, at a range of prices, using different betting accounts.
+                            Should we have reason to believe that several bets have been placed this
+                            way, the total payment of all those bets combined will be limited to one
+                            single maximum winnings pay-out. &euro;2,000,000 - Soccer &euro;500,000 -
+                             Football, Baseball, Basketball, Cricket, Horse Racing, Ice
+                            Hockey, Tennis &euro;100,000 - All other Sports
+                          </p>
+                          <h2>15. Assignment</h2>
+                          <p>
+                            15.1. No assignment of Your obligations hereunder is allowed. You may not
+                            assign your obligations under this Agreement, as well as any rights or
+                            obligations hereunder to any other person or entity.
+                          </p>
+                          <h2>16. Live Chat</h2>
+                          <p>
+                            16.1. As part of your use of the Website we may provide you with a live
+                            chat facility, which is moderated by us and subject to controls. We
+                            reserve the right to review the chat and to keep a record of all
+                            statements made on the facility. Your use of the chat facility should be
+                            for recreational and socialising purposes.
+                          </p>
+                          <p>
+                            16.2.&nbsp;&nbsp;&nbsp;&nbsp; We have the right to remove the chat room
+                            functionality or immediately terminate your Member Account and refund your
+                            account balance if you:&nbsp;<br />(a)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; make any statements that are sexually
+                            explicit or grossly offensive, including expressions of bigotry, racism,
+                            hatred or profanity;&nbsp;<br />(b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            make statements that are abusive, defamatory or harassing or insulting;<br />(c)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; use the chat facility to advertise,
+                            promote or otherwise relate to any other online entities;<br />(d)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            make statements about <a href="https://{{domain}}">{{domain}}</a>, or any other Internet site(s)
+                            connected to the Website that are untrue and/or malicious and/or damaging
+                            to <a href="https://{{domain}}">{{domain}}</a>;<br />(e) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; user the
+                            chat facility to collude, engage in unlawful conduct or encourage conduct
+                            we deem seriously inappropriate. Any suspicious chats will be reported to
+                            the competent authority.
+                          </p>
+                          <p>
+                            16.3. Live Chat is used as a form of communication between us and you and
+                            should not be copied or shared with any forums or third parties.
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2>17. Limitation of Liability</h2>
+                          <p>
+                            17.1. You enter the Website and participate in the Games at your own risk.
+                            The Websites and the Games are provided without any warranty whatsoever,
+                            whether express or implied.
+                          </p>
+                          <p>
+                            17.2.&nbsp;&nbsp;&nbsp; You accept that we do not warrant that the
+                            software, Games and the Website are<br />(a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            fit for their purpose; or<br />(b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            free from errors; or<br />(c)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            will be accessible without interruptions;
+                          </p>
+                          <p>
+                            17.3. Save for situations expressly stipulated in these Terms and
+                            Conditions, we shall not be liable for any loss, costs, expenses or
+                            damages, whether direct, indirect, special, consequential, incidental or
+                            otherwise, arising in relation to your use of the Websites or your
+                            participation in the Games.
+                          </p>
+                          <p>
+                            17.4. You understand and acknowledge that, if there is a malfunction in a
+                            Game or its interoperability, any bets made during such malfunctioning
+                            shall be void. Funds obtained from a malfunctioning Game shall be
+                            considered void, as well as any subsequent game rounds with said funds,
+                            regardless of what Games are played using such funds.
+                          </p>
+                          <p>
+                            17.5. <a href="https://{{domain}}">{{domain}}</a> reserves the right to declare a wager void, partially
+                            or in full, if <a href="https://{{domain}}">{{domain}}</a> deems it obvious that there was an error,
+                            mistake, misprint or technical error on the pay-table, odds or software.
+                            We shall not be liable to you whatsoever for any unrealised winnings as a
+                            result of voiding a wager in this scenario. Refunds are given solely at
+                            the discretion of the Sportsbet management.
+                          </p>
+                          <p>
+                            17.6. You hereby agree to fully hold harmless us, our directors,
+                            employees, partners, and service providers for any cost, expense, loss,
+                            damages, claims and liabilities howsoever caused that may arise in
+                            relation to your use of the Website or participation in the Games.
+                          </p>
+                          <p>
+                            17.7. The Company shall accept no liability for any damages or losses
+                            which are deemed or alleged to have arisen out of or in connection with
+                            the Website or its content; including without limitation, delays or
+                            interruptions in operation or transmission, loss or corruption of data,
+                            communication or lines failure, any person's misuse of the site or its
+                            content or any errors or omissions in content.
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2>18. Cancellations, Suspensions and Closure&nbsp;</h2>
+                          <p>
+                            18.1.&nbsp;&nbsp;&nbsp; Without restricting our ability to rely on other
+                            remedies that may be available to us, we may suspend and/or terminate your
+                            account, cancel any outstanding bets and/or confiscate any or all funds in
+                            your account at our absolute discretion if:&nbsp;<br />(i) we suspect that
+                            you are engaging in money laundering, illegal or other fraudulent activity
+                            while using our Website; or<br />(ii) we suspect that you are depositing
+                            funds which have been obtained unlawfully or in a clearly and seriously
+                            debase manner; or<br />(iii) we obtain evidence that you are part of a
+                            betting syndicate where several parties are involved in placing bets in
+                            order to evade the Sportsbook Rules, these Terms and Conditions or any
+                            other rules of <a href="https://{{domain}}">{{domain}}</a>; or<br />(iv) we determine that you are using
+                            any device, robot, spider, software, routine or other method (or anything
+                            in the nature of the foregoing) to interfere or attempt to interfere with
+                            the normal proper functioning of our services, any relevant device(s),
+                            software, the Website, the casino games, the sportsbook and betting
+                            information or any transactions offered on the Website and in particular
+                            will not employ or make use of any artificial intelligence or other system
+                            (including machines, computers, software or any other automated systems)
+                            designed specifically to defeat the <a href="https://{{domain}}">{{domain}}</a> systems; or<br />(v) we
+                            determine that you are colluding or attempt to collude with other players
+                            in order to defraud <a href="https://{{domain}}">{{domain}}</a> or its customers; or<br />(vi) we
+                            determine that you are breaching any term of these Terms and
+                            Conditions;&nbsp;<br />(vii) we determine that you are acting in a manner
+                            that is detrimental to the conduct of our business; or<br />(viii) we
+                            determine that you are using <a href="https://{{domain}}">{{domain}}</a> in a manner that gives you an
+                            unfair advantage, for example basing bets on insight or professional
+                            knowledge about a sport gained via personal involvement or participation
+                            in the particular field of sport; or<br />(ix) we suspect that you have
+                            registered, manage or direct your betting activity on multiple user
+                            accounts in an attempt to hide your betting activity, bypass our set
+                            trading limits or violate any promotion Terms and Conditions; or<br />(x)
+                            we suspect that your account is being used for the benefit of a third
+                            party; or<br />(xi) we obtain evidence that by registering new accounts
+                            you have violated <a href="https://{{domain}}">{{domain}}</a> direct order not to continue your betting
+                            activity on our site. <a href="https://{{domain}}">{{domain}}</a> has the right to confiscate any
+                            deposits on accounts registered by users previously found in violation or
+                            disregard of previous warnings of the above terms and conditions.
+                          </p>
+                          <p>
+                            18.2. You acknowledge that <a href="https://{{domain}}">{{domain}}</a> shall be the final decision-maker
+                            as to whether you have violated rules, terms or conditions in a manner
+                            that results in suspension or permanent barring from participation in our
+                            Websites.
+                          </p>
+                          <p>
+                            18.3 Irrespective of whether we suspend and/or terminate an account and
+                            notwithstanding any other provisions in these Terms and Conditions, we may
+                            decide to cancel and void any outstanding bets at our absolute discretion
+                            where (i) there is a technological failure, or (ii) you or another
+                            customer with whom you have bet have breached any of these Terms and
+                            Conditions.
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2>19. Token Exchange&nbsp;&nbsp;</h2>
+                          <p>
+                            19.1. The company does not allow exchange between fiat and cryptocurrency
+                            balances.
+                          </p>
+                          <p>
+                            19.2 Users can display their crypto currency in a form of fiat tokens
+                            associated with local currency.
+                          </p>
+                          <p>
+                            19.3 In order to be able to exchange crypto currency, bitcoin deposit has
+                            to be done on user account.
+                          </p>
+                          <p>
+                            19.4. Please note, that transferred funds go to token wallet. Token funds
+                            cannot be withdrawn via fiat payment instruments e.g. Visa card. In order
+                            to withdraw the exchanged funds and winnings produced using token funds,
+                            you will need to convert it back to bitcoin and proceed with bitcoin
+                            withdraw.
+                          </p>
+                          <p>19.5. Minimum amount to be tokenized is 1 mBTC.</p>
+                          <p>19.6. Exchange method transfer fee is 0.5%.</p>
+                          <p>&nbsp;</p>
+                          <h2>20. Force Majeure</h2>
+                          <p>
+                            20.1. Any failure or delay in performance by <a href="https://{{domain}}">{{domain}}</a> in respect of
+                            its obligations of service shall not be deemed a breach of its obligations
+                            to you as customer if such a failure or delay is deemed by <a href="https://{{domain}}">{{domain}}</a> to
+                            be caused by force majeure, which shall include but not be limited to
+                            flood, fire, earthquake, or any other element of nature, act of war, riots
+                            or terrorist attack, public utility electrical failure, lockouts and
+                            strikes, delays or disruptions of the Internet and telecommunications
+                            networks caused by human or natural factors, or any other such event
+                            beyond the reasonable control of <a href="https://{{domain}}">{{domain}}</a>. <a href="https://{{domain}}">{{domain}}</a> shall not be
+                            liable for any consequences arising out of any such force majeure events.
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2>21. Applicable law and jurisdiction</h2>
+                          <p>
+                            21.1. These Terms and Conditions shall be governed by the Laws of Curacao.
+                            Any disputes arising out of these Terms and Conditions shall be determined
+                            by courts of law in Curacao.
+                          </p>
+                          <p>
+                            21.2. You acknowledge that, unless stated otherwise, the Games are
+                            organised in Curacao and your participation in these Games takes place
+                            within the aforementioned territory. Any contractual relationships between
+                            you and <a href="https://{{domain}}">{{domain}}</a> shall be deemed to have been entered into and
+                            performed by the parties in Curacao, at the registered address of
+                            <a href="https://{{domain}}">{{domain}}</a>.
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2 id="Fairness_and_RNG_Testing_Methods">
+                            22. Fairness and RNG Testing Methods
+                          </h2>
+                          <p>
+                            22.1. <a href="https://{{domain}}">{{domain}}</a> operates under a Cura&ccedil;ao Gaming licence issued
+                            by the Government of the Netherlands Antilles. Our online products are all
+                            supplied by companies with approved e-Gaming Cura&ccedil;ao licensing and
+                            status. All products operated by <a href="https://{{domain}}">{{domain}}</a> go through a vigorous
+                            testing process before launch, including internal testing and External
+                            Compliance Testing (ECT) by our own teams. Conducted ECT covers elements
+                            including but not limited to functionality, display, transaction, rules
+                            and mathematics ensuring product compliance to regulatory requirements.
+                            Additional internal compliance is also conducted to ensure other
+                            functionality around integration testing and user acceptance testing,
+                            further guaranteeing integrated games perform up to the expected user
+                            experience standard. Our games all offer unpredictable game play and
+                            possibilities of large wins and losses, but the average long term return
+                            of a game can be calculated using the Theoretical Return to Player (RTP)
+                            value using either a theoretical or simulated approach adjusted according
+                            to the game type. The Theoretical RTP value is as suggested - a
+                            theoretical calculation disclosing expected wage percentage player return
+                            after a certain amount of plays. Visit the information section of the game
+                            to find more information about RTP of specific games.
+                          </p>
+                          <p>&nbsp;</p>
+                          <h2 id="Complaints">23. Complaints</h2>
+                          <p>
+                            23.1. If you have a complaint to make regarding our services, you may
+                            contact our customer support via Live Chat or by email the address
+                            provided on <a href="https://{{domain}}">https://www.{{domain}}</a>
+                          </p>
+                    </div>
+                    <footer><a class="btn-send" (click)="hideOverlayInfo('#footer-term-Condition');">CLOSE</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-fairness-RNG" class="overlay" style="display: none;">
+            <div class="frame-wrap">
+                <div class="news-wrap news-wrap-frame">
+                    <div class="side-head">
+                        <h3>Fairness and RNG Testing Methods</h3>
+                    </div>
+                    <div class="announce-wrap">
+                        <h3>Fairness and RNG Testing Methods</h3>
+                        <p>{{domain}} operates under a Curaçao Gaming licence issued by the Government of the
+                            Netherlands Antilles.</p>
+
+                        <p>Our online products are all supplied by companies with approved
+                            e-Gaming Curaçao licensing and status. All products operated by {{domain}} go through
+                            a vigorous testing process before launch, including internal testing and External
+                            Compliance Testing (ECT) by our own teams.</p>
+                        <p>Conducted ECT covers elements including but
+                            not limited to functionality, display, transaction, rules and mathematics ensuring
+                            product compliance to regulatory requirements. Additional internal compliance is also
+                            conducted to ensure other functionality around integration testing and user acceptance
+                            testing, further guaranteeing integrated games perform up to the expected user
+                            experience standard.</p>
+                        <p>Our games all offer unpredictable game play and possibilities of
+                            large wins and losses, but the average long term return of a game can be calculated
+                            using the Theoretical Return to Player (RTP) value using either a theoretical or
+                            simulated approach adjusted according to the game type. The Theoretical RTP value is as
+                            suggested - a theoretical calculation disclosing expected wage percentage player return
+                            after a certain amount of plays. Visit the information section of the game to find more
+                            information about RTP of specific games.
+                        </p>
+                    </div>
+                    <footer><a class="btn-send" (click)="hideOverlayInfo('#footer-fairness-RNG');">CLOSE</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-KYC" class="overlay" style="display: none;">
+            <div class="frame-wrap">
+                <div class="news-wrap news-wrap-frame">
+                    <div class="side-head">
+                        <h3>KYC</h3>
+                    </div>
+                    <div class="announce-wrap">
+                        <h3>KYC</h3>
+                        <p>1 )You hereby acknowledge and accept that if we deem necessary, we are able to collect
+                            and
+                            otherwise use your personal data in order to allow you access and use of the Websites
+                            and in order to allow you to participate in Games.
+                        </p>
+
+                        <p>2 )We hereby acknowledge that in collecting your personal details as stated in the
+                            previous
+                            provision, we are bound by the Data Protection Act. We will protect your personal
+                            information and respect your privacy in accordance with best business practices and
+                            applicable laws.
+                        </p>
+
+                        <p>3 )We will use your personal data to allow you to participate in the Games and to carry
+                            out
+                            operations relevant to your participation in the Games. By opening your Member Account,
+                            you acknowledge and accept that employees of {{domain}} shall have access to your
+                            personal data for the purpose of executing their duties and providing you with the best
+                            possible assistance and service. We may also use your personal data to inform you of
+                            changes, new services and promotions. You may opt out of receiving marketing emails at
+                            any time.
+                        </p>
+
+                        <p>4 )Your personal data will not be disclosed to third parties, unless such a disclosure is
+                            either required by law or is necessary for the use of our service, in which case, you
+                            are deemed to have consented to such disclosures to a third party.
+                        </p>
+
+                        <p>5 )We shall keep all information provided as personal data indefinitely, unless we elect
+                            to
+                            destroy such information after the expiration of application data-retention periods or
+                            where we are required to destroy such information by law.
+                        </p>
+                        <p>6 )You accept that our website uses cookies and we therefore collect certain basic
+                            information transmitted to our server from your browser.
+                        </p>
+
+                    </div>
+                    <footer><a class="btn-send" (click)="hideOverlayInfo('#footer-KYC');">CLOSE</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-Responsible-Gaming" class="overlay" style="display: none;">
+            <div class="frame-wrap">
+                <div class="news-wrap news-wrap-frame">
+                    <div class="side-head">
+                        <h3>Responsible-Gaming</h3>
+                    </div>
+                    <div class="announce-wrap">
+                        <h3>Responsible Gaming</h3>
+
+                        <p>At <a href="https://{{domain}}">{{domain}}</a>, along side, our sister platforms;
+                            we offer a platform and
+                            services that enable our clients to enjoy gaming and betting. We aim to provide you with
+                            a safe, secure,
+                            regulated environment which will give you a pleasant and rewarding experience. We
+                            encourage our clients to use
+                            our services responsibly and in a reasonable manner.</p>
+                        <p>Gambling of all varieties has been a popular form of entertainment for many years. Here
+                            at <a href="https://{{domain}}">{{domain}}</a>, we encourage it to be exactly
+                            that, fun. We also encourage
+                            our customers, while having fun, not to allow their gambling affect their usual daily
+                            routine or time spent with
+                            family and friends. Making sure that the money they spend is set aside for leisure time
+                            and not for other
+                            purposes. It is very important not to rely on paying for life's necessities with
+                            possible gains from gambling as
+                            this is not guaranteed in any way.</p>
+                        <p>While most customers do gamble in this manner, we understand that a small minority of
+                            customers can develop
+                            problems with their gambling.</p>
+                        <p>At <a href="https://{{domain}}">{{domain}}</a>, our customer's wellbeing is of
+                            utmost importance, we take
+                            our role within responsible gambling very seriously and recommend that you:</p>
+                        <ul>
+                            <li>Treat your betting and gaming as a form of entertainment and only use money that you
+                                have set aside for your
+                                entertainment.</li>
+                            <li>Do not bet or wager amounts larger than you are comfortable with.</li>
+                            <li>Do not bet or wager with money you cannot afford to lose.</li>
+                            <li>Do not chase your losses.</li>
+                            <li>Do not let your betting and or gaming take up time that you would usually spend on
+                                other activities.</li>
+                        </ul>
+
+                        <p>In addition, you can contact our friendly <a
+                                href="https://{{domain}}">{{domain}}</a> support agents
+                            at&nbsp;<a href=" https://{{domain}}">{{domain}}</a>compliance@<a
+                                href="https://{{domain}}">{{domain}}</a>&nbsp;if you would like to discuss our
+                            self-exclusion
+                            process. Sometimes a short break away can be really useful in assisting you with
+                            gathering your thoughts and
+                            stopping you from making any rash wagering decision that you wouldn't usually make.</p>
+                        <p>On request, we will place your account on the minimum of a 24-hour cooling off period.
+                            This will be followed by
+                            one of our support agents informing you of the voluntary 1-week, 1-month, 6-months or
+                            permanent self-exclusions
+                            available.</p>
+                        <p>Please take note; accounts closed under our self-exclusion policy cannot be reversed or
+                            reopened for any reason.
+                            However, once your self-exclusion has expired, we will email you to let you know your
+                            account is active again.
+                            Permanent self-exclusion will be remain in place indefinitely.</p>
+                        <p><span>Underage</span></p>
+                        <p>If you wish to gamble with us at <a href="https://{{domain}}">{{domain}}</a>, you
+                            must be over 18 years of
+                            age or the legal minimum age for gambling in the jurisdiction you remain under the laws
+                            applicable to you, if
+                            younger.</p>
+                        <p>We recommended if you have any minors living in your household, to review the following
+                            parental control software
+                            links, which could prove a useful tool, regarding control and restrictions of the
+                            content accessible on your
+                            devices.</p>
+                    </div>
+                    <footer><a class="btn-send" (click)="hideOverlayInfo('#footer-Responsible-Gaming');">CLOSE</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-AML" class="overlay" style="display: none;">
+            <div class="frame-wrap">
+                <div class="news-wrap news-wrap-frame">
+                    <div class="side-head">
+                        <h3>AML</h3>
+                    </div>
+                    <div class="announce-wrap">
+                        <h2>AML Policy</h2>
+                        <p>We are committed to preventing our systems from being used for Money Laundering,
+                            Terrorist Financing or other crime. This includes actioning the following steps:</p>
+
+                        <h2>GENERAL PROVISIONS</h2>
+                        <p>We are fully committed to applying measures to prevent Money Laundering and Combatting
+                            Terrorism Financing. We are also committed to our social duty in preventing our systems
+                            from being used as a tool for crime.</p>
+                        <p>We will endeavour to stay updated with developments in prevention measures in order to
+                            protect the organisation, its operations and reputation.</p>
+                        <p>Our policies and procedures were built and continue to be updated to observe the laws
+                            relevant to our operations.</p>
+
+                        <h2>LAWS AND REGULATIONS</h2>
+                        <p>The Curaçao Gaming Control Board is the designated supervisory Authority for our
+                            service.</p>
+                        <p>We are required to comply with all applicable laws and regulations within the
+                            jurisdiction of Curaçao, including National Ordinances covering the criminal code,
+                            identification for services, identification when rendering services, and the reporting
+                            of unusual transactions.</p>
+                        <p>We are required as a service provider of online games of chance to have in place adequate
+                            practices and procedures to prevent our systems from activity facilitating money
+                            laundering and the funding of terrorist and criminal activities.</p>
+
+                        <h2>CUSTOMER DUE DILIGENCE</h2>
+                        <p>We will apply appropriate customer due diligence measures required by law, including
+                            utilising identifiers.</p>
+                        <p>We will apply due diligence checks as part of its customer registration procedures,
+                            verifying age, name, residential address, nationality, PEP and a sanctions check.</p>
+                        <p>At any time a customer&rsquo;s risk profile changes based upon any number of &lsquo;red
+                            flags&rsquo;, we will conduct enhanced due diligence, including verification based on
+                            personal documents, and publicly held data, privilege information from other operators
+                            and sources, financial or corporate data, and third-party data providers.</p>
+                        <p>We have a duty to monitor all customer relationships in accordance with industry best
+                            practice, international recommendations and guidelines.</p>
+                        <p>Any suspicious transactions or circumstances potentially related to Money Laundering and
+                            Terrorist Financing will be reported to the relevant law enforcement authority.</p>
+                        <p>Where due diligence checks cannot be completed, we will suspend the business relationship
+                            until such time as all checks have been satisfactorily completed.</p>
+
+                        <h2>CRYPTOCURRENCY TRANSACTIONS</h2>
+                        <p>The company is entitled to perform additional background and security checks for the
+                            customers wishing to deposit or withdraw using cryptocurrencies. In case of suspicion,
+                            the company has the right to suspend the customer account and request additional Due
+                            Diligence documentation from the customer.</p>
+                        <p>If we are not able to be assured of either the identity of the customer or the source of
+                            funding, the matter can be referred to the management board and service provider for
+                            review and final decision.</p>
+                        <p>If the decision is to terminate the relationship any retained customer funds will be held
+                            in a seized funds account and declared as part of any suspicious activity report made to
+                            law enforcement.</p>
+                            
+                        <h2>REPORTING SUSPICIONS</h2>
+                        <p>As a Curacao eGaming IP licensee, we are obliged to report any unusual or suspicious
+                            transactions, in accordance with the National Ordinance and as a registered body of the
+                            Department of the Financial Intelligence Unit (FIU)</p>
+                        <p>A customer being identified as being on a sanctions list, linked to Money Laundering, the
+                            Financing of Terrorism, or other criminal activity, may warrant the submission of a
+                            formal suspicious activity report to law enforcement.</p>
+                    </div>
+                    <footer><a class="btn-send" (click)="hideOverlayInfo('#footer-AML');">CLOSE</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-Self-Exclusion" class="overlay" style="display: none;">
+            <div class="frame-wrap">
+                <div class="news-wrap news-wrap-frame">
+                    <div class="side-head">
+                        <h3>Self-Exclusion</h3>
+                    </div>
+                    <div class="announce-wrap">
+                        <h2>Self-Exclusion Terms and Conditions</h2>
+                        <p>By requesting one of the <a href="https://{{domain}}">{{domain}}</a> self-exclusion
+                            time periods on offer
+                            you agree to the following terms and conditions, which will be effective from the minute
+                            you receive a
+                            confirmation email of your chosen self-exclusion, this email will be sent to the email
+                            address used to register
+                            your account only and will display the date of self-exclusion completion.</p>
+                        <p>Self-exclusion requests must be emailed from the account's registered email address to
+                            our customer service
+                            department at&nbsp;<a href="#"> _______</a>
+                        </p>
+                        <p>Requests made via our Chat function will not be actioned. However, a customer support
+                            agent will direct you to
+                            our customer support email service.</p>
+                        <p><br /></p>
+                        <p>On receipt, of an email request for account closure, the requested account and any linked
+                            accounts of <a href="https://{{domain}}">{{domain}}</a> will be placed on our
+                            first stage, 24-hr cooling off period
+                            which will disable your account or accounts, allowing no gambling activity. The
+                            following associations determine
+                            linked accounts: accounts held within the same household, shared devices, email
+                            addresses, payment addresses, IP
+                            addresses and environments where computers are shared such as universities,
+                            fraternities, public libraries,
+                            workplace etc.</p>
+                        <p>Once the first stage 24hr cooling off period has passed; while your account or accounts
+                            remain closed, a customer
+                            support agent will inform you of the 1-week, 1-month, 6-months and permanent
+                            self-exclusions available. There
+                            will be no variation of these time periods.</p>
+                        <p>To proceed with this process, we will require an email response. If we do not receive a
+                            response within a further
+                            24-hrs, your account will be reopened and confirmed by email.</p>
+                        <p>If after reviewing our self-exclusion options you decide you would like to proceed with a
+                            permanent
+                            self-exclusion, please, inform us of this in your response.</p>
+                        <p>On occasion, we might decide to place an account on a short self-exclusion period if we
+                            believe it to be needed
+                            and or beneficial to the customer. This will be communicated by email; the above terms
+                            and conditions will
+                            apply.</p>
+                        <p>When you request, or we deem it necessary to add a <a
+                                href="https://{{domain}}">{{domain}}</a>; all
+                            remaining funds left in your account will be returned to you manually. You are not
+                            permitted to leave any
+                            balance in your account during a self-exclusion time period. You will not be able to
+                            access your account to
+                            withdraw any funds during your requested self-exclusion.</p>
+                        <p><a href="https://{{domain}}">{{domain}}</a> will review any active bets within a <a
+                                href="https://{{domain}}">{{domain}}</a> account affected by self-exclusion at
+                            our own
+                            discretion.</p>
+                        <p>Once a self-exclusion is applied to your account, it will stay in place until the request
+                            time has finished, it
+                            will not be reversed or decreased for any reason. Permanent self-exclusions will remain
+                            closed
+                            indefinitely.</p>
+                        <p><a href="https://{{domain}}">{{domain}}</a>will use all reasonable endeavours to
+                            ensure compliance with our
+                            responsible gambling self-exclusion policy. However, you accept that we will not be held
+                            responsible or liable
+                            if you attempt to open any new <a href="https://{{domain}}">{{domain}}</a>
+                            accounts or indeed succeed. In
+                            addition, <a href="https://{{domain}}">{{domain}}</a>will not be held liable or
+                            accountable if you
+                            continue to deposit and wager using additional accounts which have previously not been
+                            disclosed. Any future
+                            wagers, Bonus funds and entries in any promotions during a requested self-exclusion time
+                            will be forfeited,
+                            resulting in no return of stakes or payment of winnings. We will not be able to
+                            reinstate these if the account
+                            is reopened after the self-exclusion period.</p>
+                        <p>You acknowledge that:</p>
+                        <ul>
+                            <li>You should not attempt to, deposit or place any wager on any of your <a
+                                    href="https://{{domain}}">{{domain}}</a>accounts that you have requested
+                                to be excluded from
+                                during your selected self-exclusion.</li>
+                            <li>You should not attempt or proceed to open any new <a
+                                    href="https://{{domain}}">{{domain}}</a> accounts
+                                during your self-exclusion period, or indefinitely if a permanent self-exclusion has
+                                been
+                                selected.</li>
+                            <li>If you succeed in opening any new <a
+                                    href="https://{{domain}}">{{domain}}</a>accounts during a
+                                self-exclusion period, we will endeavour to close any and all such accounts at our
+                                earliest
+                                detection.</li>
+                            <li><a href="https://{{domain}}">{{domain}}</a> responsibility is only to take
+                                reasonable steps to prevent
+                                you from gambling on any of our products. It is also the customer&rsquo;s
+                                responsibility to refrain from
+                                breaching these agreed terms.</li>
+                            <li>This is a voluntary request made by you. If you proceed to breach this agreement, <a
+                                    href="https://{{domain}}">{{domain}}</a>or any of its employees are not
+                                held accountable or liable
+                                for any losses you may suffer. Any losses acquired during your self-exclusion period
+                                will not be
+                                refunded.</li>
+                        </ul>
+                        <p>This is a voluntary agreement, therefore if you proceed to breach the terms within, in
+                            the first instance only,
+                            any wagering that has taken place will stand, losses will not be refunded. However,
+                            multiple breaches of the
+                            terms within, all wagering will be void and dealt with at <a
+                                href="https://{{domain}}">{{domain}}</a>
+                            discretion. Also, if we have suspicions or further investigation provides evidence that
+                            you have actively
+                            attempted to disguise the source of your account or accounts; which affects our ability
+                            to block your account or
+                            accounts promptly, this will also be dealt with at <a
+                                href="https://{{domain}}">{{domain}}</a>
+                            discretion.</p>
+                        <p>Once your selected self-exclusion has come to an end, your account will automatically be
+                            reopened. However, you
+                            will receive an email confirmation of this information which will be sent to your
+                            registered email address.</p>
+                    </div>
+                    <footer><a class="btn-send" (click)="hideOverlayInfo('#footer-Self-Exclusion');">CLOSE</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-Dispute-Resolution" class="overlay" style="display: none;">
+            <div class="frame-wrap">
+                <div class="news-wrap news-wrap-frame">
+                    <div class="side-head">
+                        <h3>Dispute-Resolution</h3>
+                    </div>
+                    <div class="announce-wrap">
+                        <h3>Dispute Resolution</h3>
+                        <p>If you have a complaint to make regarding our services, you may contact our customer
+                            support via Live Chat or by email the address provided on https://www.{{domain}}
+                        </p>
+
+                        <p>If, for some reason, you are not satisfied with the resolution of your complaint by
+                            {{domain}}, you may report a complaint to the Curacao eGaming Commission;
+                            Address:________________________ Telephone number: ____
+                            E-mail: ____________________2 )We hereby acknowledge that in collecting your personal
+                            details as stated in the
+                            previous
+                            provision, we are bound by the Data Protection Act. We will protect your personal
+                            information and respect your privacy in accordance with best business practices and
+                            applicable laws.
+                        </p>
+
+                        <p>terms and condition Responsible Gaming Self Exclusion Dispute Resolution Fairness and RNG
+                            Testing AML Policy</p>
+                    </div>
+                    <footer><a class="btn-send" (click)="hideOverlayInfo('#footer-Dispute-Resolution');">CLOSE</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-Skyaff" class="overlay" style="display: none;">
+          <div class="frame-wrap">
+      
+              <!-- policy link content -->
+              <div class="news-wrap news-wrap-frame">
+                  <div class="side-head" style="color:#ffb80c">
+                      <h3>Welcome to {{domain}} Affiliates!</h3>
+                  </div>
+                  <div class="announce-wrap">
+                      <ul class="affiliates-advantages">
+                          <li>
+                              <div class="inner">
+                                  <span class="icon">
+                                      <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" class=""
+                                          viewBox="0 0 44 44">
+                                          <title>011_friend_add_like_subscribe_user_human_avatar</title>
+                                          <path fill="#ffb80c"
+                                              d="M19.014 26.384c.8 0 1.2-.2 1.2-.2.4-.2.8 0 .9.4.2.4 0 .8-.4 1-.1 0-.7.3-1.7.3-1.1 0-1.7-.3-1.7-.3-.4-.2-.5-.6-.4-1 .2-.4.6-.5 1-.4 0 0 .4.2 1.1.2zm-6.1-8.3c0-.4.3-.7.7-.7h3.5c.4 0 .7.3.7.7 0 .4-.3.7-.7.7h-1v.1c0 .4-.3.7-.7.7h-.1c-.4 0-.7-.3-.7-.7v-.1h-1c-.4 0-.7-.3-.7-.7zm9.8 1.6h-.1c-.4 0-.7-.3-.7-.7v-.1h-.9c-.4 0-.7-.3-.7-.7 0-.4.3-.7.7-.7h3.5c.4 0 .7.3.7.7 0 .4-.3.7-.7.7h-1.1v.1c.1.4-.3.7-.7.7zm7.2-4.2c-.1.1-.1.2-.1.3 0 .1 0 .2-.1.2.3.4.6.9.6 1.5 0 .7-.1 4.1-2.1 5.2-.4.2-.8.1-1-.3-.2-.4-.1-.8.3-1 .9-.5 1.4-2.4 1.4-3.9 0-.4-.4-.7-.7-1l-.2-.2c-.2-.2-.2-.4-.2-.7.1-.4.3-.6.6-.8.1 0 .2-.1.3-.1 0-.3-.1-.5-.3-.7-.2-.2-.6-.2-.9-.1-1.7.6-3.2.3-4.7 0-2.1-.4-4-.7-6.5 1.2-.2.1-.4.2-.6.1-.2 0-.4-.2-.5-.3-.5-.9-.8-2.3-.3-3.6-.3.2-.7.4-1 .7-.5.3-1 .7-1.6 1-.4.2-.7.3-1 .5-1 .5-1.2.6-1.2 1l.5 1c.1.3 0 .6-.2.8l-.2.2c-.3.3-.7.6-.7 1 0 1.3.4 3.4 1.3 3.9.2.1.4.4.4.6.1 2.4 2 6 2.3 6.7 2.8 2.6 4.2 3 4.6 3 .2-.1.7-.2 1.2-.2.4 0 .8.1 1.2.2.4.1.6.6.4.9-.1.4-.6.6-.9.4h-.8c-.4 0-.6.1-.7.2-.1 0-.2.1-.4.1-1.2 0-2.9-1.1-4.4-2.3-.1.8-.3 1.5-.6 1.9-.1.1-.1.2-.2.3.5.9 2.9 2.8 6.2 2.8.5 0 .9 0 1.4-.1.4-.1.8.2.8.6.1.4-.2.8-.6.8-.5.1-1.1.1-1.6.1-3.7 0-6.6-2.1-7.5-3.5-3.7.7-6.6 1.9-8.8 3.8-.3.2-.4.6-.3.9.1.4.4.6.7.7 3.3.7 8.7 1.5 15.8 1.5 1.7 0 3.3 0 5-.1.4 0 .7.3.8.7 0 .4-.3.8-.7.8-1.7.1-3.4.1-5.1.1-7.3 0-12.8-.8-16.1-1.5-.9-.2-1.6-.9-1.8-1.8-.2-.9.1-1.8.8-2.4 2.4-2.1 5.7-3.4 9.7-4.1.3-.1 1-1.4.5-3-.3-.6-2.2-4.3-2.5-7-1.7-1.2-1.8-4.3-1.8-5 0-.9.5-1.5.9-1.9-.2-.4-.3-.6-.5-.8-.2-.2-.4-.5-.5-.9-1-4.3.8-7.6 5.5-9.8.1-.3.1-1.1.2-1.7.1-1.3.1-2.1.8-2.4.2-.1.6-.2 1 .2 1.5 1.5 5.3 2.4 7.5 3 .7.2 1.3.3 1.7.5 4.2 1.5 6.5 5.2 6.1 9.5-.1 1.3-.4 1.9-.6 2.3zm-6-10.3c-.3-.1-.9-.3-1.5-.4-2.2-.6-5.4-1.4-7.4-2.8v.6c-.1 1.4-.1 2.5-.9 2.9-4 1.8-5.6 4.2-5 7.6.4-.3.9-.6 1.4-.8.3-.1.6-.3 1-.4.5-.3.9-.6 1.4-.9 1-.7 2-1.4 3.5-1.5.3 0 .6.1.8.4.1.3 0 .6-.2.9-1 .8-1.1 2-.9 2.9 2.7-1.7 4.9-1.3 6.8-.9 1.3.2 2.6.5 3.9 0 .7-.3 1.6-.1 2.2.3.5-4.4-2.3-7-5.1-7.9z">
+                                          </path>
+                                          <path fill="#000"
+                                              d="M31.914 43.284c-5.7 0-10.4-4.7-10.4-10.4s4.7-10.4 10.4-10.4 10.4 4.7 10.4 10.4-4.7 10.4-10.4 10.4zm0-18.8c-4.6 0-8.4 3.8-8.4 8.4 0 4.6 3.8 8.4 8.4 8.4 4.6 0 8.4-3.8 8.4-8.4 0-4.6-3.8-8.4-8.4-8.4z">
+                                          </path>
+                                          <path fill="#12242E"
+                                              d="M35.914 33.284h-3.6v3.6c0 .4-.3.7-.7.7-.4 0-.7-.3-.7-.7v-3.6h-3.6c-.4 0-.7-.3-.7-.7s.3-.7.7-.7h3.6v-3.6c0-.4.3-.7.7-.7.4 0 .7.3.7.7v3.6h3.6c.4 0 .7.3.7.7s-.3.7-.7.7z">
+                                          </path>
+                                      </svg>
+                                  </span>
+                                  <p>
+                                      <span>
+                                          <a target="_blank" href="{{affiliteSignUPLink}}">Join</a> our affiliate program!
+                                      </span>
+                                  </p>
+                              </div>
+                          </li>
+                          <li>
+                              <div class="inner">
+                                  <span class="icon">
+                                      <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" class=""
+                                          viewBox="0 0 49 49">
+                                          <title>011_ point_pointing_finger_hand_click_touch_2</title>
+                                          <path fill="#000"
+                                              d="M39.087 41.195c-.1.3-.1.5-.2.7-.4 1.1-.8 2-1 2.4-.1 2.5-2.1 4.5-4.5 4.5h-7c-2.5 0-4.5-2.1-4.5-4.7v-2c-1.3-1.3-2.1-2.7-3-4.2-1.1-1.9-2.3-4-4.8-6.6-.3-.3-.5-.8-.5-1.4 0-.5.2-1 .5-1.4 1.3-1.4 3.3-1.6 4.9-.5.7.5 1.4 1 1.9 1.4.1-3 .3-8.6.5-12.2.1-1.5 1.2-2.6 2.6-2.6 1.5 0 2.6 1.2 2.6 2.8v5.1h.9c1.4 0 2.7.9 3.2 2.3h1.1c1.4 0 2.7.9 3.2 2.3h.5c1.7 0 3 1.3 3.4 3.4.4 2 .6 4.3.6 8 0 .9-.2 1.8-.4 2.7zm-1.6-10.5c-.3-1.4-.9-2.2-1.9-2.2h-.3v3.8c0 .4-.3.8-.8.8-.4 0-.8-.4-.8-.8v-4c0-1.1-.9-2-1.9-2h-.9v5.4c0 .4-.3.8-.8.8s-.8-.4-.8-.8v-5.6c0-1.1-.9-2-1.9-2h-.8v7.1c0 .4-.3.8-.8.8-.4 0-.8-.4-.8-.8v-13.9c0-.7-.5-1.2-1.1-1.2-.6 0-1.1.5-1.1 1.1-.4 7.7-.6 12.7-.5 13.8v1.7c0 .4-.3.8-.8.8s-.8-.4-.8-.8v-1.3c-.6-.6-1.6-1.3-2.7-2.2-.9-.6-2.2-.5-3 .3-.1.1-.1.4 0 .5 2.6 2.7 3.9 4.9 5 6.9 1.2 2.1 2.2 3.8 4.5 5.3.4.2.5.7.2 1.1.1.3-.2.4-.4.4-.1 0-.3 0-.4-.1-.2-.1-.3-.2-.5-.3v.8c0 1.7 1.3 3.1 3 3.1h7c1.6 0 2.9-1.3 3-3-.2 0-.4.1-.6.1h-.3c-.4 0-.8-.4-.8-.8s.3-.8.8-.8h.3c.3 0 1.3 0 1.8-1.6.2-.8.4-1.7.4-2.6 0-3.7-.2-5.9-.5-7.8z">
+                                          </path>
+                                          <path fill="#ffb80c"
+                                              d="M34.687 24.395c-.3-.2-.4-.7-.2-1.1 1.4-2.2 2.2-4.8 2.2-7.5 0-7.4-5.7-13.5-12.8-13.5s-12.8 6-12.8 13.5c0 3.7 1.4 7.2 4 9.8.3.3.3.8 0 1.1-.1.2-.3.2-.5.2s-.4-.1-.5-.2c-2.9-2.9-4.5-6.8-4.5-11-.1-8.2 6.3-15 14.2-15 7.9 0 14.3 6.8 14.3 15.1 0 3-.8 5.9-2.4 8.4-.2.3-.7.4-1 .2z">
+                                          </path>
+                                      </svg>
+                                  </span>
+                                  <p>Promote {{domain}} with our easy-to-implement Affiliate package</p>
+                              </div>
+                          </li>
+                          <li>
+                              <div class="inner">
+                                  <span class="icon">
+                                      <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" class=""
+                                          viewBox="0 0 46 46">
+                                          <title>014_cash_coin_coins_money_finance_currency</title>
+                                          <path fill="#ffb80c"
+                                              d="M37.501 16.337c0 1.3-1 2.3-2.2 2.3-1.2 0-2.2-1-2.2-2.3s1-2.3 2.2-2.3c1.2 0 2.2 1 2.2 2.3zm-3 0c0 .4.3.8.7.8.4 0 .7-.3.7-.8s-.3-.8-.7-.8c-.4 0-.7.3-.7.8zm-26.5 0c0-1.3 1-2.3 2.2-2.3 1.2 0 2.2 1 2.2 2.3s-1 2.3-2.2 2.3c-1.2-.1-2.2-1.1-2.2-2.3zm2.9 0c0-.4-.3-.8-.7-.8-.4 0-.7.3-.7.8s.3.8.7.8c.4-.1.7-.4.7-.8zm2.2 9.1c0 .4-.3.8-.7.8h-5.2c-.4 0-.7-.3-.7-.8 0-1.3-1-2.3-2.2-2.3-.4 0-.7-.3-.7-.8v-12.1c0-.4.3-.8.7-.8 1.2 0 2.2-1 2.2-2.3 0-.4.3-.8.7-.8h31c.4 0 .7.3.7.8 0 1.3 1 2.3 2.2 2.3.4 0 .7.3.7.8v12.2c0 .4-.3.8-.7.8-1.2 0-2.2 1-2.2 2.3 0 .4-.3.8-.7.8h-1.5c-.4 0-.7-.3-.7-.8 0-.4.3-.8.7-.8h.8c.3-1.5 1.4-2.7 2.9-3v-10.9c-1.4-.3-2.6-1.5-2.9-3h-10.9c2.1 1.8 3.5 4.9 3.5 8.4 0 1.1-.1 2.2-.4 3.3-.1.4-.5.6-.9.5-.4-.1-.6-.5-.5-.9.2-.9.4-1.9.4-2.9 0-4.6-2.6-8.4-5.9-8.4s-5.9 3.8-5.9 8.4c0 1.9.5 3.7 1.3 5.2.6-.5 1.4-.9 2.2-1.1v-.4c0-.1-.1-.3-.2-.5-.2-.3-.4-.8-.4-1.2-.2-.5-.3-1-.3-1.5 0-.2 0-.4.1-.6v-.2l-.1-.4c-.2-1.4.2-2.5 1.3-3.1v-.1c0-.4 0-1 .5-1.2.3-.1.6 0 .8.2.3.3 1.3.6 1.8.7.2.1.4.1.5.1 1.4.5 2 1.7 1.7 3.4l-.1.3v.2c.1.2.1.4.1.6 0 .4-.1.9-.3 1.5-.1.5-.3.9-.4 1.3-.1.2-.2.4-.2.5v.1c0 .4-.4.8-.7.8-.4 0-.7-.3-.7-.7v-.1c0-.5.2-.9.4-1.2.1-.3.3-.6.3-.8 0-.1 0-.2.1-.3.2-.3.3-.7.3-.9-.1-.2-.2-.4-.1-.6 0-.2.1-.3.1-.5l.1-.4c.2-1.2-.3-1.5-.8-1.7-.1 0-.2-.1-.4-.1-.5-.1-1-.3-1.4-.5-.1.3-.2.5-.5.6-.8.3-1 .8-.8 1.6l.1.4c0 .2.1.3.1.5s0 .4-.1.6c0 .3.1.6.3.9 0 .1.1.2.1.3 0 .2.1.5.3.8.2.4.4.8.4 1.2v.6c0 .6-.4 1.1-.9 1.2-.7.1-1.4.5-1.9 1 .2.2.4.5.7.7.3.3.3.8.1 1.1-.1.2-.4.3-.6.3-.2 0-.3-.1-.5-.2-.4-.4-.8-.9-1.2-1.4l-.1-.1c-1.2-1.8-2-4.2-2-6.7 0-3.5 1.4-6.6 3.5-8.4h-11.5c-.3 1.4-1.4 2.5-2.9 2.8v10.8c1.4.3 2.6 1.5 2.9 3h4.5c.4 0 .7.4.7.8zm31 3.8h-7.4c-.4 0-.7-.3-.7-.8 0-.4.3-.8.7-.8h6.6v-22.8h-41.2v22.9h8.2c.4 0 .7.3.7.8 0 .4-.3.8-.7.8h-9c-.4 0-.7-.3-.7-.8v-24.4c0-.4.3-.8.7-.8h42.8c.4 0 .7.3.7.8v24.4c0 .4-.3.7-.7.7z">
+                                          </path>
+                                          <path fill="#000"
+                                              d="M39.501 30.737c-1.7 0-3.4.3-4.5 1v-7c0-2-3-3-6-3s-6 1-6 3v2.5c-1.2-.6-2.8-1-4.5-1-3 0-6 1-6 3v9c0 2 3 3 6 3 1.7 0 3.4-.3 4.6-1 .5 1.7 3.2 2.5 6 2.5 3 0 6-1 6-3v-1c1.2.6 2.8 1 4.5 1 3 0 6-1 6-3v-3c0-1.9-3.1-3-6.1-3zm-16.7 7.6c0 .5-1.7 1.5-4.6 1.5s-4.6-1-4.6-1.5v-1c1.2.6 2.9 1 4.6 1 1.7 0 3.4-.3 4.6-1v1zm0-3.2c0 .5-1.7 1.5-4.6 1.5s-4.6-1-4.6-1.5v-1c1.2.6 2.9 1 4.6 1s3.4-.3 4.6-1v1zm0-3.1c0 .5-1.7 1.5-4.6 1.5s-4.6-1-4.6-1.5v-1c1.2.6 2.9 1 4.6 1s3.4-.3 4.6-1v1zm-4.6-1c-2.9 0-4.6-1-4.6-1.6 0-.6 1.7-1.6 4.6-1.6s4.6 1 4.6 1.6c0 .6-1.7 1.6-4.6 1.6zm15.7 9.1c0 .5-1.7 1.5-4.6 1.5-2.9 0-4.6-1-4.6-1.5v-1c1.2.6 2.9 1 4.6 1 1.7 0 3.4-.3 4.6-1v1zm0-3.1c0 .5-1.7 1.5-4.6 1.5-2.9 0-4.6-1-4.6-1.5v-1c1.2.6 2.9 1 4.6 1 1.7 0 3.4-.3 4.6-1v1zm0-3.1c0 .5-1.7 1.5-4.6 1.5-2.9 0-4.6-1-4.6-1.5v-1c1.2.6 2.9 1 4.6 1 1.7 0 3.4-.3 4.6-1v1zm0-3.2c0 .5-1.7 1.5-4.6 1.5-2.9 0-4.6-1-4.6-1.5v-1c1.2.6 2.9 1 4.6 1 1.7 0 3.4-.3 4.6-1v1zm0-3.1c0 .5-1.7 1.5-4.6 1.5-2.9 0-4.6-1-4.6-1.5v-1c1.2.6 2.9 1 4.6 1 1.7 0 3.4-.3 4.6-1v1zm-4.6-1.6c-2.9 0-4.6-1-4.6-1.6 0-.6 1.7-1.6 4.6-1.6 2.9 0 4.6 1 4.6 1.6 0 .6-1.8 1.6-4.6 1.6zm15 11c0 .5-1.7 1.5-4.6 1.5-2.9 0-4.6-1-4.6-1.5v-1c1.2.6 2.9 1 4.6 1 1.7 0 3.4-.3 4.6-1v1zm-4.6-1.6c-2.9 0-4.6-1-4.6-1.6 0-.6 1.7-1.6 4.6-1.6 2.9 0 4.6 1 4.6 1.6 0 .6-1.7 1.6-4.6 1.6z">
+                                          </path>
+                                      </svg>
+                                  </span>
+                                  <p>Earn bitcoins while enjoying sports!</p>
+                              </div>
+                          </li>
+                      </ul>
+                      <ul class="buttons center">
+                          <li class="bttn">
+                              <a target="_blank" class="pt-button pt-intent-primary center"
+                                  href="{{affiliteSignUPLink}}">Sign
+                                  up now</a>
+                          </li>
+                          <li class="bttn">
+                              <a target="_blank" class="pt-button pt-intent-primary center"
+                                  href="{{affiliteLink}}">Login</a>
+                          </li>
+                      </ul>
+                      <div class="announce-wrap" class="conq">
+                          <h3>Advantages of Cricbuzzer</h3>
+                          <ul class="affiliates-advantages" id="aff1">
+                              <li>
+                                  <div class="inner">
+                                      <span class="icon">
+                                          <svg width="32" height="32" viewBox="0 0 174 174" fill="none"
+                                              xmlns="http://www.w3.org/2000/svg">
+                                              <path opacity="0.1"
+                                                  d="M76.6181 108.953C100.803 108.953 120.408 89.3475 120.408 65.163C120.408 40.9784 100.803 21.373 76.6181 21.373C52.4336 21.373 32.8281 40.9784 32.8281 65.163C32.8281 89.3475 52.4336 108.953 76.6181 108.953Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M90.7991 128.209C90.4221 128.209 90.0451 128.035 89.8131 127.716C89.3781 127.165 89.4651 126.382 90.0161 125.947C90.3061 125.715 117.943 103.588 119.161 66.207C119.161 65.859 119.045 65.54 118.813 65.279C118.581 65.047 118.262 64.902 117.943 64.902C117.247 64.902 116.667 64.351 116.667 63.626C116.667 62.901 117.247 62.35 117.943 62.35C118.958 62.35 119.915 62.756 120.64 63.481C121.365 64.235 121.742 65.192 121.713 66.236C120.466 104.835 91.9011 127.658 91.6111 127.89C91.3501 128.122 91.0891 128.209 90.7991 128.209Z"
+                                                  fill="#000"></path>
+                                              <path
+                                                  d="M83.462 128.209C83.201 128.209 82.911 128.122 82.679 127.948C82.389 127.716 53.824 104.893 52.577 66.294C52.548 65.25 52.925 64.293 53.65 63.539C54.375 62.814 55.332 62.408 56.347 62.408C57.043 62.408 57.623 62.959 57.623 63.684C57.623 64.409 57.072 64.96 56.347 64.96C56.028 64.96 55.709 65.105 55.477 65.337C55.245 65.569 55.1 65.917 55.129 66.236C56.318 103.646 83.984 125.773 84.274 125.976C84.825 126.411 84.912 127.194 84.477 127.745C84.216 128.035 83.839 128.209 83.462 128.209Z"
+                                                  fill="#000"></path>
+                                              <path
+                                                  d="M108.605 153.12H65.6561C64.9601 153.12 64.3801 152.54 64.3801 151.844C64.3801 151.148 64.9311 150.568 65.6561 150.568H108.605C109.301 150.568 109.881 151.148 109.881 151.844C109.881 152.54 109.301 153.12 108.605 153.12Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M53.5632 117.392C49.9672 117.392 47.0382 114.463 47.0382 110.867C47.0382 110.171 47.5892 109.591 48.3142 109.591C49.0392 109.591 49.5902 110.171 49.5902 110.867C49.5902 113.071 51.3882 114.869 53.5922 114.869C55.7962 114.869 57.5942 113.071 57.5942 110.867C57.5942 108.663 55.7962 106.865 53.5922 106.865H53.5052C53.2152 106.836 24.4182 104.313 24.4182 76.676C24.4182 75.98 24.9692 75.4 25.6942 75.4C26.3902 75.4 26.9702 75.98 26.9702 76.676C26.9702 87.29 31.4362 95.178 40.2812 100.079C46.6612 103.646 53.0992 104.284 53.6792 104.342C57.2462 104.371 60.1462 107.3 60.1462 110.867C60.0882 114.463 57.1592 117.392 53.5632 117.392Z"
+                                                  fill="#000"></path>
+                                              <path
+                                                  d="M120.988 117.392C117.392 117.392 114.463 114.463 114.463 110.867C114.463 107.271 117.363 104.371 120.93 104.342C121.51 104.284 128.006 103.617 134.415 100.05C143.202 95.12 147.639 87.261 147.639 76.676C147.639 75.98 148.219 75.4 148.915 75.4C149.611 75.4 150.191 75.98 150.191 76.676C150.191 104.313 121.394 106.836 121.104 106.865H121.017C118.813 106.865 117.015 108.663 117.015 110.867C117.015 113.071 118.813 114.869 121.017 114.869C123.221 114.869 125.019 113.071 125.019 110.867C125.019 110.171 125.599 109.591 126.295 109.591C126.991 109.591 127.571 110.171 127.571 110.867C127.513 114.463 124.584 117.392 120.988 117.392Z"
+                                                  fill="#000"></path>
+                                              <path
+                                                  d="M99.5281 146.856C98.8321 146.856 98.2521 146.276 98.2521 145.58C98.2521 139.461 93.2641 134.473 87.1451 134.473C81.0261 134.473 76.0381 139.461 76.0381 145.58C76.0381 146.276 75.4581 146.856 74.7621 146.856C74.0661 146.856 73.4861 146.276 73.4861 145.58C73.4861 138.069 79.6051 131.921 87.1451 131.921C94.6851 131.921 100.804 138.04 100.804 145.58C100.775 146.276 100.224 146.856 99.5281 146.856Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M87.145 83.288C71.021 83.288 57.884 70.18 57.884 54.027C57.884 37.903 70.992 24.766 87.145 24.766C103.269 24.766 116.406 37.874 116.406 54.027C116.377 70.151 103.269 83.288 87.145 83.288ZM87.145 27.318C72.413 27.318 60.436 39.295 60.436 54.027C60.436 68.759 72.413 80.736 87.145 80.736C101.877 80.736 113.854 68.759 113.854 54.027C113.854 39.295 101.877 27.318 87.145 27.318Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M87.1452 72.471C76.9662 72.471 68.7012 64.206 68.7012 54.027C68.7012 43.848 76.9662 35.583 87.1452 35.583C97.3242 35.583 105.589 43.848 105.589 54.027C105.589 64.206 97.2952 72.471 87.1452 72.471ZM87.1452 38.106C78.3582 38.106 71.2242 45.24 71.2242 54.027C71.2242 62.814 78.3582 69.948 87.1452 69.948C95.9322 69.948 103.066 62.814 103.066 54.027C103.066 45.269 95.9032 38.106 87.1452 38.106Z"
+                                                  fill="black"></path>
+                                              <path
+                                                  d="M76.4442 55.303C75.7482 55.303 75.1682 54.752 75.1682 54.027C75.1682 53.331 75.7482 52.751 76.4442 52.751C81.6352 52.751 85.8692 48.517 85.8692 43.326C85.8692 42.63 86.4492 42.05 87.1452 42.05C87.8412 42.05 88.4212 42.601 88.4212 43.326C88.3922 49.938 83.0272 55.303 76.4442 55.303Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M97.8174 55.303C91.2344 55.303 85.8694 49.938 85.8694 43.355C85.8694 42.659 86.4494 42.079 87.1454 42.079C87.8414 42.079 88.4214 42.63 88.4214 43.355C88.4214 48.546 92.6554 52.78 97.8464 52.78C98.5424 52.78 99.1224 53.331 99.1224 54.056C99.0644 54.723 98.5134 55.303 97.8174 55.303Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M87.1452 65.975C86.4492 65.975 85.8692 65.424 85.8692 64.699C85.8692 59.508 81.6352 55.274 76.4442 55.274C75.7482 55.274 75.1682 54.723 75.1682 53.998C75.1682 53.302 75.7482 52.722 76.4442 52.722C83.0272 52.722 88.3922 58.087 88.3922 64.67C88.3922 65.424 87.8412 65.975 87.1452 65.975Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M87.1454 65.975C86.4494 65.975 85.8694 65.424 85.8694 64.699C85.8694 58.116 91.2344 52.751 97.8174 52.751C98.5134 52.751 99.0934 53.302 99.0934 54.027C99.0934 54.723 98.5134 55.303 97.8174 55.303C92.6264 55.303 88.3924 59.537 88.3924 64.728C88.3924 65.424 87.8414 65.975 87.1454 65.975Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M89.7261 32.48H84.5351C82.3021 32.48 80.4751 30.653 80.4751 28.42V26.622C80.4751 25.926 81.0551 25.346 81.7511 25.346C82.4471 25.346 83.0271 25.897 83.0271 26.622V28.42C83.0271 29.261 83.7231 29.957 84.5641 29.957H89.7551C90.5961 29.957 91.2921 29.261 91.2921 28.42V26.622C91.2921 25.926 91.8721 25.346 92.5681 25.346C93.2641 25.346 93.8441 25.897 93.8441 26.622V28.42C93.7861 30.653 91.9591 32.48 89.7261 32.48Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M92.51 82.708C91.814 82.708 91.234 82.128 91.234 81.432V79.634C91.234 78.793 90.538 78.097 89.697 78.097H84.506C83.665 78.097 82.969 78.793 82.969 79.634V81.432C82.969 82.128 82.389 82.708 81.693 82.708C80.997 82.708 80.417 82.128 80.417 81.432V79.634C80.417 77.401 82.244 75.574 84.477 75.574H89.668C91.901 75.574 93.728 77.401 93.728 79.634V81.432C93.786 82.157 93.206 82.708 92.51 82.708Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M114.55 60.668H112.752C110.519 60.668 108.692 58.841 108.692 56.608V51.417C108.692 49.184 110.519 47.357 112.752 47.357H114.55C115.246 47.357 115.826 47.908 115.826 48.633C115.826 49.358 115.246 49.909 114.55 49.909H112.752C111.911 49.909 111.215 50.605 111.215 51.446V56.637C111.215 57.478 111.911 58.174 112.752 58.174H114.55C115.246 58.174 115.826 58.725 115.826 59.45C115.826 60.175 115.246 60.668 114.55 60.668Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M61.5091 60.668H59.7111C59.0151 60.668 58.4351 60.117 58.4351 59.392C58.4351 58.667 58.9861 58.116 59.7111 58.116H61.5091C62.3501 58.116 63.0461 57.42 63.0461 56.579V51.388C63.0461 50.547 62.3501 49.8509 61.5091 49.8509H59.7111C59.0151 49.8509 58.4351 49.3 58.4351 48.5749C58.4351 47.8499 58.9861 47.299 59.7111 47.299H61.5091C63.7421 47.299 65.5691 49.126 65.5691 51.359V56.55C65.5691 58.87 63.7421 60.668 61.5091 60.668Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M102.718 78.474C102.399 78.474 102.08 78.358 101.819 78.097L100.543 76.821C98.9772 75.255 98.9772 72.674 100.543 71.108L104.197 67.454C104.951 66.7 105.966 66.265 107.068 66.265C108.141 66.265 109.156 66.671 109.939 67.454L111.215 68.73C111.708 69.223 111.708 70.035 111.215 70.528C110.722 71.021 109.91 71.021 109.417 70.528L108.141 69.252C107.561 68.672 106.546 68.672 105.995 69.252L102.341 72.906C101.761 73.486 101.761 74.472 102.341 75.052L103.617 76.328C104.11 76.821 104.11 77.633 103.617 78.126C103.356 78.358 103.037 78.474 102.718 78.474Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M67.193 41.789C66.149 41.789 65.105 41.383 64.322 40.6L63.046 39.324C62.553 38.831 62.553 38.019 63.046 37.526C63.539 37.033 64.351 37.033 64.844 37.526L66.12 38.802C66.7 39.382 67.686 39.411 68.266 38.802L71.92 35.148C72.5 34.568 72.5 33.582 71.92 33.002L70.644 31.726C70.151 31.233 70.151 30.421 70.644 29.928C71.137 29.435 71.949 29.435 72.442 29.928L73.718 31.204C74.472 31.958 74.907 32.973 74.907 34.075C74.907 35.148 74.501 36.163 73.718 36.946L70.064 40.6C69.252 41.412 68.237 41.789 67.193 41.789Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M71.543 78.474C71.224 78.474 70.905 78.358 70.644 78.097C70.151 77.604 70.151 76.792 70.644 76.299L71.92 75.023C72.21 74.733 72.355 74.356 72.355 73.95C72.355 73.544 72.21 73.167 71.92 72.877L68.266 69.223C67.686 68.643 66.671 68.643 66.12 69.223L64.844 70.499C64.351 70.992 63.539 70.992 63.046 70.499C62.553 70.006 62.553 69.194 63.046 68.701L64.322 67.425C65.076 66.671 66.091 66.236 67.193 66.236C68.295 66.236 69.281 66.642 70.064 67.425L73.718 71.079C74.472 71.833 74.907 72.848 74.907 73.95C74.907 75.052 74.501 76.038 73.718 76.821L72.442 78.097C72.21 78.358 71.862 78.474 71.543 78.474Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M107.068 41.789C106.024 41.789 105.009 41.383 104.197 40.6L100.543 36.946C98.9772 35.38 98.9772 32.799 100.543 31.233L101.819 29.957C102.312 29.464 103.124 29.464 103.617 29.957C104.11 30.45 104.11 31.262 103.617 31.755L102.341 33.031C101.761 33.611 101.761 34.597 102.341 35.177L105.995 38.831C106.604 39.411 107.561 39.411 108.141 38.831L109.417 37.555C109.91 37.062 110.722 37.062 111.215 37.555C111.708 38.048 111.708 38.86 111.215 39.353L109.939 40.629C109.156 41.412 108.112 41.789 107.068 41.789Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M33.5821 85.84C28.5071 85.84 24.3601 81.693 24.3601 76.618C24.3601 71.543 28.5071 67.396 33.5821 67.396C38.6571 67.396 42.8041 71.514 42.8041 76.618C42.8041 81.722 38.6571 85.84 33.5821 85.84ZM33.5821 69.948C29.8991 69.948 26.8831 72.935 26.8831 76.647C26.8831 80.33 29.8701 83.346 33.5821 83.346C37.2651 83.346 40.2811 80.359 40.2811 76.647C40.2811 72.964 37.2651 69.948 33.5821 69.948Z"
+                                                  fill="#ffb80c"></path>
+                                              <path
+                                                  d="M140.94 85.84C135.865 85.84 131.718 81.693 131.718 76.618C131.718 71.543 135.836 67.396 140.94 67.396C146.044 67.396 150.162 71.514 150.162 76.618C150.162 81.722 146.015 85.84 140.94 85.84ZM140.94 69.948C137.257 69.948 134.241 72.935 134.241 76.647C134.241 80.33 137.228 83.346 140.94 83.346C144.652 83.346 147.639 80.359 147.639 76.647C147.639 72.964 144.623 69.948 140.94 69.948Z"
+                                                  fill="#ffb80c"></path>
+                                          </svg>
+                                      </span>
+      
+                                  </div>
+                              </li>
+                          
+                              <div class="inner" class="conq">
+                                  <h3>#1 Players’ Choice Casino</h3>
+                                  <p>With our variety of Sports and eSports that we are known for {{domain}} is also
+                                      selected in Askgamblers`
+                                      Awards as the Best new Casino and #1 Players choice!</p>
+                              </div>
+                              <li>
+                                  <div class="inner">
+                                      <span class="icon">
+                                          <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" class="top"
+                                              viewBox="0 0 52 52">
+                                              <title>Page 1</title>
+                                              <title>Page 1</title>
+                                              <title>Page 1</title>
+                                              <path fill="#ffb80c"
+                                                  d="M45.5 39.2H15.3v-1c0-.6-.5-1.2-1.2-1.2h-1v-6.4h2v4.6c.9.3 1.7 1.1 2 2h26.5c.3-.9 1.1-1.7 2-2V23.9c-.9-.3-1.7-1.1-2-2H17.1c-.3.9-1.1 1.7-2 2v3.5h-2V22h1c.6 0 1.2-.5 1.2-1.2v-1h30.2v1c0 .6.5 1.2 1.2 1.2h1v15h-1c-.6 0-1.2.5-1.2 1.2v1z">
+                                              </path>
+                                              <path fill="#ffb80c"
+                                                  d="M30.4 36c-1.7 0-3.3-.7-4.5-1.9-1.2-1.2-1.9-2.8-1.9-4.5 0-3.5 2.9-6.4 6.4-6.4 1.7 0 3.3.7 4.5 1.9 1.2 1.2 1.9 2.8 1.9 4.5 0 3.5-2.9 6.4-6.4 6.4zm0-10.9c-2.4 0-4.4 2-4.4 4.4 0 1.2.5 2.3 1.3 3.1.8.8 2 1.3 3.1 1.3 2.4 0 4.4-2 4.4-4.4 0-1.2-.5-2.3-1.3-3.1-.8-.8-1.9-1.3-3.1-1.3z">
+                                              </path>
+                                              <path fill="#ffb80c" d="M52 43.6H19.5v-2H50V17.5H7.6v-2H52z"></path>
+                                              <path fill="#ffb80c" d="M39.1 28.5h2.2v2h-2.2z"></path>
+                                              <path fill="#000"
+                                                  d="M20.6 9h16.3v2H20.6zM16.3 9h2.2v2h-2.2zM11.9 9h2.2v2h-2.2zM0 26.4h2.2v2H0zM15.2 41.6h2.2v2h-2.2zM10.9 41.6h2.2v2h-2.2zM4.3 26.4h14.1v2H4.3zM2.2 32.9h8.7v2H2.2z">
+                                              </path>
+                                          </svg>
+                                      </span>
+      
+                                      <h3 class="conq"> Generous 20% Commission</h3>
+                                      <p>Our payout structure allows you to earn up to 20% commission on every player.</p>
+                                  </div>
+                              </li>
+                              <li>
+                                  <div class="inner">
+                                      <span class="icon">
+                                          <img src="https://b2c.static112233.com/m/assets/images/mobile/cricbuzzer/ircons.png " height="23px"
+                                              class="top">
+                                      </span>
+                                      <h3 class="conq">Bitcoin Only</h3>
+                                      <p>Collect and get paid with the world’s most innovative digital currency that enables
+                                          you
+                                          to retain
+                                          complete anonymity.</p>
+                                  </div>
+                              </li>
+                              <li>
+      
+                                  <div class="inner">
+                                      <span class="icon">
+                                          <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" class="top"
+                                              viewBox="0 0 52 52">
+                                              <title>Page 1</title>
+                                              <title>Page 1</title>
+                                              <path fill="#ffb80c"
+                                                  d="M12.4 25.8l-2-.2c.2-2 .7-3.9 1.5-5.7l1.8.8c-.6 1.6-1.1 3.3-1.3 5.1zM11.1 33.6c-.4-1.5-.7-3-.8-4.6l2-.1c.1 1.4.3 2.8.7 4.1l-1.9.6z">
+                                              </path>
+                                              <path fill="#ffb80c"
+                                                  d="M31 48.5c-7.9 0-15-4.4-18.5-11.5l1.8-.9c3.2 6.4 9.6 10.4 16.7 10.4 10.3 0 18.6-8.4 18.6-18.6 0-10.3-8.4-18.6-18.6-18.6-6.3 0-12.1 3.1-15.5 8.3l-1.7-1.1C17.6 10.7 24 7.2 31 7.2c11.4 0 20.6 9.3 20.6 20.6S42.3 48.5 31 48.5z">
+                                              </path>
+                                              <path fill="#ffb80c"
+                                                  d="M31 32.1c-2.4 0-4.3-1.9-4.3-4.3s1.9-4.3 4.3-4.3 4.3 1.9 4.3 4.3-2 4.3-4.3 4.3zm0-6.5c-1.3 0-2.3 1-2.3 2.3 0 1.3 1 2.3 2.3 2.3s2.3-1 2.3-2.3c-.1-1.3-1.1-2.3-2.3-2.3zM27.7 2.9h6.5v2h-6.5z">
+                                              </path>
+                                              <path fill="#ffb80c"
+                                                  d="M29.9 3.9h2v4.4h-2zM42.23 11.82l3.253-3.253 1.415 1.414-3.253 3.253z">
+                                              </path>
+                                              <path fill="#ffb80c"
+                                                  d="M43.3 7.828l1.413-1.414 4.384 4.384-1.414 1.414zM32.405 24.974l8.697-8.698 1.414 1.414-8.697 8.698zM24.803 32.632l3.252-3.252 1.415 1.414-3.253 3.252z">
+                                              </path>
+                                              <path fill="#000" d="M7 15.9h16.4v2H7zM.4 24.7h16.4v2H.4zM4.8 32.3h15.3v2H4.8z">
+                                              </path>
+                                          </svg>
+                                      </span>
+                                      <h3 class="conq">Fast Payments</h3>
+                                      <p>Bitcoin system enables you to get your commission really fast, within just a few
+                                          minutes.
+                                      </p>
+                                  </div>
+                              </li>
+                              <li>
+                                  <div class="inner">
+                                      <span class="icon">
+                                          <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" class="top"
+                                              viewBox="0 0 48 48">
+                                              <title>Page 1</title>
+                                              <path fill="#ffb80c"
+                                                  d="M25.8 44.3h-.3l-7.4-2c-.3-.1-.5-.2-.6-.5-.1-.2-.2-.5-.1-.8l.9-3.4c-.8-.5-1.6-1.1-2.4-1.8l-3.1 1.8c-.2.1-.5.2-.8.1-.3-.1-.5-.2-.6-.5l-1.6-2.8 1.7-1 1.1 2 2.9-1.7c.4-.2.9-.2 1.2.2.9 1 2 1.8 3.1 2.4.4.2.6.7.5 1.1l-.9 3.2L25 42l.9-3.2c.1-.4.6-.7 1-.7 1.3 0 2.6-.2 3.9-.5.4-.1.9.1 1.1.5l1.7 2.9 4.9-2.8-1.7-2.9c-.2-.4-.2-.9.2-1.2 1-.9 1.8-2 2.4-3.1.2-.4.7-.6 1.1-.5l3.2.9 1.5-5.4-3.2-1c-.4-.1-.7-.5-.7-1 0-1.3-.2-2.6-.5-3.9-.1-.4.1-.9.5-1.1l2.9-1.7-2.8-4.9-2.9 1.7c-.4.2-.9.2-1.2-.2-.9-.9-2-1.8-3.1-2.4-.4-.2-.6-.7-.5-1.1l.9-3.2L29 5.7l-.9 3.2c-.1.4-.5.7-1 .7-1.3 0-2.6.2-3.9.5-.4.1-.9-.1-1.1-.5l-1.7-2.9-4.9 2.8 1.7 2.9c.2.4.2.9-.2 1.2-.9.9-1.8 2-2.4 3.1-.2.4-.7.6-1.1.5l-3.2-.9-.5 1.7-1.9-.5.7-2.5c.1-.5.7-.8 1.2-.7l3.4.9c.5-.8 1.1-1.6 1.8-2.4l-1.8-3.1c-.1-.2-.2-.5-.1-.8.1-.3.2-.5.5-.6l6.6-3.8c.2-.1.5-.2.8-.1.3.1.5.2.6.5L23.4 8c1-.2 2-.4 2.9-.4l.9-3.4c.1-.5.7-.8 1.2-.7l7.4 2c.3.1.5.2.6.5.1.2.2.5.1.8l-.9 3.4c.8.5 1.6 1.1 2.4 1.8l3.1-1.8c.2-.1.5-.2.8-.1.3.1.5.2.6.5l3.8 6.6c.1.2.2.5.1.8-.1.3-.2.5-.5.6l-3.1 1.8c.2 1 .4 2 .4 2.9l3.4.9c.3.1.5.2.6.5.1.2.2.5.1.8l-2 7.4c-.1.3-.2.5-.5.6-.2.1-.5.2-.8.1l-3.4-.9c-.5.8-1.1 1.6-1.8 2.4l1.8 3.1c.3.5.1 1.1-.4 1.4l-6.6 3.8c-.2.1-.5.2-.8.1-.3-.1-.5-.2-.6-.5l-1.8-3.1c-1 .2-2 .4-2.9.4l-.9 3.4c0 .3-.4.6-.8.6z">
+                                              </path>
+                                              <path fill="#ffb80c"
+                                                  d="M27 31.9c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm0-14c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z">
+                                              </path>
+                                              <path fill="#000" d="M0 19.9h14v2H0zM5 29.9h10v2H5zM8 24.9h9v2H8z"></path>
+                                          </svg>
+                                      </span>
+                                      <h3 class="conq">Advanced Dashboard</h3>
+                                      <p>On our Affiliate Dashboard your players, their deposits, your commission and all
+                                          necessary statistics are
+                                          updated in real-time.</p>
+                                  </div>
+                              </li>
+                              <li>
+                                  <div class="inner">
+                                      <span class="icon">
+                                          <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" class="top"
+                                              viewBox="0 0 48 48">
+                                              <title>Page 1</title>
+                                              <path fill="#ffb80c"
+                                                  d="M44 48l-2-.3c.2-1.3-1.1-3.2-2.6-4-.5-.2-.7-.8-.5-1.3.2-.6.3-1.1.3-1.7 0-2.5-2.1-4.6-4.6-4.6-.8 0-1.5.2-2.2.6-.3.1-.6.2-.9 0-.3-.1-.5-.4-.6-.7-.4-1.6-2.4-3.1-4-3.1-.6 0-1-.4-1-1v-6h2V31c1.8.4 3.6 1.7 4.5 3.4.7-.2 1.4-.4 2.2-.4 3.6 0 6.6 3 6.6 6.6 0 .6-.1 1.1-.2 1.7 2 1.4 3.3 3.8 3 5.7zM6 48H4c0-1.8.8-3.3 2.2-4.4-.2-.6-.3-1.3-.3-2 0-3.4 2.8-6.1 6.2-6 .6-2.3 3.3-4.1 5.9-4.5V26h2v6c0 .6-.4 1-1 1-2.2 0-5 1.8-5 3.6 0 .3-.1.6-.4.8-.2.2-.5.3-.8.2-.3-.1-.5-.1-.8-.1-2.2 0-4 1.8-4 4 0 .6.2 1.3.4 1.8s.1 1.1-.4 1.3c-1.3 1-2 2-2 3.4z">
+                                              </path>
+                                              <path fill="#ffb80c"
+                                                  d="M30.1 40.6h-2c0-3.6 2.9-6.5 6.5-6.5v2c-2.5 0-4.5 2-4.5 4.5zM38 46.3l-1-1.7c1.4-.8 2.3-2.3 2.3-3.9h2c0 2.2-1.3 4.4-3.3 5.6zM22 48h-2c0-1.6.6-3.1 1.8-4.2 1.1-1.1 2.6-1.8 4.2-1.8v2c-1.1 0-2.1.4-2.8 1.2-.8.7-1.2 1.7-1.2 2.8z">
+                                              </path>
+                                              <path fill="#ffb80c"
+                                                  d="M21.2 44.6c-.7-.9-2-1.5-3.3-1.6l.1-2c1.9.1 3.6 1 4.7 2.4l-1.5 1.2zM15.3 39.4c-.7-1.2-2-1.9-3.4-1.9v-2c2.1 0 4 1 5.1 2.8l-1.7 1.1zM23 28c-.3 0-.6-.1-.8-.4l-2.5-3.3-3.3 1.6c-.3.1-.6.1-.8 0-.3-.1-.5-.3-.6-.6l-1-3c-.1-.4 0-.8.2-1l3.7-3.7V10c0-5.1 2.9-10 5-10s5 4.9 5 10v7.6l3.7 3.7c.3.3.4.7.2 1l-1 3c-.1.3-.3.5-.6.6-.3.1-.6.1-.8 0l-3.3-1.6-2.5 3.3c0 .3-.3.4-.6.4zm-3-6c.3 0 .6.1.8.4l2.2 2.9 2.2-2.9c.3-.4.8-.5 1.2-.3l3 1.5.4-1.3-3.6-3.6c-.1-.2-.2-.4-.2-.7v-8c0-4.3-2.2-7.6-3-8-.8.4-3 3.7-3 8v8c0 .3-.1.5-.3.7l-3.6 3.6.4 1.3 3-1.5c.2-.1.3-.1.5-.1z">
+                                              </path>
+                                              <path fill="#ffb80c" d="M22 11h2v2h-2z"></path>
+                                              <path fill="#000"
+                                                  d="M10 13h2v10h-2zM10 25h2v2h-2zM10 29h2v2h-2zM34 25h2v7h-2zM31 7h2v6h-2zM31 15h2v2h-2z">
+                                              </path>
+                                          </svg>
+                                      </span>
+                                      <h3 class="conq">Great promotions</h3>
+                                      <p>Price boost for bigger winnings, cashbacks, multi bet insurance, leaderboards,
+                                          exclusive
+                                          eSports
+                                          promotions and so much more to convert your traffic with the maximum rate.</p>
+                                          
+                                  </div>
+                              </li>
+                          </ul>
+                      </div>
+                      <footer><a (click)="hideOverlayInfo('#footer-Skyaff');" class="btn-send">CLOSE</a></footer>
+                  </div>
+      
+      
+              </div>
+          </div>
+      </div>
+
+      <div id="footer-AU" class="overlay" style="display: none;">
+        <div class="frame-wrap">
+            <div class="news-wrap news-wrap-frame">
+                <div class="side-head">
+                    <h3>About Us</h3>
+                </div>
+                <div class="announce-wrap">
+                  <ul>
+                    <li>Vrnl Group is one of the upcoming providers for online gaming entertainment across
+                        Sports Betting, Online and Live Casino operating in the emerging and the regulated markets.</li>
+
+                    <li>We aim to utilize the latest technologies to provide innovative and interactive gaming
+                        experiences in a secure environment.</li>
+
+                    <li><strong>We have dedicated ourselves to offering our customers a seamless and thrilling gaming
+                            experience while you are on the go. We aim to provide an exceptional and fully customizable
+                            online betting experience.</strong></li>
+
+                    <li><strong>We are innovative, ambitious and passionate about what we do. We do it in a credible and
+                            responsible way, always aiming for the top.</strong></li>
+
+                    <li>We only operate in regulated markets where we hold the appropriate licenses. We take our
+                        responsibilities to customers and our other stakeholders seriously and place great emphasis on
+                        working to a ‘compliance first’ model across the business.</li>
+
+                    <li><strong>Dedicated Customer Service Team:</strong> We are here for you every step of the way with
+                        dedicated customer service managers standing by to provide you with a 24/7 top notch customer
+                        care service, handling any issues quickly and efficiently.</li>
+
+                    <li>When customers bet on our site they can rest assured that they are getting a wide variety of
+                        betting options, up to date information and the best odds available.</li>
+
+                    <li>Our customers also have peace of mind, knowing that when it’s time to collect, they are betting
+                        with a well-known reputable company.</li>
+
+                    <li>We have integrated best and secured payment methods on our site and a transaction process that
+                        is quick, easy enabling our players to cash out their winnings quickly and securely.</li>
+                    <li>For additional details, please visit the website<a href="https://vrnl.net/">:vrnl.net</a></li>
+                </ul>
+                </div>
+                <footer><a class="btn-send" (click)="hideOverlayInfo('#footer-AU');">CLOSE</a>
+                </footer>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
