@@ -417,6 +417,10 @@ export class HomeComponent implements OnInit {
     $('#YL').css('display', 'none');
     $(value).fadeOut();
   }
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
+
   getAWC_table() {
     if (this.tokenService.getToken()) {
       this.isLogin = true;

@@ -59,7 +59,7 @@
             <ng-container *ngFor="let awc of AWC_games">
                 <ng-container *ngIf="awc.isEnable">
                     <a class="entrance" [ngClass]="{'entrance-half':!awc.isBig}" style="cursor: pointer;"
-                        (click)="openTable(awc)">
+                        (click)="isLogin ? openTable(awc) : navigateToLogin()">
                         <dl class="entrance-title">
                             <dt>{{awc.name | titlecase}}</dt>
                             <div class="rotating-border rotating-border--google heart"><span>{{Update?.PlayNow}}<i
