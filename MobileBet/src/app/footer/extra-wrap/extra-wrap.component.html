@@ -1,0 +1,88 @@
+<div class="extra-wrap" style="display: block;" *ngIf="siteName == 'velkiex' || siteName == 'wicket7'">
+
+  <img src="https://b2c.static112233.com/m/assets/images/mobile/velkiex/footer.png" alt="transparent" alt="Betfair" style="width: 100%;">
+</div>
+<div class="extra-wrap">
+
+
+  <div class="power-wrap-b" style="display:block">
+
+    <span>{{Update?.poweredby}}</span><img src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="Betfair">
+
+  </div>
+
+
+  <div class="appdl-link-android" style="display:block;">
+    <a target="_blank" href="assets/apk/{{siteName}}.apk"><img src="https://b2c.static112233.com/m/assets/images/mobile/login/btn-appdl-android.png"
+        alt="Android Apk"></a>
+    <p>v1.04 - 2019-04-10 - 5.2MB</p>
+  </div>
+
+</div>
+<div class="extra-wrap disclaimer" *ngIf="siteName=='cricbuzzer' || siteName=='cricbuzzerlive' ">
+  <a target="_blank" href="https://www.gamblingcommission.gov.uk">
+    <img style="width:35px;margin-left: 5px;" src="https://b2c.static112233.com/m/assets/images/gamblingcomm.png">
+  </a>
+  <a target="_blank" href="https://gordonmoody.org.uk/">
+    <img style="width:35px;;margin-left: 5px;" src="https://b2c.static112233.com/m/assets/images/gordonmoody.png">
+  </a>
+  <a target="_blank" href="https://www.gamcare.org.uk/get-support/talk-to-us-now/">
+    <img style="width:30px;;margin-left: 5px;" src="https://b2c.static112233.com/m/assets/images/gamecare.png">
+  </a>
+
+  <a target="_blank" href="https://www.begambleaware.org/">
+    <img style="width:35px;margin-left: 5px;" src="https://b2c.static112233.com/m/assets/images/gamblingaware.png">
+
+  </a>
+  <a target="_blank" href="https://www.gamstop.co.uk/">
+    <img style="width:35px;margin-left: 5px;" src="https://b2c.static112233.com/m/assets/images/gamestop.png">
+  </a>
+
+  <a target="_blank" href="https://www.safergamblingstandard.org.uk/certified-businesses/">
+    <img style="width:35px;margin-left: 5px;" src="https://b2c.static112233.com/m/assets/images/safegambling.png">
+
+  </a>
+
+  <a target="_blank" href="https://www.taketimetothink.co.uk/">
+    <img style="width:25px;margin-left: 5px;" src="https://b2c.static112233.com/m/assets/images/taketimetothink.png">
+  </a>
+
+</div>
+<div class="extra-wrap disclaimer" *ngIf="siteName=='cricbuzzer' || siteName=='cricbuzzerlive' ">
+
+  <a target="_blank" href="https://www.netnanny.com/">
+    <img style="width:35px;margin-left: 5px;" src="https://b2c.static112233.com/m/assets/images/netnanny.png">
+  </a>
+
+  <a target="_blank" href="https://gamban.com/">
+    <img style="width:35px;margin-left: 5px;" src="https://b2c.static112233.com/m/assets/images/gameban.png">
+
+  </a>
+
+  <a target="_blank" href="https://betblocker.org/">
+    <img style="width:35px;margin-left: 5px;" src="https://b2c.static112233.com/m/assets/images/betblocker.png">
+
+
+  </a>
+
+  <a target="_blank" href="https://www.gamblock.com/">
+    <img style="width:30px;margin-left: 5px;" src="https://b2c.static112233.com/m/assets/images/gameblock.png">
+
+  </a>
+</div>
+
+<div class="extra-wrap disclaimer">
+  {{Update?.Disclaimer}}
+  <!-- Disclaimer : Please note that Gambling involves a financial risk and could be addictive over time if not practised within limits. Only 18+ people should use the services and should use it responsibly. Players should be aware of any financial risk and govern themselves accordingly. -->
+
+</div>
+<div class="divpad" *ngIf="!isLogin && isTraslate && siteName!='cricbuzzercom'">
+  <select id="select" (change)="selectlanguage($event.target.value)">
+    <option value="en" selected>Select language</option>
+    <option value="en">English</option>
+    <option value="bd">Bangla</option>
+    <option value="sp">Spanish</option>
+    <option value="pg">portuguese</option>
+    <option value="tu">Turkish</option>
+  </select>
+</div>

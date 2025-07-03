@@ -1,0 +1,25 @@
+<h2>Feedback</h2>
+
+<div class="white-wrap">
+
+    <div class="function-wrap">
+        <form id="feedbackForm" action="" class="contact-form" [formGroup]="FeedbackForm" (ngSubmit)="submitFeedback()">
+            <div>
+                <input type="text" class="form-control rounded border-white mb-3 form-input" id="name" placeholder="Email"
+                    required formControlName="email">
+            </div>
+            <div>
+                <input type="text" class="form-control rounded border-white mb-3 form-input" id="name" placeholder="Subject"
+                    required formControlName="subject">
+            </div>
+    
+            <div>
+                <textarea id="message" class="form-control rounded border-white mb-3 form-text-area" rows="5" cols="30" placeholder="Message" required formControlName="description"></textarea>
+            </div>
+            <div>
+                <input type="submit" class="form-control rounded border-white mb-3 form-input" id="subbtn">
+            </div>
+    
+        </form>
+</div>
+</div>

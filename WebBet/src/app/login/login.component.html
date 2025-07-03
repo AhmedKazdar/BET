@@ -1,0 +1,964 @@
+<ul class="login-wrap">
+    <form [formGroup]="LoginForm" (ngSubmit)="Login(0)">
+        <li class="user error"><input type="text" placeholder="{{Update?.Emailorusername}}" formControlName="userName"></li>
+        <li style="position: relative;">
+            <input [type]="!visiblePassword ? 'password' : 'text'" placeholder="{{Update?.password}}"
+                formControlName="password">
+            <button type="button" (click)="showPassword()" class="fa"
+                [ngClass]="{'fa-eye': visiblePassword,'fa-eye-slash': !visiblePassword}"></button>
+        </li>
+        <li>
+            <a  class="btn-login" (click)="Login(0)">{{Update?.Login}}
+                <img class="icon-login" src="https://b2c.static112233.com/assets/images/transparent.gif">
+            </a>
+        </li>
+        <li  *ngIf="isb2c"  (click)="openLoginPop()"><a class="btn-login">{{Update?.Loginwithsocial}}</a></li>
+
+        <li  *ngIf="isb2c"  (click)="openRegisterPop()"><a class="btn-signup">{{Update?.Signup}}</a></li>
+
+        <li class="error">
+            <ng-container *ngIf="f.userName.invalid && (f.userName.touched || submitted) && !result">
+               {{Update?.Usernameisempty}}
+            </ng-container>
+            <ng-container
+                *ngIf="f.password.invalid && (f.password.touched || submitted) && !f.userName.invalid && !result">
+                {{Update?.passwordisempty}}
+            </ng-container>
+            <ng-container *ngIf="result">
+                {{result}}
+            </ng-container>
+        </li>
+    </form>
+</ul>
+
+<div id="loginBox" class="overlay" style="display: none;">
+    <div id="login_loading" class="loading-wrap" style="top: 40%;">
+        <ul class="loading">
+            <li><img src="https://b2c.static112233.com/assets/images/loading40.gif"></li>
+            <li>{{Update?.Loading}}</li>
+        </ul>
+    </div>
+    <div class="dialog-wrap-w login_to_go" style="height: 404px;">
+        <div class="kv">
+            <dl style="margin: 92px 25px 25px 25px;">
+                <dd *ngIf="isb2c" >
+                    <a class="social-button" (click)="loginWithGoogle(1)">
+                        <svg width="28" height="24" class="gn y">
+                            <g fill="none" fill-rule="evenodd">
+                                <path
+                                    d="M20.66 12.7c0-.61-.05-1.19-.15-1.74H12.5v3.28h4.58a3.91 3.91 0 0 1-1.7 2.57v2.13h2.74a8.27 8.27 0 0 0 2.54-6.24z"
+                                    fill="#4285F4"></path>
+                                <path
+                                    d="M12.5 21a8.1 8.1 0 0 0 5.63-2.06l-2.75-2.13a5.1 5.1 0 0 1-2.88.8 5.06 5.06 0 0 1-4.76-3.5H4.9v2.2A8.5 8.5 0 0 0 12.5 21z"
+                                    fill="#34A853"></path>
+                                <path
+                                    d="M7.74 14.12a5.11 5.11 0 0 1 0-3.23v-2.2H4.9A8.49 8.49 0 0 0 4 12.5c0 1.37.33 2.67.9 3.82l2.84-2.2z"
+                                    fill="#FBBC05"></path>
+                                <path
+                                    d="M12.5 7.38a4.6 4.6 0 0 1 3.25 1.27l2.44-2.44A8.17 8.17 0 0 0 12.5 4a8.5 8.5 0 0 0-7.6 4.68l2.84 2.2a5.06 5.06 0 0 1 4.76-3.5z"
+                                    fill="#EA4335"></path>
+                            </g>
+                        </svg>
+                        <span style="color: black;">{{Update?.LoginwithGoogle}}</span></a>
+                </dd>
+                <dd *ngIf="isb2c" >
+                    <a class="social-button margin-top" (click)="loginWithFacebook(1)">
+                        <svg width="28" height="24" fill="#3B5998" class="gn y">
+                            <path
+                                d="M20.3 4H4.7a.7.7 0 0 0-.7.7v15.6c0 .38.32.7.7.7h8.33v-6.38h-2.12v-2.65h2.12V9.84c0-2.2 1.4-3.27 3.35-3.27.94 0 1.75.07 1.98.1v2.3H17c-1.06 0-1.31.5-1.31 1.24v1.76h2.65l-.53 2.65H15.7l.04 6.38h4.56a.7.7 0 0 0 .71-.7V4.7a.7.7 0 0 0-.7-.7"
+                                fill-rule="evenodd"></path>
+                        </svg>
+                        <span style="color: black;">{{Update?.LoginwithFacebook}}</span></a>
+                </dd>
+                <dd *ngIf="isb2c" >
+                    <a class="social-button margin-top" (click)="openPhonePop()">
+                        <svg width="28" height="24" viewBox="0 0 256 256" xml:space="preserve">
+                            <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
+                                transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+                                <path
+                                    d="M 64.967 0 H 25.033 c -3.363 0 -6.099 2.736 -6.099 6.098 v 77.803 c 0 3.362 2.736 6.099 6.099 6.099 h 39.934 c 3.363 0 6.099 -2.736 6.099 -6.099 V 6.098 C 71.065 2.736 68.33 0 64.967 0 z M 20.935 12.417 h 48.131 v 63.67 H 20.935 V 12.417 z M 25.033 2 h 39.934 c 2.26 0 4.099 1.838 4.099 4.098 v 4.319 H 20.935 V 6.098 C 20.935 3.838 22.773 2 25.033 2 z M 64.967 88 H 25.033 c -2.26 0 -4.099 -1.839 -4.099 -4.099 v -5.814 h 48.131 v 5.814 C 69.065 86.161 67.227 88 64.967 88 z"
+                                    style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                                    transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <circle cx="45" cy="83.04" r="2"
+                                    style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                                    transform="  matrix(1 0 0 1 0 0) " />
+                                <path
+                                    d="M 47.169 7.254 H 36.114 c -0.552 0 -1 -0.448 -1 -1 s 0.448 -1 1 -1 h 11.055 c 0.553 0 1 0.448 1 1 S 47.722 7.254 47.169 7.254 z"
+                                    style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                                    transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <circle cx="51.89" cy="6.25" r="1.5"
+                                    style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                                    transform="  matrix(1 0 0 1 0 0) " />
+                            </g>
+                        </svg><span style="color: black;">{{Update?.LoginwithPhoneNo}}</span></a>
+                </dd>
+                <dd *ngIf="isb2c" >
+                    <div class="telegramRealButton">
+                        <app-telegram-login-widget-component></app-telegram-login-widget-component>
+                    </div>
+                    <div class="telegramFakeButton">
+                        <a class="social-button margin-top">
+                            <svg width="28" height="24" viewBox="0 0 256 256" xml:space="preserve">
+                                <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
+                                    transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+                                    <path
+                                        d="M 83.924 7.756 L 4.202 38.496 c -5.442 2.183 -5.409 5.219 -0.992 6.571 l 20.455 6.385 l 7.035 23.153 c 0.925 2.553 0.469 3.566 3.151 3.566 c 2.069 0 2.983 -0.946 4.138 -2.069 l 9.941 -9.666 l 20.681 15.28 c 3.806 2.1 6.553 1.012 7.501 -3.533 l 13.577 -63.978 C 91.079 8.631 87.565 6.103 83.924 7.756 z"
+                                        style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(33,151,201); fill-rule: nonzero; opacity: 1;"
+                                        transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                    <path
+                                        d="M 33.942 72.016 l -6.747 -22.204 L 79.13 19.002 L 40.751 56.789 L 33.942 72.016 z"
+                                        style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"
+                                        transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                </g>
+                            </svg>
+                            <span style="color: black;">{{Update?.LoginwithTelegram}}</span></a>
+                    </div>
+                </dd>
+                <dd *ngIf="isb2c">
+                    <a *ngIf="!isPendingMetaMask" class="social-button margin-top" (click)="loginWithMetamask(1)">
+                        <svg width="28" height="24" viewBox="0 0 507.83 470.86">
+                            <defs>
+                                <style>
+                                    .a {
+                                        fill: #e2761b;
+                                        stroke: #e2761b;
+                                    }
+
+                                    .a,
+                                    .b,
+                                    .c,
+                                    .d,
+                                    .e,
+                                    .f,
+                                    .g,
+                                    .h,
+                                    .i,
+                                    .j {
+                                        stroke-linecap: round;
+                                        stroke-linejoin: round;
+                                    }
+
+                                    .b {
+                                        fill: #e4761b;
+                                        stroke: #e4761b;
+                                    }
+
+                                    .c {
+                                        fill: #d7c1b3;
+                                        stroke: #d7c1b3;
+                                    }
+
+                                    .d {
+                                        fill: #233447;
+                                        stroke: #233447;
+                                    }
+
+                                    .e {
+                                        fill: #cd6116;
+                                        stroke: #cd6116;
+                                    }
+
+                                    .f {
+                                        fill: #e4751f;
+                                        stroke: #e4751f;
+                                    }
+
+                                    .g {
+                                        fill: #f6851b;
+                                        stroke: #f6851b;
+                                    }
+
+                                    .h {
+                                        fill: #c0ad9e;
+                                        stroke: #c0ad9e;
+                                    }
+
+                                    .i {
+                                        fill: #161616;
+                                        stroke: #161616;
+                                    }
+
+                                    .j {
+                                        fill: #763d16;
+                                        stroke: #763d16;
+                                    }
+                                </style>
+                            </defs>
+                            <title>metamask</title>
+                            <polygon class="a" points="482.09 0.5 284.32 147.38 320.9 60.72 482.09 0.5" />
+                            <polygon class="b" points="25.54 0.5 221.72 148.77 186.93 60.72 25.54 0.5" />
+                            <polygon class="b"
+                                points="410.93 340.97 358.26 421.67 470.96 452.67 503.36 342.76 410.93 340.97" />
+                            <polygon class="b"
+                                points="4.67 342.76 36.87 452.67 149.57 421.67 96.9 340.97 4.67 342.76" />
+                            <polygon class="b"
+                                points="143.21 204.62 111.8 252.13 223.7 257.1 219.73 136.85 143.21 204.62" />
+                            <polygon class="b"
+                                points="364.42 204.62 286.91 135.46 284.32 257.1 396.03 252.13 364.42 204.62" />
+                            <polygon class="b" points="149.57 421.67 216.75 388.87 158.71 343.55 149.57 421.67" />
+                            <polygon class="b" points="290.88 388.87 358.26 421.67 348.92 343.55 290.88 388.87" />
+                            <polygon class="c"
+                                points="358.26 421.67 290.88 388.87 296.25 432.8 295.65 451.28 358.26 421.67" />
+                            <polygon class="c"
+                                points="149.57 421.67 212.18 451.28 211.78 432.8 216.75 388.87 149.57 421.67" />
+                            <polygon class="d" points="213.17 314.54 157.12 298.04 196.67 279.95 213.17 314.54" />
+                            <polygon class="d" points="294.46 314.54 310.96 279.95 350.71 298.04 294.46 314.54" />
+                            <polygon class="e" points="149.57 421.67 159.11 340.97 96.9 342.76 149.57 421.67" />
+                            <polygon class="e" points="348.72 340.97 358.26 421.67 410.93 342.76 348.72 340.97" />
+                            <polygon class="e"
+                                points="396.03 252.13 284.32 257.1 294.66 314.54 311.16 279.95 350.91 298.04 396.03 252.13" />
+                            <polygon class="e"
+                                points="157.12 298.04 196.87 279.95 213.17 314.54 223.7 257.1 111.8 252.13 157.12 298.04" />
+                            <polygon class="f" points="111.8 252.13 158.71 343.55 157.12 298.04 111.8 252.13" />
+                            <polygon class="f" points="350.91 298.04 348.92 343.55 396.03 252.13 350.91 298.04" />
+                            <polygon class="f"
+                                points="223.7 257.1 213.17 314.54 226.29 382.31 229.27 293.07 223.7 257.1" />
+                            <polygon class="f"
+                                points="284.32 257.1 278.96 292.87 281.34 382.31 294.66 314.54 284.32 257.1" />
+                            <polygon class="g"
+                                points="294.66 314.54 281.34 382.31 290.88 388.87 348.92 343.55 350.91 298.04 294.66 314.54" />
+                            <polygon class="g"
+                                points="157.12 298.04 158.71 343.55 216.75 388.87 226.29 382.31 213.17 314.54 157.12 298.04" />
+                            <polygon class="h"
+                                points="295.65 451.28 296.25 432.8 291.28 428.42 216.35 428.42 211.78 432.8 212.18 451.28 149.57 421.67 171.43 439.55 215.75 470.36 291.88 470.36 336.4 439.55 358.26 421.67 295.65 451.28" />
+                            <polygon class="i"
+                                points="290.88 388.87 281.34 382.31 226.29 382.31 216.75 388.87 211.78 432.8 216.35 428.42 291.28 428.42 296.25 432.8 290.88 388.87" />
+                            <polygon class="j"
+                                points="490.44 156.92 507.33 75.83 482.09 0.5 290.88 142.41 364.42 204.62 468.37 235.03 491.43 208.2 481.49 201.05 497.39 186.54 485.07 177 500.97 164.87 490.44 156.92" />
+                            <polygon class="j"
+                                points="0.5 75.83 17.39 156.92 6.66 164.87 22.56 177 10.44 186.54 26.34 201.05 16.4 208.2 39.26 235.03 143.21 204.62 216.75 142.41 25.54 0.5 0.5 75.83" />
+                            <polygon class="g"
+                                points="468.37 235.03 364.42 204.62 396.03 252.13 348.92 343.55 410.93 342.76 503.36 342.76 468.37 235.03" />
+                            <polygon class="g"
+                                points="143.21 204.62 39.26 235.03 4.67 342.76 96.9 342.76 158.71 343.55 111.8 252.13 143.21 204.62" />
+                            <polygon class="g"
+                                points="284.32 257.1 290.88 142.41 321.1 60.72 186.93 60.72 216.75 142.41 223.7 257.1 226.09 293.27 226.29 382.31 281.34 382.31 281.74 293.27 284.32 257.1" />
+                        </svg>
+                        <span style="color: black;">{{Update?.LoginwithMetamask}}</span></a>
+                    <a *ngIf="isPendingMetaMask" class="social-button margin-top">
+                        <svg width="28" height="24" viewBox="0 0 507.83 470.86">
+                            <defs>
+                                <style>
+                                    .a {
+                                        fill: #e2761b;
+                                        stroke: #e2761b;
+                                    }
+
+                                    .a,
+                                    .b,
+                                    .c,
+                                    .d,
+                                    .e,
+                                    .f,
+                                    .g,
+                                    .h,
+                                    .i,
+                                    .j {
+                                        stroke-linecap: round;
+                                        stroke-linejoin: round;
+                                    }
+
+                                    .b {
+                                        fill: #e4761b;
+                                        stroke: #e4761b;
+                                    }
+
+                                    .c {
+                                        fill: #d7c1b3;
+                                        stroke: #d7c1b3;
+                                    }
+
+                                    .d {
+                                        fill: #233447;
+                                        stroke: #233447;
+                                    }
+
+                                    .e {
+                                        fill: #cd6116;
+                                        stroke: #cd6116;
+                                    }
+
+                                    .f {
+                                        fill: #e4751f;
+                                        stroke: #e4751f;
+                                    }
+
+                                    .g {
+                                        fill: #f6851b;
+                                        stroke: #f6851b;
+                                    }
+
+                                    .h {
+                                        fill: #c0ad9e;
+                                        stroke: #c0ad9e;
+                                    }
+
+                                    .i {
+                                        fill: #161616;
+                                        stroke: #161616;
+                                    }
+
+                                    .j {
+                                        fill: #763d16;
+                                        stroke: #763d16;
+                                    }
+                                </style>
+                            </defs>
+                            <title>metamask</title>
+                            <polygon class="a" points="482.09 0.5 284.32 147.38 320.9 60.72 482.09 0.5" />
+                            <polygon class="b" points="25.54 0.5 221.72 148.77 186.93 60.72 25.54 0.5" />
+                            <polygon class="b"
+                                points="410.93 340.97 358.26 421.67 470.96 452.67 503.36 342.76 410.93 340.97" />
+                            <polygon class="b"
+                                points="4.67 342.76 36.87 452.67 149.57 421.67 96.9 340.97 4.67 342.76" />
+                            <polygon class="b"
+                                points="143.21 204.62 111.8 252.13 223.7 257.1 219.73 136.85 143.21 204.62" />
+                            <polygon class="b"
+                                points="364.42 204.62 286.91 135.46 284.32 257.1 396.03 252.13 364.42 204.62" />
+                            <polygon class="b" points="149.57 421.67 216.75 388.87 158.71 343.55 149.57 421.67" />
+                            <polygon class="b" points="290.88 388.87 358.26 421.67 348.92 343.55 290.88 388.87" />
+                            <polygon class="c"
+                                points="358.26 421.67 290.88 388.87 296.25 432.8 295.65 451.28 358.26 421.67" />
+                            <polygon class="c"
+                                points="149.57 421.67 212.18 451.28 211.78 432.8 216.75 388.87 149.57 421.67" />
+                            <polygon class="d" points="213.17 314.54 157.12 298.04 196.67 279.95 213.17 314.54" />
+                            <polygon class="d" points="294.46 314.54 310.96 279.95 350.71 298.04 294.46 314.54" />
+                            <polygon class="e" points="149.57 421.67 159.11 340.97 96.9 342.76 149.57 421.67" />
+                            <polygon class="e" points="348.72 340.97 358.26 421.67 410.93 342.76 348.72 340.97" />
+                            <polygon class="e"
+                                points="396.03 252.13 284.32 257.1 294.66 314.54 311.16 279.95 350.91 298.04 396.03 252.13" />
+                            <polygon class="e"
+                                points="157.12 298.04 196.87 279.95 213.17 314.54 223.7 257.1 111.8 252.13 157.12 298.04" />
+                            <polygon class="f" points="111.8 252.13 158.71 343.55 157.12 298.04 111.8 252.13" />
+                            <polygon class="f" points="350.91 298.04 348.92 343.55 396.03 252.13 350.91 298.04" />
+                            <polygon class="f"
+                                points="223.7 257.1 213.17 314.54 226.29 382.31 229.27 293.07 223.7 257.1" />
+                            <polygon class="f"
+                                points="284.32 257.1 278.96 292.87 281.34 382.31 294.66 314.54 284.32 257.1" />
+                            <polygon class="g"
+                                points="294.66 314.54 281.34 382.31 290.88 388.87 348.92 343.55 350.91 298.04 294.66 314.54" />
+                            <polygon class="g"
+                                points="157.12 298.04 158.71 343.55 216.75 388.87 226.29 382.31 213.17 314.54 157.12 298.04" />
+                            <polygon class="h"
+                                points="295.65 451.28 296.25 432.8 291.28 428.42 216.35 428.42 211.78 432.8 212.18 451.28 149.57 421.67 171.43 439.55 215.75 470.36 291.88 470.36 336.4 439.55 358.26 421.67 295.65 451.28" />
+                            <polygon class="i"
+                                points="290.88 388.87 281.34 382.31 226.29 382.31 216.75 388.87 211.78 432.8 216.35 428.42 291.28 428.42 296.25 432.8 290.88 388.87" />
+                            <polygon class="j"
+                                points="490.44 156.92 507.33 75.83 482.09 0.5 290.88 142.41 364.42 204.62 468.37 235.03 491.43 208.2 481.49 201.05 497.39 186.54 485.07 177 500.97 164.87 490.44 156.92" />
+                            <polygon class="j"
+                                points="0.5 75.83 17.39 156.92 6.66 164.87 22.56 177 10.44 186.54 26.34 201.05 16.4 208.2 39.26 235.03 143.21 204.62 216.75 142.41 25.54 0.5 0.5 75.83" />
+                            <polygon class="g"
+                                points="468.37 235.03 364.42 204.62 396.03 252.13 348.92 343.55 410.93 342.76 503.36 342.76 468.37 235.03" />
+                            <polygon class="g"
+                                points="143.21 204.62 39.26 235.03 4.67 342.76 96.9 342.76 158.71 343.55 111.8 252.13 143.21 204.62" />
+                            <polygon class="g"
+                                points="284.32 257.1 290.88 142.41 321.1 60.72 186.93 60.72 216.75 142.41 223.7 257.1 226.09 293.27 226.29 382.31 281.34 382.31 281.74 293.27 284.32 257.1" />
+                        </svg>
+                        <span style="color: black;">{{Update?.LoginwithMetamask}}</span></a>
+                </dd>
+            </dl>
+        </div>
+        <form [formGroup]="LoginForm" (ngSubmit)="Login(1)">
+            <dl class="login-panel" style="margin: 25px 0 0 25px;">
+                <dt class="loginText">{{Update?.Login}}</dt>
+                <dd style="margin-top: 32px;"><input id="loginBoxUserName" type="text" [minlength]="5" placeholder="{{Update?.Emailaddressorusername}}"
+                        formControlName="userName">
+                </dd>
+                <dd style="margin-top: 16px;">
+                    <input id="loginBoxPassword" [type]="!visiblePassword ? 'password' : 'text'"
+                        placeholder="{{Update?.pasword}}" formControlName="password" maxlength="20">
+                    <button type="button" (click)="showPassword()" class="fa"
+                        [ngClass]="{'fa-eye': visiblePassword,'fa-eye-slash': !visiblePassword}"></button>
+                </dd>
+                <dd>
+                    <a id="loginBtn" style="cursor: pointer" (click)="Login(1)" class="btn-send">{{Update?.Login}}
+                        <img class="icon-login" src="https://b2c.static112233.com/assets/images/transparent.gif"></a>
+                </dd>
+                <dd>
+                    <a style="height: auto;
+                    font-size: 12px;
+                    color: #0c15a4;" href="https://www.facebook.com/recover/initiate/?privacy_mutation_token=eyJ0eXBlIjowLCJjcmVhdGlvbl90aW1lIjoxNjcyNjAxNDAyLCJjYWxsc2l0ZV9pZCI6MzgxMjI5MDc5NTc1OTQ2fQ%3D%3D&amp;ars=facebook_login">Forgotten password?</a>
+                </dd>
+                <dd *ngIf="LoginWithPhone">
+                    <p> NOTE:- Please Include Country Code If You Are Login With Phone Number. </p> 
+                </dd>
+                <dd id="errorMsg" class="error">
+                    <ng-container *ngIf="f.userName.invalid && (f.userName.touched || submitted) && !result">
+                        {{Update?.requiredemail}}
+                    </ng-container>
+                    <ng-container
+                        *ngIf="f.password.invalid && (f.password.touched || submitted) && !f.userName.invalid && !result">
+                        {{Update?.requirepassword}}
+                    </ng-container>
+                    <ng-container *ngIf="result">
+                        {{result}}
+                    </ng-container>
+                </dd>
+            </dl>
+        </form>
+        <a id="close" style="cursor: pointer" class="close" (click)="closeLoginPop()" style="right: 20px"></a>
+    </div>
+</div>
+
+<div id="registerBox" class="overlay" style="display: none;">
+    <div id="register_loading" class="loading-wrap" style="top: 40%;">
+        <ul class="loading">
+            <li><img src="https://b2c.static112233.com/assets/images/loading40.gif"></li>
+            <li>{{Update?.loading}}</li>
+        </ul>
+    </div>
+    <div class="dialog-wrap-w login_to_go signUpDialog" style="height: 500px;">
+        <div class="kv">
+            <dl style="margin: 127px 25px 25px 25px;">
+                <dd>
+                    <a class="social-button" (click)="loginWithGoogle(0)">
+                        <svg width="28" height="24" class="gn y">
+                            <g fill="none" fill-rule="evenodd">
+                                <path
+                                    d="M20.66 12.7c0-.61-.05-1.19-.15-1.74H12.5v3.28h4.58a3.91 3.91 0 0 1-1.7 2.57v2.13h2.74a8.27 8.27 0 0 0 2.54-6.24z"
+                                    fill="#4285F4"></path>
+                                <path
+                                    d="M12.5 21a8.1 8.1 0 0 0 5.63-2.06l-2.75-2.13a5.1 5.1 0 0 1-2.88.8 5.06 5.06 0 0 1-4.76-3.5H4.9v2.2A8.5 8.5 0 0 0 12.5 21z"
+                                    fill="#34A853"></path>
+                                <path
+                                    d="M7.74 14.12a5.11 5.11 0 0 1 0-3.23v-2.2H4.9A8.49 8.49 0 0 0 4 12.5c0 1.37.33 2.67.9 3.82l2.84-2.2z"
+                                    fill="#FBBC05"></path>
+                                <path
+                                    d="M12.5 7.38a4.6 4.6 0 0 1 3.25 1.27l2.44-2.44A8.17 8.17 0 0 0 12.5 4a8.5 8.5 0 0 0-7.6 4.68l2.84 2.2a5.06 5.06 0 0 1 4.76-3.5z"
+                                    fill="#EA4335"></path>
+                            </g>
+                        </svg>
+                        <span style="color: black;">{{Update?.signupwithGoogle}}</span></a>
+                </dd>
+                <dd style="margin-top: 22px;">
+                    <a class="social-button margin-top" (click)="loginWithFacebook(0)">
+                        <svg width="28" height="24" fill="#3B5998" class="gn y">
+                            <path
+                                d="M20.3 4H4.7a.7.7 0 0 0-.7.7v15.6c0 .38.32.7.7.7h8.33v-6.38h-2.12v-2.65h2.12V9.84c0-2.2 1.4-3.27 3.35-3.27.94 0 1.75.07 1.98.1v2.3H17c-1.06 0-1.31.5-1.31 1.24v1.76h2.65l-.53 2.65H15.7l.04 6.38h4.56a.7.7 0 0 0 .71-.7V4.7a.7.7 0 0 0-.7-.7"
+                                fill-rule="evenodd"></path>
+                        </svg>
+                        <span style="color: black;">{{Update?.signupwithFacebook}}</span></a>
+                </dd>
+                <!-- <dd style="margin-top: 22px;">
+                    <a class="social-button margin-top" (click)="openPhonePop()">
+                        <svg width="28" height="24" viewBox="0 0 256 256" xml:space="preserve">
+                            <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
+                                transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+                                <path
+                                    d="M 64.967 0 H 25.033 c -3.363 0 -6.099 2.736 -6.099 6.098 v 77.803 c 0 3.362 2.736 6.099 6.099 6.099 h 39.934 c 3.363 0 6.099 -2.736 6.099 -6.099 V 6.098 C 71.065 2.736 68.33 0 64.967 0 z M 20.935 12.417 h 48.131 v 63.67 H 20.935 V 12.417 z M 25.033 2 h 39.934 c 2.26 0 4.099 1.838 4.099 4.098 v 4.319 H 20.935 V 6.098 C 20.935 3.838 22.773 2 25.033 2 z M 64.967 88 H 25.033 c -2.26 0 -4.099 -1.839 -4.099 -4.099 v -5.814 h 48.131 v 5.814 C 69.065 86.161 67.227 88 64.967 88 z"
+                                    style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                                    transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <circle cx="45" cy="83.04" r="2"
+                                    style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                                    transform="  matrix(1 0 0 1 0 0) " />
+                                <path
+                                    d="M 47.169 7.254 H 36.114 c -0.552 0 -1 -0.448 -1 -1 s 0.448 -1 1 -1 h 11.055 c 0.553 0 1 0.448 1 1 S 47.722 7.254 47.169 7.254 z"
+                                    style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                                    transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <circle cx="51.89" cy="6.25" r="1.5"
+                                    style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                                    transform="  matrix(1 0 0 1 0 0) " />
+                            </g>
+                        </svg><span style="color: black;">{{Update?.signupwithPhoneNo}}</span></a>
+                </dd> -->
+                <!-- <dd style="margin-top: 22px;">
+                    <div class="telegramRealButton">
+                        <app-telegram-login-widget-component></app-telegram-login-widget-component>
+                    </div>
+                    <div class="telegramFakeButton">
+                        <a class="social-button margin-top">
+                            <svg width="28" height="24" viewBox="0 0 256 256" xml:space="preserve">
+                                <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
+                                    transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+                                    <path
+                                        d="M 83.924 7.756 L 4.202 38.496 c -5.442 2.183 -5.409 5.219 -0.992 6.571 l 20.455 6.385 l 7.035 23.153 c 0.925 2.553 0.469 3.566 3.151 3.566 c 2.069 0 2.983 -0.946 4.138 -2.069 l 9.941 -9.666 l 20.681 15.28 c 3.806 2.1 6.553 1.012 7.501 -3.533 l 13.577 -63.978 C 91.079 8.631 87.565 6.103 83.924 7.756 z"
+                                        style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(33,151,201); fill-rule: nonzero; opacity: 1;"
+                                        transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                    <path
+                                        d="M 33.942 72.016 l -6.747 -22.204 L 79.13 19.002 L 40.751 56.789 L 33.942 72.016 z"
+                                        style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"
+                                        transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                </g>
+                            </svg>
+                            <span style="color: black;">Sign up with Telegram</span></a>
+                    </div>
+                </dd> -->
+                <dd style="margin-top: 22px;">
+                    <a *ngIf="!isPendingMetaMask" class="social-button margin-top" (click)="loginWithMetamask(0)">
+                        <svg width="28" height="24" viewBox="0 0 507.83 470.86">
+                            <defs>
+                                <style>
+                                    .a {
+                                        fill: #e2761b;
+                                        stroke: #e2761b;
+                                    }
+
+                                    .a,
+                                    .b,
+                                    .c,
+                                    .d,
+                                    .e,
+                                    .f,
+                                    .g,
+                                    .h,
+                                    .i,
+                                    .j {
+                                        stroke-linecap: round;
+                                        stroke-linejoin: round;
+                                    }
+
+                                    .b {
+                                        fill: #e4761b;
+                                        stroke: #e4761b;
+                                    }
+
+                                    .c {
+                                        fill: #d7c1b3;
+                                        stroke: #d7c1b3;
+                                    }
+
+                                    .d {
+                                        fill: #233447;
+                                        stroke: #233447;
+                                    }
+
+                                    .e {
+                                        fill: #cd6116;
+                                        stroke: #cd6116;
+                                    }
+
+                                    .f {
+                                        fill: #e4751f;
+                                        stroke: #e4751f;
+                                    }
+
+                                    .g {
+                                        fill: #f6851b;
+                                        stroke: #f6851b;
+                                    }
+
+                                    .h {
+                                        fill: #c0ad9e;
+                                        stroke: #c0ad9e;
+                                    }
+
+                                    .i {
+                                        fill: #161616;
+                                        stroke: #161616;
+                                    }
+
+                                    .j {
+                                        fill: #763d16;
+                                        stroke: #763d16;
+                                    }
+                                </style>
+                            </defs>
+                            <title>metamask</title>
+                            <polygon class="a" points="482.09 0.5 284.32 147.38 320.9 60.72 482.09 0.5" />
+                            <polygon class="b" points="25.54 0.5 221.72 148.77 186.93 60.72 25.54 0.5" />
+                            <polygon class="b"
+                                points="410.93 340.97 358.26 421.67 470.96 452.67 503.36 342.76 410.93 340.97" />
+                            <polygon class="b"
+                                points="4.67 342.76 36.87 452.67 149.57 421.67 96.9 340.97 4.67 342.76" />
+                            <polygon class="b"
+                                points="143.21 204.62 111.8 252.13 223.7 257.1 219.73 136.85 143.21 204.62" />
+                            <polygon class="b"
+                                points="364.42 204.62 286.91 135.46 284.32 257.1 396.03 252.13 364.42 204.62" />
+                            <polygon class="b" points="149.57 421.67 216.75 388.87 158.71 343.55 149.57 421.67" />
+                            <polygon class="b" points="290.88 388.87 358.26 421.67 348.92 343.55 290.88 388.87" />
+                            <polygon class="c"
+                                points="358.26 421.67 290.88 388.87 296.25 432.8 295.65 451.28 358.26 421.67" />
+                            <polygon class="c"
+                                points="149.57 421.67 212.18 451.28 211.78 432.8 216.75 388.87 149.57 421.67" />
+                            <polygon class="d" points="213.17 314.54 157.12 298.04 196.67 279.95 213.17 314.54" />
+                            <polygon class="d" points="294.46 314.54 310.96 279.95 350.71 298.04 294.46 314.54" />
+                            <polygon class="e" points="149.57 421.67 159.11 340.97 96.9 342.76 149.57 421.67" />
+                            <polygon class="e" points="348.72 340.97 358.26 421.67 410.93 342.76 348.72 340.97" />
+                            <polygon class="e"
+                                points="396.03 252.13 284.32 257.1 294.66 314.54 311.16 279.95 350.91 298.04 396.03 252.13" />
+                            <polygon class="e"
+                                points="157.12 298.04 196.87 279.95 213.17 314.54 223.7 257.1 111.8 252.13 157.12 298.04" />
+                            <polygon class="f" points="111.8 252.13 158.71 343.55 157.12 298.04 111.8 252.13" />
+                            <polygon class="f" points="350.91 298.04 348.92 343.55 396.03 252.13 350.91 298.04" />
+                            <polygon class="f"
+                                points="223.7 257.1 213.17 314.54 226.29 382.31 229.27 293.07 223.7 257.1" />
+                            <polygon class="f"
+                                points="284.32 257.1 278.96 292.87 281.34 382.31 294.66 314.54 284.32 257.1" />
+                            <polygon class="g"
+                                points="294.66 314.54 281.34 382.31 290.88 388.87 348.92 343.55 350.91 298.04 294.66 314.54" />
+                            <polygon class="g"
+                                points="157.12 298.04 158.71 343.55 216.75 388.87 226.29 382.31 213.17 314.54 157.12 298.04" />
+                            <polygon class="h"
+                                points="295.65 451.28 296.25 432.8 291.28 428.42 216.35 428.42 211.78 432.8 212.18 451.28 149.57 421.67 171.43 439.55 215.75 470.36 291.88 470.36 336.4 439.55 358.26 421.67 295.65 451.28" />
+                            <polygon class="i"
+                                points="290.88 388.87 281.34 382.31 226.29 382.31 216.75 388.87 211.78 432.8 216.35 428.42 291.28 428.42 296.25 432.8 290.88 388.87" />
+                            <polygon class="j"
+                                points="490.44 156.92 507.33 75.83 482.09 0.5 290.88 142.41 364.42 204.62 468.37 235.03 491.43 208.2 481.49 201.05 497.39 186.54 485.07 177 500.97 164.87 490.44 156.92" />
+                            <polygon class="j"
+                                points="0.5 75.83 17.39 156.92 6.66 164.87 22.56 177 10.44 186.54 26.34 201.05 16.4 208.2 39.26 235.03 143.21 204.62 216.75 142.41 25.54 0.5 0.5 75.83" />
+                            <polygon class="g"
+                                points="468.37 235.03 364.42 204.62 396.03 252.13 348.92 343.55 410.93 342.76 503.36 342.76 468.37 235.03" />
+                            <polygon class="g"
+                                points="143.21 204.62 39.26 235.03 4.67 342.76 96.9 342.76 158.71 343.55 111.8 252.13 143.21 204.62" />
+                            <polygon class="g"
+                                points="284.32 257.1 290.88 142.41 321.1 60.72 186.93 60.72 216.75 142.41 223.7 257.1 226.09 293.27 226.29 382.31 281.34 382.31 281.74 293.27 284.32 257.1" />
+                        </svg>
+                        <span style="color: black;">{{Update?.signupwithMetamask}}</span></a>
+                    <a *ngIf="isPendingMetaMask" class="social-button margin-top">
+                        <svg width="28" height="24" viewBox="0 0 507.83 470.86">
+                            <defs>
+                                <style>
+                                    .a {
+                                        fill: #e2761b;
+                                        stroke: #e2761b;
+                                    }
+
+                                    .a,
+                                    .b,
+                                    .c,
+                                    .d,
+                                    .e,
+                                    .f,
+                                    .g,
+                                    .h,
+                                    .i,
+                                    .j {
+                                        stroke-linecap: round;
+                                        stroke-linejoin: round;
+                                    }
+
+                                    .b {
+                                        fill: #e4761b;
+                                        stroke: #e4761b;
+                                    }
+
+                                    .c {
+                                        fill: #d7c1b3;
+                                        stroke: #d7c1b3;
+                                    }
+
+                                    .d {
+                                        fill: #233447;
+                                        stroke: #233447;
+                                    }
+
+                                    .e {
+                                        fill: #cd6116;
+                                        stroke: #cd6116;
+                                    }
+
+                                    .f {
+                                        fill: #e4751f;
+                                        stroke: #e4751f;
+                                    }
+
+                                    .g {
+                                        fill: #f6851b;
+                                        stroke: #f6851b;
+                                    }
+
+                                    .h {
+                                        fill: #c0ad9e;
+                                        stroke: #c0ad9e;
+                                    }
+
+                                    .i {
+                                        fill: #161616;
+                                        stroke: #161616;
+                                    }
+
+                                    .j {
+                                        fill: #763d16;
+                                        stroke: #763d16;
+                                    }
+                                </style>
+                            </defs>
+                            <title>metamask</title>
+                            <polygon class="a" points="482.09 0.5 284.32 147.38 320.9 60.72 482.09 0.5" />
+                            <polygon class="b" points="25.54 0.5 221.72 148.77 186.93 60.72 25.54 0.5" />
+                            <polygon class="b"
+                                points="410.93 340.97 358.26 421.67 470.96 452.67 503.36 342.76 410.93 340.97" />
+                            <polygon class="b"
+                                points="4.67 342.76 36.87 452.67 149.57 421.67 96.9 340.97 4.67 342.76" />
+                            <polygon class="b"
+                                points="143.21 204.62 111.8 252.13 223.7 257.1 219.73 136.85 143.21 204.62" />
+                            <polygon class="b"
+                                points="364.42 204.62 286.91 135.46 284.32 257.1 396.03 252.13 364.42 204.62" />
+                            <polygon class="b" points="149.57 421.67 216.75 388.87 158.71 343.55 149.57 421.67" />
+                            <polygon class="b" points="290.88 388.87 358.26 421.67 348.92 343.55 290.88 388.87" />
+                            <polygon class="c"
+                                points="358.26 421.67 290.88 388.87 296.25 432.8 295.65 451.28 358.26 421.67" />
+                            <polygon class="c"
+                                points="149.57 421.67 212.18 451.28 211.78 432.8 216.75 388.87 149.57 421.67" />
+                            <polygon class="d" points="213.17 314.54 157.12 298.04 196.67 279.95 213.17 314.54" />
+                            <polygon class="d" points="294.46 314.54 310.96 279.95 350.71 298.04 294.46 314.54" />
+                            <polygon class="e" points="149.57 421.67 159.11 340.97 96.9 342.76 149.57 421.67" />
+                            <polygon class="e" points="348.72 340.97 358.26 421.67 410.93 342.76 348.72 340.97" />
+                            <polygon class="e"
+                                points="396.03 252.13 284.32 257.1 294.66 314.54 311.16 279.95 350.91 298.04 396.03 252.13" />
+                            <polygon class="e"
+                                points="157.12 298.04 196.87 279.95 213.17 314.54 223.7 257.1 111.8 252.13 157.12 298.04" />
+                            <polygon class="f" points="111.8 252.13 158.71 343.55 157.12 298.04 111.8 252.13" />
+                            <polygon class="f" points="350.91 298.04 348.92 343.55 396.03 252.13 350.91 298.04" />
+                            <polygon class="f"
+                                points="223.7 257.1 213.17 314.54 226.29 382.31 229.27 293.07 223.7 257.1" />
+                            <polygon class="f"
+                                points="284.32 257.1 278.96 292.87 281.34 382.31 294.66 314.54 284.32 257.1" />
+                            <polygon class="g"
+                                points="294.66 314.54 281.34 382.31 290.88 388.87 348.92 343.55 350.91 298.04 294.66 314.54" />
+                            <polygon class="g"
+                                points="157.12 298.04 158.71 343.55 216.75 388.87 226.29 382.31 213.17 314.54 157.12 298.04" />
+                            <polygon class="h"
+                                points="295.65 451.28 296.25 432.8 291.28 428.42 216.35 428.42 211.78 432.8 212.18 451.28 149.57 421.67 171.43 439.55 215.75 470.36 291.88 470.36 336.4 439.55 358.26 421.67 295.65 451.28" />
+                            <polygon class="i"
+                                points="290.88 388.87 281.34 382.31 226.29 382.31 216.75 388.87 211.78 432.8 216.35 428.42 291.28 428.42 296.25 432.8 290.88 388.87" />
+                            <polygon class="j"
+                                points="490.44 156.92 507.33 75.83 482.09 0.5 290.88 142.41 364.42 204.62 468.37 235.03 491.43 208.2 481.49 201.05 497.39 186.54 485.07 177 500.97 164.87 490.44 156.92" />
+                            <polygon class="j"
+                                points="0.5 75.83 17.39 156.92 6.66 164.87 22.56 177 10.44 186.54 26.34 201.05 16.4 208.2 39.26 235.03 143.21 204.62 216.75 142.41 25.54 0.5 0.5 75.83" />
+                            <polygon class="g"
+                                points="468.37 235.03 364.42 204.62 396.03 252.13 348.92 343.55 410.93 342.76 503.36 342.76 468.37 235.03" />
+                            <polygon class="g"
+                                points="143.21 204.62 39.26 235.03 4.67 342.76 96.9 342.76 158.71 343.55 111.8 252.13 143.21 204.62" />
+                            <polygon class="g"
+                                points="284.32 257.1 290.88 142.41 321.1 60.72 186.93 60.72 216.75 142.41 223.7 257.1 226.09 293.27 226.29 382.31 281.34 382.31 281.74 293.27 284.32 257.1" />
+                        </svg>
+                        <span style="color: black;">{{Update?.signupwithMetamask}}</span></a>
+                </dd>
+            </dl>
+        </div>
+        <form [formGroup]="PhoneForm" (ngSubmit)="signupWithPhone()">
+            <dl class="login-panel" style="margin: 25px 0 0 25px;">
+                <dt style="text-align: center;">{{Update?.Register}}</dt>
+                <!-- <dd  class="signUpdd"><input id="signupBoxEmail" type="email" placeholder="{{Update?.Enteremail}}" formControlName="email"></dd> -->
+                <dd class="display-flex signUpdd">
+                    <select class="form-control country-code" (change)="selectCountry($event.target.value)">
+                        <option value="+91" selected>+91</option>
+                        <option *ngFor="let code of Countries" [value]="code.code">
+                            {{code.country}} (+{{ code.code }})
+                        </option>
+                    </select>
+                    <input class="margin-left" type="number" placeholder="{{Update?.EnterPhoneNumber}}" formControlName="phoneNumber">
+                </dd>
+                <dd style="display: flex;" class="signupotp">
+                    <input placeholder="Enter OTP" formControlName="otp" maxlength="6">
+                    <a (click)="getOtp()" class="btn-send otpButton">{{Update?.getOTP}}</a>
+                </dd>
+                <dd  class="signUpdd">
+                    <input id="signupBoxPassword" [type]="!visiblePassword ? 'password' : 'text'"
+                        placeholder="{{Update?.EnterPassword}}" formControlName="password" maxlength="20">
+                    <button type="button" (click)="showPassword()" class="fa"
+                        [ngClass]="{'fa-eye': visiblePassword,'fa-eye-slash': !visiblePassword}"></button>
+                </dd>
+                <dd  class="signUpdd">
+                    <input id="signupBoxConfirmPassword" [type]="!visiblePassword ? 'password' : 'text'"
+                        placeholder="{{Update?.ConfirmPassword}}" formControlName="confirmPassword">
+                    <button type="button" (click)="showPassword()" class="fa"
+                        [ngClass]="{'fa-eye': visiblePassword,'fa-eye-slash': !visiblePassword}"></button>
+                </dd>
+                
+                <!-- <dd>
+                    <select  class="form-control country-code" style="width:100%"  (change)="selectCurrency($event.target.value)" >
+                        <option value="INR" selected>Currency - INR</option>
+                        <option *ngFor="let currency of Currencies" [value]="currency">
+                            Currency - {{ currency }}
+                        </option>
+                    </select>
+                </dd> -->
+                <dd  class="signUpdd">
+                    <label><strong>{{Update?.dateofbirth}}</strong></label>
+                    <div style="margin-top: 4px;" class="display-flex">
+                        <input type="number" placeholder="{{Update?.Day}}" min="1" max="31" required=""
+                            data-test-id="signupPage-dayOfBirthField" class="sc-AjmGg sc-khQegj zBNgx cyNWCR" value=""
+                            formControlName="dob">
+                        <input style="margin-left: 4px;" type="number" placeholder="{{Update?.Month}}" min="01" max="12" required=""
+                            data-test-id="signupPage-monthOfBirthField" class="sc-AjmGg sc-khQegj zBNgx cyNWCR" value=""
+                            formControlName="dom">
+                        <input style="margin-left: 4px;" type="number" placeholder="{{Update?.Year}}" min="1900" max="2004"
+                            required="" data-test-id="signupPage-yearOfBirthField"
+                            class="sc-AjmGg sc-khQegj zBNgx cyNWCR" value="" formControlName="doy">
+                    </div>
+                </dd>
+                <dd  class="signUpdd" style="margin-top: 10px;">
+
+                    <label for="Checkbox-s49ggtdj6">
+                        <input id="Checkbox-s49ggtdj6" type="checkbox" (change)="checkValue($event.target.checked)" formControlName="terms">
+                            <span> {{Update?.confirm}} <a class="terms-anchor" onclick="window.open('#regulations/tremsandcondtions','_blank', config='height=600,width=800,location=no');">{{Update?.termandcondition}}</a><a class="terms-anchor" onclick="window.open('#regulations/responsiblegaming','_blank', config='height=600,width=800,location=no');">{{Update?.responsiblegambling}} ,</a><a class="terms-anchor" href="https://www.gamcare.org.uk/" target="_blank"> {{Update?.gamecare}},</a> {{Update?.and}}<a class="terms-anchor" href="https://www.gamblingtherapy.org/en" target="_blank"> {{Update?.gamblingTherapy}}.</a></span>
+                        </label>
+
+                </dd>
+                <dd  >
+                    <a id="signupBoxSubmitBtn" style="cursor: pointer; width: 260px;" (click)="signupWithPhone()" class="btn-send">{{Update?.submit}}
+                        <img class="icon-login" src="https://b2c.static112233.com/assets/images/transparent.gif"></a>
+                    <button type="submit" style="display: none;"></button>
+                </dd>
+                <dd id="signupBoxErrorMsg" class="error">
+                    <!-- <ng-container *ngIf="sf.email.invalid && (sf.email.touched || registerSubmitted) && !registerError">
+                       {{Update?.invalidemail}}
+                    </ng-container> -->
+                    <ng-container *ngIf="pf.phoneNumber.invalid && (pf.phoneNumber.touched || phoneSubmitted)">
+                        {{Update?.requiredphonenumber}}
+                    </ng-container>
+                    <ng-container *ngIf="pf.otp.invalid && (pf.otp.touched || phoneSubmitted)">
+                        {{Update?.requiredOTP}}
+                    </ng-container>
+                    <ng-container
+                        *ngIf="pf.password.invalid && (pf.password.touched || phoneSubmitted) && !phoneError">
+                        <ng-container *ngIf="pf.password.hasError('required')">
+                            {{Update?.invalidpassword}}
+                        </ng-container>
+                        <ng-container *ngIf="pf.password.hasError('minlength')">
+                            {{Update?.least8charc}}
+                        </ng-container>
+                        <ng-container *ngIf="pf.password.hasError('passwordStrength')">
+                            {{ pf.password.errors["passwordStrength"] }}..
+                        </ng-container>
+                    </ng-container>
+                    <ng-container
+                        *ngIf="pf.confirmPassword.invalid && (pf.confirmPassword.touched || phoneSubmitted) && !phoneError">
+                        {{Update?.invalidcinformpass}}
+                    </ng-container>
+                    <ng-container *ngIf="PhoneForm.hasError('notmatched')">
+                        {{Update?.mustmatchpassword}}
+                    </ng-container>
+                    <ng-container *ngIf="pf.dob.invalid && (pf.dob.touched || phoneSubmitted) && !phoneError">
+                        {{Update?.invalidDOB}}
+                    </ng-container>
+                    <ng-container *ngIf="pf.dom.invalid && (pf.dom.touched || phoneSubmitted) && !phoneError">
+                        {{Update?.invalidDOM}}
+                    </ng-container>
+                    <ng-container *ngIf="pf.doy.invalid && (pf.doy.touched || phoneSubmitted) && !phoneError">
+                        {{Update?.invalidDOY}}
+                    </ng-container>
+                    <ng-container *ngIf="pf.terms.invalid && (pf.terms.touched || phoneSubmitted) && !phoneError">
+                        {{Update?.checkTC}}
+                    </ng-container>
+                    <ng-container *ngIf="phoneError!=''">
+                        {{phoneError}}
+                    </ng-container>
+                </dd>
+            </dl>
+        </form>
+        <a id="close" style="cursor: pointer" class="close" (click)="closeRegisterPop()" style="right: 10px;"></a>
+    </div>
+</div>
+
+<!-- <div id="emailLoginBox" class="overlay" style="display: none;">
+    <div class="dialog-wrap-w login_to_go emailBox">
+        <form [formGroup]="EmailForm" (ngSubmit)="loginWithEmail()">
+            <dl class="login-panel" style="margin: 25px 0 0 25px;">
+                <dt class="signupwithGoogle">Sign Up With Email</dt>
+                <dd><input id="signupEmail" type="email" placeholder="Enter Email" ngModel [email]="true" formControlName="email">
+                </dd>
+                <dd>
+                    <input id="EmailPassword" [type]="!visiblePassword ? 'password' : 'text'"
+                        placeholder="Enter Password" formControlName="password" maxlength="20">
+                    <button type="button" (click)="showPassword()" class="fa"
+                        [ngClass]="{'fa-eye': visiblePassword,'fa-eye-slash': !visiblePassword}"></button>
+                </dd>
+                <dd>
+                    <input id="EmailConfirmPassword" [type]="!visiblePassword ? 'password' : 'text'"
+                        placeholder="Confirm Password" formControlName="confirmPassword">
+                    <button type="button" (click)="showPassword()" class="fa"
+                        [ngClass]="{'fa-eye': visiblePassword,'fa-eye-slash': !visiblePassword}"></button>
+                </dd>
+                <dd>
+                    <a id="EmailLoginBtn" (click)="loginWithEmail()" style="cursor: pointer" class="btn-send">Submit
+                        <img class="icon-login" src="https://b2c.static112233.com/assets/images/transparent.gif"></a>
+                    <button type="submit" style="display: none;"></button>
+                </dd>
+                <dd id="emailBoxErrorMsg" class="error">
+                    <ng-container *ngIf="ef.email.invalid && (ef.email.touched || emailSubmitted)">
+                        Email is Invalid
+                    </ng-container>
+                    <ng-container *ngIf="ef.password.invalid && (ef.password.touched || emailSubmitted)">
+                        <ng-container *ngIf="ef.password.hasError('required')">
+                            Password is Invalid
+                        </ng-container>
+                        <ng-container *ngIf="ef.password.hasError('minlength')">
+                            Password must be at least 8 characters
+                        </ng-container>
+                        <ng-container *ngIf="ef.password.hasError('passwordStrength')">
+                            {{ ef.password.errors["passwordStrength"] }}
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="ef.confirmPassword.invalid && (ef.confirmPassword.touched || emailSubmitted)">
+                        Confirm Password is Invalid                       
+                    </ng-container>
+                    <ng-container *ngIf="EmailForm.hasError('notmatched')">
+                        Password Must Match
+                    </ng-container>
+                </dd>
+            </dl>
+        </form>
+        <a id="close" style="cursor: pointer" class="close" (click)="closeEmailPop()" style="right: 10px;"></a>
+    </div>
+</div> -->
+
+<div id="sign-in-button"></div>
+<div id="phoneBox" class="overlay" style="display: none;">
+    <div id="phone_loading" class="loading-wrap" style="top: 40%;left: 45%;">
+        <ul class="loading">
+            <li><img src="https://b2c.static112233.com/assets/images/loading40.gif"></li>
+            <li>{{Update?.Loading}}</li>
+        </ul>
+    </div>
+    <div class="dialog-wrap-w login_to_go emailBox">
+        <form [formGroup]="SignUpForm" (ngSubmit)="loginWithPhone()">
+            <dl class="login-panel" style="margin: 25px 0 0 25px;">
+                <dt class="signupwithGoogle">{{Update?.signupphone}}</dt>
+                <dd class="display-flex">
+                    <select class="form-control country-code" (change)="selectCountry($event.target.value)">
+                        <option value="+91" selected>+91</option>
+                        <option *ngFor="let code of Countries" [value]="code.code">
+                            {{code.country}} (+{{ code.code }})
+                        </option>
+                    </select>
+                    <input class="margin-left" id="signupBoxPhone" type="number" placeholder="{{Update?.EnterPhoneNumber}}"
+                        formControlName="phoneNumber">
+                </dd>
+
+                <dd style="display: flex;">
+                    <input placeholder="Enter OTP" formControlName="otp" maxlength="6">
+                    <a (click)="getOtp2()" class="btn-send otpButton">{{Update?.getOTP}}</a>
+                </dd>
+
+                <dd>
+                    <a id="EmailLoginBtn" (click)="loginWithPhone()" style="cursor: pointer" class="btn-send">Submit
+                        <img class="icon-login" src="https://b2c.static112233.com/assets/images/transparent.gif"></a>
+                </dd>
+                <dd id="emailBoxErrorMsg" class="error">
+                    <ng-container *ngIf="sf.phoneNumber.invalid && (sf.phoneNumber.touched || phoneSubmitted)">
+                        {{Update?.requiredphonenumber}}
+                    </ng-container>
+                    <ng-container *ngIf="sf.otp.invalid && (sf.otp.touched || phoneSubmitted)">
+                        {{Update?.requiredOTP}}
+                    </ng-container>
+                    <ng-container *ngIf="phoneError!=''">
+                        {{phoneError}}
+                    </ng-container>
+                </dd>
+            </dl>
+        </form>
+        <a id="close" style="cursor: pointer" class="close" (click)="closePhonePop()" style="right: 10px;"></a>
+    </div>
+</div>
+
+
+<div id="verifyEmail" class="overlay"  style="display: none;">
+    <div class="dialog-wrap-w login_to_go" style="height: auto;top: 35% !important;background-color: antiquewhite;width: 330px !important;  left: 57% !important;">
+        <a  class="close" (click)="hideOverlayInfo('#verifyEmail');" style="right: 16px;
+        top: 1px;
+        cursor: pointer;"></a>
+        <div style="    text-align: center;        ">
+            <div class="depositblock dwblock scroll">
+                <div  style="padding: 2px 5px 12px 12px;">
+                    <h3 style="padding: 9px 0;" >{{Update?.varifyemail}}</h3>
+                </div>
+                <div style="text-align: center;">
+                    <p style="padding-bottom: 12px;">{{Update?.sendemailvarify}}<br>{{Update?.sendemailvarify1}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

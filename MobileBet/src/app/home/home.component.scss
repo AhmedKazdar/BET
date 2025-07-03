@@ -1,0 +1,607 @@
+.tp_image {
+  // height: 106px;
+}
+
+.mian-wrap .gamehall .entrance-half:before {
+  padding-top: 68.77778%;
+}
+
+.entrance-title {
+  background-image: linear-gradient(270deg, rgb(41 42 42 / 62%) 4%, #000 97%);
+}
+
+#coming_soon img {
+  // height: 125px;
+  max-width: 100%;
+  height: auto;
+}
+
+#coming_soon .news-wrap.news-wrap-frame {
+  height: auto;
+}
+
+#Evolution img {
+  // height: 125px;
+  max-width: 100%;
+  height: auto;
+}
+
+#Evolution .news-wrap.news-wrap-frame {
+  height: auto;
+  margin-left: 20px;
+  margin-top: 100px;
+}
+
+#marketing img {
+  // height: 125px;
+  max-width: 100%;
+  height: auto;
+}
+
+#marketing .news-wrap.news-wrap-frame {
+  height: auto;
+  margin-left: 0px;
+  margin-top: 0px;
+}
+
+.baji {
+  margin-top: 3px;
+}
+
+// .overlay1 {
+//   position: fixed;
+//   top: 20%;
+//   left: 10px;
+//   width: 95vw;
+//   height: 100%;
+//   background-color: rgba(0, 0, 0, 0);
+//   z-index: 99;
+//   justify-content: center;
+//   align-items: center;
+//   animation: fadeIn 0.5s ease
+// }
+
+.activePlayer {
+  padding: 12px;
+  color: #ffffff;
+  text-align: center;
+  font-size: 21px;
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url(https://b2c.static112233.com/m/assets/images/mobile/cricbuzzer/goldbg.jpg);
+  background-size: cover;
+  display: grid;
+  margin: 5px;
+  margin-bottom: 0px;
+  margin-top: 2px;
+}
+
+.cl1 {
+  color: #ffcc2e;
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 2px 2px #000;
+
+}
+
+.cl2 {
+  font-size: 14px;
+  font-weight: 400;
+  text-shadow: 2px 2px #000;
+
+}
+
+.main {
+  width: 100%;
+  margin: 0px auto;
+  padding: 10px 10px;
+  background-image: url("https://b2c.static112233.com/m/assets/images/bgimg.jpg");
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.main::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  height: 95%;
+  // background-color: #fff;
+}
+
+.main::after {
+  // content: "or";
+  position: absolute;
+  left: 50.25%;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  margin-left: -25px;
+  margin-top: -25px;
+  background-color: #fff;
+  border-radius: 50%;
+  text-transform: uppercase;
+  color: #20bfa9;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main .prod {
+  width: 100%;
+  height: 95%;
+  background-color: #fff;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
+
+.main .prod div:not(.features) {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: 100px;
+  background-color: #282828;
+  color: #fff;
+  font-weight: bold;
+  font-size: 19px;
+  border-radius: 15px 15px 0 0;
+  -webkit-border-radius: 15px 15px 0 0;
+  -moz-border-radius: 15px 15px 0 0;
+  -ms-border-radius: 15px 15px 0 0;
+  -o-border-radius: 15px 15px 0 0;
+}
+
+.main .prod div:not(.features) label {
+  margin-top: 15px;
+  font-size: 17px;
+}
+
+.main .prod div:not(.features) label span {
+  color: #4caf50;
+  margin-left: 6px;
+}
+
+.main .prod .features {
+  width: 81%;
+  height: 95%;
+  margin: -50px auto 40px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: #282828;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
+
+.main .prod .features h4 {
+  font-size: 20px;
+  margin-block: 20px;
+  text-align: center;
+}
+
+.main .prod .features ul li {
+  list-style: none;
+  font-size: 16px;
+  padding-bottom: 10px;
+}
+
+.main .prod .features ul li::before {
+  content: "\2022";
+  position: relative;
+  top: 4px;
+  right: 5px;
+  color: #f73859;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.main .prod .features .btncls {
+  width: 80%;
+  padding: 10px;
+  margin: 20px auto;
+  background-color: #f73859;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+
+.main .prod .features .btncls::before,
+.main .prod .features .btncls::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background-color: inherit;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+
+.main .prod .features .btncls::before {
+  top: -4px;
+  left: 0;
+}
+
+.main .prod .features .btncls::after {
+  bottom: -4px;
+  right: 0;
+}
+
+.main .prod .features .btncls:hover {
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+}
+
+.main .prod .features .btncls:hover::before,
+.main .prod .features .btncls:hover::after {
+  width: 100%;
+}
+
+@media (max-width: 1099px) {
+  .main {
+    // margin: 10px auto;
+    // flex-direction: column;
+    // justify-content: center !important;
+    gap: 60px;
+  }
+
+  .main::before {
+    left: 7.5%;
+    width: 85%;
+    height: 2px;
+  }
+
+  .main .prod {
+    width: 95%;
+  }
+}
+
+.features h2 {
+  font-size: 12px;
+}
+
+.info i {
+  font-size: 20px;
+  color: #47b2e4;
+  float: left;
+  width: 44px;
+  height: 44px;
+  background: #e7f5fb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  transition: all .3s ease-in-out;
+}
+
+.fa-phone:before {
+  content: "\f095";
+}
+
+.mobfont {
+  padding-top: 12px;
+  color: #000;
+  font-size: 25px;
+  padding-left: 10px;
+  font-family: fantasy;
+}
+
+.fa-skype:before {
+  content: "\f17e";
+}
+
+.side-content h3 {
+  background-image: none !important;
+  color: #000 !important;
+}
+
+#marketing .frame-wrap {
+  width: 100% !important;
+  height: 90%;
+}
+
+/* Generated by http://responsive-css.spritegen.com Responsive CSS Sprite Generator */
+
+/* Generated by http://responsive-css.spritegen.com Responsive CSS Sprite Generator */
+.tab {
+  min-width: 96.9%;
+  width: 96.9%;
+  border-left: 1px solid #3b5160;
+  border-radius: 5px;
+  display: flex;
+  text-align: center;
+  margin-left: 5px;
+}
+
+.tab li {
+  list-style: none;
+  border: 1px solid #3b5160;
+  border-width: 1px 0
+}
+
+.tab li:first-child {
+  border-radius: 4px 4px 4px 4px
+}
+
+.tab li:first-child a {
+  border-radius: 3px 3px 3px 3px
+}
+
+.tab li {
+  border-radius: 4px 4px 4px 4px
+}
+
+.tab li:last-child a {
+  border-radius: 3px 3px 3px 3px
+}
+
+.tab li {
+  background-color: #212121;
+  border: 1px solid #9b9b9b;
+  color: #3b5160;
+  font-size: 11px;
+  line-height: 27px;
+  font-weight: 700;
+  padding: 1px;
+  padding-left: 7px;
+  padding-right: 7px;
+  margin-right: 7px;
+}
+
+.tab .select {
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.tab .select a {
+  color: #fff;
+}
+
+.tab li a {
+  color: #fff;
+}
+
+.tab .select:hover {
+  text-decoration: none
+}
+
+.tab.col2 li {
+  width: 50%
+}
+
+.tab.col3 li {
+  width: 33.33%
+}
+
+.tab.col4 li {
+  width: 25%
+}
+
+.tab.col5 li {
+  width: 20%
+}
+
+.casino-box-tabs {
+  top: 50px;
+  padding: 3px 0;
+}
+
+.casino-box-tabs {
+  position: sticky;
+  margin: 3px 0px 0px;
+  z-index: 1;
+  width: 100%;
+  background: #23292e;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.casino-tabs-menu {
+  width: 100%;
+}
+
+.casino-tabs-menu {
+  position: relative;
+  /* width: 100%; */
+  height: 100%;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  transition: .75s;
+}
+
+li,
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.arrow-tabs.arrow-left {
+  left: 0;
+}
+
+.arrow-tabs.arrow-right {
+  right: 0;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  .arrow-tabs {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 1279px) {
+  .arrow-tabs {
+    top: 0;
+  }
+}
+
+.arrow-tabs {
+  display: none;
+  width: 21px;
+  position: absolute;
+  top: 0px;
+  height: 30px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  display: -webkit-flex;
+  color: #aaafb5;
+  font-size: 16px;
+}
+
+.casino-box-tabs ul {
+  display: flex;
+  margin: 0 5px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.casino-box-tabs ul {
+  margin: 0 24px;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+}
+
+.casino-box-tabs ul {
+  overflow: hidden;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  scroll-behavior: smooth;
+  overflow-x: auto;
+}
+
+.casino-box-tabs .nav-pills .nav-item {
+  margin-right: 10px;
+}
+
+.casino-box-tabs .nav-pills .nav-link {
+  min-height: unset;
+  border-radius: 12px;
+  padding: 5px;
+}
+
+.casino-box-tabs .nav-pills .nav-link.active {
+  border: 2px solid #fdcf13;
+}
+
+.casino-box-tabs .nav-pills .nav-link {
+  border: 2px solid #3c444b;
+  color: #aaafb5;
+  /* border-radius: 20px; */
+  background-color: transparent;
+  /* min-height: 50px; */
+  display: flex;
+  align-items: center;
+}
+
+.casino-box-tabs .nav-pills .nav-item img {
+  height: 20px;
+}
+
+.casino-box-tabs .nav-pills .nav-item img {
+  height: 30px;
+  margin-right: 5px;
+}
+
+.view-see-more {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: rgba(var(--b-sc-rgb), .5);
+  -webkit-margin-start: 10px;
+  margin-inline-start: 10px;
+  -webkit-margin-end: 4px;
+  margin-inline-end: 4px;
+  font-size: 12px;
+  line-height: 14px;
+  background: red;
+  padding: 6px;
+  color: #fff;
+  border-radius: 4px;
+}
+
+h4 {
+  flex: auto;
+  text-transform: uppercase;
+  padding-top: 6px;
+  background: #000;
+  color: #fff;
+  padding-left: 5px;
+  border-radius: 4px;
+}
+
+.page-view-more {
+  display: flex;
+  padding: 0 7px;
+  padding-top: 6px;
+}
+
+.games-horiz-scroll {
+  grid-template-rows: auto;
+  will-change: scroll-position;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  -webkit-scroll-snap-type: x proximity;
+  scroll-snap-type: x proximity;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 10px;
+}
+
+.fa-chevron-right {
+  padding-left: 5px;
+}
+.overlay {
+  position: fixed;
+  top: 30%;
+  left: 20px;
+  width: 100%;
+  height: 50%;
+  background-color: transparent !important;
+  z-index: 99;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.5s ease;
+}
+.aligh{
+  text-align: center;
+}
+.para{
+  text-align: center;
+  font-size: 15px;
+  padding-top: 50px;
+}
+.overlay .frame-wrap {
+  width: 89.33333vw;
+  height: 65%;
+  font-family: monospace;
+}

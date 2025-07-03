@@ -1,0 +1,180 @@
+<div class="mian-wrap">
+    <div id="highlightLabel" class="highlight-fix">
+        <div id="frame" class="wrap-highlight" style="overflow-x: auto;">
+
+            <a class="a-tab_prev" href="#" style="display: none;">prev</a>
+
+            <ul id="label" style="left: 0px;border-bottom: 2px solid white;">
+
+                <li class="menu-virtual" [ngClass]="{'select':id== 0}" (click)="getsportid(0)">
+                    <a>Horses - Flat</a>
+                </li>
+                <li class="menu-virtual" [ngClass]="{'select':id== 100}" (click)="getsportid(100)">
+                    <a>Horses - Jumps</a>
+                </li>
+                <li class="menu-virtual" [ngClass]="{'select':id== 10}" (click)="getsportid(10)">
+                    <a>Horses - Sprint</a>
+                </li>
+
+                <li class="menu-virtual" [ngClass]="{'select':id== 9}" (click)="getsportid(9)">
+                    <a>World Cup</a>
+                </li>
+                <li class="menu-virtual" [ngClass]="{'select':id== 4}" (click)="getsportid(4)">
+                    <a>Club Football</a>
+                </li>
+                <li class="menu-virtual" [ngClass]="{'select':id== 1}" (click)="getsportid(1)">
+                    <a>Greyhounds</a>
+                </li>
+                <li class="menu-virtual" [ngClass]="{'select':id== 3}" (click)="getsportid(3)">
+                    <a>Motor Racing</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="wrap-highlight_list">
+        <div id="highlightList" class="highlight-list">
+            <div id="streamingBox" class="tv-fix">
+                <div class="tv-wrap">
+                    <div id="streamContainer" class="tv-box">
+                        <div id="tv" class="tv">
+                            <ul class="tv-control">
+                                <li><a id="closeStreamingBox" class="close" style="display: none;">Close</a></li>
+                            </ul><iframe allowfullscreen="true" style="border: none; height: 98%; width: 100%;"
+                                src=""></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ul id="timeRacing" class="virtualhorse">
+                <li class="liTemp" *ngFor="let data of resultdata" [ngClass]="{'Active':data.eventId== eventid}"
+                (click)="getEvent(data.eventId)"><a>{{data.openDate |date: "hh:mm"}} <span class="resulticn" [ngClass]="{'resultactive':data.eventId== eventid}">R</span></a></li>
+                <li id="liTemp" *ngFor="let data of eventdata" [ngClass]="{'Active':data.event?.eventId== eventid}"
+                    (click)="getEvent(data.event?.eventId)"><a title="{{data.event.distance}}" >{{data.event.openDate |date: "hh:mm"}}</a>
+                </li>
+                        
+            </ul>
+            <div id="mainWrap" class="mian-wrap">
+
+                <ng-container *ngFor="let data of eventdata">
+                    <div class="game-wrap" *ngIf="data.event?.eventId==eventid && data.event?.eventId != updateddata">
+                        <div class="event-title-container">
+                            <div class="event-title">{{data.event.openDate | date: "hh:mm"}} &nbsp;
+                                {{data.event.eventName}}</div>
+                            <div class="event-details">
+                                <span *ngIf="data.event.distance">Distance: {{data.event.distance}}</span>
+
+                            </div>
+                        </div>
+                        <ng-container *ngFor="let market of data.markets">
+                        <table id="gameTeam" class="game-team">
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        <h4 id="teamHome"> {{market.marketName}}</h4>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div id="marketBetsWrap" class="bets-wrap">
+                         
+                            <dl id="betsHead" class="bets-selections-head">
+                                <dt *ngIf="market.eachWay==true">
+                                    EW (1/{{market.eachWayFraction}} Odds, {{market.eachWayPlaces}} Places) 
+                                </dt>
+                                <dd class="mode-land"></dd>
+                                <dd class="mode-land"></dd>
+                                <dd></dd>
+                                <dd class="mode-land"></dd>
+                                <dd class="mode-land"></dd>
+                            </dl>
+                            <dl class="bets-selections" style="display: flex;" *ngFor="let runner of market.selections">
+                                <dt>
+                                    <div id="horseInfo" class="horse-info">
+                                        <ul id="horseBox" class="horse-box">
+                                            <li id="stallDraw" *ngIf="runner.racerIndex"> {{runner.racerIndex}}</li>
+
+                                        </ul>
+                                        <div id="uniform" class="saddle_ uniform"><img
+                                                src="https://content-cache.cdnbf.net/feeds_images/Horses/SilkColours/20220509ctt143003.png">
+                                        </div>
+                                        <ul id="horseName" class="horse-name tooltip1">
+                                            <li id="runnerName">{{runner.selectionName}}</li>
+                                            <li id="jockyName"> {{runner.humanName}}</li>
+                                            <span class="tooltip1text"></span>
+                                        </ul>
+                                    </div>
+
+
+                                </dt>
+
+                                <dd id="closed" class="suspend" *ngIf="market.marketStatus != 'OPEN'">
+                                    <p>{{market.marketStatus}} </p>
+                                </dd>
+                                <dd id="back_1"><a class="back-1">{{runner.odds.decimalOdds}}</a></dd>
+
+
+                            </dl>
+
+                        </div>
+                    </ng-container>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="resultdata">
+                <ng-container *ngFor="let data of resultdata">
+                    <div class="game-wrap" *ngIf="data.eventId==eventid">
+                        <div class="event-title-container">
+                            <div class="event-title">{{data.openDate | date: "hh:mm"}} &nbsp;
+                                {{data.eventName}}</div>
+                            <div class="event-details">
+                               
+
+                            </div>
+                        </div>
+                       
+                        <table id="gameTeam" class="game-team">
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        <h4 id="teamHome"> Quick Results</h4>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div id="marketBetsWrap" class="bets-wrap">
+                         
+                            <dl class="bets-selections" style="display: flex;" *ngFor="let runner of data.resultsDetails">
+                                <dt>
+                                    <div id="horseInfo" class="horse-info">
+                                        <ul id="horseBox" class="horse-box">
+                                            <li id="stallDraw" *ngIf="runner.racerIndex"> {{runner.racerIndex}}</li>
+
+                                        </ul>
+                                        <div id="uniform" class="saddle_ uniform"><img
+                                                src="https://content-cache.cdnbf.net/feeds_images/Horses/SilkColours/20220509ctt143003.png">
+                                        </div>
+                                        <ul id="horseName" class="horse-name tooltip1">
+                                            <li id="runnerName">{{runner.runnerName}}</li>
+                                            <!-- <li id="jockyName"> {{runner.humanName}}</li> -->
+                                            <span class="tooltip1text"></span>
+                                        </ul>
+                                    </div>
+
+
+                                </dt>
+
+
+
+                            </dl>
+
+                        </div>
+                   
+                    </div>
+                </ng-container>
+              </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+

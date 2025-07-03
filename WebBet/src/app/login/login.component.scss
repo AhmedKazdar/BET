@@ -1,0 +1,109 @@
+.fa-eye-slash,.fa-eye{
+    position: absolute; color: #212121; right: 3px; top: 65%; transform: translateY(-70%); border: none; padding: 2px;cursor: pointer;
+}
+.btn-signup1{
+    border-color: #fff!important;
+    cursor: pointer;
+    /* color: #000; */
+    text-decoration: none;
+    padding: 0 4px;
+}
+
+.country-code{
+    width: 35%;
+    height: 33px;
+    font-size: 14px;
+    line-height: 21px;
+    border: 1px solid #aaa;
+    box-shadow: inset 0px 2px 0px 0px rgb(0 0 0 / 10%);
+    margin: 0;
+    border-radius: 4px;
+}
+
+.display-flex{
+    display: flex;
+}
+
+.margin-left{
+    margin-left: 2px;
+}
+
+.margin-top{
+  margin-top: 16px;
+}
+
+.signupwithGoogle{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.telegramRealButton{
+  position: absolute;
+}
+
+.telegramFakeButton{
+    z-index: 1;
+    pointer-events: none;
+    position: relative;
+}
+
+.otpButton{
+  cursor: pointer;
+  width: 100px;
+  height: 29px;
+  line-height: 28px;
+  font-size: 12px;
+  margin-left: 2px;
+  margin-top: 2px;
+}
+
+.register{
+  text-align: center;
+  font-size: 20px;
+}
+
+.emailBox{
+  height: 338px;
+  width: 275px;
+  left: 62%;
+  top: 22%;
+}
+
+.loginText{
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.signUpDialog{
+  height: 519px;
+  top: 14%!important;
+  width: 565px;
+}
+
+.signUpdd{
+  width: 260px;
+}
+
+.social-button{
+  display: flex;
+    background: #fff;
+    padding: 4px;
+    text-align: center;
+    align-items: center;
+    border-radius: 5px;
+    height: auto !important;
+}
+.social-button span{
+  margin-left: 10px;
+background: #fff;
+font-size: 12px;
+}
+
+.terms-anchor{
+  height: auto;
+    display: inline;
+}
+
+
+

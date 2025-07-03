@@ -1,0 +1,20 @@
+<div id="overWrap" class="over-wrap" style="height: calc(100% - 26px)" >
+    <h4 class="sport-list-title">{{Update?.IndianLiveCasinos}}</h4>
+
+    <div class="gamehall-wrap-simple">
+
+        <a class="entrance-half"  
+        routerLink="/tpp/{{casino.opentable}}"
+        *ngFor="let casino of casinoListlist"
+            style="cursor: pointer">
+            <dl class="entrance-title">
+                <dt>{{casino.CasinoName}}</dt>
+                <div class="rotating-border rotating-border--google heart"><span>{{Update?.playnow}} <i aria-hidden="true"
+                    class="fa fa-play"></i></span></div>
+                    <!-- <dd>{{Update?.playnow}}</dd> -->
+            </dl>
+            <img src="https://b2c.static112233.com/assets/images/casino/aman/{{casino.tableName}}.png"  >
+        </a>
+    </div>
+
+</div>

@@ -1,0 +1,33 @@
+<div class="mian-wrap result">
+    <div class="tab-wrap">
+        <ul>
+            <li id="today" [ngClass]="{'select':type=='today'}"><a (click)="changeTab('today');">Today
+                </a></li>
+            <li id="yesterday" [ngClass]="{'select':type=='yesterday'}"><a (click)="changeTab('yesterday');">Yesterday
+                </a></li>
+        </ul>
+        <div class="custom-select">
+            <select id="sportsSelect" (change)="sportselect($event)">
+                <option [value]="4">{{Update?.cricket}}</option>
+                <option [value]="1">{{Update?.soccer}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="result-wrap" id="eventResultData">
+        <dl id="eventResultTemplate" style="display: flex;" *ngFor="let result of results;">
+            <dt>
+                <p id="eventDate">{{result.eventDate}}</p>
+                <strong id="eventName">{{result.eventName}}</strong>
+            </dt>
+            <dd>
+                <p id="resultTitle1">{{Update?.home}}</p>
+                <strong id="resultItem1">{{result.resultItem1}}</strong>
+            </dd>
+            <dd>
+                <p id="resultTitle2">{{Update?.away}}</p>
+                <strong id="resultItem2">{{result.resultItem2}}</strong>
+            </dd>
+        </dl>
+
+    </div>
+</div>

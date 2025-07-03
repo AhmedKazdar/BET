@@ -1,0 +1,17 @@
+.allsport{
+    display: list-item;
+    line-height: 25px;
+    padding: 0 10px;
+}
+.allsport a{
+    color: #222;
+
+}
+.allsport:hover{
+    background-color: #a7e6f2;
+    cursor: pointer;
+}
+.allsport a:hover{
+    text-decoration: none;
+    
+}

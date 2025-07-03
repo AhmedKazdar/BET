@@ -1,0 +1,32 @@
+<div id="overWrap" class="over-wrap" style="height: calc(100% - 26px)">
+    <div class="gamehall-wrap-simple">
+        <ng-container *ngIf="isLogin">
+            <ng-container *ngIf="isInrCurrency">
+                <a  class="entrance-half"
+                    (click)="awc_login_direct(awc.prod_code,awc.prod_type,awc.prod_name,awc.game_code)"
+                    *ngFor="let awc of cricbuzzerawcList_Vnd">
+                    <dl class="entrance-title">
+                        <dt>{{awc.name | titlecase}}</dt>
+                        <div class="rotating-border rotating-border--google heart"><span>{{Update?.playnow}} <i aria-hidden="true"
+                                    class="fa fa-play"></i></span></div>
+                                    <!-- <dd>{{Update?.playnow}}</dd> -->
+                    </dl>
+                    <img src="https://b2c.static112233.com/assets/images/awc_banner/awc_poster/{{awc.name}}.png" alt="" draggable="false"  >
+                </a>
+            </ng-container>
+            <ng-container *ngIf="!isInrCurrency">
+                <a  class="entrance-half"
+                    (click)="awc_login_direct(awc.prod_code,awc.prod_type,awc.prod_name,awc.game_code)"
+                    *ngFor="let awc of awcCasinoLists_all">
+                    <dl class="entrance-title">
+                        <dt>{{awc.name | titlecase}}</dt>
+                        <div class="rotating-border rotating-border--google heart"><span>{{Update?.playnow}} <i aria-hidden="true"
+                                    class="fa fa-play"></i></span></div>
+                                    <!-- <dd>{{Update?.playnow}}</dd> -->
+                    </dl>
+                    <img src="https://b2c.static112233.com/assets/images/awc_banner/awc_baji/{{awc.name}}.png" alt="" draggable="false"  >
+                </a>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="marquee-box" *ngIf="isLogin">
+  <h4>{{Update?.News}}</h4>
+  <div class="marquee">
+    <a (click)="openAnnouncementPopUp()"> {{tickers?tickers+' || ':''}} {{news}}</a>  </div>
+</div>
+
+
+<div id="announcementPopUp" class="overlay" style="display: none;" *ngIf="isLogin">
+  <div class="news-wrap marquee-pop">
+    <div class="side-head">
+      <h3 class="a-depth">{{Update?.Announcement}}</h3>
+      <a class="close ui-link" (click)="closeAnnouncementPopUp();">{{Update?.close}}</a>
+    </div>
+    <div class="announce-wrap" id="announcementContent">
+   
+      <div id="announcementTemplate" class="article-wrap" *ngFor="let news1 of vnews"
+      style="padding-bottom: 2vw !important;">
+      <dl class="article-date">
+        <dt id="date_0">{{currentDate | date:'d' }}</dt>
+        <dd id="month_0">{{currentDate | date:'MMM' }}</dd>
+        <dd id="year_0">{{currentDate | date:'y' }}</dd>
+      </dl>
+      <p id="textByLanguageType_0">{{news1.ticker}}</p>
+    </div>
+    <div id="announcementTemplate" class="article-wrap" *ngFor="let news1 of pnews"
+      style="padding-bottom: 2vw !important;">
+      <dl class="article-date">
+        <dt id="date_0">{{currentDate | date:'d' }}</dt>
+        <dd id="month_0">{{currentDate | date:'MMM' }}</dd>
+        <dd id="year_0">{{currentDate | date:'y' }}</dd>
+      </dl>
+      <p id="textByLanguageType_0">{{news1}}</p>
+    </div>
+    <!-- <div id="announcementTemplate" class="article-wrap" *ngIf="tickerData.length">
+      <ng-container *ngFor="let data of tickerData">
+        <dl class="article-date">
+          <dt id="date_0">{{data.creationDate | date:'d' }}</dt>
+          <dd id="month_0">{{data.creationDate | date:'MMM' }}</dd>
+          <dd id="year_0">{{data.creationDate | date:'y' }}</dd>
+        </dl>
+        <p id="textByLanguageType_0">{{data.ticker}}</p>
+      </ng-container>
+    </div> -->
+      
+    </div>
+  </div>
+</div>

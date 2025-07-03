@@ -1,0 +1,2046 @@
+<div id="overWrap" class="over-wrap live-match" style="height: calc(100% - 26px)">
+
+    <div id="mainWrap" class="mian-wrap" *ngIf="markets">
+        <div class="game-wrap">
+            <!-- <h4 id="gameHead" class="game-head">{{exchData?.channel?.name}} <ul id="infoIcon" class="info-icon">
+                <li id="inPlayIcon">
+                    Game ID: {{markets?.markets[0]?.id}}
+                </li>
+                <li id="inPlayIcon" (click)="openrules()">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </li>
+
+
+            </ul>
+        </h4> -->
+            <div id="gameHead" class="game-head">
+                <div class="game-team">
+                    <div class="game-name">{{exchData?.channel?.name}} <span class="rules_underline" (click)="openrules()"><i
+                                class="fas fa-info-circle m-l-10"></i></span><span class="float-right round"> Game ID
+                            <span>{{markets?.markets[0]?.id}}</span></span></div>
+                </div>
+            </div>
+
+            <div id="matchTrackerWrap" class="match-tracker-wrap">
+
+                <ul class="match-btn">
+                    <li [ngClass]="{'select':!isShowResults}"><a (click)="showGames()">Game</a></li>
+                    <li [ngClass]="{'select':isShowResults}"><a (click)="showResults()">Results</a></li>
+                </ul>
+            </div>
+
+
+
+        </div>
+
+
+
+        <ng-container *ngIf="runnerGameData && (gameName=='blackjack' || gameName=='blackjack-turbo')">
+            <div class="showcards__bottom">
+                <div class="block-players live-teenpatti">
+                    <div class="block-player"><span>Dealer</span>
+                        <div class="cards" *ngIf="runnerGameData['Dealer']">
+                            <img src="https://b2c.static112233.com/assets/images/cards/{{
+                            card.value == 'NOT AVAILABLE'
+                              ? 'cardempty'
+                              : 'card' + card.value
+                          }}.gif" *ngFor="let card of runnerGameData['Dealer'].properties">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="block-desc live-teenpatti">
+                    <div class="block-player" *ngIf="runnerGameData['Dealer']">
+                        <span class="status {{playerStatusMap[runnerGameData['Dealer']?.status]}}">
+                            {{playerStatusMap[runnerGameData["Dealer"]?.status]}} <span
+                                *ngIf="playerStatusMap[runnerGameData['Dealer']?.status]"> → </span>
+                        </span>
+                        <span>
+                            {{runnerGameData["Dealer"].description}}
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="showcards__bottom">
+                <div class="block-players live-teenpatti">
+                    <div class="block-player"><span>Player 1</span>
+                        <div class="cards" *ngIf="runnerGameData['Player 1']">
+                            <img src="https://b2c.static112233.com/assets/images/cards/{{
+                            card.value == 'NOT AVAILABLE'
+                              ? 'cardempty'
+                              : 'card' + card.value
+                          }}.gif" *ngFor="let card of runnerGameData['Player 1'].properties">
+                        </div>
+                    </div>
+                    <div class="block-player">
+                        <div class="cards" *ngIf="runnerGameData['Player 4']">
+                            <img src="https://b2c.static112233.com/assets/images/cards/{{
+                            card.value == 'NOT AVAILABLE'
+                              ? 'cardempty'
+                              : 'card' + card.value
+                          }}.gif" *ngFor="let card of runnerGameData['Player 4'].properties">
+                        </div>
+                        <span>Player 4</span>
+                    </div>
+                </div>
+                <div class="block-desc live-teenpatti">
+                    <div class="block-player" *ngIf="runnerGameData['Player 1']">
+                        <span class="status {{playerStatusMap[runnerGameData['Player 1']?.status]}}">
+                            {{playerStatusMap[runnerGameData["Player 1"]?.status]}} <span
+                                *ngIf="playerStatusMap[runnerGameData['Player 1']?.status]"> → </span>
+                        </span>
+                        <span>
+                            {{runnerGameData["Player 1"].description}}
+                        </span>
+                    </div>
+                    <div class="block-player" *ngIf="runnerGameData['Player 4']">
+                        <span class="status {{playerStatusMap[runnerGameData['Player 4']?.status]}}">
+                            {{playerStatusMap[runnerGameData["Player 4"]?.status]}} <span
+                                *ngIf="playerStatusMap[runnerGameData['Player 4']?.status]"> → </span>
+                        </span>
+                        <span>
+                            {{runnerGameData["Player 4"].description}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="showcards__bottom">
+                <div class="block-players live-teenpatti">
+                    <div class="block-player"><span>Player 2</span>
+                        <div class="cards" *ngIf="runnerGameData['Player 2']">
+                            <img src="https://b2c.static112233.com/assets/images/cards/{{
+                            card.value == 'NOT AVAILABLE'
+                              ? 'cardempty'
+                              : 'card' + card.value
+                          }}.gif" *ngFor="let card of runnerGameData['Player 2'].properties">
+                        </div>
+                    </div>
+                    <div class="block-player">
+                        <div class="cards" *ngIf="runnerGameData['Player 3']">
+                            <img src="https://b2c.static112233.com/assets/images/cards/{{
+                            card.value == 'NOT AVAILABLE'
+                              ? 'cardempty'
+                              : 'card' + card.value
+                          }}.gif" *ngFor="let card of runnerGameData['Player 3'].properties">
+                        </div>
+                        <span>Player 3</span>
+                    </div>
+                </div>
+                <div class="block-desc live-teenpatti">
+                    <div class="block-player" *ngIf="runnerGameData['Player 2']">
+                        <span class="status {{playerStatusMap[runnerGameData['Player 2']?.status]}}">
+                            {{playerStatusMap[runnerGameData["Player 2"]?.status]}} <span
+                                *ngIf="playerStatusMap[runnerGameData['Player 2']?.status]"> → </span>
+                        </span>
+                        <span>
+                            {{runnerGameData["Player 2"].description}}
+                        </span>
+                    </div>
+                    <div class="block-player" *ngIf="runnerGameData['Player 3']">
+                        <span class="status {{playerStatusMap[runnerGameData['Player 3']?.status]}}">
+                            {{playerStatusMap[runnerGameData["Player 3"]?.status]}} <span
+                                *ngIf="playerStatusMap[runnerGameData['Player 3']?.status]"> → </span>
+                        </span>
+                        <span>
+                            {{runnerGameData["Player 3"].description}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="showcards__bottom" style="min-height: 30px;">
+                <ng-conatiner *ngIf="!gameStartDate">
+                    <div class="block-progress live-teenpatti" *ngIf="exchData">
+                        <div style="text-align: center;"><b>Round {{ exchData?.channel?.game?.round }} of 7</b></div>
+                        <div id="progress" class="progress-wrap progress"
+                            *ngIf="markets?.markets[0]?.status == 'ACTIVE'">
+                            <div class="progress-bar progress"
+                                [style.left]="exchData?.channel?.game?.bettingWindowPercentageComplete + '%'"></div>
+                        </div>
+                    </div>
+                </ng-conatiner>
+                <ng-conatiner *ngIf="gameStartDate">
+                    <div class="block-progress live-teenpatti">
+                        <div style="text-align: center;"><b>{{gameStartDate | date: "M/d/YYYY H:mm"}}</b></div>
+                    </div>
+                </ng-conatiner>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="runnerGameData && (gameName=='holdem' || gameName=='holdem-turbo')">
+            <div class="showcards__bottom">
+                <div class="block-desc live-teenpatti" *ngIf="!gameStartDate">
+                    <div class="block-player">
+                        <ng-container *ngFor="let round of holdemRoundList; let $i = index">
+                            <span class="round" style="font-weight: bold" [style.color]="
+                        round.id === exchData?.channel?.game?.round
+                        ? 'rgb(144, 144, 144)'
+                        : '#fff'
+                    ">
+                                {{ round.name }}
+                            </span>
+                            <ng-template [ngIf]="$i != holdemRoundList.length - 1">&nbsp;|&nbsp;</ng-template>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="block-players live-teenpatti">
+                    <div class="block-player">
+                        <div class="cards" *ngIf="runnerGameData['Community Cards']">
+                            <img src="https://b2c.static112233.com/assets/images/cards/{{
+                            card.value == 'NOT AVAILABLE'
+                              ? 'cardempty'
+                              : 'card' + card.value
+                          }}.gif" *ngFor="let card of runnerGameData['Community Cards'].properties">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="showcards__bottom">
+                <div class="block-players live-teenpatti">
+                    <div class="block-player"><span>Hand 1</span>
+                        <div class="cards" *ngIf="runnerGameData['Hand 1']">
+                            <img src="https://b2c.static112233.com/assets/images/cards/{{
+                            card.value == 'NOT AVAILABLE'
+                              ? 'cardempty'
+                              : 'card' + card.value
+                          }}.gif" *ngFor="let card of runnerGameData['Hand 1'].properties">
+                        </div>
+                    </div>
+                    <div class="block-player">
+                        <div class="cards" *ngIf="runnerGameData['Hand 2']">
+                            <img src="https://b2c.static112233.com/assets/images/cards/{{
+                            card.value == 'NOT AVAILABLE'
+                              ? 'cardempty'
+                              : 'card' + card.value
+                          }}.gif" *ngFor="let card of runnerGameData['Hand 2'].properties">
+                        </div>
+                        <span>Hand 2</span>
+                    </div>
+                </div>
+                <div class="block-desc live-teenpatti">
+                    <div class="block-player" *ngIf="runnerGameData['Hand 1']">
+                        <!-- <span class="status {{playerStatusMap[runnerGameData['Hand 1']?.status]}}">
+                        {{playerStatusMap[runnerGameData["Hand 1"]?.status]}} <span *ngIf="playerStatusMap[runnerGameData['Hand 1']?.status]"> → </span>
+                    </span> -->
+                        <span class="desc">
+                            {{runnerGameData["Hand 1"].description}}
+                        </span>
+                    </div>
+                    <div class="block-player" *ngIf="runnerGameData['Hand 2']">
+                        <!-- <span class="status {{playerStatusMap[runnerGameData['Hand 2']?.status]}}">
+                        {{playerStatusMap[runnerGameData["Hand 2"]?.status]}} <span *ngIf="playerStatusMap[runnerGameData['Hand 2']?.status]"> → </span>
+                    </span> -->
+                        <span class="desc">
+                            {{runnerGameData["Hand 2"].description}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="showcards__bottom">
+                <div class="block-players live-teenpatti">
+                    <div class="block-player"><span>Hand 3</span>
+                        <div class="cards" *ngIf="runnerGameData['Hand 3']">
+                            <img src="https://b2c.static112233.com/assets/images/cards/{{
+                            card.value == 'NOT AVAILABLE'
+                              ? 'cardempty'
+                              : 'card' + card.value
+                          }}.gif" *ngFor="let card of runnerGameData['Hand 3'].properties">
+                        </div>
+                    </div>
+                    <div class="block-player">
+                        <div class="cards" *ngIf="runnerGameData['Hand 4']">
+                            <img src="https://b2c.static112233.com/assets/images/cards/{{
+                            card.value == 'NOT AVAILABLE'
+                              ? 'cardempty'
+                              : 'card' + card.value
+                          }}.gif" *ngFor="let card of runnerGameData['Hand 4'].properties">
+                        </div>
+                        <span>Hand 4</span>
+                    </div>
+                </div>
+                <div class="block-desc live-teenpatti">
+                    <div class="block-player" *ngIf="runnerGameData['Hand 3']">
+                        <!-- <span class="status {{playerStatusMap[runnerGameData['Hand 3']?.status]}}">
+                        {{playerStatusMap[runnerGameData["Hand 3"]?.status]}} <span *ngIf="playerStatusMap[runnerGameData['Hand 3']?.status]"> → </span>
+                    </span> -->
+                        <span class="desc">
+                            {{runnerGameData["Hand 3"].description}}
+                        </span>
+                    </div>
+                    <div class="block-player" *ngIf="runnerGameData['Hand 4']">
+                        <!-- <span class="status {{playerStatusMap[runnerGameData['Hand 4']?.status]}}">
+                        {{playerStatusMap[runnerGameData["Hand 4"]?.status]}} <span *ngIf="playerStatusMap[runnerGameData['Hand 4']?.status]"> → </span>
+                    </span> -->
+                        <span class="desc">
+                            {{runnerGameData["Hand 4"].description}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="showcards__bottom" style="min-height: 30px;">
+                <ng-conatiner *ngIf="!gameStartDate">
+                    <div class="block-progress live-teenpatti" *ngIf="exchData">
+                        <div id="progress" class="progress-wrap progress"
+                            *ngIf="markets?.markets[0]?.status == 'ACTIVE'">
+                            <div class="progress-bar progress"
+                                [style.left]="exchData?.channel?.game?.bettingWindowPercentageComplete + '%'"></div>
+                        </div>
+                    </div>
+                </ng-conatiner>
+                <ng-conatiner *ngIf="gameStartDate">
+                    <div class="block-progress live-teenpatti">
+                        <div style="text-align: center;"><b>{{gameStartDate | date: "M/d/YYYY H:mm"}}</b></div>
+                    </div>
+                </ng-conatiner>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="runnerGameData && (gameName=='omaha-hi')">
+            <div class="showcards__bottom">
+                <div class="block-desc live-teenpatti" *ngIf="!gameStartDate">
+                    <div class="block-player">
+                        <ng-container *ngFor="let round of holdemRoundList; let $i = index">
+                            <span class="round" style="font-weight: bold" [style.color]="
+                        round.id === exchData?.channel?.game?.round
+                        ? 'rgb(144, 144, 144)'
+                        : '#fff'
+                    ">
+                                {{ round.name }}
+                            </span>
+                            <ng-template [ngIf]="$i != holdemRoundList.length - 1">&nbsp;|&nbsp;</ng-template>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="block-players live-teenpatti">
+                    <div class="block-player">
+                        <div class="cards" *ngIf="runnerGameData['Community Cards']">
+                            <img src="https://b2c.static112233.com/assets/images/cards/{{
+                            card.value == 'NOT AVAILABLE'
+                              ? 'cardempty'
+                              : 'card' + card.value
+                          }}.gif" *ngFor="let card of runnerGameData['Community Cards'].properties">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="showcards__bottom">
+                <div class="block-players live-teenpatti">
+                    <div class="block-player"><span>Hand 1</span>
+                        <div class="cards" *ngIf="runnerGameData['Hand 1']">
+                            <img src="https://b2c.static112233.com/assets/images/cards/{{
+                            card.value == 'NOT AVAILABLE'
+                              ? 'cardempty'
+                              : 'card' + card.value
+                          }}.gif" *ngFor="let card of runnerGameData['Hand 1'].properties">
+                        </div>
+                    </div>
+                    <div class="block-player">
+                        <div class="cards" *ngIf="runnerGameData['Hand 2']">
+                            <img src="https://b2c.static112233.com/assets/images/cards/{{
+                            card.value == 'NOT AVAILABLE'
+                              ? 'cardempty'
+                              : 'card' + card.value
+                          }}.gif" *ngFor="let card of runnerGameData['Hand 2'].properties">
+                        </div>
+                        <span>Hand 2</span>
+                    </div>
+                </div>
+                <div class="block-desc live-teenpatti">
+                    <div class="block-player" *ngIf="runnerGameData['Hand 1']">
+                        <!-- <span class="status {{playerStatusMap[runnerGameData['Hand 1']?.status]}}">
+                        {{playerStatusMap[runnerGameData["Hand 1"]?.status]}} <span *ngIf="playerStatusMap[runnerGameData['Hand 1']?.status]"> → </span>
+                    </span> -->
+                        <span class="desc">
+                            {{runnerGameData["Hand 1"].description}}
+                        </span>
+                    </div>
+                    <div class="block-player" *ngIf="runnerGameData['Hand 2']">
+                        <!-- <span class="status {{playerStatusMap[runnerGameData['Hand 2']?.status]}}">
+                        {{playerStatusMap[runnerGameData["Hand 2"]?.status]}} <span *ngIf="playerStatusMap[runnerGameData['Hand 2']?.status]"> → </span>
+                    </span> -->
+                        <span class="desc">
+                            {{runnerGameData["Hand 2"].description}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="showcards__bottom">
+                <div class="block-players live-teenpatti">
+                    <div class="block-player"><span>Hand 3</span>
+                        <div class="cards" *ngIf="runnerGameData['Hand 3']">
+                            <img src="https://b2c.static112233.com/assets/images/cards/{{
+                            card.value == 'NOT AVAILABLE'
+                              ? 'cardempty'
+                              : 'card' + card.value
+                          }}.gif" *ngFor="let card of runnerGameData['Hand 3'].properties">
+                        </div>
+                    </div>
+                    <div class="block-player">
+                        <div class="cards" *ngIf="runnerGameData['Hand 4']">
+                            <img src="https://b2c.static112233.com/assets/images/cards/{{
+                            card.value == 'NOT AVAILABLE'
+                              ? 'cardempty'
+                              : 'card' + card.value
+                          }}.gif" *ngFor="let card of runnerGameData['Hand 4'].properties">
+                        </div>
+                        <span>Hand 4</span>
+                    </div>
+                </div>
+                <div class="block-desc live-teenpatti">
+                    <div class="block-player" *ngIf="runnerGameData['Hand 3']">
+                        <!-- <span class="status {{playerStatusMap[runnerGameData['Hand 3']?.status]}}">
+                        {{playerStatusMap[runnerGameData["Hand 3"]?.status]}} <span *ngIf="playerStatusMap[runnerGameData['Hand 3']?.status]"> → </span>
+                    </span> -->
+                        <span class="desc">
+                            {{runnerGameData["Hand 3"].description}}
+                        </span>
+                    </div>
+                    <div class="block-player" *ngIf="runnerGameData['Hand 4']">
+                        <!-- <span class="status {{playerStatusMap[runnerGameData['Hand 4']?.status]}}">
+                        {{playerStatusMap[runnerGameData["Hand 4"]?.status]}} <span *ngIf="playerStatusMap[runnerGameData['Hand 4']?.status]"> → </span>
+                    </span> -->
+                        <span class="desc">
+                            {{runnerGameData["Hand 4"].description}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="showcards__bottom" style="min-height: 30px;">
+                <ng-conatiner *ngIf="!gameStartDate">
+                    <div class="block-progress live-teenpatti" *ngIf="exchData">
+                        <div id="progress" class="progress-wrap progress"
+                            *ngIf="markets?.markets[0]?.status == 'ACTIVE'">
+                            <div class="progress-bar progress"
+                                [style.left]="exchData?.channel?.game?.bettingWindowPercentageComplete + '%'"></div>
+                        </div>
+                    </div>
+                </ng-conatiner>
+                <ng-conatiner *ngIf="gameStartDate">
+                    <div class="block-progress live-teenpatti">
+                        <div style="text-align: center;"><b>{{gameStartDate | date: "M/d/YYYY H:mm"}}</b></div>
+                    </div>
+                </ng-conatiner>
+            </div>
+        </ng-container>
+        <div class="last-result-container text-right mt-1" *ngIf="results">
+            <span class="last-result ml-1 playerb" [ngClass]="{'select':selectIndex==index}"
+                *ngFor="let game of results.channel?.games?.games;let index = index;trackBy:trackByIndex"
+                (click)="getResultByMarketId(index)">{{game.gameStartDate | date: "H:mm"}}</span>
+        </div>
+        <div class="bets-wrap cooldown1 cooldowns" *ngFor="let market of markets.markets;trackBy:trackByIndex">
+
+            <table id="fullMarketBoard" class="bets">
+                <dd id="suspend" class="market-suspend" *ngIf="market.status!='ACTIVE'">
+                    <p class="mstatus">{{statusMap[market.status]}}
+                    </p>
+                </dd>
+                <tbody>
+                    <tr class="bet-all">
+                        <td></td>
+                        <td id="backPercent" colspan="2" class="refer-bet"></td>
+                        <td><a id="backAll" class="back-all"><img src="https://b2c.static112233.com/assets/images/transparent.gif"><span>Back
+                                    all</span></a></td>
+                        <td><a id="layAll" class="lay-all"><img src="https://b2c.static112233.com/assets/images/transparent.gif"><span>Lay
+                                    all</span></a></td>
+                        <td id="layPercent" colspan="2" class="refer-book"></td>
+                    </tr>
+                 
+
+
+                    <ng-container *ngFor="let selection of market.selections.selections;trackBy:trackByIndex">
+                        <td colspan="6" class="fancy-suspend-td" *ngIf="selection.status=='LOSER'">
+                            <div id="suspendClass" class="fancy-suspend"><span class="info">ELIMINATED</span></div>
+                        </td>
+                        <td colspan="6" class="fancy-suspend-td" *ngIf="selection.status=='WINNER'">
+                            <div id="suspendClass" class="fancy-suspend"><span class="info">{{selection.status}}</span>
+                            </div>
+                        </td>
+                        <td colspan="6" class="fancy-suspend-td" *ngIf="selection.status=='TIED_DEAD_HEAT'">
+                            <div id="suspendClass" class="fancy-suspend"><span class="info">Deat Heat</span></div>
+                        </td>
+                        <td colspan="6" class="fancy-suspend-td" *ngIf="selection.status=='CAN_NOT_LOSE'">
+                            <div id="suspendClass" class="fancy-suspend"><span class="info">{{selection.status}}</span>
+                            </div>
+                        </td>
+                        <td colspan="6" class="fancy-suspend-td" *ngIf="selection.status=='CAN_NOT_WIN'">
+                            <div id="suspendClass" class="fancy-suspend"><span class="info">{{selection.status}}</span>
+                            </div>
+                        </td>
+                        <tr style="display: table-row;" id="selection_{{selection.id}}">
+                            <th>
+                                <p><a><img src="https://b2c.static112233.com/assets/images/transparent.gif" class="icon-predict"></a>
+                                    {{selection.name}} </p>
+                                <!-- <dd id="suspend" class="suspend" >
+                                    <p>ELIMINATED
+                                    </p>
+                                </dd> -->
+
+
+
+                                <span id="lossWithoutBet" class="win"
+                                    [ngClass]="getPnlClass(selection)">{{getPnlValue(selection)}}</span>
+
+
+                                <span id="lossWithBet" class="win"></span><span id="zeroProfit" class="win"
+                                    style="display: none;"></span><span id="zeroLiability" class="win"
+                                    style="display: none;"></span><span id="zeroProfitWithBet" class="win"
+                                    style="display: none;"></span><span id="zeroLiabilityWithBet" class="win"
+                                    style="display: none;"></span>
+                            </th>
+
+
+
+                            <td id="back_3" class="back-3" *ngIf="!selection.bestAvailableToBackPrices?.prices"></td>
+                            <td id="back_3" class="back-3" *ngIf="selection.bestAvailableToBackPrices?.prices" (click)="
+                            selection.bestAvailableToBackPrices.prices &&
+                            selection.bestAvailableToBackPrices.prices[2]?.value === null
+                            ? ''
+                            : openExchbetSlip(
+                                $event,
+                                'back',
+                                selection.name,
+                                selection.id,
+                                'exchange',
+                                selection.bestAvailableToBackPrices.prices[2].value,
+                                exchData?.channel?.id,
+                                market.id
+                                
+                                )
+                        ">
+                                <a>{{selection.bestAvailableToBackPrices?.prices[2]?.value}}<span>
+                                        {{selection.bestAvailableToBackPrices?.prices[2]?.amountUnmatched}}</span></a>
+                            </td>
+
+                            <td id="back_2" class="back-2" *ngIf="!selection.bestAvailableToBackPrices?.prices">
+                                <a><span></span></a>
+                            </td>
+                            <td id="back_2" class="back-2" *ngIf="selection.bestAvailableToBackPrices?.prices" (click)="
+                            selection.bestAvailableToBackPrices.prices &&
+                            selection.bestAvailableToBackPrices.prices[1]?.value === null
+                            ? ''
+                            : openExchbetSlip(
+                                $event,
+                                'back',
+                                selection.name,
+                                selection.id,
+                                'exchange',
+                                selection.bestAvailableToBackPrices.prices[1].value,
+                                exchData?.channel?.id,
+                                market.id
+                                
+                                )
+                        ">
+                                <a>{{selection.bestAvailableToBackPrices?.prices[1]?.value}}<span>
+                                        {{selection.bestAvailableToBackPrices?.prices[1]?.amountUnmatched}}</span></a>
+                            </td>
+
+                            <td id="back_1" class="back-1" *ngIf="!selection.bestAvailableToBackPrices?.prices">
+                                <a><span></span></a>
+                            </td>
+                            <td id="back_1" class="back-1" *ngIf="selection.bestAvailableToBackPrices?.prices" (click)="
+            selection.bestAvailableToBackPrices.prices &&
+            selection.bestAvailableToBackPrices.prices[0]?.value === null
+            ? ''
+            : openExchbetSlip(
+                $event,
+                'back',
+                selection.name,
+                selection.id,
+                'exchange',
+                selection.bestAvailableToBackPrices.prices[0].value,
+                exchData?.channel?.id,
+                market.id
+                
+                )
+        "><a>{{selection.bestAvailableToBackPrices?.prices[0]?.value}}<span>
+                                        {{selection.bestAvailableToBackPrices?.prices[0]?.amountUnmatched}}</span></a>
+                            </td>
+
+                            <td id="lay_1" class="lay-1" *ngIf="!selection.bestAvailableToLayPrices?.prices">
+                                <a><span></span></a>
+                            </td>
+                            <td id="lay_1" class="lay-1" *ngIf="selection.bestAvailableToLayPrices?.prices" (click)="
+            selection.bestAvailableToLayPrices.prices &&
+            selection.bestAvailableToLayPrices.prices[0]?.value === null
+            ? ''
+            : openExchbetSlip(
+                $event,
+                'lay',
+                selection.name,
+                selection.id,
+                'exchange',
+                selection.bestAvailableToLayPrices.prices[0].value,
+                exchData?.channel?.id,
+                market.id
+                )
+        "><a>{{selection.bestAvailableToLayPrices?.prices[0]?.value}}<span>
+                                        {{selection.bestAvailableToLayPrices?.prices[0]?.amountUnmatched}}</span></a>
+                            </td>
+
+                            <td id="lay_2" class="lay-2" *ngIf="!selection.bestAvailableToLayPrices?.prices">
+                                <a><span></span></a>
+                            </td>
+                            <td id="lay_2" class="lay-2" *ngIf="selection.bestAvailableToLayPrices?.prices" (click)="
+                            selection.bestAvailableToLayPrices.prices &&
+                            selection.bestAvailableToLayPrices.prices[1]?.value === null
+                            ? ''
+                            : openExchbetSlip(
+                                $event,
+                                'lay',
+                                selection.name,
+                                selection.id,
+                                'exchange',
+                                selection.bestAvailableToLayPrices.prices[1].value,
+                                exchData?.channel?.id,
+                                market.id
+                                
+                                )
+                        ">
+                                <a>{{selection.bestAvailableToLayPrices?.prices[1]?.value}}<span>
+                                        {{selection.bestAvailableToLayPrices?.prices[1]?.amountUnmatched}}</span></a>
+                            </td>
+
+                            <td id="lay_3" class="lay-3" *ngIf="!selection.bestAvailableToLayPrices?.prices">
+                                <a><span></span></a>
+                            </td>
+                            <td id="lay_3" class="lay-3" *ngIf="selection.bestAvailableToLayPrices?.prices" (click)="
+                            selection.bestAvailableToLayPrices.prices &&
+                            selection.bestAvailableToLayPrices.prices[2]?.value === null
+                            ? ''
+                            : openExchbetSlip(
+                                $event,
+                                'lay',
+                                selection.name,
+                                selection.id,
+                                'exchange',
+                                selection.bestAvailableToLayPrices.prices[2].value,
+                                exchData?.channel?.id,
+                                market.id
+                                
+                                )
+                        ">
+                                <a>{{selection.bestAvailableToLayPrices?.prices[2]?.value}}<span>
+                                        {{selection.bestAvailableToLayPrices?.prices[2]?.amountUnmatched}}</span></a>
+                            </td>
+
+                        </tr>
+
+
+                        <ng-container *ngIf="openBet && showLoader">
+                            <tr class="fancy-quick-tr" *ngIf="openBet.selId==selection.id" id="betBoard_{{selection.id}}" >
+                                <td colspan="7">
+                                    <dl>Placing your bets, Please wait</dl>
+                                </td>
+                            </tr>
+                        </ng-container>
+
+                        <ng-container *ngIf="msgData && openBet" >
+                            <tr  id="fancyBetMessage_{{selection.id}}" class="fancy-quick-tr {{status}}"
+                            *ngIf="openBet.selId==selection.id">
+                                <td colspan="7">
+                                    <dl>{{!msgData.msg?msgData:msgData.msg}}</dl>
+                                </td>
+                            </tr>
+                        </ng-container>
+
+
+
+
+                        <ng-container *ngIf="openBet  && !showLoader">
+                            <tr class="fancy-quick-tr" style="display: table-row;" id="betBoard_{{selection.id}}"
+                                *ngIf="openBet.selId==selection.id">
+                                <td colspan="7">
+                                    <form [formGroup]="OpenBetForm"
+                                        (ngSubmit)="!f.odds?.value || !f.stake?.value || msgData?'':BetSubmit()">
+                                        <dl id="classWrap" class="quick_bet-wrap slip-{{f.betType.value}}">
+                                            <dt id="fancyBetHeader"><span id="fancyBetAcceptCheck" class="bet-check"
+                                                    style="display: none;"><input id="fancyBetAcceptAnyOdds"
+                                                        type="checkbox"><label for="fancyBetAcceptAnyOdds">Accept Any
+                                                        Odds</label></span></dt>
+                                            <dd class="col-btn"><a id="cancel" class="btn" style="cursor: pointer;"
+                                                    (click)="ClearAllSelection();">Cancel</a>
+                                            </dd>
+                                            <dd id="oddsHeader" class="col-odd">
+                                                <ul class="quick-bet-confirm">
+                                                    <li id="runs">{{f.odds.value}}</li>
+                                                    <li id="odds" class="quick-bet-confirm-title">
+                                                        {{stakeSetting[index]}}
+                                                    </li>
+                                                </ul>
+                                            </dd>
+                                            <dd class="col-stake">
+                                                <div id="inputStake" class="input-num input-stake">
+                                                    <input id="stake" type="text"  formControlName="stake" numberOnly>
+                                                </div>
+                                            </dd>
+                                            <dd class="col-send">
+                                                <a id="placeBet" class="btn-send disable" style="cursor: pointer;"
+                                                    (click)="!f.odds?.value || !f.stake?.value || msgData?'':BetSubmit()"
+                                                    [ngClass]="{'disable':!f.odds?.value || !f.stake?.value}">Place
+                                                    Bets</a>
+                                            </dd>
+
+                                            <dd id="stakePopupList" class="col-stake_list" style="display: block;">
+                                                <ul>
+                                                    <ng-container *ngFor="let stake of stakeSetting;let index=index;">
+                                                        <li *ngIf="index<6"><a class="btn" style="cursor: pointer;"
+                                                                stake="{{stakeSetting[index]}}"
+                                                                (click)="addStake(stake);">{{stakeSetting[index]}}</a>
+                                                        </li>
+                                                    </ng-container>
+
+
+                                                </ul>
+                                                <p id="totalStakeP" style="display: none;">Total Stake:
+                                                    <strong id="totalStake"></strong>
+                                                </p>
+                                            </dd>
+                                        </dl>
+                                    </form>
+                                </td>
+                            </tr>
+                        </ng-container>
+
+                    </ng-container>
+
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+
+
+<ng-container *ngIf="gameName=='blackjack-turbo'">
+    <div id="rulespop" class="overlay" style="display: none;">
+        <div class="news-wrap marquee-pop">
+            <div class="side-head">
+                <h3 class="a-depth">Rules</h3>
+                <a class="close ui-link" (click)="closerules();"></a>
+            </div>
+            <div id="matchTrackerWrap" class="match-tracker-wrap">
+                <ul class="match-btn">
+                    <li [ngClass]="{'select':!isShowRules}"><a (click)="Showplacebetrules()">Game Info</a></li>
+                    <li [ngClass]="{'select':isShowRules}"><a (click)="Showrules()">Game Rules</a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="announce-wrap" id="announcementContent" style="font-family: inherit;letter-spacing: 1px;"
+                *ngIf="!isShowRules">
+                <div id="announcementTemplate" class="article-wrap">
+                    <h6 class="main">What is Turbo Exchange Blackjack ?</h6>
+                    <p class="paraghraph">Played in exactly the same way as Exchange Blackjack, this version plays out
+                        25% faster, designed for those who like their Betfair Games fast and furious.</p>
+
+                    <h6 class="main">What is Exchange Blackjack ?</h6>
+                    <p class="paraghraph">Exchange Blackjack brings together the world's most famous casino game and
+                        Betfair's unique back and lay system.
+                        Four automated players battle against the dealer, to see who can get closest to 21. Instead of
+                        you deciding to hit or stand in the game, each player automatically plays a perfect game using
+                        Betfair Games 'Perfect Strategy'. There are up to seven rounds of betting in each game, allowing
+                        you to back or lay each player as the game unfolds. In addition there are four 'exotic' bets,
+                        including 'dealer wins or ties all' and '1 or more has 5 cards'.
+
+                    </p>
+                    <p class="paraghraph"> Only with Betfair Games can you profit from betting on the house. A game is
+                        already underway in
+                        the panel to the left, so make your selection and start betting now!</p>
+
+                    <h6 class="main">What are decimal odds?</h6>
+
+                    <p class="paraghraph">
+                        Decimal odds express your total return for the stake you place. Therefore even money is
+                        expressed as
+                        2.0 - you get back your initial stake plus the same again as winnings - twice your initial
+                        stake. To
+                        see other odds use the odds converter.
+                        <br>
+                    </p>
+                    <button class="Covrtbuttonback">
+                        <div class="btn-small covrtfrstchild">2.10</div>
+                        <div class="btn-bottom">$17000</div>
+                    </button>
+                    <div class="col-sm-8">
+                        <table cellspacing="0" cellpadding="2" border="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td align="center" width="33%" class="GlobalTableHeaderBackground">
+                                        &nbsp;&nbsp;&nbsp;Fractional&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                    <td align="center" width="33%" class="GlobalTableHeaderBackground">
+                                        &nbsp;&nbsp;&nbsp;Decimal&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                    <td align="center" width="33%" class="GlobalTableHeaderBackground">
+                                        &nbsp;&nbsp;&nbsp;American&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="GlobalTableCell"> 11/10 </td>
+                                    <td align="center" class="GlobalTableCell"> 2.10 </td>
+                                    <td align="center" class="GlobalTableCell"> 110 </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="GlobalTableCell"> 1/1 </td>
+                                    <td align="center" class="GlobalTableCell"> 2.00 </td>
+                                    <td align="center" class="GlobalTableCell"> -100 </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h6 class="main">What is the Amount Available ?</h6>
+                    <p class="paraghraph">
+                        This is the amount of money available for you to bet at these odds. You can bet all or part of
+                        this
+                        amount. If you want more than the amount shown, the system will place the remaining stake as an
+                        unmatched bet available for others to take.
+                        <br>
+                        <button class="Covrtbuttonback">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$17000</div>
+                        </button>
+                    </p>
+                    <h6 class="main">What is Backing ?</h6>
+                    <p class="paraghraph">
+                        Back bets are those placed in the normal way. You can also ask for better odds, or more money
+                        than
+                        currently available. In either case your bet will appear on the Lay side of the market.
+                        <br>
+                        <button class="Covrtbuttonback">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$17000</div>
+                        </button>
+                    </p>
+                    <h6 class="main">What is Laying ?</h6>
+                    <p class="paraghraph">
+                        The Lay side of the market shows the money and odds requested by backers. To accommodate a
+                        backer,
+                        click a button in the Lay column.
+                        <br>
+                        <button class="Covrtbuttonlay">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$17000</div>
+                        </button>
+                    </p>
+                    <h6 class="main">How are the odds ordered ?</h6>
+                    <p class="paraghraph">
+                        The current best odds are shown in the coloured box, with the second and third best in adjacent
+                        boxes.
+                        <br>
+                        <button class="Covrtbutton">
+                            <div class="btn-small covrtfrstchild">2.06</div>
+                            <div class="btn-bottom">$1120</div>
+                        </button>
+                        <button class="Covrtbutton">
+                            <div class="btn-small covrtfrstchild">2.08</div>
+                            <div class="btn-bottom">$1820</div>
+                        </button>
+                        <button class="Covrtbuttonback">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$94</div>
+                        </button>
+                    </p>
+
+
+
+
+                </div>
+            </div>
+            <div class="announce-wrap" id="announcementContent" style="font-family: inherit;letter-spacing: 1px;"
+                *ngIf="isShowRules">
+                <div id="announcementTemplate" class="article-wrap">
+                    <h6 class="main">
+                        Any number of winners
+                        <br>
+                        Total matched so far:USD16
+                        <br>
+                        Commission on this market:4%
+                        <br>
+                        Betfair Exchange Blackjack
+                    </h6>
+                    <p class="paraghraph">Exchange Omaha Hi is Betfair's unique take on this increasingly popular Poker
+                        variant.</p>
+
+                    <h6 class="main">House Rules</h6>
+                    <li>Infinite Deck</li>
+                    <li>No Splitting / Doubling or Surrender</li>
+                    <li>Dealer sits on soft 17</li>
+                    <li>Hand rankings</li>
+                    <span style="margin-left: 50px;font-size: 12px;">Five Card Charlie</span>
+                    <br>
+                    <span style="margin-left: 50px;font-size: 12px;">Blackjack</span>
+                    <br>
+                    <span style="margin-left: 50px;font-size: 12px;">Highest points value</span>
+
+                    <h6 class="main">Exotic Selections</h6>
+                    <p class="paraghraph">There are 4 additional betting selections within Exchange Blackjack for
+                        customer
+                        to bet upon. They are;</p>
+                    <ol>
+                        <li>Dealer wins or ties with all 4 player hands.</li>
+                        <li> One of more of the 5 hands gets a "5 Card Charlie". </li>
+                        <li> All Cards are unique in respect of both suit and value (e.g. fails if the
+                            3 of clubs appears twice). </li>
+                        <li> Only one hand on the table has a points value of exactly 21 pts. </li>
+                    </ol>
+
+
+                    <h6 class="main">Early Settlement</h6>
+                    <p class="paraghraph">
+                        Where the outcome of all players hands is known prior to the normal end of game play, (e.g. when
+                        all
+                        players hands are bust), then the game will be halted, all bets will be settled and a new game
+                        commenced. Click here for more information on Early Settlement.
+                    </p>
+                    <h6 class="main">Game Flow</h6>
+                    <p class="paraghraph">
+                        This game is based on the casino game of Blackjack.
+                    </p>
+
+                    <p class="paraghraph">
+                        The game begins with 10 cards dealt face down. 8 of the 10 cards are paired to form 4 separate
+                        "player" hands (Player 1, Player 2, Player 3 and Player 4). The remaining cards are for the
+                        "Dealer"
+                        hand.The first round of betting occurs with no cards face up. Customers may place bets on any
+                        individual player to beat the dealer or on any of the four 'exotic' selections.
+                    </p>
+                    <p class="paraghraph">
+                        After the second round of betting the players hands draw further cards on the basis of the
+                        defined
+                        players logic table. If a hand is bust then it is suspended from further betting and all bets
+                        are
+                        immediately settled. The third round of betting now begins (unless all players have bust - If
+                        all
+                        players have bust the game finishes without the dealer taking a second card).
+                    </p>
+                    <p class="paraghraph">
+                        After the third round of betting the second of the dealer's cards is turned over. The Dealer
+                        will
+                        stand if he has soft 17 or greater (soft refers to when an Ace is being counted as 11 points to
+                        make
+                        up the points total) up to a maximum of 5 cards. If the dealer stands or is bust then the game
+                        is
+                        over and all bets are immediately settled. If not then betting continues until the dealer stands
+                        or
+                        all of the hands have been resolved (i.e. it is unknown whether they will win, lose or tie). For
+                        example, if prior to the Dealer taking a third card, 3 players have busted and 1 player has a
+                        Blackjack and the Dealer cannot possibly get a 5 card Charlie because they have 15 or 16, then
+                        the
+                        dealer cannot possibly win, the player will be settled as a winner and the game finishes without
+                        the
+                        Dealer taking a further card. Please see the help section for more information about Exchange
+                        Blackjack.
+                    </p>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="gameName=='blackjack'">
+    <div id="rulespop" class="overlay" style="display: none;">
+        <div class="news-wrap marquee-pop">
+            <div class="side-head">
+                <h3 class="a-depth">Rules</h3>
+                <a class="close ui-link" (click)="closerules();"></a>
+            </div>
+            <div id="matchTrackerWrap" class="match-tracker-wrap">
+                <ul class="match-btn">
+                    <li [ngClass]="{'select':!isShowRules}"><a (click)="Showplacebetrules()">Game Info</a></li>
+                    <li [ngClass]="{'select':isShowRules}"><a (click)="Showrules()">Game Rules</a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="announce-wrap" id="announcementContent" style="font-family: inherit;letter-spacing: 1px;"
+                *ngIf="!isShowRules">
+                <div id="announcementTemplate" class="article-wrap">
+                    <h6 class="main">What is Exchange Blackjack ?</h6>
+                    <p class="paraghraph">Exchange Blackjack brings together the world's most famous casino game and
+                        Betfair's unique back and lay system.</p>
+
+                    <p class="paraghraph">Four automated players battle against the dealer, to see who can get closest
+                        to 21. Instead of you deciding to hit or stand in the game, each player automatically plays a
+                        perfect game using Betfair Games 'Perfect Strategy'. There are up to seven rounds of betting in
+                        each game, allowing you to back or lay each player as the game unfolds. In addition there are
+                        four 'exotic' bets, including 'dealer wins or ties all' and '1 or more has 5 cards'.
+
+                    </p>
+                    <p class="paraghraph">Only with Betfair Games can you profit from betting on the house. A game is
+                        already underway in the panel to the left, so make your selection and start betting now!!</p>
+                    <p class="paraghraph">Already mastered Standard Exchange Blackjack? Try Turbo Exchange Blackjack -
+                        25% faster.</p>
+
+                    <h6 class="main">What are decimal odds?</h6>
+
+                    <p class="paraghraph">
+                        Decimal odds express your total return for the stake you place. Therefore even money is
+                        expressed as 2.0 - you get back your initial stake plus the same again as winnings - twice your
+                        initial stake. To see other odds use the odds converter.
+                        <br>
+                    </p>
+                    <button class="Covrtbuttonback">
+                        <div class="btn-small covrtfrstchild">2.10</div>
+                        <div class="btn-bottom">$17000</div>
+                    </button>
+                    <div class="col-sm-8">
+                        <table cellspacing="0" cellpadding="2" border="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td align="center" width="33%" class="GlobalTableHeaderBackground">
+                                        &nbsp;&nbsp;&nbsp;Fractional&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                    <td align="center" width="33%" class="GlobalTableHeaderBackground">
+                                        &nbsp;&nbsp;&nbsp;Decimal&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                    <td align="center" width="33%" class="GlobalTableHeaderBackground">
+                                        &nbsp;&nbsp;&nbsp;American&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="GlobalTableCell"> 11/10 </td>
+                                    <td align="center" class="GlobalTableCell"> 2.10 </td>
+                                    <td align="center" class="GlobalTableCell"> 110 </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="GlobalTableCell"> 1/1 </td>
+                                    <td align="center" class="GlobalTableCell"> 2.00 </td>
+                                    <td align="center" class="GlobalTableCell"> -100 </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h6 class="main">What is the Amount Available ?</h6>
+                    <p class="paraghraph">
+                        This is the amount of money available for you to bet at these odds. You can bet all or part of
+                        this amount. If you want more than the amount shown, the system will place the remaining stake
+                        as an unmatched bet available for others to take. more info
+                        <br>
+                        <button class="Covrtbuttonback">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$17000</div>
+                        </button>
+                    </p>
+                    <h6 class="main">What is Backing ?</h6>
+                    <p class="paraghraph">
+                        Back bets are those placed in the normal way. You can also ask for better odds, or more money
+                        than
+                        currently available. In either case your bet will appear on the Lay side of the market.
+                        <br>
+                        <button class="Covrtbuttonback">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$17000</div>
+                        </button>
+                    </p>
+                    <h6 class="main">What is Laying ?</h6>
+                    <p class="paraghraph">
+                        The Lay side of the market shows the money and odds requested by backers. To accommodate a
+                        backer,
+                        click a button in the Lay column.
+                        <br>
+                        <button class="Covrtbuttonlay">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$17000</div>
+                        </button>
+                    </p>
+                    <h6 class="main">How are the odds ordered ?</h6>
+                    <p class="paraghraph">
+                        The current best odds are shown in the coloured box, with the second and third best in adjacent
+                        boxes.
+                        <br>
+                        <button class="Covrtbutton">
+                            <div class="btn-small covrtfrstchild">2.06</div>
+                            <div class="btn-bottom">$1120</div>
+                        </button>
+                        <button class="Covrtbutton">
+                            <div class="btn-small covrtfrstchild">2.08</div>
+                            <div class="btn-bottom">$1820</div>
+                        </button>
+                        <button class="Covrtbuttonback">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$94</div>
+                        </button>
+                    </p>
+
+
+
+
+                </div>
+            </div>
+            <div class="announce-wrap" id="announcementContent" style="font-family: inherit;letter-spacing: 1px;"
+                *ngIf="isShowRules">
+                <div id="announcementTemplate" class="article-wrap">
+                    <h6 class="main">
+                        Any number of winners
+                        <br>
+                        Total matched so far:USD16
+                        <br>
+                        Commission on this market:4%
+                        <br>
+                        Betfair Exchange Blackjack
+                    </h6>
+                    <p class="paraghraph">Exchange Omaha Hi is Betfair's unique take on this increasingly popular Poker
+                        variant.</p>
+
+                    <h6 class="main">House Rules</h6>
+                    <li>Infinite Deck</li>
+                    <li>No Splitting / Doubling or Surrender</li>
+                    <li>Dealer sits on soft 17</li>
+                    <li>Hand rankings</li>
+                    <span style="margin-left: 50px;font-size: 12px;">Five Card Charlie</span>
+                    <br>
+                    <span style="margin-left: 50px;font-size: 12px;">Blackjack</span>
+                    <br>
+                    <span style="margin-left: 50px;font-size: 12px;">Highest points value</span>
+
+                    <h6 class="main">Exotic Selections</h6>
+                    <p class="paraghraph">There are 4 additional betting selections within Exchange Blackjack for
+                        customer
+                        to bet upon. They are;</p>
+                    <ol>
+                        <li>Dealer wins or ties with all 4 player hands.</li>
+                        <li> One of more of the 5 hands gets a "5 Card Charlie". </li>
+                        <li> All Cards are unique in respect of both suit and value (e.g. fails if the
+                            3 of clubs appears twice). </li>
+                        <li> Only one hand on the table has a points value of exactly 21 pts. </li>
+                    </ol>
+
+
+                    <h6 class="main">Early Settlement</h6>
+                    <p class="paraghraph">
+                        Where the outcome of all players hands is known prior to the normal end of game play, (e.g. when
+                        all
+                        players hands are bust), then the game will be halted, all bets will be settled and a new game
+                        commenced. Click here for more information on Early Settlement.
+                    </p>
+                    <h6 class="main">Game Flow</h6>
+                    <p class="paraghraph">
+                        This game is based on the casino game of Blackjack.
+                    </p>
+
+                    <p class="paraghraph">
+                        The game begins with 10 cards dealt face down. 8 of the 10 cards are paired to form 4 separate
+                        "player" hands (Player 1, Player 2, Player 3 and Player 4). The remaining cards are for the
+                        "Dealer"
+                        hand.The first round of betting occurs with no cards face up. Customers may place bets on any
+                        individual player to beat the dealer or on any of the four 'exotic' selections.
+                    </p>
+                    <p class="paraghraph">
+                        After the second round of betting the players hands draw further cards on the basis of the
+                        defined
+                        players logic table. If a hand is bust then it is suspended from further betting and all bets
+                        are
+                        immediately settled. The third round of betting now begins (unless all players have bust - If
+                        all
+                        players have bust the game finishes without the dealer taking a second card).
+                    </p>
+                    <p class="paraghraph">
+                        After the third round of betting the second of the dealer's cards is turned over. The Dealer
+                        will
+                        stand if he has soft 17 or greater (soft refers to when an Ace is being counted as 11 points to
+                        make
+                        up the points total) up to a maximum of 5 cards. If the dealer stands or is bust then the game
+                        is
+                        over and all bets are immediately settled. If not then betting continues until the dealer stands
+                        or
+                        all of the hands have been resolved (i.e. it is unknown whether they will win, lose or tie). For
+                        example, if prior to the Dealer taking a third card, 3 players have busted and 1 player has a
+                        Blackjack and the Dealer cannot possibly get a 5 card Charlie because they have 15 or 16, then
+                        the
+                        dealer cannot possibly win, the player will be settled as a winner and the game finishes without
+                        the
+                        Dealer taking a further card. Please see the help section for more information about Exchange
+                        Blackjack.
+                    </p>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</ng-container>
+
+
+<ng-container *ngIf="gameName=='holdem-turbo'">
+    <div id="rulespop" class="overlay" style="display: none;">
+        <div class="news-wrap marquee-pop">
+            <div class="side-head">
+                <h3 class="a-depth">Rules</h3>
+                <a class="close ui-link" (click)="closerules();"></a>
+            </div>
+            <div id="matchTrackerWrap" class="match-tracker-wrap">
+                <ul class="match-btn">
+                    <li [ngClass]="{'select':!isShowRules}"><a (click)="Showplacebetrules()">Game Info</a></li>
+                    <li [ngClass]="{'select':isShowRules}"><a (click)="Showrules()">Game Rules</a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="announce-wrap" id="announcementContent" style="font-family: inherit;letter-spacing: 1px;"
+                *ngIf="!isShowRules">
+                <div id="announcementTemplate" class="article-wrap">
+                    <h6 class="main">What is Turbo Exchange Poker?</h6>
+                    <p class="paraghraph">Played in exactly the same way as Exchange Poker, this version plays out 25%
+                        faster, designed for those who like their Betfair Games fast and furious.</p>
+
+                    <h6 class="main">What is Exchange Poker?</h6>
+
+                    <p class="paraghraph">Exchange Poker is the fast, furious and brand new way to play Texas Hold'em.
+                        You are able to see all four hands on the table and can bet on any of them to win or lose at any
+                        stage of the game; pre-deal, after the deal, after the flop and after the turn. There are no
+                        betting limits, and the minimum stake is just £1.
+
+                    </p>
+                    <p class="paraghraph">There's no bullying or bluffing to hamper your play, you just use your skill
+                        and judgment to recognise the best hands and place your bets at the best odds. You can BACK a
+                        hand to win or LAY one to lose.</p>
+                    <p class="paraghraph">A game is already underway in the panel to the left, so choose your hand and
+                        start betting now!</p>
+
+                    <h6 class="main">What are decimal odds?</h6>
+
+                    <p class="paraghraph">
+                        Decimal odds express your total return for the stake you place. Therefore even money is
+                        expressed as 2.0 - you get back your initial stake plus the same again as winnings - twice your
+                        initial stake. To see other odds use the odds converter.
+                        <br>
+                    </p>
+                    <button class="Covrtbuttonback">
+                        <div class="btn-small covrtfrstchild">2.10</div>
+                        <div class="btn-bottom">$17000</div>
+                    </button>
+                    <div class="col-sm-8">
+                        <table cellspacing="0" cellpadding="2" border="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td align="center" width="33%" class="GlobalTableHeaderBackground">
+                                        &nbsp;&nbsp;&nbsp;Fractional&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                    <td align="center" width="33%" class="GlobalTableHeaderBackground">
+                                        &nbsp;&nbsp;&nbsp;Decimal&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                    <td align="center" width="33%" class="GlobalTableHeaderBackground">
+                                        &nbsp;&nbsp;&nbsp;American&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="GlobalTableCell"> 11/10 </td>
+                                    <td align="center" class="GlobalTableCell"> 2.10 </td>
+                                    <td align="center" class="GlobalTableCell"> 110 </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="GlobalTableCell"> 1/1 </td>
+                                    <td align="center" class="GlobalTableCell"> 2.00 </td>
+                                    <td align="center" class="GlobalTableCell"> -100 </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h6 class="main">What is the Amount Available ?</h6>
+                    <p class="paraghraph">
+                        This is the amount of money available for you to bet at these odds. You can bet all or part of
+                        this amount. If you want more than the amount shown, the system will place the remaining stake
+                        as an unmatched bet available for others to take. more info
+                        <br>
+                        <button class="Covrtbuttonback">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$17000</div>
+                        </button>
+                    </p>
+                    <h6 class="main">What is Backing ?</h6>
+                    <p class="paraghraph">
+                        Back bets are those placed in the normal way. You can also ask for better odds, or more money
+                        than
+                        currently available. In either case your bet will appear on the Lay side of the market.
+                        <br>
+                        <button class="Covrtbuttonback">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$17000</div>
+                        </button>
+                    </p>
+                    <h6 class="main">What is Laying ?</h6>
+                    <p class="paraghraph">
+                        The Lay side of the market shows the money and odds requested by backers. To accommodate a
+                        backer,
+                        click a button in the Lay column.
+                        <br>
+                        <button class="Covrtbuttonlay">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$17000</div>
+                        </button>
+                    </p>
+                    <h6 class="main">How are the odds ordered ?</h6>
+                    <p class="paraghraph">
+                        The current best odds are shown in the coloured box, with the second and third best in adjacent
+                        boxes.
+                        <br>
+                        <button class="Covrtbuttonlay">
+                            <div class="btn-small covrtfrstchild">2.06</div>
+                            <div class="btn-bottom">$1120</div>
+                        </button>
+                        <button class="Covrtbutton">
+                            <div class="btn-small covrtfrstchild">2.08</div>
+                            <div class="btn-bottom">$1820</div>
+                        </button>
+                        <button class="Covrtbuttonback">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$94</div>
+                        </button>
+                    </p>
+
+
+
+
+                </div>
+            </div>
+            <div class="announce-wrap" id="announcementContent" style="font-family: inherit;letter-spacing: 1px;"
+                *ngIf="isShowRules">
+                <div id="announcementTemplate" class="article-wrap">
+                    <h6 class="main">
+                        Any number of winners
+                        <br>
+                        Total matched so far:USD16
+                        <br>
+                        Commission on this market:4%
+                        <br>
+                        Betfair Exchange Blackjack
+                    </h6>
+                    <p class="paraghraph">
+                        This game is based on the poker game commonly known as 'Texas Hold'em'.
+                    </p>
+
+                    <p class="paraghraph">
+                        Each game begins with 13 cards being dealt face down from one randomly shuffled pack. 8 of the
+                        13 cards are paired to form 4 separate hands as displayed on site (these cards in the pairs can
+                        be known as 'hole cards'). The remaining 5 cards form a pool of community cards.
+                    </p>
+                    <p class="paraghraph">
+                        The first round of betting occurs whilst all cards are face down (The deal) Players should bet
+                        on which individual hand they think will win the game. Bets can be placed to back or lay each
+                        hand.
+                    </p>
+
+                    <p class="paraghraph">
+                        Each round of betting lasts for a specific period of time before unmatched bets are cancelled
+                        and the next cards turned face up. The length of time is indicated by the movement of the bar
+                        just below the community cards. (Please note the progress bar is an indication only).
+                    </p>
+                    <p class="paraghraph">
+                        At the end of the first round of betting, unmatched bets are cancelled and the pairs of cards
+                        forming the individual hands are simultaneously turned face up. There is then another round of
+                        betting, again bets can back or lay each individual hand within the game (Pre Flop).
+                    </p>
+                    <p class="paraghraph">
+                        At the end of the second round of betting unmatched bets are cancelled and the first three of
+                        the community cards (sometimes known as the 'flop') are turned face up. Another round of betting
+                        then begins.
+                    </p>
+
+                    <p class="paraghraph">
+                        The end of the third round of betting sees unmatched bets cancelled before the fourth card from
+                        the community cards is turned face up (this card is sometimes know as the 'turn'). Another round
+                        of betting then commences.
+                    </p>
+
+                    <p class="paraghraph">
+                        The fourth and final round of betting finishes with unmatched bets cancelled before the fifth
+                        and final of the community cards is turned face up (this is sometimes known as the 'river').
+
+                    </p>
+
+                    <p class="paraghraph">The result of the game is determined by which hand is best within the
+                        predetermined rank system.
+                        Should two hands be of equal standing then dead heat rules will apply. Each hand may consist of
+                        the following:</p>
+                    <ol>
+                        <li>Both hole cards and three community cards
+                        </li>
+                        <li> One of more of the 5 hands gets a "5 Card Charlie". </li>
+                        <li>One hole card and four community cards</li>
+                        <li> All five community cards </li>
+                    </ol>
+                    <p class="paraghraph">The rank system that determines the winning hand is as follows with the
+                        highest first:</p>
+
+                    <h6 class="main">Royal Flush:</h6>
+                    <p class="paraghraph">
+                        Ace, King, Queen, Jack, Ten of the same suit.
+                    </p>
+
+                    <h6 class="main">Straight Flush:</h6>
+                    <p class="paraghraph">
+                        Straight with all five cards in the same suit.
+                    </p>
+                    <h6 class="main">Four of a Kind:</h6>
+                    <p class="paraghraph">
+                        Four cards of the same number or face value ('quads').
+                    </p>
+                    <h6 class="main">Full House:</h6>
+                    <p class="paraghraph">
+                        Three cards of one number or face value and two cards of another number or face value. If more
+                        than one player has a full house, the full house with the highest ranking three of a kind
+                        ('trips') wins.
+                    </p>
+                    <h6 class="main">Flush</h6>
+                    <p class="paraghraph">
+                        Five cards of the same suit. If there is more than one flush, the hand with the highest card(s)
+                        wins.
+                    </p>
+                    <h6 class="main">Straight</h6>
+                    <p class="paraghraph">
+                        Five cards in sequence. Cards can be in any suit. An Ace can be used in the highest straight
+                        (10, J, Q, K, A) and the lowest straight (A, 2, 3, 4, 5). If there is more than one straight,
+                        the hand with the highest card in the straight wins.
+                    </p>
+                    <h6 class="main">Three of a Kind:</h6>
+                    <p class="paraghraph">
+                        Three cards of the same number or face value ('trips').
+                    </p>
+                    <h6 class="main">Two Pair:</h6>
+                    <p class="paraghraph">
+                        If two players have two pair, the hand with the highest pair wins. If they have the same high
+                        pair, whoever has the second highest pair wins. If they have the same two pair, whoever has the
+                        highest fifth card ('kicker') wins
+                    </p>
+                    <h6 class="main">One Pair:</h6>
+                    <p class="paraghraph">
+                        Two cards of the same number or face value. If two players have the same pair, the highest
+                        outside card(s) wins.
+                    </p>
+                    <h6 class="main">High Card:</h6>
+                    <p class="paraghraph">
+                        The hand with the highest card(s) wins.
+
+                        Should two or more hands have cards or combinations of cards with equal standing and value then
+                        the value of the remaining cards in that hand is used to determine the winner (sometimes know as
+                        the kicker). Should one or more hands still be of equal values then dead heat rules will apply
+                        to the winning hands. (sometimes known as 'splitting the pot').
+                    </p>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="gameName=='holdem'">
+    <div id="rulespop" class="overlay" style="display: none;">
+        <div class="news-wrap marquee-pop">
+            <div class="side-head">
+                <h3 class="a-depth">Rules</h3>
+                <a class="close ui-link" (click)="closerules();"></a>
+            </div>
+            <div id="matchTrackerWrap" class="match-tracker-wrap">
+                <ul class="match-btn">
+                    <li [ngClass]="{'select':!isShowRules}"><a (click)="Showplacebetrules()">Game Info</a></li>
+                    <li [ngClass]="{'select':isShowRules}"><a (click)="Showrules()">Game Rules</a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="announce-wrap" id="announcementContent" style="font-family: inherit;letter-spacing: 1px;"
+                *ngIf="!isShowRules">
+                <div id="announcementTemplate" class="article-wrap">
+                    <h6 class="main">What is Exchange Poker?</h6>
+                    <p class="paraghraph">Exchange Poker is the fast, furious and brand new way to play Texas Hold'em.
+                    </p>
+
+
+                    <p class="paraghraph">You are able to see all four hands on the table and can bet on any of them to
+                        win or lose at any stage of the game; pre-deal, after the deal, after the flop and after the
+                        turn. There are no betting limits, and the minimum stake is just £1.
+
+                    </p>
+                    <p class="paraghraph">There's no bullying or bluffing to hamper your play, you just use your skill
+                        and judgment to recognise the best hands and place your bets at the best odds. You can BACK a
+                        hand to win or LAY one to lose.</p>
+                    <p class="paraghraph">A game is already underway in the panel to the left, so choose your hand and
+                        start betting now!</p>
+                    <p class="paraghraph">Already mastered Standard Exchange Poker? Try Turbo Exchange Poker - 25%
+                        faster.</p>
+
+                    <h6 class="main">What are decimal odds?</h6>
+
+                    <p class="paraghraph">
+                        Decimal odds express your total return for the stake you place. Therefore even money is
+                        expressed as 2.0 - you get back your initial stake plus the same again as winnings - twice your
+                        initial stake. To see other odds use the odds converter.
+                        <br>
+                    </p>
+                    <button class="Covrtbuttonback">
+                        <div class="btn-small covrtfrstchild">2.10</div>
+                        <div class="btn-bottom">$17000</div>
+                    </button>
+                    <div class="col-sm-8">
+                        <table cellspacing="0" cellpadding="2" border="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td align="center" width="33%" class="GlobalTableHeaderBackground">
+                                        &nbsp;&nbsp;&nbsp;Fractional&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                    <td align="center" width="33%" class="GlobalTableHeaderBackground">
+                                        &nbsp;&nbsp;&nbsp;Decimal&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                    <td align="center" width="33%" class="GlobalTableHeaderBackground">
+                                        &nbsp;&nbsp;&nbsp;American&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="GlobalTableCell"> 11/10 </td>
+                                    <td align="center" class="GlobalTableCell"> 2.10 </td>
+                                    <td align="center" class="GlobalTableCell"> 110 </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="GlobalTableCell"> 1/1 </td>
+                                    <td align="center" class="GlobalTableCell"> 2.00 </td>
+                                    <td align="center" class="GlobalTableCell"> -100 </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h6 class="main">What is the Amount Available ?</h6>
+                    <p class="paraghraph">
+                        This is the amount of money available for you to bet at these odds. You can bet all or part of
+                        this amount. If you want more than the amount shown, the system will place the remaining stake
+                        as an unmatched bet available for others to take. more info
+                        <br>
+                        <button class="Covrtbuttonback">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$17000</div>
+                        </button>
+                    </p>
+                    <h6 class="main">What is Backing ?</h6>
+                    <p class="paraghraph">
+                        Back bets are those placed in the normal way. You can also ask for better odds, or more money
+                        than
+                        currently available. In either case your bet will appear on the Lay side of the market.
+                        <br>
+                        <button class="Covrtbuttonback">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$17000</div>
+                        </button>
+                    </p>
+                    <h6 class="main">What is Laying ?</h6>
+                    <p class="paraghraph">
+                        The Lay side of the market shows the money and odds requested by backers. To accommodate a
+                        backer,
+                        click a button in the Lay column.
+                        <br>
+                        <button class="Covrtbuttonlay">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$17000</div>
+                        </button>
+                    </p>
+                    <h6 class="main">How are the odds ordered ?</h6>
+                    <p class="paraghraph">
+                        The current best odds are shown in the coloured box, with the second and third best in adjacent
+                        boxes.
+                        <br>
+                        <button class="Covrtbutton">
+                            <div class="btn-small covrtfrstchild">2.06</div>
+                            <div class="btn-bottom">$1120</div>
+                        </button>
+                        <button class="Covrtbutton">
+                            <div class="btn-small covrtfrstchild">2.08</div>
+                            <div class="btn-bottom">$1820</div>
+                        </button>
+                        <button class="Covrtbuttonback">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$94</div>
+                        </button>
+                    </p>
+
+
+
+
+                </div>
+            </div>
+            <div class="announce-wrap" id="announcementContent" style="font-family: inherit;letter-spacing: 1px;"
+                *ngIf="isShowRules">
+                <div id="announcementTemplate" class="article-wrap">
+                    <h6 class="main">
+                        Any number of winners
+                        <br>
+                        Total matched so far:USD16
+                        <br>
+                        Commission on this market:4%
+                        <br>
+                        Betfair Exchange Blackjack
+                    </h6>
+                    <p class="paraghraph">
+                        This game is based on the poker game commonly known as 'Texas Hold'em'.
+                    </p>
+
+                    <p class="paraghraph">
+                        Each game begins with 13 cards being dealt face down from one randomly shuffled pack. 8 of the
+                        13 cards are paired to form 4 separate hands as displayed on site (these cards in the pairs can
+                        be known as 'hole cards'). The remaining 5 cards form a pool of community cards.
+                    </p>
+                    <p class="paraghraph">
+                        The first round of betting occurs whilst all cards are face down (The deal) Players should bet
+                        on which individual hand they think will win the game. Bets can be placed to back or lay each
+                        hand.
+                    </p>
+
+                    <p class="paraghraph">
+                        Each round of betting lasts for a specific period of time before unmatched bets are cancelled
+                        and the next cards turned face up. The length of time is indicated by the movement of the bar
+                        just below the community cards. (Please note the progress bar is an indication only).
+                    </p>
+                    <p class="paraghraph">
+                        At the end of the first round of betting, unmatched bets are cancelled and the pairs of cards
+                        forming the individual hands are simultaneously turned face up. There is then another round of
+                        betting, again bets can back or lay each individual hand within the game (Pre Flop).
+                    </p>
+                    <p class="paraghraph">
+                        At the end of the second round of betting unmatched bets are cancelled and the first three of
+                        the community cards (sometimes known as the 'flop') are turned face up. Another round of betting
+                        then begins.
+                    </p>
+
+                    <p class="paraghraph">
+                        The end of the third round of betting sees unmatched bets cancelled before the fourth card from
+                        the community cards is turned face up (this card is sometimes know as the 'turn'). Another round
+                        of betting then commences.
+                    </p>
+
+                    <p class="paraghraph">
+                        The fourth and final round of betting finishes with unmatched bets cancelled before the fifth
+                        and final of the community cards is turned face up (this is sometimes known as the 'river').
+
+                    </p>
+
+                    <p class="paraghraph">The result of the game is determined by which hand is best within the
+                        predetermined rank system.
+                        Should two hands be of equal standing then dead heat rules will apply. Each hand may consist of
+                        the following:</p>
+                    <ol>
+                        <li>Both hole cards and three community cards
+                        </li>
+                        <li> One of more of the 5 hands gets a "5 Card Charlie". </li>
+                        <li>One hole card and four community cards</li>
+                        <li> All five community cards </li>
+                    </ol>
+                    <p class="paraghraph">The rank system that determines the winning hand is as follows with the
+                        highest first:</p>
+
+                    <h6 class="main">Royal Flush:</h6>
+                    <p class="paraghraph">
+                        Ace, King, Queen, Jack, Ten of the same suit.
+                    </p>
+
+                    <h6 class="main">Straight Flush:</h6>
+                    <p class="paraghraph">
+                        Straight with all five cards in the same suit.
+                    </p>
+                    <h6 class="main">Four of a Kind:</h6>
+                    <p class="paraghraph">
+                        Four cards of the same number or face value ('quads').
+                    </p>
+                    <h6 class="main">Full House:</h6>
+                    <p class="paraghraph">
+                        Three cards of one number or face value and two cards of another number or face value. If more
+                        than one player has a full house, the full house with the highest ranking three of a kind
+                        ('trips') wins.
+                    </p>
+                    <h6 class="main">Flush</h6>
+                    <p class="paraghraph">
+                        Five cards of the same suit. If there is more than one flush, the hand with the highest card(s)
+                        wins.
+                    </p>
+                    <h6 class="main">Straight</h6>
+                    <p class="paraghraph">
+                        Five cards in sequence. Cards can be in any suit. An Ace can be used in the highest straight
+                        (10, J, Q, K, A) and the lowest straight (A, 2, 3, 4, 5). If there is more than one straight,
+                        the hand with the highest card in the straight wins.
+                    </p>
+                    <h6 class="main">Three of a Kind:</h6>
+                    <p class="paraghraph">
+                        Three cards of the same number or face value ('trips').
+                    </p>
+                    <h6 class="main">Two Pair:</h6>
+                    <p class="paraghraph">
+                        If two players have two pair, the hand with the highest pair wins. If they have the same high
+                        pair, whoever has the second highest pair wins. If they have the same two pair, whoever has the
+                        highest fifth card ('kicker') wins
+                    </p>
+                    <h6 class="main">One Pair:</h6>
+                    <p class="paraghraph">
+                        Two cards of the same number or face value. If two players have the same pair, the highest
+                        outside card(s) wins.
+                    </p>
+                    <h6 class="main">High Card:</h6>
+                    <p class="paraghraph">
+                        The hand with the highest card(s) wins.
+
+                        Should two or more hands have cards or combinations of cards with equal standing and value then
+                        the value of the remaining cards in that hand is used to determine the winner (sometimes know as
+                        the kicker). Should one or more hands still be of equal values then dead heat rules will apply
+                        to the winning hands. (sometimes known as 'splitting the pot').
+                    </p>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="gameName=='omaha-hi'">
+    <div id="rulespop" class="overlay" style="display: none;">
+        <div class="news-wrap marquee-pop">
+            <div class="side-head">
+                <h3 class="a-depth">Rules</h3>
+                <a class="close ui-link" (click)="closerules();"></a>
+            </div>
+            <div id="matchTrackerWrap" class="match-tracker-wrap">
+                <ul class="match-btn">
+                    <li [ngClass]="{'select':!isShowRules}"><a (click)="Showplacebetrules()">Game Info</a></li>
+                    <li [ngClass]="{'select':isShowRules}"><a (click)="Showrules()">Game Rules</a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="announce-wrap" id="announcementContent" style="font-family: inherit;letter-spacing: 1px;"
+                *ngIf="!isShowRules">
+                <div id="announcementTemplate" class="article-wrap">
+                    <h6 class="main">What is Exchange Omaha Hi?</h6>
+                    <p class="paraghraph">Exchange Omaha Hi is Betfair's unique take on this increasingly popular Poker
+                        variant.
+                    </p>
+
+
+                    <p class="paraghraph">You're able to see all four hands on the table and can bet on any of them to
+                        win or lose at any stage of the game; before the deal, after the deal, after the flop and after
+                        the turn. You can also bet on the ranking of the winning hand(s) using the Side bets market.
+                        There are no betting limits, and the minimum stake is just £1. You can BACK a hand to win, or
+                        LAY one to lose. A game is already underway on the left, so choose your hand and start betting
+                        now!
+
+                    </p>
+                    <p class="paraghraph">
+                        In the betting section there are two tabs - Main market and Side bets market. When you have one
+                        tab clicked you will only be able to bet on the selections in that market and only bets on those
+                        selections will appear in the My Bets tab. Simply click on the other tab if you would like to
+                        see your other bets. e.g. If you are placing a bet in the Side bets market, any bets already
+                        placed on Hands 1 to 4 will not appear in the 'My Bets' section until you change to the 'Main
+                        market' tab in the betting window.</p>
+                    <p class="paraghraph">Note that the commission rate and amount matched (displayed in the Rules Tab)
+                        are also specific to whether you have the Main market or Side bets market tab clicked.</p>
+
+                    <h6 class="main">What are decimal odds?</h6>
+
+                    <p class="paraghraph">
+                        Decimal odds express your total return for the stake you place. Therefore even money is
+                        expressed as 2.0 - you get back your initial stake plus the same again as winnings - twice your
+                        initial stake. To see other odds use the odds converter.
+                        <br>
+                    </p>
+                    <button class="Covrtbuttonback">
+                        <div class="btn-small covrtfrstchild">2.10</div>
+                        <div class="btn-bottom">$17000</div>
+                    </button>
+                    <div class="col-sm-8">
+                        <table cellspacing="0" cellpadding="2" border="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td align="center" width="33%" class="GlobalTableHeaderBackground">
+                                        &nbsp;&nbsp;&nbsp;Fractional&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                    <td align="center" width="33%" class="GlobalTableHeaderBackground">
+                                        &nbsp;&nbsp;&nbsp;Decimal&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                    <td align="center" width="33%" class="GlobalTableHeaderBackground">
+                                        &nbsp;&nbsp;&nbsp;American&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="GlobalTableCell"> 11/10 </td>
+                                    <td align="center" class="GlobalTableCell"> 2.10 </td>
+                                    <td align="center" class="GlobalTableCell"> 110 </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="GlobalTableCell"> 1/1 </td>
+                                    <td align="center" class="GlobalTableCell"> 2.00 </td>
+                                    <td align="center" class="GlobalTableCell"> -100 </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h6 class="main">What is the Amount Available ?</h6>
+                    <p class="paraghraph">
+                        This is the amount of money available for you to bet at these odds. You can bet all or part of
+                        this amount. If you want more than the amount shown, the system will place the remaining stake
+                        as an unmatched bet available for others to take. more info
+                        <br>
+                        <button class="Covrtbuttonback">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$17000</div>
+                        </button>
+                    </p>
+                    <h6 class="main">What is Backing ?</h6>
+                    <p class="paraghraph">
+                        Back bets are those placed in the normal way. You can also ask for better odds, or more money
+                        than
+                        currently available. In either case your bet will appear on the Lay side of the market.
+                        <br>
+                        <button class="Covrtbuttonback">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$17000</div>
+                        </button>
+                    </p>
+                    <h6 class="main">What is Laying ?</h6>
+                    <p class="paraghraph">
+                        The Lay side of the market shows the money and odds requested by backers. To accommodate a
+                        backer,
+                        click a button in the Lay column.
+                        <br>
+                        <button class="Covrtbuttonlay">
+                            <div class="btn-small covrtfrstchild">2.12</div>
+                            <div class="btn-bottom">$17000</div>
+                        </button>
+                    </p>
+                    <h6 class="main">How are the odds ordered ?</h6>
+                    <p class="paraghraph">
+                        The current best odds are shown in the coloured box, with the second and third best in adjacent
+                        boxes.
+                        <br>
+                        <button class="Covrtbutton">
+                            <div class="btn-small covrtfrstchild">2.06</div>
+                            <div class="btn-bottom">$1120</div>
+                        </button>
+                        <button class="Covrtbutton">
+                            <div class="btn-small covrtfrstchild">2.08</div>
+                            <div class="btn-bottom">$1820</div>
+                        </button>
+                        <button class="Covrtbuttonback">
+                            <div class="btn-small covrtfrstchild">2.10</div>
+                            <div class="btn-bottom">$94</div>
+                        </button>
+                    </p>
+
+
+
+
+                </div>
+            </div>
+            <div class="announce-wrap" id="announcementContent" style="font-family: inherit;letter-spacing: 1px;"
+                *ngIf="isShowRules">
+                <div id="announcementTemplate" class="article-wrap">
+                    <h6 class="main">
+                        Any number of winners
+                        <br>
+                        Total matched so far:USD16
+                        <br>
+                        Commission on this market:4%
+                        <br>
+                        Betfair Exchange Blackjack
+                    </h6>
+                    <p class="paraghraph">
+                        This game is based on the poker game commonly known as 'Omaha High'.
+                    </p>
+
+                    <p class="paraghraph">
+                        Each game begins with 21 cards being dealt face down from one randomly shuffled pack. 16 of the
+                        21 cards are paired to form 4 separate hands as displayed on site (these cards in the pairs can
+                        be known as 'hole cards'). The remaining 5 cards form a pool of community cards.
+                    </p>
+                    <p class="paraghraph">
+                        The first round of betting occurs whilst all cards are face down (The deal) Players should bet
+                        on which individual hand they think will win the game. Bets can be placed to back or lay each
+                        hand.
+                    </p>
+
+                    <p class="paraghraph">
+                        Each round of betting lasts for a specific period of time before unmatched bets are cancelled
+                        and the next cards turned face up. The length of time is indicated by the movement of the bar
+                        just below the community cards. (Please note the progress bar is an indication only).
+                    </p>
+                    <p class="paraghraph">
+                        At the end of the first round of betting, unmatched bets are cancelled and the pairs of cards
+                        forming the individual hands are simultaneously turned face up. There is then another round of
+                        betting, again bets can back or lay each individual hand within the game (Pre Flop).
+                    </p>
+                    <p class="paraghraph">
+                        At the end of the second round of betting unmatched bets are cancelled and the first three of
+                        the community cards (sometimes known as the 'flop') are turned face up. Another round of betting
+                        then begins.
+                    </p>
+
+                    <p class="paraghraph">
+                        The end of the third round of betting sees unmatched bets cancelled before the fourth card from
+                        the community cards is turned face up (this card is sometimes know as the 'turn'). Another round
+                        of betting then commences.
+                    </p>
+
+                    <p class="paraghraph">
+                        The fourth and final round of betting finishes with unmatched bets cancelled before the fifth
+                        and final of the community cards is turned face up (this is sometimes known as the 'river').
+
+                    </p>
+
+                    <p class="paraghraph">The result of the game is determined by which hand is best within the
+                        predetermined rank system. Should two hands be of equal standing then dead heat rules will
+                        apply. Each hand may consist of the following:
+                        The rank system that determines the winning hand is as follows with the highest first:</p>
+
+                    <h6 class="main">Royal Flush:</h6>
+                    <p class="paraghraph">
+                        Ace, King, Queen, Jack, Ten of the same suit.
+                    </p>
+
+                    <h6 class="main">Straight Flush:</h6>
+                    <p class="paraghraph">
+                        Straight with all five cards in the same suit.
+                    </p>
+                    <h6 class="main">Four of a Kind:</h6>
+                    <p class="paraghraph">
+                        Four cards of the same number or face value ('quads').
+                    </p>
+                    <h6 class="main">Full House:</h6>
+                    <p class="paraghraph">
+                        Three cards of one number or face value and two cards of another number or face value. If more
+                        than one player has a full house, the full house with the highest ranking three of a kind
+                        ('trips') wins.
+                    </p>
+                    <h6 class="main">Flush</h6>
+                    <p class="paraghraph">
+                        Five cards of the same suit. If there is more than one flush, the hand with the highest card(s)
+                        wins.
+                    </p>
+                    <h6 class="main">Straight</h6>
+                    <p class="paraghraph">
+                        Five cards in sequence. Cards can be in any suit. An Ace can be used in the highest straight
+                        (10, J, Q, K, A) and the lowest straight (A, 2, 3, 4, 5). If there is more than one straight,
+                        the hand with the highest card in the straight wins.
+                    </p>
+                    <h6 class="main">Three of a Kind:</h6>
+                    <p class="paraghraph">
+                        Three cards of the same number or face value ('trips').
+                    </p>
+                    <h6 class="main">Two Pair:</h6>
+                    <p class="paraghraph">
+                        If two players have two pair, the hand with the highest pair wins. If they have the same high
+                        pair, whoever has the second highest pair wins. If they have the same two pair, whoever has the
+                        highest fifth card ('kicker') wins
+                    </p>
+                    <h6 class="main">One Pair:</h6>
+                    <p class="paraghraph">
+                        Two cards of the same number or face value. If two players have the same pair, the highest
+                        outside card(s) wins.
+                    </p>
+                    <h6 class="main">High Card:</h6>
+                    <p class="paraghraph">
+                        The hand with the highest card(s) wins.
+
+                        Should two or more hands have cards or combinations of cards with equal standing and value then
+                        the value of the remaining cards in that hand is used to determine the winner (sometimes know as
+                        the kicker). Should one or more hands still be of equal values then dead heat rules will apply
+                        to the winning hands. (sometimes known as 'splitting the pot').
+                    </p>
+
+                    <h6 class="main">Betting Selections</h6>
+                    <p class="paraghraph">
+                        In Exchange Omaha Hi, there are two markets which are available for betting for any given Omaha
+                        Hi game. The two markets each hold different types of betting selections. The first market is
+                        known as the main market and contains the betting selections for the Game Outcome, i.e. Hand 1,
+                        Hand 2, Hand 3 and Hand 4. This market is known as a ‘Win Only Market’ and generally only a
+                        single selection will win (however it is possible for a dead heat to occur when the winning
+                        selections will be settled according to the dead heat rules). The Side bets market is also a
+                        ‘Win Only Market’, however for this market each of the selections are mutually exclusive and
+                        therefore one of the selections will win, and the other selections will be settled as losers.
+                        It’s also important to note that the main and side bets markets are two separate markets with
+                        commission on each charged at according to the standard Betfair commission charging model.
+                        The side bets selections are as follows:
+                    </p>
+
+                    <span><b>Winner has a Full House or better - </b>Will
+                        the winning hand(s) have a Full House or better?</span>
+                    <ol>
+                        <li> If the winning hand(s) has a Full House then this selection wins
+                        </li>
+                        <li> If the winning hand(s) has a Four-of-a-Kind then this selection wins
+                        </li>
+                        <li> If the winning hand(s) has a Straight Flush then this selection wins
+                        </li>
+                        <li> If the winning hand(s) has a Royal Flush then this selection wins
+                        </li>
+                        <li> If the winning hand(s) has a Flush then this selection loses </li>
+                    </ol>
+
+
+                    <span><b>Winner has a Flush - </b>Will the winning hand(s) have a Flush?</span>
+                    <ol>
+                        <li> If the winning hand(s) has a Flush then this selection wins </li>
+                        <li> If the winning hand(s) has a Straight Flush then this selection loses </li>
+                        <li> If the winning hand(s) has a Royal Flush then this selection loses </li>
+                    </ol>
+
+
+                    <span><b>Winner has a Straight - </b>Will the winning hand(s) have a Straight?</span>
+                    <ol>
+                        <li> If the winning hand(s) has a Straight then this selection wins </li>
+                        <li> If the winning hand(s) has a Straight Flush then this selection loses </li>
+                        <li> If the winning hand(s) has a Royal Flush then this selection loses </li>
+                    </ol>
+
+                    <span><b>Winner has a Three-of-a-Kind - </b>Will the winning hand(s) have Three-of-a-Kind?</span>
+                    <ol>
+                        <li> If the winning hand(s) has a Three-of-a-Kind then this selection wins </li>
+                        <li> If the winning hand(s) has a Full House then this selection loses </li>
+                        <li> If the winning hand(s) has a Four-of-a-Kind then this selection loses </li>
+                    </ol>
+
+
+                    <span><b>Winner has a Two pair or worse - </b>Will the winning hand(s) have Two Pair or less?</span>
+                    <ol>
+                        <li> If the winning hand(s) has a Two Pair then this selection wins </li>
+                        <li> If the winning hand(s) has a One Pair then this selection wins </li>
+                        <li> If the winning hand(s) has a No Pair, High Card then this selection wins </li>
+                        <li> If the winning hand(s) has a Full House then this selection loses </li>
+                        <li> If the winning hand(s) has a Four-of-a-Kind then this selection loses </li>
+                    </ol>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</ng-container>

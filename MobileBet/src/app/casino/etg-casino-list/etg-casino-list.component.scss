@@ -1,0 +1,142 @@
+.home-page .home-page-body .top-section.banner {
+    margin-bottom: 0;
+    align-items: flex-start;
+}
+
+.home-page .home-page-body .top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.top-section .row-title,
+.home-page .home-page-body .top-section .title {
+    font-size: 18px;
+    color: #e3eff4;
+    margin: 0;
+    padding-left: 15px;
+}
+
+.home-page .row-title {
+    padding: 10px 15px 0;
+    background: #181818;
+    position: relative;
+    border-radius: 12px 12px 0 0;
+    min-width: 50%;
+}
+
+.home-page .row-title:before {
+    left: 100%;
+    border-radius: 0 0 0 10px;
+    -moz-border-radius: 0 0 0 10px;
+    -webkit-border-radius: 0 0 0 10px;
+    -webkit-box-shadow: -10px 0 0 0 #181818;
+    box-shadow: -10px 0 0 0 #181818;
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.home-page .slide-bars {
+    display: flex;
+    gap: 12px;
+}
+
+.home-page .slide-bars .slide-arrow-box {
+    background-color: #181818;
+    width: 23px;
+    height: 23px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer
+}
+
+
+.casino-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    width: 95%;
+    flex: 1 1 50%;
+    // max-width: 135px;
+    // max-height: 135px;
+    margin: 6px;
+}
+
+.casino-item .img-box {
+    position: relative;
+    padding-top: 100%;
+}
+
+.casino-item .img-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+img {
+    margin-top: 8px;
+}
+
+img {
+    width: 100%;
+}
+
+img,
+textarea {
+    vertical-align: top;
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.zoomIn {
+    -webkit-animation-name: zoomIn;
+    animation-name: zoomIn;
+}
+
+.home-page .home-page-body .home-top-casino {
+    padding: 5px;
+}
+
+.home-page .home-page-body .top-section.banner+div {
+    background: #181818;
+    padding: 10px 7.5px;
+    border-radius: 0 12px 12px;
+}
+
+
+
+.swiper-button-prev1:after,
+.swiper-button-next1:after {
+    font-family: swiper-icons;
+    font-size: var(--swiper-navigation-size);
+    text-transform: none !important;
+    /* letter-spacing: 0; */
+    // font-feature-settings: ;
+    /* font-variant: initial; */
+    /* line-height: 1; */
+    font-size: 10px;
+    color: white;
+}
+
+.swiper-button-prev1:after,
+.swiper-rtl .swiper-button-next1:after {
+    content: 'prev';
+}
+
+.swiper-button-next1:after,
+.swiper-rtl .swiper-button-prev1:after {
+    content: 'next';
+}

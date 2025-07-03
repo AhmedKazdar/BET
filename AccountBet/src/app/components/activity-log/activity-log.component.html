@@ -1,0 +1,28 @@
+<h2>{{Update?.activitylog}}</h2>
+
+<table class="table01">
+    <tbody>
+        <tr>
+            <th width="15%" class="align-L">{{Update?.logindate}} &amp; {{Update?.time}}
+            </th>
+            <th width="15%" class="align-L">{{Update?.loginstatus}}
+            </th>
+            <th width="12%">{{Update?.ipadress}}
+            </th>
+            <th width="28%">{{Update?.isp}}
+            </th>
+            <th width="">{{Update?.citystatecountry}}
+            </th>
+        </tr>
+    </tbody>
+    <tbody id="content">
+        <tr id="tempTr" *ngFor="let log of logsData">
+            <td class="align-L" id="loginDate">{{log.loginTime | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td class="align-L" [ngClass]="log.loginStatus==1?'green':'red'" id="loginMessage">Login {{log.loginStatus==1?'Success':'Failed'}}</td>
+            <td id="ipAddress">{{log.loginIp}}</td>
+            <td id="isp">{{log.ISP}}</td>
+            <td id="location">{{log.origin}}</td>
+        </tr>
+
+    </tbody>
+</table>

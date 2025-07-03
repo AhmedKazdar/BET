@@ -1,0 +1,29 @@
+<ul class="policy-link">
+       
+        <ng-container>
+                <li><a onclick="window.open('#regulations/tremsandcondtions','_blank', config='height=600,width=800,location=no');">
+                               {{Update?.termandcondition}}</a></li>
+
+
+                <li><a onclick="window.open('#regulations/selfexclusionpolicy','_blank', config='height=600,width=800,location=no');">{{Update?.Selfexclusionpolicy}}</a></li>
+                <li><a onclick="window.open('#regulations/responsiblegaming','_blank', config='height=600,width=800,location=no');">
+                                {{Update?.responsiblegambling}}
+                        </a></li>
+
+
+                <li><a onclick="window.open('#regulations/disputteresolution','_blank', config='height=600,width=800,location=no');">
+                        {{Update?.DisputeResolution}}
+                        </a></li>
+                <li><a onclick="window.open('#regulations/aml','_blank', config='height=600,width=800,location=no');"> {{Update?.AML}}
+                        </a></li>
+                <li><a onclick="window.open('#regulations/fairnessandrngtestingmethod','_blank', config='height=600,width=800,location=no');">
+                               {{Update?.FairnessAndRNGTestingMethod}}
+                        </a></li>
+                <li><a onclick="window.open('#regulations/kyccricbuzzercomponent','_blank', config='height=600,width=800,location=no');">
+                                {{Update?.KYCPolicies}}
+                        </a></li>
+                <li *ngIf="isAffiliate"><a onclick="window.open('#regulations/affiliatecomponent','_blank', config='height=600,width=800,location=no');">
+                        {{Update?.AffiliateProgram}}
+                        </a></li>
+        </ng-container>
+</ul>

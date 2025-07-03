@@ -1,0 +1,221 @@
+<h2>{{Update?.mybet}}</h2>
+<ul class="tab col3">
+    <li><a class="select" routerLink="/current_bets">{{Update?.currentbets}}</a></li>
+    <li><a routerLink="/bet_history">{{Update?.betshistory}}</a></li>
+    <li><a routerLink="/profit_loss">{{Update?.profitandloss}}</a></li>
+</ul>
+<ul class="report-tab-wrap" style="display:block">
+
+
+    <li class="report-tab " [ngClass]="{'select':stype==''}" id="reportType_exchange" (click)="changeSport('')" data-reporttabtype="0">
+        {{Update?.all}}
+    </li>
+    <li class="report-tab " [ngClass]="{'select':stype!='' && stype<'6'}" id="reportType_exchange" (click)="changeSport('0')" data-reporttabtype="0">
+        {{Update?.exchange}}
+    </li>
+    <li *ngIf="Parlayenable" class="report-tab " [ngClass]="{'select':stype=='9'}" (click)="changeSport('9')"
+        id="reportType_binary" data-reporttabtype="2">
+        Parlay
+    </li>
+    <li class="report-tab " [ngClass]="{'select':stype=='8'}" id="reportType_casino" (click)="changeSport('8')" data-reporttabtype="8">
+        {{Update?.casino}}
+    </li>
+    <li class="report-tab " [ngClass]="{'select':stype=='6'}" id="reportType_fancyBet" (click)="changeSport('6')" data-reporttabtype="6">
+        {{Update?.fancybet}}
+    </li>
+    <li class="report-tab " [ngClass]="{'select':stype=='7'}" id="reportType_bookMaker" (click)="changeSport('7')" data-reporttabtype="7">
+        {{Update?.bookmaker}}
+    </li>
+
+    <li class="report-tab " [ngClass]="{'select':stype=='-1'}" (click)="changeSport('-1')" id="reportType_sportsBook" data-reporttabtype="4">
+        {{Update?.sportsbook}}
+    </li>
+
+    <li class="report-tab " [ngClass]="{'select':stype=='-2'}" (click)="changeSport('-2')" id="reportType_binary" data-reporttabtype="2">
+        {{Update?.binary}}
+    </li>
+</ul>
+<div class="function-wrap">
+    <ul class="input-list">
+        <li><label>{{Update?.betstatus}}</label></li>
+        <li>
+            <select id="betStatus" [(ngModel)]="betStatus" (change)="changeBetStatus()">
+                <option value="">{{Update?.all}}</option>
+                <option value="Unmatched">{{Update?.unmatched}}</option>
+                <option value="Matched">{{Update?.matched}}</option>
+            </select>
+        </li>
+        <li></li>
+        <li><label>{{Update?.orderby}}</label></li>
+        <li>
+            <input id="orderBetPlaced" type="checkbox" [checked]="orderBetPlaced" (change)="changeStatus($event)"><label for="orderBetPlaced">{{Update?.betplaced}}</label>
+            <input id="orderMarket" type="checkbox" [checked]="orderMarket" (change)="changeStatus($event)"><label for="orderMarket">{{Update?.market}}</label>
+        </li>
+    </ul>
+</div>
+
+<table id="Unmatched_Table" class="table-s" *ngIf="(betStatus=='Unmatched' || betStatus=='') && (stype=='0' || stype=='')">
+    <caption>{{Update?.unmatched}}</caption>
+    <tbody>
+        <tr>
+            <th id="Unmatched_market" width="" class="align-L"><input id="checkAll" type="checkbox">{{Update?.market}}</th>
+            <th id="Unmatched_selection" width="10%">{{Update?.selection}}</th>
+            <th id="Unmatched_type" width="3%">{{Update?.type}}</th>
+            <th id="Unmatched_betId" width="9%">{{Update?.betid}}</th>
+            <th id="Unmatched_betPlaced" width="8%">{{Update?.betplaced}}</th>
+            <th id="Unmatched_oddsReq" width="8%">{{Update?.oddsreq}}</th>
+            <th id="Unmatched_matched" width="9%">{{Update?.matched}} </th>
+            <th id="Unmatched_unMatched" width="10%">{{Update?.unmatched}} </th>
+            <th id="Unmatched_avgOdds" width="10%" style="display: none;">{{Update?.avgoddsmatched}}</th>
+            <th id="Unmatched_dateMatched" width="10%">{{Update?.datematched}}</th>
+        </tr>
+    </tbody>
+    <tbody id="Unmatched_Content">
+        <tr id="tempTr" style="display: none;">
+            <td class="align-L"><input id="cancelCheckBox" type="checkbox" data-id="317022009"
+                    data-marketid="1.177426532" data-eventid="30208821"><label id="title">{{Update?.cricket}}<img id="arrow"
+                        class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif"><strong>{{Update?.SouthAfricaVSriLanka}}</strong><img
+                        id="arrow" class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">{{Update?.matchodds}}</label></td>
+            <td id="selection">{{Update?.southafrica}}</td>
+            <td><span id="type" class="back">{{Update?.back}}</span></td>
+            <td><a id="betId" href="javascript: void(0);">317022009</a></td>
+            <td><span id="betPlaced" class="small-date">2021-01-04 19:26:38</span></td>
+            <td id="oddsReq">15</td>
+            <td id="matched">0.00</td>
+            <td id="unMatched">10.00</td>
+            <td id="avgOdds" style="display: none;"></td>
+            <td><span id="dateMatched" class="small-date"></span></td>
+        </tr>
+        <tr id="cancelContent" style="display: none;">
+            <td colspan="4">
+                <ul class="btn-wrap">
+                    <li><a id="cancelBtn" class="btn" href="#">{{Update?.cancel}}</a></li>
+                </ul>
+            </td>
+            <td colspan="6"></td>
+        </tr>
+
+        <tr id="noDataTemplate" style="display: table-row;" *ngIf="!loader">
+            <td class="no-data" colspan="9">
+                <p>{{Update?.Youhavenobetsinthistimeperiod}}</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<table id="Matched_Table" class="table-s" *ngIf="betStatus=='Matched' || betStatus==''">
+    <caption>Matched</caption>
+    <tbody>
+        <tr>
+            <th id="Matched_market" width="" class="align-L">{{Update?.market}}</th>
+            <th id="Matched_selection" width="10%">{{Update?.selection}}</th>
+            <th id="Matched_type" width="3%">{{Update?.type}}</th>
+            <th id="Matched_betId" width="9%">{{Update?.betid}}</th>
+            <th id="Matched_betPlaced" width="8%">{{Update?.betplaced}}</th>
+            <th id="Matched_oddsReq" width="8%">{{Update?.oddsreq}}</th>
+            <th id="Matched_matched" width="9%">{{Update?.matched}} </th>
+            <th id="Matched_unMatched" width="10%" style="display: none;">{{Update?.unmatched}} </th>
+            <th id="Matched_avgOdds" width="10%">{{Update?.avgoddsmatched}}</th>
+            <th id="Matched_dateMatched" width="10%">{{Update?.datematched}}</th>
+        </tr>
+    </tbody>
+    <tbody id="Matched_Content">
+        <ng-container *ngFor="let bet of bets;let index=index">
+            <tr id="tempTr">
+                <td class="align-L"  *ngIf="bet.betType != 'parlay'">
+                    <label id="title">{{bet.sportName | titlecase}}
+                        <img id="arrow" class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">
+                        <strong>{{bet.eventName}}</strong>
+                        <img id="arrow" class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">{{bet.betType === 'yes' || bet.betType
+                        === 'no'? 'Fancy Bet':
+                        bet.marketName}}
+                    </label>
+                </td>
+                <td class="align-L" *ngIf="bet.betType == 'parlay'">
+                    <label id="title">
+
+                       {{bet.betType}} Bet <img id="arrow" class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">
+                       <strong> {{bet.countName}}</strong>
+
+                    </label>
+                </td>
+                <td id="selection">{{bet.selName}}</td>
+                <td><span id="type" class="{{bet.betType}}">{{bet.betType=='parlay'?'back': bet.betType}}</span></td>
+                <td><a id="betId" href="javascript: void(0);" (click)="betId==bet.betId?toggleTx(null):toggleTx(bet.betId)">{{bet.betId}}</a></td>
+                <td><span id="betPlaced" class="small-date">{{bet.betTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span></td>
+                <td id="oddsReq">{{bet.odds}}</td>
+                <td id="matched">{{bet.stake | number:'1.2-2'}}</td>
+                <td id="unMatched" style="display: none;">10.00</td>
+                <td id="avgOdds">{{bet.odds}}</td>
+                <td><span id="dateMatched" class="small-date">{{bet.betTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span></td>
+            </tr>
+            <tr id="expandMatched317251950" class="expand" *ngIf="bet.betId==betId && bet.betType != 'parlay'">
+                <td colspan="3"></td>
+                <td colspan="7">
+                    <img class="expand-arrow" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>{{Update?.bettaken}}</th>
+                                <th width="16%">Odds req.</th>
+                                <th width="17%">{{Update?.stake}} </th>
+                                <th width="24%">{{Update?.liability}} </th>
+                                <th width="24%">{{Update?.oddsmatched}}</th>
+                            </tr>
+                        </tbody>
+                        <tbody id="sub_content">
+                            <tr id="tempSubTr" class="even">
+                                <td><span id="betTaken" class="small-date">{{bet.betTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span></td>
+                                <td id="txOddsReq">{{bet.odds}}</td>
+                                <td id="txStake">{{bet.stake | number:'1.2-2'}}</td>
+                                <td id="txLiability"><span class="red">{{bet.liability | number:'1.2-2'}}</span></td>
+                                <td id="txOddsMatched">{{bet.odds}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <ng-container *ngIf="bet.betId==betId && bet.betType == 'parlay'">
+                <tr id="expandMatched317251950" class="expand" >
+                    <td colspan="2"></td>
+                    <td colspan="7">
+                        <img class="expand-arrow" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th class="align-L">{{Update?.market}}</th>
+                                    <th width="16%">{{Update?.oddsreq}}</th>
+                                    <th width="24%">{{Update?.oddsmatched}}</th>
+                                    <th width="24%">WIN/LOSE</th>
+
+                                </tr>
+                            </tbody>
+                            <tbody id="sub_content" >
+                                <tr style="border-bottom: 1px solid #c1c4c8;" id="tempSubTr" class="even" *ngFor="let data of bet.details">
+                                    <td class="align-L"><span class="whitespace-pre-wrap"> {{data.sport | titlecase}}
+                                        </span><img id="arrow" class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif"><i
+                                            class="icon-triangle-black-600 inline-block"></i>
+                                        <span><strong>{{data.eventName.split('v ')[0] }} </strong> vs
+                                            <strong>{{data.eventName.split('v ')[1]}}</strong></span>
+                                        <img id="arrow" class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif"> <i
+                                            class="icon-triangle-black-600 inline-block"></i><span>{{data.selName}}
+                                        </span>
+                                    </td>
+                                    <td id="txOddsReq">{{data.odds}}</td>
+                                    <td id="txStake">{{data.odds}}</td>
+                                    <td id="txStake"      [ngClass]="{'green': data?.result === 'WON', 'red': data?.result === 'LOST'}">    {{data?.result==null?'PENDING':data?.result}}</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </ng-container>
+        </ng-container>
+        <tr id="noDataTemplate" style="display: table-row;" *ngIf="bets.length==0 && !loader">
+            <td class="no-data" colspan="9">
+                <p>{{Update?.Youhavenobetsinthistimeperiod}}</p>
+            </td>
+        </tr>
+    </tbody>
+</table>

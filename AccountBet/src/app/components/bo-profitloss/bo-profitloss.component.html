@@ -1,0 +1,158 @@
+<h2>{{Update?.BObets}}</h2>
+<ul class="tab col3">
+    <li><a routerLink="/bo_bet_history">{{Update?.bobetshistory}}</a></li>
+
+    <li><a class="select" routerLink="/bo_profit_loss">{{Update?.BOprofit}} &amp; {{Update?.loss}}</a></li>
+
+</ul>
+<ul class="report-tab-wrap" style="display: block;">
+    <li id="reportType_exchange" class="report-tab select"> {{Update?.all}} </li>
+</ul>
+<div class="function-wrap">
+    <ul class="input-list">
+        <li><label>{{Update?.period}}</label></li>
+        <li>
+            <input id="startDate" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                [(ngModel)]="selectfromdate" [minDate]="month" [maxDate]="selectfromdate"
+                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-default', isAnimated: true }">
+            <input id="startTime" disabled="" class="time-input disable" type="text" placeholder="00:00" maxlength="5">
+            to
+            <input id="endDate" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                [(ngModel)]="selecttodate" [minDate]="month" [maxDate]="selecttodate"
+                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-default', isAnimated: true }">
+            <input id="endTime" disabled="" class="time-input disable" type="text" placeholder="23:59" maxlength="5">
+        </li>
+        <li style="display: none;">({{Update?.timezone}}:IST)</li>
+    </ul>
+    <ul class="input-list">
+        <li><a id="today" (click)="selectTab('today')" class="btn">{{Update?.justfortoday}}</a></li>
+        <li><a id="yesterday" (click)="selectTab('yesterday')" class="btn">{{Update?.fromyesterday}}</a></li>
+        <li style="display: none;"><a id="last7days" (click)="selectTab('last7days')" class="btn">{{Update?.last7days}}</a>
+        </li>
+        <li style="display: none;"><a id="last30days" (click)="selectTab('last30days')" class="btn">{{Update?.last30days}}</a>
+        </li>
+        <li style="display: none;"><a id="last2months" (click)="selectTab('last2months')" class="btn">{{Update?.last2months}}</a></li>
+        <li style="display: none;"><a id="last3months" (click)="selectTab('last3months')" class="btn">{{Update?.last3months}}</a></li>
+        <li><a id="getPL" class="btn-send" (click)="GetProfitLoss()">Get P &amp; L</a></li>
+    </ul>
+</div>
+<div id="report" *ngIf="ProfitLoss.length>0">
+    <ul id="spotsUl" class="total-show">
+        <li id="totalPL">{{Update?.totalpl}}: {{userInfo?.currencyCode}} <span
+                [ngClass]="{'win':totalPnl>0,'lose':totalPnl<0}">{{totalPnl | number:'1.2-2'}}</span></li>
+
+    </ul>
+    <ul id="binaryPL" class="total-show" style="display: none;">
+        <li id="binaryTotalPL"></li>
+    </ul>
+    <table id="reportTable" class="table01 table-pnl" style="display: table;">
+        <tbody>
+            <tr>
+                <th width="30%" class="align-L">{{Update?.market}} </th>
+                <!-- <th width="15%">{{Update?.starttime}} </th>
+                <th width="15%">{{Update?.settleddate}} </th> -->
+                <th width="18%">{{Update?.profitloss}} </th>
+            </tr>
+            <ng-container *ngFor="let pnl of ProfitLoss;let index=index">
+                <tr id="summary{{index}}" style="display: table-row;">
+                    
+                    <td id="title" class="align-L">{{pnl.provider}} 
+                        <img class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">
+                        <strong>{{pnl.gameType}}</strong>
+                        <img class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">
+
+                        <span>  {{pnl.gameName}}</span>
+                        <img class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">
+
+                        <span>  {{pnl.gameCode}}</span>
+
+
+                
+                    </td>
+                    <!-- <td id="startTime">{{pnl.startTime | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td id="settledDate">{{pnl.settledDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td> -->
+                    <td>
+                        <a id="pl0"
+                            [ngClass]="{'expand-open':srNo==index,'expand-close':srNo!=index,'win':pnl.netPL>0,'lose':pnl.netPL<0}"
+                            (click)="srNo==index?toggleDetail(null):toggleDetail(index)"
+                            href="javascript: void(0);">{{pnl.netPL | number:'1.2-2'}}</a>
+                    </td>
+                </tr>
+                <tr id="detail{{index}}" class="expand" style="display: table-row;" *ngIf="srNo==index">
+                    <td colspan="4">
+                        <img class="expand-arrow-R" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">
+
+                        <table class="table-commission">
+                            <tbody>
+                                <tr>
+                                    <th width="14%">{{Update?.betid}}
+                                    </th>
+                                    <th width="15%">{{Update?.starttime}}
+                                    </th>
+                                    <th width="15%">{{Update?.settleddate}}
+                                    </th>
+                                    <th width="13%">{{Update?.stake}}
+                                    </th>
+                                    <!-- <th width="8%">Type
+                                    </th> -->
+                                    <th width="16%">{{Update?.placed}}
+                                    </th>
+                                    <th width="23%">{{Update?.profitloss}}
+                                    </th>
+                                </tr>
+                                <ng-container
+                                    *ngFor="let bet of pnl.bets;let index2=index;let isOdd=odd;let isEven=even">
+                                    <tr id="txRow{{index2}}" style="display: table-row;"
+                                        [ngClass]="{'odd':isOdd,'even':isEven}">
+                                        <td id="betID">{{bet.betId}}</td>
+                                        <!-- <td id="matchSelection">{{bet.selection}}</td> -->
+                                        <!-- <td id="txOddsMatched">{{bet.odds}}</td> -->
+                                        <td id="startTime">{{bet.betTime | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td id="settledDate">{{bet.settledDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td> 
+
+                                        <td id="txStake">{{bet.stake | number:'1.2-2'}}</td>
+                                        <!-- <td><span id="matchType" class="{{bet.betType}}">{{bet.betType}}</span>
+                                        </td> -->
+                                        <td id="placed">{{bet.betTime | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td [ngClass]="{'win':bet.roundPl>0,'lose':bet.roundPl<0}" id="txLiability">{{bet.roundPl | number:'1.2-2'}}</td>
+                                    </tr>
+                                </ng-container>
+                                <tr class="sum-pl">
+                                    <td colspan="7">
+
+                                        <dl>
+                                            <dt>{{Update?.totalstakes}}</dt>
+                                            <dd [ngClass]="{'win':pnl.totalStakes>0,'lose':pnl.totalStakes<0}"id="totalStakes">{{pnl.totalStakes | number:'1.2-2'}}</dd>
+
+                                            <dt id="backSubTotalTitle">{{Update?.yessubtotal}}</dt>
+                                            <dd [ngClass]="{'win':pnl.backTotal>0,'lose':pnl.backTotal<0}" id="backSubTotal">{{pnl.backTotal | number:'1.2-2'}}</dd>
+
+                                            <dt id="laySubTotalTitle">{{Update?.nosubtotal}}</dt>
+                                            <dd [ngClass]="{'win':pnl.layTotal>0,'lose':pnl.layTotal<0}" id="laySubTotal">{{pnl.layTotal | number:'1.2-2'}}</dd>
+
+                                            <dt>Market subtotal</dt>
+                                            <dd [ngClass]="{'win':pnl.mktPnl>0,'lose':pnl.mktPnl<0}" id="marketTotal">{{pnl.mktPnl | number:'1.2-2'}}</dd>
+
+                                            <dt id="commissionTitle" style="display: none;">{{Update?.rebate}}</dt>
+                                            <dd [ngClass]="{'win':pnl.commission>0,'lose':pnl.commission<0}" id="commission">{{pnl.commission | number:'1.2-2'}}</dd>
+
+                                            <dt class="net_total">{{Update?.netmarkettotal}}</dt>
+                                            <dd [ngClass]="{'win':pnl.netPL>0,'lose':pnl.netPL<0}"  id="netTotal" class="net_total">{{pnl.netPL | number:'1.2-2'}}</dd>
+                                        </dl>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </td>
+                </tr>
+            </ng-container>
+
+        </tbody>
+    </table>
+</div>
+
+<div id="noReportMessage" *ngIf="ProfitLoss.length==0 && !loader">
+    <p>{{Update?.bethistoryenableyou}} <br>{{Update?.specifythetimeperiodduringwhichyour}}</p>
+    <p>{{Update?.bettinghistoryisavailableonlineforthepast30days}}</p>
+</div>

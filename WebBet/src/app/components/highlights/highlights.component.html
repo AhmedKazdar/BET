@@ -1,0 +1,288 @@
+<div id="overWrap" class="over-wrap" style="height: calc(100% - 0px)">
+
+    <app-promote-banner *ngIf="isAllSport"></app-promote-banner>
+
+    <div class="kv-wrap" *ngIf="!isAllSport">
+        <img src="https://b2c.static112233.com/assets/images/kv/KV0{{sportId?sportId:''}}.jpg" alt="">
+    </div>
+
+    <!-- Horse Coming Up Start -->
+    <ng-container *ngIf="isLogin">
+    <ng-container *ngIf="nextRaces && siteName=='cricbuzzer'">
+        <div class="upcome-wrap" id="upcomingHorseRace" style="">
+            <dl class="upcome-head" id="next">
+                <dt id="nextHeader">Next Horse Race</dt>
+                <ng-container *ngFor="let race of nextRaces;let i =index">
+                    <dd *ngIf="i<2">
+                        <a [routerLink]="['/fullmarkets',race.eventId,race.marketId,race.port]"
+                            id="upcoming_{{race.marketId}}">{{race.startTime | date: "HH:mm" }} {{race.eventName}}</a>
+                        <span>{{race.marketName}}</span>
+                    </dd>
+                </ng-container>
+    
+            </dl>
+    
+            <dl class="upcome" id="upcoming">
+                <dt id="upcomeHeader">coming up</dt>
+                <ng-container *ngFor="let race of nextRaces;let i =index">
+                    <dd *ngIf="i>2 && i<7">
+                        <a [routerLink]="['/fullmarkets',race.eventId,race.marketId,race.port]" id="upcoming_{{race.marketId}}">{{race.startTime | date: "HH:mm" }} {{race.marketName}}</a>
+                        <span></span>
+                    </dd>
+                </ng-container>
+            </dl>
+        </div>
+    </ng-container>
+</ng-container>
+
+    <div id="gameHighlightWrap" class="game-highlight-wrap col3">
+        <h3>{{Update?.Highlights}}
+            <div class="highlight-sorting" *ngIf="siteName=='cricbuzzer'">
+                <label for="lang">View by</label>
+                <div class="select">
+                    <select id="viewType" name="View" [(ngModel)]="selectedOption" (change)="onOptionChange()">
+                        <!-- <img src="assets/images/icons-down-arrow.png"> -->
+                        <option id="competitionName" id="sortByTime"
+                            [class.select]="competetionTab === 'by Time'" value="openDateTime" orderby="asc"
+                            priority="asc">Time
+                        </option>
+                        <option id="openDateTime" id="sortByCompetition"
+                            [class.select]="competetionTab === 'by Competition'" value="competitionName" orderby="asc"
+                            inplay="desc" selected="">Competition</option>
+                        <!-- <option id="totalMatched" value="totalMatched" orderby="desc">Matched</option> -->
+                    </select>
+                </div>
+            </div>
+        </h3>
+
+
+        <ul id="highlightLabel" class="tab-highlight" *ngIf="isAllSport">
+            <ng-container *ngFor="let sport of sportList;trackBy:trackBySport; let index = index">
+                <li *ngIf="index<6">
+                    <a id="highlightTab{{sport.eventTypeId}}" style="cursor:pointer;" (click)="selectHighlight(sport);"
+                        [ngClass]="{'select':sport.eventTypeId==sportId}">{{sport.sportsName | titlecase}}</a>
+                </li>
+            </ng-container>
+        </ul>
+        <ul class="slip-head">
+            <li class="col-game"></li>
+            <li class="col-visit">1</li>
+            <li class="col-draw">x</li>
+            <li class="col-home">2</li>
+            <li class="col-info"></li>
+        </ul>
+
+        <!-- Event Board -->
+        <div class="game-list">
+            <ng-container *ngFor="let sport of sportList;trackBy:trackBySport; let index = index">
+                <ng-container *ngIf="sport.eventTypeId==sportId">
+                    <div id="noDataDiv" class="no-data" *ngIf="sport.matches.length==0">
+                        <p>There are no events to be displayed.</p>
+                    </div>
+
+                    <div id="eventBoard">
+                        <!-- time -->
+                        <ng-container *ngIf="competetionTab == 'by Time'">
+                        <ng-container *ngFor="let match of selectedSport?.matches | sortByDate:'time';trackBy:trackByEvent">
+                            <dl id="highLightEvent_{{match.eventId}}" class="game-list-col"
+                                [ngClass]="{'disabled':!match.isBettable}" style="display: block;">
+                                <dt id="eventInfo" style="cursor: pointer">
+                                    <img id="playIcon"
+                                        [ngClass]="{'icon-in_play':match.inplay || match.isBettable,'icon-no_play':!match.inplay && !match.isBettable}"
+                                        src="https://b2c.static112233.com/assets/images/transparent.gif">
+                                    <span id="lowLiquidityTag" class="game-low_liq" style="display: none;">Low
+                                        Liquidity</span>
+                                    <a id="vsName"
+                                        [routerLink]="match.isTeenpatti ? ['/casino/',match.gameName] :['/fullmarkets',match.eventId]">{{match.home}}
+                                        <span class="in_play" *ngIf="match.score">{{match.score?.score}}</span><span
+                                            *ngIf="match.away && !match.score">v</span> {{match.away}}</a>
+                                    <span id="dateTimeInfo" class="game-list-time">
+                                        <span class="in_play" *ngIf="match.inplay">In-Play
+                                            {{match.score?.timeElapsed}}</span>
+
+
+                                        <ng-container *ngIf="!match.inplay">
+                                            <ng-container *ngIf="match.todayTomorrow==0">
+                                                {{match.time | date:'HH:mm'}}
+                                            </ng-container>
+                                            <ng-container *ngIf="match.todayTomorrow==1">
+                                                Tomorrow {{match.time | date:'HH:mm'}}
+                                            </ng-container>
+                                            <ng-container *ngIf="match.todayTomorrow>1">
+                                                {{match.time | date:'yyyy-MM-dd HH:mm'}}
+                                            </ng-container>
+                                        </ng-container>
+                                    </span>
+                                    <span class="game-fancy in-play" id="fancyBetIcon"
+                                        style="cursor: pointer;display: inline-flex;" *ngIf="match.isFancy">Fancy</span>
+
+                                    <!-- icon for fancy bet -->
+                                    <span class="game-bookmaker in-play" id="bookMakerIcon"
+                                        style="cursor: pointer; display: inline-flex;"
+                                        *ngIf="match.isBm">BookMaker</span>
+                                    <!-- icon for fancy bet -->
+                                    <span class="game-sportsbook" id="sportsBookIcon_2" style="display: inline-flex;"
+                                        *ngIf="match.isPremium">Premium Cricket</span>
+                                    <span class="game-sportsbook" id="feedingSiteIcon"
+                                        style="display: none;">Sportsbook</span>
+                                    <span class="game-sportsbook" id="sportsBookIcon_1" style="display: none;">Premium
+                                        Tennis</span>
+                                    <span class="game-sportsbook" id="sportsBookIcon_2" style="display: none;">Premium
+                                        Cricket</span>
+                                    <span class="game-live" id="streamingIcon" *ngIf="match.videoEnabled">Live</span>
+                                    <span class="game-E" id="sportsBookEIcon_1"
+                                        style="display: none;"><i></i>Soccer</span>
+                                    <span class="game-E" id="sportsBookEIcon_4"
+                                        *ngIf="match.isVir || match.isSrl"><i></i>Cricket</span>
+                                  </dt>
+
+                                <dd id="selectTemp" class="col-visit">
+                                    <div class="suspend" style="display: none;">
+                                        <span>Suspend</span>
+                                    </div>
+                                    <a id="btnBack" class="btn-back" side="Back">{{match?.runners ?
+                                        match?.runners[0]?.backPrice:"--"}}&nbsp;</a>
+                                    <a id="btnLay" class="btn-lay" side="Lay">{{match?.runners ?
+                                        match?.runners[0]?.layPrice:"--"}}&nbsp;</a>
+                                </dd>
+
+                                <dd class="col-draw">
+                                    <div class="suspend" style="display: none;">
+                                        <span>Suspend</span>
+                                    </div>
+                                    <a id="btnBack" class="btn-back" side="Back">{{match?.runners ?
+                                        match?.runners[2]?.backPrice:"--"}}&nbsp;</a>
+                                    <a id="btnLay" class="btn-lay" side="Lay">{{match?.runners ?
+                                        match?.runners[2]?.layPrice:"--"}}&nbsp;</a>
+                                </dd>
+
+                                <dd class="col-home">
+                                    <div class="suspend" style="display: none;">
+                                        <span>Suspend</span>
+                                    </div>
+                                    <a id="btnBack" class="btn-back" side="Back">{{match?.runners ?
+                                        match?.runners[1]?.backPrice:"--"}}&nbsp;</a>
+                                    <a id="btnLay" class="btn-lay" side="Lay">{{match?.runners ?
+                                        match?.runners[1]?.layPrice:"--"}}&nbsp;</a>
+                                </dd>
+
+
+                                <dd class="col-info">
+                                    <a id="multiMarketPin" style="cursor: pointer"
+                                        [ngClass]="{ 'delete-pin': checkIsMulti('market_'+match.eventId+'_'+match.marketId), 'add-pin': !checkIsMulti('market_'+match.eventId+'_'+match.marketId) }"
+                                        (click)="toggleFavourite(match,'market_'+match.eventId+'_'+match.marketId)">Pin</a>
+                                </dd>
+
+
+                            </dl>
+                        </ng-container>
+                    </ng-container>
+
+                    <!-- compition -->
+                    <ng-container *ngIf="competetionTab == 'by Competition'">
+                        <ng-container *ngFor="let data of tourList">
+                            <h3 id="AsianGamesT20" class="leagueTitle competition-expand" priority="1" style="background: #ced5da;">
+                                <a>{{data.competitionName}}</a>
+                            </h3>
+                            <dl class="game-list-col"
+                                style="display: block;">
+                                <ng-container *ngFor="let match of data.matches">
+                                <dt id="eventInfo" style="cursor: pointer">
+                                    <img id="playIcon"
+                                        [ngClass]="{'icon-in_play':match.inplay || match.isBettable,'icon-no_play':!match.inplay && !match.isBettable}"
+                                        src="https://b2c.static112233.com/assets/images/transparent.gif">
+                                    <span id="lowLiquidityTag" class="game-low_liq" style="display: none;">Low
+                                        Liquidity</span>
+                                        <a [routerLink]="['/fullmarkets',match.eventId]" id="vsName">{{match.eventName}}
+                                        </a>
+                                    <span id="dateTimeInfo" class="game-list-time">
+                                        <span class="in_play" *ngIf="match.inplay">In-Play
+                                            {{match.score?.timeElapsed}}</span>
+
+
+                                        <ng-container *ngIf="!match.inplay">
+                                            <ng-container *ngIf="match.todayTomorrow==0">
+                                                {{match.time | date:'HH:mm'}}
+                                            </ng-container>
+                                            <ng-container *ngIf="match.todayTomorrow==1">
+                                                Tomorrow {{match.time | date:'HH:mm'}}
+                                            </ng-container>
+                                            <ng-container *ngIf="match.todayTomorrow>1">
+                                                {{match.time | date:'yyyy-MM-dd HH:mm'}}
+                                            </ng-container>
+                                        </ng-container>
+                                    </span>
+                                    <span class="game-fancy in-play" id="fancyBetIcon"
+                                        style="cursor: pointer;display: inline-flex;" *ngIf="match.isFancy">Fancy</span>
+
+                                    <!-- icon for fancy bet -->
+                                    <span class="game-bookmaker in-play" id="bookMakerIcon"
+                                        style="cursor: pointer; display: inline-flex;"
+                                        *ngIf="match.isBm">BookMaker</span>
+                                    <!-- icon for fancy bet -->
+                                    <span class="game-sportsbook" id="sportsBookIcon_2" style="display: inline-flex;"
+                                        *ngIf="match.isPremium">Premium Cricket</span>
+                                    <span class="game-sportsbook" id="feedingSiteIcon"
+                                        style="display: none;">Sportsbook</span>
+                                    <span class="game-sportsbook" id="sportsBookIcon_1" style="display: none;">Premium
+                                        Tennis</span>
+                                    <span class="game-sportsbook" id="sportsBookIcon_2" style="display: none;">Premium
+                                        Cricket</span>
+                                    <span class="game-live" id="streamingIcon" *ngIf="match.videoEnabled">Live</span>
+                                    <span class="game-E" id="sportsBookEIcon_1"
+                                        style="display: none;"><i></i>Soccer</span>
+                                    <span class="game-E" id="sportsBookEIcon_4"
+                                        *ngIf="match.isVir || match.isSrl"><i></i>Cricket</span>
+                                  </dt>
+
+                                <dd id="selectTemp" class="col-visit">
+                                    <div class="suspend" style="display: none;">
+                                        <span>Suspend</span>
+                                    </div>
+                                    <a id="btnBack" class="btn-back" side="Back">{{match?.runners ?
+                                        match?.runners[0]?.backPrice:"--"}}&nbsp;</a>
+                                    <a id="btnLay" class="btn-lay" side="Lay">{{match?.runners ?
+                                        match?.runners[0]?.layPrice:"--"}}&nbsp;</a>
+                                </dd>
+
+                                <dd class="col-draw">
+                                    <div class="suspend" style="display: none;">
+                                        <span>Suspend</span>
+                                    </div>
+                                    <a id="btnBack" class="btn-back" side="Back">{{match?.runners ?
+                                        match?.runners[2]?.backPrice:"--"}}&nbsp;</a>
+                                    <a id="btnLay" class="btn-lay" side="Lay">{{match?.runners ?
+                                        match?.runners[2]?.layPrice:"--"}}&nbsp;</a>
+                                </dd>
+
+                                <dd class="col-home">
+                                    <div class="suspend" style="display: none;">
+                                        <span>Suspend</span>
+                                    </div>
+                                    <a id="btnBack" class="btn-back" side="Back">{{match?.runners ?
+                                        match?.runners[1]?.backPrice:"--"}}&nbsp;</a>
+                                    <a id="btnLay" class="btn-lay" side="Lay">{{match?.runners ?
+                                        match?.runners[1]?.layPrice:"--"}}&nbsp;</a>
+                                </dd>
+
+
+                                <dd class="col-info">
+                                    <a id="multiMarketPin" style="cursor: pointer"
+                                        [ngClass]="{ 'delete-pin': checkIsMulti('market_'+match.eventId+'_'+match.marketId), 'add-pin': !checkIsMulti('market_'+match.eventId+'_'+match.marketId) }"
+                                        (click)="toggleFavourite(match,'market_'+match.eventId+'_'+match.marketId)">Pin</a>
+                                </dd>
+
+                            </ng-container>
+                            </dl>
+                        </ng-container>
+                    </ng-container>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+        </div>
+        <!-- Event Board -->
+    </div>
+
+    <app-footer></app-footer>
+</div>

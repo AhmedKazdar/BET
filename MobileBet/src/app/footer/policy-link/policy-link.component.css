@@ -1,0 +1,39 @@
+li.bttn{
+    padding:8px;
+    margin: 7px;
+    width: 50%;
+        background-color: #ffb80c;
+    border-radius: 10px;
+}
+ul.buttons.center{
+    display: flex;
+    position: relative;
+    right: 16px;
+    list-style-type: none;
+
+
+}
+ul.affiliates-advantages{
+    list-style-type:none;
+    margin-left: 8px;
+
+}
+a.pt-button.pt-intent-primary.center{
+    display: flex;
+    justify-content: center;
+    color: black;
+}
+ul#aff1 {
+    margin-left: 1.4vw;
+}
+.conq{
+    position: relative;
+    margin-top: 28px;
+    border-top: 1px dotted #ccc;
+
+}
+
+.top{
+    position: relative;
+    bottom:10px;;
+}

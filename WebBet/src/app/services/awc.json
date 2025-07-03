@@ -1,0 +1,311 @@
+{
+    "errorCode": 0,
+    "errorDescription": null,
+    "result": [
+      {
+        "Platform": "E1SPORT",
+        "Games": [
+          {
+            "GameType": "ESPORTS",
+            "GameCode": "E1-ESPORTS-001",
+            "GameName": "eSports"
+          }
+        ]
+      },
+      {
+        "Platform": "SV388",
+        "Games": [
+          {
+            "GameType": "LIVE",
+            "GameCode": "SV-LIVE-001",
+            "GameName": "CockFight"
+          }
+        ]
+      },
+      {
+        "Platform": "SEXYBCRT",
+        "Games": [
+          {
+            "GameType": "LIVE",
+            "GameCode": "MX-LIVE-001",
+            "GameName": "Baccarat Classic"
+          },
+          {
+            "GameType": "LIVE",
+            "GameCode": "MX-LIVE-002",
+            "GameName": "Baccarat"
+          },
+          {
+            "GameType": "LIVE",
+            "GameCode": "MX-LIVE-003",
+            "GameName": "Baccarat Insurance"
+          },
+          {
+            "GameType": "LIVE",
+            "GameCode": "MX-LIVE-006",
+            "GameName": "DragonTiger"
+          },
+          {
+            "GameType": "LIVE",
+            "GameCode": "MX-LIVE-007",
+            "GameName": "SicBo"
+          },
+          {
+            "GameType": "LIVE",
+            "GameCode": "MX-LIVE-009",
+            "GameName": "Roulette"
+          },
+          {
+            "GameType": "LIVE",
+            "GameCode": "MX-LIVE-010",
+            "GameName": "Red Blue Duel"
+          },
+          {
+            "GameType": "LIVE",
+            "GameCode": "MX-LIVE-012",
+            "GameName": "Extra Andar Bahar"
+          },
+          {
+            "GameType": "LIVE",
+            "GameCode": "MX-LIVE-014",
+            "GameName": "Thai Hi Lo"
+          },
+          {
+            "GameType": "LIVE",
+            "GameCode": "MX-LIVE-015",
+            "GameName": "Thai Fish Prawn Crab"
+          },
+          {
+            "GameType": "LIVE",
+            "GameCode": "MX-LIVE-016",
+            "GameName": "Extra Sicbo"
+          }
+        ]
+      },
+      {
+        "Platform": "KINGMAKER",
+        "Games": [
+          {
+            "GameType": "SLOT",
+            "GameCode": "KM-SLOT-001",
+            "GameName": "Sugar Blast"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-009",
+            "GameName": "thai-hi-lo2"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-010",
+            "GameName": "belangkai2"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-011",
+            "GameName": "dragon-tiger2"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-013",
+            "GameName": "fish-prawn-crab2"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-014",
+            "GameName": "vn_fish-prawn-crab"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-015",
+            "GameName": "sicbo"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-017",
+            "GameName": "taixiu"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-018",
+            "GameName": "keno"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-019",
+            "GameName": "thai-fpc"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-020",
+            "GameName": "B?i C?o"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-021",
+            "GameName": "NumberMatka"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-022",
+            "GameName": "CardMatka"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-023",
+            "GameName": "Xocdia2"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-024",
+            "GameName": "FanTanClassic"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-025",
+            "GameName": "Fruit Roulette"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-026",
+            "GameName": "Baccarat"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-027",
+            "GameName": "European Roulette"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-028",
+            "GameName": "7 Up 7 Down"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-029",
+            "GameName": "Bai Buu"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-030",
+            "GameName": "jhandimunda"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-032",
+            "GameName": "Andar Bahar"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-033",
+            "GameName": "Pai Kang"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-034",
+            "GameName": "Kingmaker Pok Deng"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-035",
+            "GameName": "Bola Golek"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-036",
+            "GameName": "Coin Toss"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-037",
+            "GameName": "Cards Hi Lo"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-038",
+            "GameName": "Blackjack"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-039",
+            "GameName": "32 Cards"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-040",
+            "GameName": "Plinko"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-041",
+            "GameName": "Cash Rocket"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-042",
+            "GameName": "Minesweeper"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-043",
+            "GameName": "Bonus Dice"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-044",
+            "GameName": "Dota Hi-Lo"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-045",
+            "GameName": "Monkey King Roulette"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-046",
+            "GameName": "Teen Patti"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-047",
+            "GameName": "Heist"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-048",
+            "GameName": "HorseRacing"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-049",
+            "GameName": "5 Card Poker"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-050",
+            "GameName": "Color Game"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-051",
+            "GameName": "Bingo Roll"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-052",
+            "GameName": "BolaTangkas"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-053",
+            "GameName": "Marble Knockout"
+          },
+          {
+            "GameType": "TABLE",
+            "GameCode": "KM-TABLE-055",
+            "GameName": "KM Virtual Hound Racing"
+          }
+        ]
+      }
+    ]
+  }

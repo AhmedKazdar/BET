@@ -1,0 +1,491 @@
+<div id="openBetsLeftSide" class="overlay left-side" style="display: none;">
+  <div id="openBetSlide" class="side-wrap" style="display: flex;">
+
+    <div id="sideHead" class="side-head">
+      <h3 class="a-open_bets"><img src="https://www.static112233.com/m/assets/images/mobile/transparent.gif"
+          alt="transparent">{{Update?.OpenBets}}</h3>
+      <a id="close" class="close"></a>
+    </div>
+
+    <div id="sideContent" class="side-content">
+
+      <div id="msgBox" class="message-wrap {{status}} to-open_bets" *ngIf="msgData">
+        <div class="message">
+          <h4 id="header">{{!msgData.msg?msgData:msgData.msg}}</h4>
+          <p class="info" *ngIf="msgData.backlay">
+            <span id="sideType"
+              class="{{msgData.backlay=='yes' || msgData.backlay=='back'?'back':'lay'}}">{{msgData.backlay |
+              uppercase}}</span>
+            <strong id="selectionName">{{msgData.runnerName}}</strong> <strong id="stake"> {{msgData.stake}}</strong> at
+            odds <strong id="odds">{{msgData.mtype!='fancy'?msgData.odds:msgData.score+'/'+msgData.rate}}</strong>
+          </p>
+        </div>
+        <a id="close" class="close ui-link" (click)="removeMsg()">Close</a>
+      </div>
+
+      <div id="openBetMsgBox" class="message-wrap success" style="display: none;">
+        <div class="message">
+          <h4 id="header">Bet Matched</h4>
+          <p class="info">
+            <span id="sideType" class="back">Back</span>
+            <strong id="selectionName">England</strong> <strong id="stake">$1,000</strong> at odds <strong
+              id="odds">1.29</strong>
+          </p>
+        </div>
+        <a id="close" class="close" href="#">Close</a>
+      </div>
+
+      <ul id="eventMenuList" class="menu-list" style="display: block;" *ngIf="!marketBets">
+
+        <ng-container *ngFor="let match of eventBets;trackBy:trackByMatch">
+          <ng-container *ngFor="let market of match.markets;trackBy:trackByMarket">
+            <ng-container *ngIf="match.isType != 'parlay'">
+              <li id="eventMenu_1_30208379_1_177412401" class="inplay-off" style="display: list-item;"
+                (click)="openMarketBets(market)">
+                <a>
+                  <p>{{match.eventName}} - {{market.name}}</p>
+                  <span class="slip-note"></span>
+                </a>
+              </li>
+            </ng-container>
+            <ng-container *ngIf="match.isType == 'parlay'">
+              <li id="eventMenu_1_30208379_1_177412401" class="inplay-off" style="display: list-item;"
+                (click)="openMarketBetparlay(market , data.consolidateId)" *ngFor="let data of parlayDetailBets">
+                <a>
+                  <p>{{data.consolidateId}} - {{data.countName | titlecase}}</p>
+                  <span class="slip-note"></span>
+                </a>
+              </li>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+
+      </ul>
+
+      <div id="pathWrap" class="path-wrap" *ngIf="marketBets">
+        <a id="goBack" class="go_back" (click)="goBack()"></a>
+        <ul>
+          <li id="eventName" style="color:white !important" *ngIf="marketBets.eventName != null">
+            {{marketBets.eventName}} - {{marketBets.name}}</li>
+          <li id="eventName" style="color:white !important" *ngIf="marketBets.eventName == null">{{marketBets.betType[0]?.bets[0]?.consolidateId}} - {{marketBets.betType[0]?.bets[0]?.countName | titlecase}} (@{{marketBets.betType[0]?.bets[0]?.odds}} * {{marketBets.betType[0]?.bets[0]?.stake}} =  {{marketBets.betType[0]?.bets[0]?.profit}} Profit)</li>
+        </ul>
+      </div>
+
+      <h3 id="unMatchHeader" *ngIf="marketBets?.isUnmatched">Unmatched<a id="cancelAll" class="trashcan"
+          style="display: none;">Cancel All</a>
+      </h3>
+
+      <div id="unMatchList" class="slip-list" *ngIf="marketBets?.isUnmatched">
+        <ng-container *ngFor="let betType of marketBets.betType;trackBy:trackByBetType">
+          <dl id="header_{{betType.betType | lowercase}}" class="bets-head" *ngIf="betType.isUnmatched">
+            <dt>
+              <h4>{{(marketBets.marketType!=1?betType.betType:betType.betType=='BACK'?'YES':'NO') | titlecase}}</h4>
+            </dt>
+            <dd class="col-odds"><span>Odds</span></dd>
+            <dd class="col-stake"><span>Stake</span></dd>
+            <dd class="col-profit"><span>{{betType.betType=='back'?'Profit':'Liability'}}</span></dd>
+            <dd id="colDelete" class="col-delete"></dd>
+          </dl>
+          <ng-container *ngFor="let bet of betType.bets;trackBy:trackByBet">
+            <dl id="unMatchTicket_313201814" class="bets-{{bet.betType | lowercase}}" style="display: flex;"
+              *ngIf="bet.unmatched==1">
+              <dt>
+                <span id="feedingSideType" class="{{bet.betType | lowercase}}" style="display: none;">{{bet.type |
+                  titlecase}}</span>
+                <!-- <a id="editBtn" class="a-edit">Edit</a> -->
+                <h4 id="selectionName">{{bet.selName}}</h4>
+              </dt>
+              <dd id="odds" class="col-odds"><span>{{bet.odds}}</span></dd>
+              <dd id="stake" class="col-stake" title=" {{bet.stake}}"><span> {{bet.stake}}</span></dd>
+              <dd id="pl" class="col-profit"><span> {{bet.profit}}</span></dd>
+              <dd id="delete" class="col-delete" (click)="cancelBet(bet.consolidateId)"><a class="trashcan"></a></dd>
+              <dd id="persistence" class="info-keep" style="display: none;">Will be <strong>cancel</strong> at In-Play
+              </dd>
+              <dd id="keepOptionBox" class="info-keep edit" style="display: none;">
+                At In-Play
+                <ul class="check-list">
+                  <li><a id="cancel" name="keepOption" class="checked">cancel</a></li>
+                  <li><a id="keep" name="keepOption" class="">keep</a></li>
+                </ul>
+              </dd>
+              <dd id="betInfo" class="col-ref" *ngIf="isCheckedBetInfo">
+                <ul>
+                  <li id="betId">Ref:{{bet.consolidateId}}</li>
+                  <li id="placeDate">{{bet.betTime | date: 'yyyy-MM-dd HH:mm:ss'}}</li>
+                </ul>
+              </dd>
+            </dl>
+          </ng-container>
+        </ng-container>
+
+        <dl id="unMatchTemplate" class="bets-back" style="display: none;">
+          <dt>
+            <span id="feedingSideType" class="lay" style="display: none;">Back</span>
+            <a id="editBtn" class="a-edit" href="#">Edit</a>
+            <h4 id="selectionName"></h4>
+          </dt>
+          <dd id="odds" class="col-odds"><span></span></dd>
+          <dd id="stake" class="col-stake"><span></span></dd>
+          <dd id="pl" class="col-profit"><span></span></dd>
+          <dd id="delete" class="col-delete"><a href="#" class="trashcan"></a></dd>
+          <dd id="persistence" class="info-keep">Will be <strong>Cancel</strong> at In-Play</dd>
+          <dd id="keepOptionBox" class="info-keep edit" style="display: none;">
+            At In-Play
+            <ul class="check-list">
+              <li><a id="cancel" name="keepOption" class="" href="#">cancel</a></li>
+              <li><a id="keep" name="keepOption" class="" href="#">keep</a></li>
+            </ul>
+          </dd>
+          <dd id="betInfo" class="col-ref" style="display: none;">
+            <ul>
+              <li id="betId"></li>
+              <li id="placeDate"></li>
+            </ul>
+          </dd>
+        </dl>
+
+        <div id="editBoardTemplate" class="bet_slip-wrap back" style="display: none;">
+
+          <div id="messageWrap" class="message-wrap" style="display: none;">
+            <div class="message">
+              <h4 id="header">The Minimun stake is $25.00</h4>
+              <p class="info">
+                Your stake has been updated accordingly.
+              </p>
+            </div>
+            <a id="close" class="close" href="#">Close</a>
+          </div>
+
+          <ul class="btn-list">
+            <li>
+              <p class="dynamic-min-bet">&nbsp;</p>
+              <div id="inputOdds" class="input-num">
+                <a id="oddsDown" class="icon-minus" href="#"></a>
+                <span id="odds" class="typed"></span>
+                <a id="oddsUp" class="icon-plus" href="#"></a>
+              </div>
+            </li>
+            <li>
+              <p class="dynamic-min-bet">Min Bet: <strong id="dynamicMinBet"></strong></p>
+              <div id="inputStake" class="input-num">
+                <a id="stakeDown" class="icon-minus" href="#"></a>
+                <span id="stake" class="typed"></span>
+                <a id="stakeUp" class="icon-plus" href="#"></a>
+              </div>
+            </li>
+          </ul>
+
+          <ul id="stakePopupList" class="coin-list">
+            <li><a id="selectStake_1" href="#" stake="50"> 50</a></li>
+            <li><a id="selectStake_2" href="#" stake="100"> 100</a></li>
+            <li><a id="selectStake_3" href="#" stake="200"> 200</a></li>
+            <li><a id="selectStake_4" href="#" stake="300"> 300</a></li>
+            <li><a id="selectStake_5" href="#" stake="500"> 500</a></li>
+            <li><a id="selectStake_6" href="#" stake="1000"> 1000</a></li>
+          </ul>
+
+          <div id="keyboard" class="keyboard-wrap">
+            <ul id="numPad" class="btn-tel">
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li><a href="#">6</a></li>
+              <li><a href="#">7</a></li>
+              <li><a href="#">8</a></li>
+              <li><a href="#">9</a></li>
+              <li><a href="#">0</a></li>
+              <li><a href="#">00</a></li>
+              <li><a href="#">.</a></li>
+            </ul>
+            <a id="delete" class="btn-delete" href="#">Delete</a>
+          </div>
+
+          <ul class="btn-list">
+            <li>
+              <a id="cancel" href="#" class="btn">Cancel</a>
+            </li>
+            <li>
+              <a id="placeBet" href="#" class="btn-send disable">OK</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div id="unMatchList" class="slip-list" style="display: none;">
+
+        <dl id="header_back" class="bets-head">
+          <dt>
+            <h4>Back</h4>
+          </dt>
+          <dd class="col-odds"><span>Odds</span></dd>
+          <dd class="col-stake"><span>Stake</span></dd>
+          <dd class="col-profit"><span>Profit</span></dd>
+          <dd id="colDelete" class="col-delete"></dd>
+        </dl>
+        <dl id="unMatchTicket_313201814" class="bets-back" style="display: flex;" unmatchticketid="313201814"
+          eventid="30208379" marketid="1.177412401" categorytype="1" status="2" odds="2.58" lastprice="10"
+          persistencetype="0">
+          <dt>
+            <span id="feedingSideType" class="lay" style="display: none;">Back</span>
+            <a id="editBtn" class="a-edit" href="#">Edit</a>
+            <h4 id="selectionName">Hobart Hurricanes</h4>
+          </dt>
+          <dd id="odds" class="col-odds"><span>2.58</span></dd>
+          <dd id="stake" class="col-stake" title=" 10"><span> 10</span></dd>
+          <dd id="pl" class="col-profit"><span> 16</span></dd>
+          <dd id="delete" class="col-delete"><a href="#" class="trashcan"></a></dd>
+          <dd id="persistence" class="info-keep" style="display: none;">Will be <strong>cancel</strong> at In-Play</dd>
+          <dd id="keepOptionBox" class="info-keep edit" style="display: none;">
+            At In-Play
+            <ul class="check-list">
+              <li><a id="cancel" name="keepOption" class="checked" href="#">cancel</a></li>
+              <li><a id="keep" name="keepOption" class="" href="#">keep</a></li>
+            </ul>
+          </dd>
+          <dd id="betInfo" class="col-ref">
+            <ul>
+              <li id="betId">Ref:313201814</li>
+              <li id="placeDate">30-12-2020 04:03</li>
+            </ul>
+          </dd>
+        </dl>
+
+        <dl id="header_lay" class="bets-head">
+          <dt>
+            <h4>Lay</h4>
+          </dt>
+          <dd class="col-odds"><span>Odds</span></dd>
+          <dd class="col-stake"><span>Stake</span></dd>
+          <dd class="col-profit"><span>Liability</span></dd>
+          <dd class="col-delete"></dd>
+        </dl>
+        <dl id="unMatchTicket_313201841" class="bets-lay" style="display: flex;" unmatchticketid="313201841"
+          eventid="30208379" marketid="1.177412401" categorytype="1" status="2" odds="1.01" lastprice="60"
+          persistencetype="0">
+          <dt>
+            <span id="feedingSideType" class="lay" style="display: none;">Back</span>
+            <a id="editBtn" class="a-edit" href="#">Edit</a>
+            <h4 id="selectionName">Hobart Hurricanes</h4>
+          </dt>
+          <dd id="odds" class="col-odds"><span>1.01</span></dd>
+          <dd id="stake" class="col-stake" title=" 60"><span> 60</span></dd>
+          <dd id="pl" class="col-profit"><span> 1</span></dd>
+          <dd id="delete" class="col-delete"><a href="#" class="trashcan"></a></dd>
+          <dd id="persistence" class="info-keep" style="display: none;">Will be <strong>cancel</strong> at In-Play</dd>
+          <dd id="keepOptionBox" class="info-keep edit" style="display: none;">
+            At In-Play
+            <ul class="check-list">
+              <li><a id="cancel" name="keepOption" class="checked" href="#">cancel</a></li>
+              <li><a id="keep" name="keepOption" class="" href="#">keep</a></li>
+            </ul>
+          </dd>
+          <dd id="betInfo" class="col-ref">
+            <ul>
+              <li id="betId">Ref:313201841</li>
+              <li id="placeDate">30-12-2020 04:04</li>
+            </ul>
+          </dd>
+        </dl>
+
+        <dl id="unMatchTemplate" class="bets-back" style="display: none;">
+          <dt>
+            <span id="feedingSideType" class="lay" style="display: none;">Back</span>
+            <a id="editBtn" class="a-edit" href="#">Edit</a>
+            <h4 id="selectionName"></h4>
+          </dt>
+          <dd id="odds" class="col-odds"><span></span></dd>
+          <dd id="stake" class="col-stake"><span></span></dd>
+          <dd id="pl" class="col-profit"><span></span></dd>
+          <dd id="delete" class="col-delete"><a href="#" class="trashcan"></a></dd>
+          <dd id="persistence" class="info-keep">Will be <strong>Cancel</strong> at In-Play</dd>
+          <dd id="keepOptionBox" class="info-keep edit" style="display: none;">
+            At In-Play
+            <ul class="check-list">
+              <li><a id="cancel" name="keepOption" class="" href="#">cancel</a></li>
+              <li><a id="keep" name="keepOption" class="" href="#">keep</a></li>
+            </ul>
+          </dd>
+          <dd id="betInfo" class="col-ref" style="display: none;">
+            <ul>
+              <li id="betId"></li>
+              <li id="placeDate"></li>
+            </ul>
+          </dd>
+        </dl>
+
+        <div id="editBoardTemplate" class="bet_slip-wrap back" style="display: none;">
+
+          <div id="messageWrap" class="message-wrap" style="display: none;">
+            <div class="message">
+              <h4 id="header">The Minimun stake is $25.00</h4>
+              <p class="info">
+                Your stake has been updated accordingly.
+              </p>
+            </div>
+            <a id="close" class="close" href="#">Close</a>
+          </div>
+
+          <ul class="btn-list">
+            <li>
+              <p class="dynamic-min-bet">&nbsp;</p>
+              <div id="inputOdds" class="input-num">
+                <a id="oddsDown" class="icon-minus" href="#"></a>
+                <span id="odds" class="typed"></span>
+                <a id="oddsUp" class="icon-plus" href="#"></a>
+              </div>
+            </li>
+            <li>
+              <p class="dynamic-min-bet">Min Bet: <strong id="dynamicMinBet"></strong></p>
+              <div id="inputStake" class="input-num">
+                <a id="stakeDown" class="icon-minus" href="#"></a>
+                <span id="stake" class="typed"></span>
+                <a id="stakeUp" class="icon-plus" href="#"></a>
+              </div>
+            </li>
+          </ul>
+
+          <ul id="stakePopupList" class="coin-list">
+            <li><a id="selectStake_1" href="#" stake="50"> 50</a></li>
+            <li><a id="selectStake_2" href="#" stake="100"> 100</a></li>
+            <li><a id="selectStake_3" href="#" stake="200"> 200</a></li>
+            <li><a id="selectStake_4" href="#" stake="300"> 300</a></li>
+            <li><a id="selectStake_5" href="#" stake="500"> 500</a></li>
+            <li><a id="selectStake_6" href="#" stake="1000"> 1000</a></li>
+          </ul>
+
+          <div id="keyboard" class="keyboard-wrap">
+            <ul id="numPad" class="btn-tel">
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li><a href="#">6</a></li>
+              <li><a href="#">7</a></li>
+              <li><a href="#">8</a></li>
+              <li><a href="#">9</a></li>
+              <li><a href="#">0</a></li>
+              <li><a href="#">00</a></li>
+              <li><a href="#">.</a></li>
+            </ul>
+            <a id="delete" class="btn-delete" href="#">Delete</a>
+          </div>
+
+          <ul class="btn-list">
+            <li>
+              <a id="cancel" href="#" class="btn">Cancel</a>
+            </li>
+            <li>
+              <a id="placeBet" href="#" class="btn-send disable">OK</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <h3 id="txnHeader" *ngIf="marketBets?.isMatched">
+        Matched
+      </h3>
+
+      <div id="txnList" class="slip-list" *ngIf="marketBets?.isMatched">
+
+        <ng-container *ngFor="let betType of marketBets.betType;trackBy:trackByBetType">
+          <ng-container *ngIf="betType.betType != 'parlay'">
+            <dl id="header_{{betType.betType | lowercase}}" class="bets-head">
+              <dt>
+                <h4>{{(marketBets.marketType!=1?betType.betType:betType.betType=='BACK'?'YES':'NO') | titlecase}}</h4>
+              </dt>
+              <dd class="col-odds"><span>{{marketBets.marketType!=1?'Odds':'Runs/Odds'}}</span></dd>
+              <dd class="col-stake"><span>Stake</span></dd>
+              <dd class="col-profit"><span>{{betType.betType=='back'?'Profit':'Liability'}}</span></dd>
+            </dl>
+          </ng-container>
+          <ng-container *ngIf="betType.betType == 'parlay'">
+            <dl id="header_{{betType.betType | lowercase}}" class="bets-head">
+              <!-- <dt class="col-odds" style="width: 45px;">
+                <h4>{{(marketBets.marketType!=1?betType.betType:betType.betType=='BACK'?'YES':'NO') | titlecase}}</h4>
+              </dt> -->
+              <dt>
+                <h4>MarketName</h4>
+              </dt>
+              <dt>
+                <h4>RunnerName</h4>
+              </dt>
+              <dd class="col-odds" style="    padding-right: 5px;
+              "><span>{{marketBets.marketType!=1?'Odds':'Runs/Odds'}}</span></dd>
+                <dd class="col-odds" style="padding-right: 5px;
+                "><span>Winner</span></dd>
+            </dl>
+          </ng-container>
+          <ng-container *ngFor="let bet of betType.bets;trackBy:trackByBet">
+            <ng-container *ngIf="bet.betType != 'parlay'">
+              <dl id="txn_405145714" class="bets-{{bet.betType | lowercase}}" style="display: flex;"
+                *ngIf="bet.unmatched==0">
+                <dt>
+                  <span id="sideType" class="{{bet.betType | lowercase}}">{{bet.type | titlecase}}</span>
+                  <h4 id="selectionName">{{bet.selName}}</h4>
+                </dt>
+                <dd id="odds" class="col-odds">
+                  {{bet.odds}}
+                </dd>
+                <dd id="stake" class="col-stake" title=" 10"><span> {{bet.stake}}</span></dd>
+                <dd id="pl" class="col-profit"><span> {{bet.profit}}</span></dd>
+                <dd id="betInfo" class="col-ref" *ngIf="isCheckedBetInfo">
+                  <ul>
+                    <li id="betId">Ref:{{bet.consolidateId}}</li>
+                    <li id="placeDate">{{bet.betTime | date: 'yyyy-MM-dd HH:mm:ss'}}</li>
+                  </ul>
+                </dd>
+              </dl>
+            </ng-container>
+
+
+            <ng-container *ngIf="bet.consolidateId == consolidateId">
+              <ng-container *ngIf="bet.betType == 'parlay'">
+                <ng-container *ngFor="let event of matchingDetails">
+                  <dl id="txn_405145714" class="bets-back" style="display: flex;">
+                    <dt>
+                      <h4 id="selectionName">{{event.marketName}}</h4>
+                    </dt>
+                    <dt>
+                      <span id="selectionName">{{event.selName}}</span>
+                    </dt>
+                  
+                    <dd id="odds" class="col-odds" style="padding-right: 3px;">
+                      {{event.odds}}
+                    </dd>
+                    <dd id="odds" class="col-odds" style="padding-right: 3px;"
+                    [ngClass]="{'green': event?.result === 'WON', 'red': event?.result === 'LOST'}"
+                    >
+                      {{event?.result==null?'-------':event?.result}}
+                    </dd>
+                    <dd id="betInfo" class="col-ref" *ngIf="isCheckedBetInfo">
+                      <ul>
+                        <li id="betId">Ref:{{bet.consolidateId}}</li>
+                        <li id="placeDate">{{bet.betTime | date: 'yyyy-MM-dd HH:mm:ss'}}</li>
+                      </ul>
+                    </dd>
+                  </dl>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+
+
+      </div>
+
+      <ul id="openBetOption" class="check-list" *ngIf="marketBets">
+        <li><a id="showBetInfo" [ngClass]="{'checked':isCheckedBetInfo}" (click)="betInfo()">Bet Info</a></li>
+        <li name="txnOption"><a id="averageOdds" [ngClass]="{'checked':isCheckedAverageOdds}"
+            (click)="averageOdds()">Average Odds</a></li>
+      </ul>
+
+    </div>
+
+
+  </div>
+</div>

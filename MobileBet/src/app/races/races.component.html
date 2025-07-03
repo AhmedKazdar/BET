@@ -1,0 +1,109 @@
+<div class="mian-wrap">
+    <h3 id="nextHeader">Next {{eventTypeName}} Race</h3>
+
+    <ul id="nextUpComing" class="upcoming-list">
+
+        <ng-container *ngFor="let race of nextRaces;let i =index">
+            <li id="upcoming_{{race.marketId}}" class="" *ngIf="i<3">
+                <a [routerLink]="['/event',race.eventId,race.marketId,race.port]">
+                    <span class="time">{{race.marketName}}</span>
+                    {{race.startTime | date: "HH:mm" }} {{race.eventName}}
+                </a>
+            </li>
+        </ng-container>
+
+
+        <li id="upcomingWrap" class="upcoming-list-col3">
+
+            <h4>Coming Up</h4>
+
+            <ul id="upcoming">
+
+                <li id="upcomingRaceTempLate" class="" style="display: none;">
+                    <a href="#">
+                        <span class="time">14:00</span>
+                        Pakenham (AUS)
+                    </a>
+                </li>
+                <ng-container *ngFor="let race of nextRaces;let i =index">
+                    <li id="upcoming_{{race.marketId}}" class="" *ngIf="i>3">
+                        <a [routerLink]="['/event',race.eventId,race.marketId,race.port]"><span class="time">
+                                {{race.startTime | date: "HH:mm" }}</span> {{race.name}}</a>
+                    </li>
+                </ng-container>
+
+            </ul>
+        </li>
+    </ul>
+    <div class="tab-wrap">
+        <ul>
+            <li id="today" [ngClass]="{'select':seletedTab=='today'}">
+                <a (click)="changeTab('today');">Today</a>
+            </li>
+            <li id="tomorrow" [ngClass]="{'select':seletedTab=='tomorrow'}">
+                <a (click)="changeTab('tomorrow');">Tomorrow</a>
+            </li>
+            <li id="dayAfter" [ngClass]="{'select':seletedTab=='dayAfter'}">
+                <a (click)="changeTab('dayAfter');">Day After</a>
+            </li>
+        </ul>
+    </div>
+    <div id="noDataDiv" class="game-wrap-horse" *ngIf="todayRaces.length==0 && !listMeetingPending">
+        <div class="no-data">
+            <p>No races available yet.
+            </p>
+        </div>
+    </div>
+    <div id="contentBox">
+        <div id="countryGroup_{{country.countryCode}}" class="game-wrap-horse" firstmarkettime="2021-12-13 21:30"
+            *ngFor="let country of todayRaces">
+            <h3>
+                <a class="to-expand">
+                    <span id="heading">{{country.countryCode}}</span>
+                    <span id="closeInfo" class="close-info" style="display: none;">Races 6 (Next in 3 mins)</span>
+                </a>
+            </h3>
+            <div id="gameList" class="game-list"></div>
+            <dl id="racingBox_" class="game-list-col hs-time" firstmarkettime="2021-12-13 21:30"
+                *ngFor="let venue of country.venueVo">
+                <dt>
+                    <a id="eventName" style="cursor: default">{{venue.venue}}</a>
+                    <span id="placeInfo" class="game-list-place" style="display: none;">--</span>
+                </dt>
+                <dd>
+                    <ul id="timeRacing">
+                        <li id="liTemp" *ngFor="let race of venue.races">
+                            <a id="market_{{race.marketId}}" title="{{race.marketName}}"
+                                marketdatetime="{{race.startTime}}" [ngClass]="{'in-play':race.isInplay}"
+                                [routerLink]="['/event',race.eventId,race.marketId,race.port]">
+                                {{race.startTime | date: "HH:mm" }}</a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+        </div>
+    </div>
+    <div style="display: none">
+        <div id="countryGroupTemplate" class="game-wrap-horse">
+            <h3>
+                <a class="to-expand">
+                    <span id="heading">--</span>
+                    <span id="closeInfo" class="close-info" style="display:none;">Race 12 (Next in 12 mins)</span>
+                </a>
+            </h3>
+            <div id="gameList" class="game-list"></div>
+        </div>
+        <li id="liTemp"><a></a></li>
+        <dl id="racingBoxTemplate" class="game-list-col hs-time">
+            <dt>
+                <a id="eventName" style="cursor: default">--</a>
+                <span id="placeInfo" class="game-list-place"></span>
+            </dt>
+            <dd>
+                <ul id="timeRacing">
+                </ul>
+            </dd>
+        </dl>
+    </div>
+</div>

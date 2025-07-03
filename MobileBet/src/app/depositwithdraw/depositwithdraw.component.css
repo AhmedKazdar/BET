@@ -1,0 +1,340 @@
+.head-topic{
+    text-align: center;
+}
+
+.wallet
+{
+    border: 1px solid black;
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    padding: 9px 25px 25px 25px;
+    border-radius: 8px;
+  }
+  .container h3 {
+    border-radius: 4px;
+    background-image: linear-gradient(-180deg, #414141 0%, #000 100%);
+  }
+  .container form {
+    margin-top: 19px;
+  }
+  form .field {
+    margin-bottom: 8px;
+  }
+  form .input-field {
+    position: relative;
+    height: 55px;
+    text-align: center;
+  }
+  .input-field input {
+    width: 85%;
+    height: 79%;
+    padding: 0 15px;
+    border: 1px solid #d1d1d1;
+    border-radius: 8px;
+    outline: none;
+  }
+  .invalid input {
+    border: 1px solid #d93025;
+  }
+  .input-field .password-hide {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #919191;
+    padding: 3px;
+    cursor: pointer;
+  }
+  .field .error {
+    display: flex;
+    align-items: center;
+    margin-top: 6px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #d93025;
+    display: none;
+  }
+  .invalid .error {
+    display: flex;
+  }
+  .error .error-icon {
+    font-size: 15px;
+    margin-right: 6px;
+  }
+  .create-password .error {
+    align-items: flex-start;
+  }
+  .create-password .error-icon {
+    margin-top: 4px;
+  }
+
+  .button-field input {
+    font-size: 16px;
+    font-weight: 400;
+    background-image: linear-gradient(-180deg, #414141 0%, #000 100%);
+    color: #fff;
+    transition: all 0.3s;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 82px;
+  }
+
+  .label{
+    margin: 5px;
+    font-size: 14px;
+
+  }
+
+
+
+
+
+
+  .p-method{
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+
+.box h4{
+    text-align: center;
+}
+
+.box.qr {
+  padding: 6px 17px 2px 17px;
+    border-radius: 7px;
+    background: #c9c9c9;
+}
+.box.upi {
+  padding: 2px 27px 2px 27px;
+    border-radius: 7px;
+    background: #c9c9c9;
+}
+
+.box.bank {
+  padding: 2px 32px 2px 32px;
+    border-radius: 7px;
+    background: #c9c9c9;
+}
+.method-logo .upi-img{
+  width: 44px !important;
+}
+
+
+.method-logo img{
+    width: 37px;
+    text-align: center;
+}
+.method-logo{
+    text-align: center;
+}
+
+
+.section-2{
+    margin-top: 10px;
+}
+
+.select{
+  width: 96%;
+    height: 79%;
+    margin-top: 8px;
+    padding: 0 8px;
+    border: 1px solid #d1d1d1;
+    border-radius: 8px;
+    outline: none;
+    font-size: 4vw;
+}
+
+
+.qr-section{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0px;
+    align-items: center;
+    padding: 0;
+}
+
+.qr-btn{
+    background-image: linear-gradient(-180deg, #414141 0%, #000 100%);
+    width: 100%;
+    border-radius: 6px;
+    padding: 5px;
+    color: white;
+    border: none;
+}
+
+.upi-detail{
+    padding-left: 82px;
+}
+
+.table-tr{
+    border-bottom: 1px solid black;
+}
+
+.d-name{
+    padding: 5px 2px 5px 13px;
+}
+.mode{
+    padding: 5px 2px 5px 13px;
+}
+.upi-table{
+    margin-top: 10px;
+    
+}
+
+.fileupload {
+    text-align: center;
+    border: 2px dashed;
+    padding: 28px 0px;
+    margin: 18px;
+}
+.stylefile{
+    width: auto;
+    padding: 6px;
+    background: transparent;
+    color: black;
+    font-size: 13px;
+    border-radius: 7px;
+    border: none;
+
+}
+.bank-section{
+    margin-top: 10px;
+}
+
+.bank-section ul li {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+}
+
+.bank-section ul li span{
+    padding: 2px 11px 4px 13px;
+}
+
+
+.beforeclick {
+  border:none;
+}
+
+.afterclick {
+  border: 1px solid black;
+  box-shadow: 2px 2px 7px grey;
+}
+
+.tab {
+  min-width: 100%;
+  width: 100%;
+  margin: 0 0 10px;
+  border-left: 1px solid #3b5160;
+  border-radius: 5px;
+  display: flex;
+  text-align: center;
+}
+
+.tab li {
+  list-style: none;
+  border: 1px solid #3b5160;
+  border-width: 1px 0
+}
+
+.tab li:first-child {
+  border-radius: 4px 0 0 4px
+}
+
+.tab li:first-child a {
+  border-radius: 3px 0 0 3px
+}
+
+.tab li:last-child {
+  border-radius: 0 4px 4px 0
+}
+
+.tab li:last-child a {
+  border-radius: 0 3px 3px 0
+}
+
+.tab li {
+  background-color: #fff;
+  border-right: 1px solid #3b5160;
+  color: #3b5160;
+  font-size: 13px;
+  line-height: 38px;
+  font-weight: 700
+}
+
+.tab .select {
+  width: 50% !important;
+  margin-top: 0px;
+  background-color: #3b5160;
+  color: #fff
+}
+
+.tab .select a {
+  color: #fff
+}
+
+.tab li a {
+  color: #3b5160;
+}
+
+.tab .select:hover {
+  text-decoration: none
+}
+
+.tab.col2 li {
+  width: 50%
+}
+
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10000000000;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.frame-wrap{
+  width: 89.33333vw;
+  height: auto !important;
+}
+
+.bankupidialog{
+  margin: 8px !important;
+  right: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+
+.right-side{
+  justify-content: flex-end !important;
+  align-items: flex-start !important;
+  display: block;
+}
+
+.rotating-rupee {
+  animation: rotate 3s linear infinite;
+  perspective: 1000px; /* Adjust to control perspective */
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateY(0deg) 
+  }
+  100% {
+    transform: rotateY(360deg) 
+  }
+}

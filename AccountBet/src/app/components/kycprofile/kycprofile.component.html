@@ -1,0 +1,260 @@
+<h2>{{Update?.accountdetails}}
+    <!-- <a  *ngIf="Lockedview" title="lock" (click)="openPersonal()"  class="lockclass favor-set"></a>
+    <a *ngIf="!Lockedview" class="favor-set" (click)="openPersonal()">{{Update?.edit}}</a> -->
+    <ng-container *ngIf="Lockedview">
+        <a  title="edit"  (click)="openPersonal()" class="editicon favor-set"> {{Update?.edit}}</a>
+    </ng-container>
+    <ng-container *ngIf="!Lockedview">
+        <a  title="lock"   class="lockclass favor-set"></a>
+    </ng-container>
+</h2>
+
+<div>
+    <div class="event-left">
+        <div class="profile-wrap">
+            <h3>{{Update?.aboutyou}}
+
+            </h3>
+
+            <dl>
+
+                <dt>Phone Number</dt>
+                <dd>{{ maskPhoneNumber(accountInfo.phoneNumber)}}
+
+                    <a title="lock" class="a-lock favor-set"></a>
+
+                </dd>
+
+                <dt>{{Update?.Email}}</dt>
+                <dd>{{kycdata?.email || '--'}}
+
+                </dd>
+                <dt>{{Update?.firstname}}</dt>
+                <dd>{{accountInfo?.userName}}
+                    <a title="lock" class="a-lock favor-set"></a>
+                </dd>
+                <dt>Surname</dt>
+                <dd>{{kycdata?.surName || '--'}}</dd>
+                <dt>{{Update?.birthday}}</dt>
+                <dd>
+
+                    {{kycdata?.dob  || '--'}}
+                </dd>
+                <dt>Place of birth</dt>
+                <dd>
+
+                    {{kycdata?.pob || '--'}}
+                </dd>
+                <dt>Type of document</dt>
+                <dd>
+
+                    {{kycdata?.docType || '--'}}
+                </dd>
+                <dt>Document number</dt>
+                <dd>
+
+                    {{kycdata?.docNumber || '--'}}
+                </dd>
+                <dt>Document issue date</dt>
+                <dd>
+
+                    {{kycdata?.docIssueDate  || '--'}}
+                </dd>
+
+
+                <dt>{{Update?.pasword}}</dt>
+                <dd>********************************
+
+                    <a class="favor-set" (click)="showDialog()">{{Update?.edit}}</a>
+
+                </dd>
+
+
+                <dt>{{Update?.languages}}</dt>
+                <dd>
+                    <select id="lang">
+
+                        <option value="en" selected="">{{Update?.english}}
+                        </option>
+
+                        <!-- <option value="cn">中文
+                        </option> -->
+
+                    </select>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="profile-wrap">
+            <h3>{{Update?.address}}</h3>
+            <dl>
+                <dt>Permanent Address</dt>
+                <dd>{{kycdata?.address || '--'}}</dd>
+
+                <dt>{{Update?.towncity}}</dt>
+                <dd>--</dd>
+
+                <dt>{{Update?.country}}</dt>
+                <dd>{{country?.name ||'--'}}
+                    <a title="lock" class="a-lock favor-set"></a>
+                </dd>
+
+                <dt>{{Update?.countrystate}}</dt>
+                <dd>--</dd>
+
+                <dt>{{Update?.postcode}}</dt>
+                <dd>--</dd>
+
+                <dt>{{Update?.timezone}}</dt>
+                <dd>IST</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="event-right">
+        <div class="profile-wrap">
+            <h3>{{Update?.contactdetails}}</h3>
+            <dl>
+                <dt>{{Update?.primarynumber}}</dt>
+                <dd>--</dd>
+            </dl>
+        </div>
+
+        <div class="profile-wrap">
+            <h3>{{Update?.setting}}</h3>
+            <dl>
+                <dt>{{Update?.currency}}</dt>
+                <dd>{{accountInfo?.currencyCode}}</dd>
+
+                <dt>{{Update?.oddsformat}}</dt>
+                <dd>--</dd>
+            </dl>
+        </div>
+
+        <div class="profile-wrap">
+            <h3>{{Update?.commission}}</h3>
+            <dl>
+                <dt>{{Update?.commcharged}}</dt>
+                <dd>0.0 %</dd>
+            </dl>
+        </div>
+    </div>
+    <div id="editdetails" *ngIf="editkycpopup">
+        <div class="pop_box">
+            <a class="close_pop" (click)="hideDialog()">close_pop</a>
+
+            <h3>Edit account details</h3>
+            <form [formGroup]="kycform" (ngSubmit)="onSubmit()">
+
+                <dl class="form_list">
+
+                    <dt>Phone Number</dt>
+                    <dd>
+                        <input formControlName="phoneNumber" placeholder="Phone Number" id="input-phone" type="tel"
+                            [value]="formattedPhoneNumber" readonly>
+
+                        <span class="must">＊</span>
+
+                    </dd>
+                    <dt>Email</dt>
+                    <dd>
+                        <input formControlName="email" placeholder="{{Update?.email}}" id="input-email" type="email">
+                        <span class="must">＊</span>
+
+                    </dd>
+                    <dt>First Name</dt>
+                    <dd>
+                        <input formControlName="firstName" placeholder="firstName" id="input-658" type="text" readonly>
+                        <span class="must">＊</span>
+                    </dd>
+                    <dt>Surname</dt>
+                    <dd>
+                        <input formControlName="surName" placeholder="surName" id="input-658" type="text" readonly>
+                        <span class="must">＊</span>
+                    </dd>
+                    <dt>Birthday</dt>
+                    <dd>
+                        <input id="startDate1" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                            formControlName="dob"
+                            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-default', isAnimated: true, showWeekNumbers: false }">
+                        <span class="must">*</span>
+                    </dd>
+
+                  
+
+                    <dt>Place of birth</dt>
+                    <dd>
+                        <input  formControlName="pob" placeholder="Place of birth" type="text">
+                        <span class="must">＊</span>
+
+
+                    </dd>
+                    <dt>Document Image</dt>
+                    <dd>
+
+                            
+                        <label for="input-docType" class="image-input-label">
+                            <input type="file" id="docImg" formControlName="docImg" (change)="onFileSelected($event)" accept="image/*">
+                          </label>
+                          
+                      
+                        <span class="must">＊</span>
+                    </dd>
+                    
+                    <dt>Type of document</dt>
+                    <dd>
+                        <select formControlName="docType" id="input-docType"
+                        [ngClass]="{'placeholder': !kycform.get('docType')?.value}">
+                        <option *ngFor="let docType of documentTypes"
+                            [value]="docType?.value">{{ docType.text }}
+                        </option>
+                    </select>
+                        <span class="must">＊</span>
+                    </dd>
+
+                    <dt>Document Number</dt>
+                    <dd>
+                        <input
+                        formControlName="docNumber"
+                        placeholder="Document number" id="input-658"
+                        type="text">
+                    
+                        <span class="must">＊</span>
+                    </dd>
+
+                    <dt>Document issue date</dt>
+                    <dd>
+                        <input id="startDate2" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                            formControlName="docIssueDate"
+                            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-default', isAnimated: true, showWeekNumbers: false }">
+                        <span class="must">*</span>
+                    </dd>
+                    <dt>Country</dt>
+                    <dd>
+                        <input formControlName="country" placeholder="country"  value="{{kycform.get('country')?.value }}" readonly>
+                        <span class="must">＊</span>
+
+                    </dd>
+                    <dt>Registered address</dt>
+                    <dd>
+                        <input formControlName="address" placeholder="Permanent registered address"  type="text">
+                        <span class="must">＊</span>
+
+                    </dd>
+                    <!-- 
+                    <dt>Document issue date</dt>
+                    <dd>
+                        <input id="startDate" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                            formControlName="docIssueDate" [(ngModel)]="selecttodate" [minDate]="month"
+                            [maxDate]="selecttodate"
+                            [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-default', isAnimated: true ,showWeekNumbers: false }">
+                        <span class="must">＊</span>
+                    </dd> -->
+                    <dd><a id="changePasswordBtn" class="btn-send" 
+                            (click)="onSubmit()">Update</a></dd>
+
+                </dl>
+            </form>
+        </div>
+    </div>
+</div>

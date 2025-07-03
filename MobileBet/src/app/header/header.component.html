@@ -1,0 +1,140 @@
+<header *ngIf="!isLogin">
+
+  <h1 class="top-logo" ></h1>
+ 
+  <div *ngIf="siteName=='cricbuzzer' || siteName == 'cricbuzzerlive'" class="activeclass" > <div style="font-size: 10px;">{{Update?.ActivePlayers}}</div>
+  <span id="activePlayer"> {{activePlayer| number}}</span>  
+  </div>
+  <a  id="logcls" class="login-index ui-link" routerLink="/signup" *ngIf="isb2c">{{Update?.Signup}}</a>
+  <a  id="logcls1" class="login-index ui-link" routerLink="/login" >{{Update?.login}}</a>
+
+</header>
+
+<header *ngIf="isLogin">
+
+  <ul>
+    <li class="li-tv_bet">
+      <a id="openTV" class="a-open_tv ui-link" style="display: none;" (click)="showTv()">
+        <img src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent">
+      </a>
+      <a id="openBetsBtn" class="a-open_bets ui-link" (click)="listBets()">
+        <img src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent">{{Update?.Bets}}
+      </a>
+    </li>
+    <li id="menuRefreshIcon" style="display: none;">
+      <img class="refresh-bar" src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent">
+    </li>
+    <li class="main-wallet" >
+      <!-- 加open打開-->
+      <a id="multiWallet" class="a-wallet ui-link">
+        <ul id="accountCredit" *ngIf="!isClicked">
+          <li><span>{{Update?.Main}}</span> <span id="betCredit"> {{accountInfo?.currencyCode}} {{fundInfo?.balance |
+              number:'1.2-2'}}</span></li>
+          <li><span>{{Update?.Exposure}} </span> <span id="totalExposure" [ngClass]="{'red':fundInfo?.exposure>0}">
+              {{fundInfo?.exposure | number:'1.2-2'}}</span></li>
+          <!-- <li class="nums" *ngIf="siteName!='betswiz'">+<span id="vendorQuantity">2</span> </li> -->
+        </ul>
+        <p class="loading-bar" id="menuRefreshLoading" *ngIf="isClicked">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </p>
+      </a>
+      <a class="a-refresh ui-link" id="menuRefresh" (click)="FundExpo('click')" title="Refresh Main Wallet"><img
+          src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent"></a>
+    </li>
+    <li *ngIf="isb2c && currency == 'USD'"><a (click)="openDWBtn()" class="a-dw ui-link" id="dw" title="D/W"><img
+          style="width: 12.06667vw; height: 9.06667vw;" src="https://b2c.static112233.com/m/assets/images/mobile/cricbuzzer/shinydollar.gif"
+          alt="transparent"></a>
+    </li>
+    <li *ngIf="isb2c && currency == 'INR'"><a (click)="openDWBtn()" class="a-dw ui-link" id="dw" title="D/W"><img class="rotating-rupee"
+      style="width: 7.06667vw; height: 7.06667vw;" src="https://b2c.static112233.com/m/assets/images/mobile/cricbuzzer/rupee.png"
+      alt="transparent"></a>
+</li>
+    <li><a class="a-setting ui-link" title="Setting"><img src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif"
+          alt="transparent"></a>
+    </li>
+  </ul>
+
+
+  <div id="msgBox" class="message-wrap {{status}} to-open_bets" *ngIf="msgData">
+    <div class="message">
+      <h4 id="header">{{!msgData.msg?msgData:msgData.msg}}</h4>
+      <p class="info" *ngIf="msgData.backlay">
+        <span id="sideType" class="{{msgData.backlay=='yes' || msgData.backlay=='back'?'back':'lay'}}">{{msgData.backlay
+          | uppercase}}</span>
+        <strong id="selectionName">{{msgData.runnerName}}</strong> <strong id="stake"> {{msgData.stake}}</strong> at odds <strong id="odds">{{msgData.mtype!='fancy'?msgData.odds:msgData.score+'/'+msgData.rate}}</strong>
+      </p>
+      <p class="info" *ngIf="msgData.mtype=='parlay'">
+        <span id="sideType" class="{{msgData.backlay=='back'}}">{{msgData.mtype}}</span>@<strong id="stake">
+          {{msgData.stake}}</strong> at
+        {{Update?.odds}} <strong
+          id="odds">{{msgData.mtype!='fancy'?msgData.odds:msgData.score+'/'+msgData.rate}}</strong>
+      </p>
+    </div>
+    <a *ngIf="isCross"  id="close" class="close ui-link" (click)="removeMsg()">Close</a>
+  </div>
+
+  <div id="pluseight" class="ageplus" style="z-index: 999;" [ngClass]="[displaypluseight]">
+
+    <div class="dialog" style="position: fixed;top: 5%;">
+      <div class="announce-wrap1">
+        <div class="announce-header1">
+          <h1>AGE RESTRICTION DISCLAIMER</h1>
+        </div>
+
+        <div class="tc-content">
+          <p>To play at this site, your age should be 18 years or above.</p>
+
+          <p>You are required to truthfully state your age while registering. Minors and underage are strictly
+            prohibited to participate in any activity
+            on this site.</p>
+
+          <p>Your account with this site may stand suspended till satisfactory documentation to prove your age is
+            provided to us. If we find later that
+            you are underage or minor we reserve the right to suspend or deactivate your account whichever we find
+            appropriate.</p>
+
+        </div>
+
+        <ul class="announce-footer1 age_box">
+          <li><a id="decline" class="btn-send secondary" style="height: 34px;line-height: 1.8;" (click)="Logout()"><i
+                class="fa fa-times crossIcon" aria-hidden="true"></i>I am below 18</a></li>
+          <li><a id="accept" class="btn-send" style="height: 34px;line-height: 1.8;" (click)="close18plusPop()"><i
+                class="fa fa-check checkIcon" aria-hidden="true"></i>I am 18 or above</a></li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="lowBalance" class="ageplus" [ngClass]="[displayplusWallet]">
+    <div class="dialog" style="background-color: antiquewhite;position: fixed;top: 27%;">
+      <div id="sideHead" class="side-head">
+        <h3 class="a-open_bets" style="padding-left: 16px;">
+          {{Update?.Alert}}
+        </h3>
+        <a class="close" style="height: 38px;" (click)="closeLowBalance()"></a>
+      </div>
+      <div style="text-align: center;">
+        <div style="padding: 45px 20px 12px 20px;color: #474747;">
+          <b style="padding: 9px 0;font-size: 18px;">{{Update?.Lookslikeyourbalanceistoolow}}</b>
+        </div>
+        <div style="color: #474747;font-size: 16px;">
+          {{Update?.Depositbalancetocontinueplaying}}
+        </div>
+        <img class="walletimg" src="https://b2c.static112233.com/m/assets/images/mobile/cricbuzzer/wallet.png">
+        <div style="padding: 20px 40px 20px 40px;">
+          <a class="btn-send" style="width: -webkit-fill-available;height: 32px;
+              line-height: 1.8;" (click)="gotoDeposit()">{{Update?.DepositBalance}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>

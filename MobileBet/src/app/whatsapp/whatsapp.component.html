@@ -1,0 +1,56 @@
+<div *ngIf="actualSiteName=='cricbuzzer' || actualSiteName=='cricbuzzerlive'  " id="whatsapp">
+    <!-- <div #script>
+        <ng-content></ng-content>
+    </div> -->
+    <div type="floating" class="Window__Component-sc-1wwhwms-0 kjxaQJ">
+        <div *ngIf="whatsappOpen" id="whatsappLayout" type="floating" class="Window__WindowComponent-sc-1wwhwms-1 ezpWWK" style="width: 360px;">
+          <div color="rgb(255, 255, 255)" role="button" tabindex="0" class="Close__Component-sc-9nuxpx-0 nrXFk" (click)="openWhatsapp()">
+          </div>
+          <div class="Header__Component-sc-5nh99s-0 fKCpEp">
+            <div size="52" class="UserImage__Component-sc-1qu4hk4-0 laaWy">
+              <div class="UserImage__ImageContainer-sc-1qu4hk4-1 cyaNgZ">
+                <div class="UserImage__Image-sc-1qu4hk4-2 eQBDXe"></div>
+              </div>
+            </div>
+            <div class="Header__Info-sc-5nh99s-1 iutTvF">
+              <div class="Header__Name-sc-5nh99s-2 bRbKkp">{{siteName}}</div>
+              <div class="Header__AnswerTime-sc-5nh99s-3 dhKaKi">Typically replies within a day</div>
+            </div>
+          </div>
+          <div pattern="https://elfsight.com/assets/chats/patterns/whatsapp.png"
+            class="WhatsappChat__Component-sc-1nhdht4-0 fCgqdU">
+            <div class="WhatsappChat__MessageContainer-sc-1nhdht4-1 gcMznj">
+              <div class="WhatsappDots__Component-sc-inte9t-0 eOpiGJ" style="opacity: 0;">
+                <div class="WhatsappDots__ComponentInner-sc-inte9t-1 fpMSyN">
+                  <div class="WhatsappDots__Dot-sc-inte9t-2 WhatsappDots__DotOne-sc-inte9t-3 UwiBE dEyhvI"></div>
+                  <div class="WhatsappDots__Dot-sc-inte9t-2 WhatsappDots__DotTwo-sc-inte9t-4 UwiBE iVaplT"></div>
+                  <div class="WhatsappDots__Dot-sc-inte9t-2 WhatsappDots__DotThree-sc-inte9t-5 UwiBE jwwJfj"></div>
+                </div>
+              </div>
+              <div class="WhatsappChat__Message-sc-1nhdht4-4 eaCcCT" style="opacity: 1;">
+                <div class="WhatsappChat__Author-sc-1nhdht4-3 cPLlxU">{{siteName}}</div>
+                <div class="WhatsappChat__Text-sc-1nhdht4-2 dcYPvh">Hi there 👋<br><br>How can I help you?</div>
+                <div class="WhatsappChat__Time-sc-1nhdht4-5 iCUltA"><span id="time">{{date}}</span></div>
+              </div>
+            </div>
+          </div><a role="button" target="popup" onclick="window.open('https://api.whatsapp.com/send?phone={{whatsappChat}}','popup','width=600,height=600'); return false;" href="https://api.whatsapp.com/send?phone={{whatsappChat}}" title="WhatsApp"
+            class="DefaultButton__DefaultButtonComponent-sc-1v663dx-0 kWkHkS"><svg width="20" height="20"
+              viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"
+              class="WhatsappButton__Icon-sc-7zv9k4-0 gfmUpP">
+              <path
+                d="M90,43.841c0,24.213-19.779,43.841-44.182,43.841c-7.747,0-15.025-1.98-21.357-5.455L0,90l7.975-23.522   c-4.023-6.606-6.34-14.354-6.34-22.637C1.635,19.628,21.416,0,45.818,0C70.223,0,90,19.628,90,43.841z M45.818,6.982   c-20.484,0-37.146,16.535-37.146,36.859c0,8.065,2.629,15.534,7.076,21.61L11.107,79.14l14.275-4.537   c5.865,3.851,12.891,6.097,20.437,6.097c20.481,0,37.146-16.533,37.146-36.857S66.301,6.982,45.818,6.982z M68.129,53.938   c-0.273-0.447-0.994-0.717-2.076-1.254c-1.084-0.537-6.41-3.138-7.4-3.495c-0.993-0.358-1.717-0.538-2.438,0.537   c-0.721,1.076-2.797,3.495-3.43,4.212c-0.632,0.719-1.263,0.809-2.347,0.271c-1.082-0.537-4.571-1.673-8.708-5.333   c-3.219-2.848-5.393-6.364-6.025-7.441c-0.631-1.075-0.066-1.656,0.475-2.191c0.488-0.482,1.084-1.255,1.625-1.882   c0.543-0.628,0.723-1.075,1.082-1.793c0.363-0.717,0.182-1.344-0.09-1.883c-0.27-0.537-2.438-5.825-3.34-7.977   c-0.902-2.15-1.803-1.792-2.436-1.792c-0.631,0-1.354-0.09-2.076-0.09c-0.722,0-1.896,0.269-2.889,1.344   c-0.992,1.076-3.789,3.676-3.789,8.963c0,5.288,3.879,10.397,4.422,11.113c0.541,0.716,7.49,11.92,18.5,16.223   C58.2,65.771,58.2,64.336,60.186,64.156c1.984-0.179,6.406-2.599,7.312-5.107C68.398,56.537,68.398,54.386,68.129,53.938z">
+              </path>
+            </svg><span class="DefaultButton__DefaultButtonText-sc-1v663dx-1 izvwhT">Start Chat</span></a>
+        </div>
+        <div role="button" tabindex="0" type="bubble" class="Bubble__BubbleComponent-sc-13azvyr-3 intSJi" (click)="openWhatsapp()">
+          <div class="Bubble__NotificationBadge-sc-13azvyr-2 gFtgEV"></div>
+          <div class="Icon__Component-sc-19xn1fe-0 jiDpTn Bubble__StyledIcon-sc-13azvyr-1 drBMdB" color="rgb(79, 206, 93)"
+            height="32" width="32"><svg viewBox="0 0 90 90" fill="#4FCE5D">
+              <path
+                d="M90,43.841c0,24.213-19.779,43.841-44.182,43.841c-7.747,0-15.025-1.98-21.357-5.455L0,90l7.975-23.522   c-4.023-6.606-6.34-14.354-6.34-22.637C1.635,19.628,21.416,0,45.818,0C70.223,0,90,19.628,90,43.841z M45.818,6.982   c-20.484,0-37.146,16.535-37.146,36.859c0,8.065,2.629,15.534,7.076,21.61L11.107,79.14l14.275-4.537   c5.865,3.851,12.891,6.097,20.437,6.097c20.481,0,37.146-16.533,37.146-36.857S66.301,6.982,45.818,6.982z M68.129,53.938   c-0.273-0.447-0.994-0.717-2.076-1.254c-1.084-0.537-6.41-3.138-7.4-3.495c-0.993-0.358-1.717-0.538-2.438,0.537   c-0.721,1.076-2.797,3.495-3.43,4.212c-0.632,0.719-1.263,0.809-2.347,0.271c-1.082-0.537-4.571-1.673-8.708-5.333   c-3.219-2.848-5.393-6.364-6.025-7.441c-0.631-1.075-0.066-1.656,0.475-2.191c0.488-0.482,1.084-1.255,1.625-1.882   c0.543-0.628,0.723-1.075,1.082-1.793c0.363-0.717,0.182-1.344-0.09-1.883c-0.27-0.537-2.438-5.825-3.34-7.977   c-0.902-2.15-1.803-1.792-2.436-1.792c-0.631,0-1.354-0.09-2.076-0.09c-0.722,0-1.896,0.269-2.889,1.344   c-0.992,1.076-3.789,3.676-3.789,8.963c0,5.288,3.879,10.397,4.422,11.113c0.541,0.716,7.49,11.92,18.5,16.223   C58.2,65.771,58.2,64.336,60.186,64.156c1.984-0.179,6.406-2.599,7.312-5.107C68.398,56.537,68.398,54.386,68.129,53.938z">
+              </path>
+            </svg></div>
+          <div class="Bubble__BubbleText-sc-13azvyr-0 ezeWqw"></div>
+        </div>
+    </div>
+</div>

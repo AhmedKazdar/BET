@@ -1,0 +1,25 @@
+<div id="overWrap" class="over-wrap" style="height: calc(100% - 26px)">
+    <div class="gamehall-wrap-simple">
+        <a style="cursor: pointer" [routerLink]="['/sport/52']">
+            <dl class="entrance-title">
+                <dt>Kabaddi</dt>
+                <dd>Play Now</dd>
+            </dl>
+            <img src="https://b2c.static112233.com/assets/images/mobile/gamehall/banner_kabaddi.png" alt="" draggable="false">
+        </a>
+        <a  *ngIf="!isLogin" class="entrance" style="cursor: pointer" (click)="openLoginPop()">
+            <dl class="entrance-title">
+                <dt>Horse Book</dt>
+                <dd>Play Now</dd>
+            </dl>
+            <img src="https://b2c.static112233.com/assets/images/mobile/gamehall/banner_horse.png" alt="" draggable="false">
+        </a>
+        <a *ngIf="isLogin" class="entrance" style="cursor: pointer" [routerLink]="['/races/7']">
+            <dl class="entrance-title">
+                <dt>Horse Book</dt>
+                <dd>Play Now</dd>
+            </dl>
+            <img src="https://b2c.static112233.com/assets/images/mobile/gamehall/banner_horse.png" alt="" draggable="false">
+        </a>
+    </div>
+</div>

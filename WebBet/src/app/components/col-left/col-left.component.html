@@ -1,0 +1,97 @@
+<div class="col-left">
+
+    <!-- Sub Menu and Path -->
+
+    <div id="subMenu" class="sub_path" style="height: calc(100% - 0px);" (clickOutside)="onClickedOutside($event,true)">
+
+        <!-- Path -->
+        <div class="path">
+            <span>
+                <a id="pathPopHome"
+                    style="padding-left: 5px; cursor: none;">
+                    {{Update?.sports}}
+                </a>
+            </span>
+
+        </div>
+        <ul>
+            <li routerLink="/sport"  class="allsport" (click)="sportsWise();closePathPop();" style="display: list-item;" id="naviMenu_4" title="cricket"><a routerLink="/sport" 
+                     id="name" type="EVENT_TYPE" style="cursor: pointer;">{{Update?.all}} {{Update?.sports}}</a></li>
+        </ul>
+        <div class="path">
+
+            <a class="path-back" (click)="togglePathPop();">...</a>
+
+            <ul id="pathBackUl">
+                <li class="node" [ngClass]="{'path-last':!selectedTour}" *ngIf="selectedSport">
+                    <a [routerLink]="['/sport',selectedSport?.eventTypeId]" (click)="toursWise(selectedSport)"
+                        id="navi_{{selectedSport?.eventTypeId}}" type="EVENT_TYPE">{{sportsName |
+                        titlecase}}</a>
+                </li>
+                <li class="path-last node" *ngIf="selectedSport && selectedTour">
+                    <a [routerLink]="['/sport',selectedSport.eventTypeId]" (click)="matchesWise(selectedTour)"
+                        id="navi_{{selectedtour?.competitionId}}" type="GROUP">{{competitionName}}</a>
+                </li>
+
+            </ul>
+        </div>
+
+        <!-- Path Pop Up-->
+        <ul id="path-pop" class="path-pop" style="display: none;">
+
+            <li class="node" *ngIf="selectedSport && selectedTour">
+                <a [routerLink]="['/sport',selectedSport.eventTypeId]" (click)="matchesWise(selectedTour)"
+                    id="navi_{{selectedtour?.competitionId}}" type="GROUP">{{competitionName}}</a>
+            </li>
+            <li class="node" *ngIf="selectedSport">
+                <a [routerLink]="['/sport',selectedSport.eventTypeId]" (click)="toursWise(selectedSport)"
+                    id="navi_{{selectedSport?.eventTypeId}}" type="EVENT_TYPE">{{sportsName |
+                    titlecase}}</a>
+            </li>
+
+
+        </ul>
+
+        <!-- Sub Menu -->
+        <ul id="listBoardLoading" class="loading" style="display:none;">
+            <li><img src="https://b2c.static112233.com/assets/images/loading40.gif"></li>
+            <li>Loading...</li>
+        </ul>
+
+        <!-- Sub Menu -->
+        <ul id="listBoard" class="menu-list">
+            <li id="listBoardTemplate" style="display:none">
+                <a id="arrow" class="Go" style="cursor: pointer">Go</a>
+                <a id="name" style="cursor: pointer"></a>
+            </li>
+            <ng-container *ngIf="!selectedSport">
+                <li id="naviMenu_{{sport.eventTypeId}}" style="display: list-item;" title="{{sport.sportsName}}"
+                    *ngFor="let sport of sportList;trackBy:trackBySport; let index = index">
+                    <a id="arrow" class="Go" style="cursor: pointer" (click)="toursWise(sport)" type="EVENT_TYPE">Go</a>
+                    <a id="name" style="cursor: pointer" [routerLink]="['/sport',sport.eventTypeId]"
+                        (click)="toursWise(sport)" type="EVENT_TYPE">{{sport.sportsName | titlecase}}</a>
+                </li>
+            </ng-container>
+            <ng-container *ngIf="selectedSport && !selectedTour">
+                <li id="naviMenu_{{tour.competitionId}}" style="display: list-item;" title="{{tour.competitionName}}"
+                    *ngFor="let tour of tourList;trackBy:trackByTour; let index = index">
+                    <a id="arrow" class="Go" style="cursor: pointer" (click)="matchesWise(tour)" type="GROUP">Go</a>
+                    <a id="name" style="cursor: pointer" [routerLink]="['/sport',selectedSport.eventTypeId]"
+                        (click)="matchesWise(tour)" type="GROUP">{{tour.competitionName}}</a>
+                </li>
+            </ng-container>
+            <ng-container *ngIf="selectedSport && selectedTour">
+                <li id="naviMenu_{{match.eventId}}" style="display: list-item;" title="{{match.eventName}}"
+                    *ngFor="let match of matchList;trackBy:trackByEvent; let index = index">
+                    <a id="arrow" class="Go" style="cursor: pointer" type="EVENT">Go</a>
+                    <a id="name" style="cursor: pointer" [routerLink]="['/fullmarkets',match.eventId]"
+                        type="EVENT">{{match.eventName}}</a>
+                </li>
+            </ng-container>
+
+        </ul>
+
+
+
+    </div>
+</div>

@@ -1,0 +1,69 @@
+.border-l {
+    border-left: 1px solid #7e97a7;
+  }
+
+  .full-amount{
+    border-left: 1px solid #7e97a7;
+    padding: 4px 10px;
+    line-height: 25px;
+    position: relative;
+    border-top: 1px solid #eee;
+    padding: 8px 7px;
+    vertical-align: middle;
+    text-align: left!important;
+  }
+
+  .btn{
+    padding: 0 5px!important;
+    background: #eee;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    color: #1e1e1e;
+    font-weight: 700;
+    line-height: 23px;
+    font-size: 12px;
+    padding: 0 8px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    outline: 0;
+    font-family: Tahoma,Helvetica,sans-serif;
+  }
+
+  .disbtn{
+    pointer-events: none!important;
+    background: #acacac!important;
+  }
+
+  .pop_bg{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 80;
+    background: linear-gradient(45deg, rgb(0 0 0 / 64%), rgb(0 0 0 / 47%));  
+  }
+  
+  .pop_box{
+    position: fixed;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    top: 51%;
+    left: 50%;
+    background-color: #eee;
+    border-radius: 5px;
+    padding: 30px;
+    transform: translate(-50%,-50%);
+    box-shadow: 0 4px 5px rgb(0 0 0 / 50%);
+    text-align: center;
+  }
+
+  .ss{
+    max-width: 200px;
+    max-height: 400px;
+    margin-top: 30px;
+  }

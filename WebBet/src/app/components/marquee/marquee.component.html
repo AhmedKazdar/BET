@@ -1,0 +1,12 @@
+<div class="marquee-box">
+    <h4>{{Update?.News}}</h4>
+    <div class="marquee" *ngIf="isLogin">
+        
+        <a (click)="openAnnouncementPopUp();">
+            <!-- <span>23 Dec 2020</span> -->
+            {{news}} {{vnews?' | '+vnews:''}}
+        </a>
+      
+    </div>
+  
+</div>

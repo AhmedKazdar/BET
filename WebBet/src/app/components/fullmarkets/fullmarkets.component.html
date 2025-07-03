@@ -1,0 +1,2588 @@
+<div id="overWrap" class="over-wrap live-match" style="height: calc(100% - 26px)"
+    *ngFor="let match of matchData; trackBy:trackByEvent">
+    <div id="gameHead" class="game-head" *ngIf="match.isRacing">
+        <a id="refreshButton" class="refresh" style="cursor:pointer">Refresh</a>
+        <a id="multiMarketPin" class="add-pin" name="gameHeadPin" style="cursor: pointer;"
+            title="Add to Multi Markets"></a>
+        <table id="gameTeam" class="game-team">
+            <tbody>
+                <tr id="noTeam">
+                    <td class="game-name"> {{match.eventTypes?.eventNodes?.event?.eventName}}<span>
+                            {{match.eventTypes?.eventNodes?.marketNodes?.description?.marketName}}</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="game-info-wrap">
+            <!-- Game Information -->
+            <ul class="game-info">
+                <li id="infoLive" class="info-live" style="display: none;"><a class="btn-live"><img class="icon-live"
+                            src="https://b2c.static112233.com/assets/images/transparent.gif">Live</a></li>
+                <li id="gameInfoDate"><img class="icon-time"
+                        src="https://b2c.static112233.com/assets/images/transparent.gif"> {{match.time |
+                    date:'yyyy-MM-dd HH:mm'}}</li>
+            </ul>
+
+            <span id="lowLiquidityTag" class="game-low_liq" style="display: none;">Low Liquidity</span>
+
+            <dl id="minMaxBox" class="fancy-info">
+                <dt id="minMaxDt" style="display: none;">Min/Max</dt>
+                <dt id="maxDt">Max</dt>
+                <dd id="minMaxInfo">1600</dd>
+            </dl>
+
+
+
+            <a id="openStreaming" class="open-tv-wrap" style="display: none;">Live</a>
+
+            <ng-container *ngFor="let market of match.markets; trackBy:trackByMkt">
+                <dl *ngIf="selectedMarket==market.MarketId" class="game-matched" style="display: block;">
+                    <dt id="gameMatchedName">Matched</dt>
+                    <dd id="gameMatched">{{accountInfo?.currencyCode}} {{market?.TotalMatched |
+                        number:'1.2-2'}}</dd>
+                </dl>
+            </ng-container>
+        </div>
+    </div>
+    <div id="gameHead" class="game-head"
+        *ngIf="!match.isRacing && (!match.sportradar_url || selectedMatch && !isSportRadar) || (!match.sportradar_url && match.fullScore && isSportRadar)">
+
+        <ng-container
+            *ngIf="(!match.sportradar_url || selectedMatch && match.fullScore) || (!match.fullScore && !isSportRadar)">
+            <a id="refreshButton" class="refresh" style="cursor:pointer">Refresh</a>
+            <a id="multiMarketPin"
+                [ngClass]="{'delete-pin':checkIsMulti('market_'+match.eventId+'_'+selectedMarket),'add-pin':!checkIsMulti('market_'+match.eventId+'_'+selectedMarket)}"
+                title="{{checkIsMulti('market_'+match.eventId+'_'+selectedMarket)?'Remove':'Add'}} to Multi Markets"
+                (click)="toggleFavourite(match,'market_'+match.eventId+'_'+selectedMarket)"></a>
+        </ng-container>
+        <table id="gameTeam" class="game-team"
+            *ngIf="(!match.sportradar_url && !match.fullScore) || (!match.fullScore && !isSportRadar)">
+            <tbody>
+                <tr id="noTeam" style="display:none;">
+                    <td class="game-name">-event name-<span>All Markets</span></td>
+                </tr>
+                <tr id="noTeam" *ngIf="!match.away">
+                    <td class="game-name">{{match.eventName}}<span>{{match.marketName}}</span></td>
+                </tr>
+                <tr id="twoTeam" *ngIf="match.home && match.away">
+                    <td id="gameVisit" class="game-visit">{{match.home}}<span></span></td>
+                    <td id="gameVs" class="game-vs">
+                        <div>
+                            {{match.marketName}}
+                            <span>v</span>
+                        </div>
+                    </td>
+                    <td id="gameHome" class="game-home">{{match.away}}<span></span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <ng-container
+            *ngIf="((!match.sportradar_url || selectedMatch) && match.fullScore || !isSportRadar)  || (!match.sportradar_url && match.fullScore && isSportRadar)">
+            <table id="cricketScoreBoard" class="game-scores"
+                *ngIf="match.eventTypeId==4 && (!match.sportradar_url || selectedMatch) && match.fullScore">
+                <tbody>
+                    <tr>
+
+                        <td id="gameHeadPinSpace" class="scores-space"></td>
+                        <td class="scores-team">
+                            <!-- <h4 id="teamHome">{{match.fullScore.score.spnnation1}}</h4>
+                            <h4 id="teamAway">{{match.fullScore.score.spnnation2}}</h4> -->
+                            <h4 id="teamHome">{{match.home}}
+                                <span *ngIf="match.fullScore.score?.spnrunrate1">
+                                    {{match.fullScore.score.spnrunrate1}}
+                                </span>
+                                <span *ngIf="match.fullScore.score?.spnreqrate1">
+                                    {{match.fullScore.score.spnreqrate1}}
+                                </span>
+                            </h4>
+                            <h4 id="teamAway">{{match.away}}
+                                <span *ngIf="match.fullScore.score?.spnrunrate2">
+                                    {{match.fullScore.score.spnrunrate2}}
+                                </span>&nbsp;
+                                <span *ngIf="match.fullScore.score?.spnreqrate2">
+                                    {{match.fullScore.score.spnreqrate2}}
+                                </span>&nbsp;
+                            </h4>
+                            <ul class="scores-time">
+                                <li id="description" class="filter-first"></li>
+                                <li id="currentDay"><span class="ball-runs m-l-5"
+                                        [ngClass]="{'four':ball==4,'six':ball==6,'wicket':ball=='ww'}"
+                                        *ngFor="let ball of match.fullScore.score?.balls">{{ball}}</span> <span
+                                        style="margin-left:10px">{{match.fullScore.score?.spnmessage}}</span>
+                                </li>
+                            </ul>
+                        </td>
+                        <td id="inningsBox1" class="scores-box">
+                            <h4 id="runsHome"
+                                [ngClass]="{'in_play':match.fullScore.score.activenation1==1 && !match.fullScore.score.score3}">
+                                {{match.fullScore.score.score1?match.fullScore.score.score1.split(' (')[0]:'Yet to
+                                bat'}}
+                                <span>{{match.fullScore.score.score1?'('+match.fullScore.score.score1.split('
+                                    (')[1]:''}}</span>
+                            </h4>
+                            <h4 id="runsAway"
+                                [ngClass]="{'in_play':match.fullScore.score.activenation2==1 && !match.fullScore.score.score4}">
+                                {{match.fullScore.score.score2?match.fullScore.score.score2.split(' (')[0]:'Yet to
+                                bat'}}
+                                <span>{{match.fullScore.score.score2?'('+match.fullScore.score.score2.split('
+                                    (')[1]:''}}</span>
+                            </h4>
+                            <span id="inningsIndex" class="scores-inns">Innings 1</span>
+                        </td>
+
+                        <td id="inningsBox1" class="scores-box"
+                            *ngIf="match.fullScore.score.score3 || match.fullScore.score.score4">
+                            <h4 id="runsHome" [ngClass]="{'in_play':match.fullScore.score.activenation1==1}">
+                                {{match.fullScore.score.score3?match.fullScore.score.score3.split(' (')[0]:'Yet to
+                                bat'}}
+                                <span>{{match.fullScore.score.score3?'('+match.fullScore.score.score3.split('
+                                    (')[1]:''}}</span>
+                            </h4>
+                            <h4 id="runsAway" [ngClass]="{'in_play':match.fullScore.score.activenation2==1}">
+                                {{match.fullScore.score.score4?match.fullScore.score.score4.split(' (')[0]:'Yet to
+                                bat'}}
+                                <span>{{match.fullScore.score.score4?'('+match.fullScore.score.score4.split('
+                                    (')[1]:''}}</span>
+                            </h4>
+                            <span id="inningsIndex" class="scores-inns">Innings 2</span>
+                        </td>
+                        <td id="inningsBoxTemplate" class="scores-box" style="display: none;">
+                            <h4 id="runsHome"><span></span></h4>
+                            <h4 id="runsAway"><span></span></h4>
+                            <span id="inningsIndex" class="scores-inns"></span>
+                        </td>
+
+                        <td class="scores-space"></td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <table id="tennisScoreBoard" class="game-scores tennis"
+                *ngIf="match.eventTypeId==2 && (!match.sportradar_url || selectedMatch) && match.fullScore">
+                <tbody>
+                    <tr>
+
+                        <td id="gameHeadPinSpace" class="scores-space"></td>
+
+                        <td class="scores-team">
+                            <h4 id="teamHome"> {{match.home}} </h4>
+                            <h4 id="teamAway"> {{match.away}} </h4>
+                            <ul class="scores-time">
+                                <li id="currentSet" class="filter-first">{{match.fullScore.currentSet}}</li>
+                                <li id="fullTimeElapsed">
+                                    {{match.fullScore.fullTimeElapsed.hour}}h
+                                    {{match.fullScore.fullTimeElapsed.min}}m
+                                    {{match.fullScore.fullTimeElapsed.sec}}s
+                                </li>
+                                <li><span id="court">HARD court</span></li>
+                            </ul>
+                        </td>
+
+                        <td id="setBox1" class="scores-box" *ngIf="match.fullScore.currentSet>=1">
+                            <ng-container *ngIf="match.fullScore.currentSet==1">
+                                <h4 id="setHome" [ngClass]="{'in-play':match.fullScore.currentSet==1}">
+                                    {{match.fullScore.score.home.games}}</h4>
+                                <h4 id="setAway" [ngClass]="{'in-play':match.fullScore.currentSet==1}">
+                                    {{match.fullScore.score.away.games}}</h4>
+                            </ng-container>
+                            <ng-container *ngIf="match.fullScore.currentSet>1">
+                                <h4 id="setHome">{{match.fullScore.score.home.gameSequence[0]}}</h4>
+                                <h4 id="setAway">{{match.fullScore.score.away.gameSequence[0]}}</h4>
+                            </ng-container>
+                            <span class="scores-inns">1</span>
+                        </td>
+                        <td id="setBox2" class="scores-box" *ngIf="match.fullScore.currentSet>=2">
+                            <ng-container *ngIf="match.fullScore.currentSet==2">
+                                <h4 id="setHome" [ngClass]="{'in-play':match.fullScore.currentSet==2}">
+                                    {{match.fullScore.score.home.games}}</h4>
+                                <h4 id="setAway" [ngClass]="{'in-play':match.fullScore.currentSet==2}">
+                                    {{match.fullScore.score.away.games}}</h4>
+                            </ng-container>
+                            <ng-container *ngIf="match.fullScore.currentSet>2">
+                                <h4 id="setHome">{{match.fullScore.score.home.gameSequence[1]}}</h4>
+                                <h4 id="setAway">{{match.fullScore.score.away.gameSequence[1]}}</h4>
+                            </ng-container>
+                            <span class="scores-inns">2</span>
+                        </td>
+                        <td id="setBox3" class="scores-box last-box" *ngIf="match.fullScore.currentSet>=3">
+                            <ng-container *ngIf="match.fullScore.currentSet==3">
+                                <h4 id="setHome" [ngClass]="{'in-play':match.fullScore.currentSet==3}">
+                                    {{match.fullScore.score.home.games}}</h4>
+                                <h4 id="setAway" [ngClass]="{'in-play':match.fullScore.currentSet==3}">
+                                    {{match.fullScore.score.away.games}}</h4>
+                            </ng-container>
+                            <ng-container *ngIf="match.fullScore.currentSet>3">
+                                <h4 id="setHome">{{match.fullScore.score.home.gameSequence[2]}}</h4>
+                                <h4 id="setAway">{{match.fullScore.score.away.gameSequence[2]}}</h4>
+                            </ng-container>
+                            <span class="scores-inns">3</span>
+                        </td>
+                        <td id="setBox2" class="scores-box last-box" *ngIf="match.fullScore.currentSet==1">
+                            <h4 id="setHome">-</h4>
+                            <h4 id="setAway">-</h4>
+                            <span class="scores-inns">2</span>
+                        </td>
+                        <td id="setBox3" class="scores-box last_box" *ngIf="match.fullScore.currentSet<3">
+                            <h4 id="setHome">-</h4>
+                            <h4 id="setAway">-</h4>
+                            <span class="scores-inns">3</span>
+                        </td>
+
+                        <td id="points" class="scores-box last-box">
+                            <h4 id="pointsHome" class="scores-now">{{match.fullScore.score.home.score}}</h4>
+                            <h4 id="pointsAway" class="scores-now">{{match.fullScore.score.away.score}}</h4>
+                            <span class="scores-inns">Points</span>
+                        </td>
+
+                        <td id="aces" class="scores-box scores-other">
+                            <h4 id="acesHome">{{match.fullScore.score.home.aces?match.fullScore.score.home.aces:'-'}}
+                            </h4>
+                            <h4 id="acesAway">{{match.fullScore.score.away.aces?match.fullScore.score.away.aces:'-'}}
+                            </h4>
+                            <span class="scores-inns">Aces</span>
+                        </td>
+                        <td id="faults" class="scores-box scores-other">
+                            <h4 id="faultsHome">
+                                {{match.fullScore.score.home.doubleFaults?match.fullScore.score.home.doubleFaults:'-'}}
+                            </h4>
+                            <h4 id="faultsAway">
+                                {{match.fullScore.score.away.doubleFaults?match.fullScore.score.away.doubleFaults:'-'}}
+                            </h4>
+                            <span class="scores-inns">Faults</span>
+                        </td>
+                        <td id="breaks" class="scores-box scores-other last-box">
+                            <h4 id="breaksHome">{{match.fullScore.score.home.serviceBreaks}}</h4>
+                            <h4 id="breaksAway">{{match.fullScore.score.away.serviceBreaks}}</h4>
+                            <span class="scores-inns">Breaks</span>
+                        </td>
+                        <td class="scores-space"></td>
+
+                        <td id="setBoxTemplate" class="scores-box last-box" style="display: none;">
+                            <h4 id="setHome"></h4>
+                            <h4 id="setAway"></h4>
+                            <span id="setIndex" class="scores-inns"></span>
+                        </td>
+
+                        <td class="scores-space"></td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <div id="soccerScoreBoard" class="game-scores"
+                *ngIf="match.eventTypeId==1 && (!match.sportradar_url || selectedMatch) && match.fullScore">
+                <ul>
+                    <li class="game-visit">
+                        <h4 id="teamHome">{{match.home}}</h4>
+                    </li>
+                    <li class="scores-box">
+                        <p id="vsScores" class="scores-now">{{match.fullScore.score.home.score}} -
+                            {{match.fullScore.score.away.score}}</p>
+                        <span id="timeElapsed" class="scores-now">{{match.fullScore.elapsedRegularTime}}'</span>
+                    </li>
+                    <li class="game-home">
+                        <h4 id="teamAway">{{match.away}}</h4>
+                    </li>
+                </ul>
+
+                <!-- <div class="game-progress">
+                    <div class="progress-bar">
+
+                        <div id="progressPercent" class="progress-now" style="width: 0%;"></div>
+
+
+
+                        <img id="soccerEventTemplate" class="" style="left: 0%; display: none;"
+                            src="https://b2c.static112233.com/assets/images/transparent.gif">
+
+                        <div id="popupTemplate" class="score-pop" style="left: 0%; display: none;">
+                            <ul>
+                                <li id="matchTime" class="scores-now"></li>
+                                <li><img class="" src="https://b2c.static112233.com/assets/images/transparent.gif"></li>
+                            </ul>
+                        </div>
+
+                        <span id="sumTemplate" class="sum-status" style="left: 0%; display: none;"></span>
+
+                        <div id="sumPopupTemplate" class="score-pop-last" style="left: 0%; display: none;">
+                            <ul id="list">
+                                <li id="matchTimeTemplate" class="scores-now" style="display: none;"></li>
+                                <li id="iconTemplate" style="display: none;"><img class="" src="https://b2c.static112233.com/assets/images/transparent.gif">
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div> -->
+            </div>
+
+            <div class="game-info-wrap">
+                <!-- Game Information -->
+                <ul class="game-info" style="display: block;">
+                    <li id="gameInfoDate" [ngClass]="{'green':match.inplay}">
+                        <ng-container *ngIf="!match.inplay">
+                            <img class="icon-time" src="https://b2c.static112233.com/assets/images/transparent.gif">
+                            {{match.time | date:'yyyy-MM-dd
+                            HH:mm'}}
+                        </ng-container>
+                        <ng-container *ngIf="match.inplay">
+                            <img class="icon-irun" src="https://b2c.static112233.com/assets/images/transparent.gif">
+                            In-Play
+                        </ng-container>
+
+                    </li>
+                    <!-- <li id="infoLive" class="info-live" style="display: none;"><a class="btn-live">
+                        <img class="icon-live" src="https://b2c.static112233.com/assets/images/transparent.gif">Live</a></li>
+                    <li id="gameInfoDate"><img class="icon-time" src="https://b2c.static112233.com/assets/images/transparent.gif"> Mon 10 Jan, 19:30</li> -->
+                    <!-- <li><img class="icon-live" src="https://b2c.static112233.com/assets/images/transparent.gif" />Live</li> -->
+                    <!-- <li><img class="icon-irun" src="https://b2c.static112233.com/assets/images/transparent.gif" />In-Play</li> -->
+                    <!-- <li><img class="icon-cashout" src="https://b2c.static112233.com/assets/images/transparent.gif" />Cash Out</li> -->
+                    <!-- Low Liquidity Tag -->
+                </ul>
+
+
+
+                <dl id="minMaxBox" class="fancy-info">
+                    <dt id="minMaxDt">Min/Max</dt>
+                    <dt id="maxDt" style="display: none;">Max</dt>
+                    <dd id="minMaxInfo"> - {{bfMin | number:'1.0-0'}}/{{bfMax | number:'1.0-0'}}</dd>
+                </dl>
+                <div id="fancyBetRulesWrap" class="rules-wrap" style="display: none;">
+                    <h3 id="fancyBetHeader">Rules of Fancy Bets</h3>
+                    <h3 id="electionHeader" style="display: none;">Rules of Election Fancy Bets</h3>
+                    <div class="rules-content">
+                        <ol id="fancyBetRules" name="fancyBetRules">
+                            <li>Once all session/fancy bets are completed and settled there will be no reversal even if
+                                the
+                                Match is Tied or is Abandoned.</li>
+                            <li>Advance Session or Player Runs and all Fancy Bets are only valid for 20/50 overs full
+                                match each
+                                side. (Please Note this condition is applied only in case of Advance Fancy Bets only).
+                            </li>
+                            <li>All advance fancy bets market will be suspended 60 mins prior to match and will be
+                                settled.</li>
+                            <li>Under the rules of Session/Fancy Bets if a market gets Suspended for any reason
+                                whatsoever and
+                                does not resume then all previous Bets will remain Valid and become HAAR/JEET bets.</li>
+                            <li>Incomplete Session/Fancy Bet will be cancelled but Complete Session will be settled.
+                            </li>
+                            <li>In the case of Running Match getting Cancelled/ No Result/ Abandoned but the session is
+                                complete
+                                it will still be settled. Player runs / fall of wicket will be also settled at the
+                                figures where
+                                match gets stopped due to rain for the inning (D/L) , cancelled , abandoned , no result.
+                            </li>
+                            <li>If a player gets Retired Hurt and one ball is completed after you place your bets then
+                                all the
+                                betting till then is and will remain valid.</li>
+                            <li>Should a Technical Glitch in Software occur, we will not be held responsible for any
+                                losses.
+                            </li>
+                            <li>Should there be a power failure or a problem with the Internet connection at our end and
+                                session/fancy market does not get suspended then our decision on the outcome is final.
+                            </li>
+                            <li>All decisions relating to settlement of wrong market being offered will be taken by
+                                management.
+                                Management will consider all actual facts and decision taken will be full in final.</li>
+                            <li>Any bets which are deemed of being suspicious, including bets which have been placed
+                                from the
+                                stadium or from a source at the stadium maybe voided at anytime. The decision of whether
+                                to void
+                                the particular bet in question or to void the entire market will remain at the
+                                discretion of
+                                Company. The final decision of whether bets are suspicious will be taken by Company and
+                                that
+                                decision will be full and final.</li>
+                            <li>Any sort of cheating bet , any sort of Matching (Passing of funds), Court Siding
+                                (Ghaobaazi on
+                                commentary), Sharpening, Commission making is not allowed in Company, If any company
+                                User is
+                                caught in any of such act then all the funds belonging that account would be seized and
+                                confiscated. No argument or claim in that context would be entertained and the decision
+                                made by
+                                company management will stand as final authority.</li>
+                            <li>Fluke hunting/Seeking is prohibited in Company , All the fluke bets will be reversed.
+                                Cricket
+                                commentary is just an additional feature and facility for company user but company is
+                                not
+                                responsible for any delay or mistake in commentary.</li>
+                            <li>Valid for only 1st inning.<ul>• Highest Inning Run :- This fancy is valid only for first
+                                    inning
+                                    of the match.</ul>
+                                <ul>• Lowest Inning Run :- This fancy is valid only for first inning of the match.</ul>
+                            </li>
+                            <li>If any fancy value gets passed, we will settle that market after that match gets over.
+                                For
+                                example :- If any market value is ( 22-24 ) and incase the result is 23 than that market
+                                will be
+                                continued, but if the result is 24 or above then we will settle that market. This rule
+                                is for
+                                the following market.<ul>• Total Sixes In Single Match</ul>
+                                <ul>• Total Fours In Single Match</ul>
+                                <ul>• Highest Inning Run</ul>
+                                <ul>• Highest Over Run In Single Match</ul>
+                                <ul>• Highest Individual Score By Batsman</ul>
+                                <ul>• Highest Individual Wickets By Bowler</ul>
+                            </li>
+                            <li>If any fancy value gets passed, we will settle that market after that match gets over.
+                                For
+                                example :- If any market value is ( 22-24 ) and incase the result is 23 than that market
+                                will be
+                                continued, but if the result is 22 or below then we will settle that market. This rule
+                                is for
+                                the following market.<ul>• Lowest Inning Run</ul>
+                                <ul>• Fastest Fifty</ul>
+                                <ul>• Fastest Century</ul>
+                            </li>
+                            <li>If any case wrong rate has been given in fancy ,that particular bets will be cancelled
+                                (Wrong
+                                Commentary).</li>
+                            <li>In case customer make bets in wrong fancy we are not liable to delete, no changes will
+                                be made
+                                and bets will be considered as confirm bet.</li>
+                            <li>Dot Ball Market Rules<ul>Wides Ball - Not Count</ul>
+                                <ul>No Ball - Not Count</ul>
+                                <ul>Leg Bye - Not Count as A Dot Ball</ul>
+                                <ul>Bye Run - Not Count as A Dot Ball</ul>
+                                <ul>Run Out - On 1st Run Count as A Dot Ball</ul>
+                                <ul>Run Out - On 2nd n 3rd Run Not Count as a Dot Ball</ul>
+                                <ul>Out - Catch Out, Bowled, Stumped n LBW Count as A Dot Ball</ul>
+                            </li>
+                            <li>Bookmaker Rules<ul>• Due to any reason any team will be getting advantage or
+                                    disadvantage we are
+                                    not concerned.</ul>
+                                <ul>• We will simply compare both teams 25 overs score higher score team will be
+                                    declared winner
+                                    in ODI.</ul>
+                                <ul>• We will simply compare both teams 10 overs higher score team will be declared
+                                    winner in
+                                    T20 matches.</ul>
+                            </li>
+                            <li>Penalty Runs - Any Penalty Runs Awarded in the Match (In Any Running Fancy or ADV Fancy)
+                                Will
+                                Not be Counted While Settling in our Exchange.</li>
+                            <li>LIVE STREAMING OF ALL VIRTUAL CRICKET MATCHES IS AVAILABLE HERE
+                                https://www.youtube.com/channel/UCd837ZyyiO5KAPDXibynq_Q/featured</li>
+                            <li>CHECK SCORE OF VIRTUAL CRICKET ON
+                                https://sportcenter.sir.sportradar.com/simulated-reality/cricket</li>
+                            <li>Comparison Market<ul>In Comparison Market We Don't Consider Tie or Equal Runs on Both
+                                    the
+                                    Innings While Settling . Second Batting Team Must need to Surpass 1st Batting's team
+                                    Total
+                                    to win otherwise on Equal Score or Below We declare 1st Batting Team as Winner .
+                                </ul>
+                            </li>
+                            <li>Player Boundaries Fancy:- We will only consider Direct Fours and Sixes hit by BAT.</li>
+                            <li>BOWLER RUN SESSION RULE :-<ul>IF BOWLER BOWL 1.1 OVER,THEN VALID ( FOR BOWLER 2 OVER
+                                    RUNS
+                                    SESSION )</ul>
+                                <ul>IF BOWLER BOWL 2.1 OVER,THEN VALID ( FOR BOWLER 3 OVER RUNS SESSION )</ul>
+                                <ul>IF BOWLER BOWL 3.1 OVER,THEN VALID ( FOR BOWLER 4 OVER RUNS SESSION )</ul>
+                                <ul>IF BOWLER BOWL 4.1 OVER,THEN VALID ( FOR BOWLER 5 OVER RUNS SESSION )</ul>
+                                <ul>IF BOWLER BOWL 9.1 OVER,THEN VALID ( FOR BOWLER 10 OVER RUNS SESSION )</ul>
+                            </li>
+                            <li>Total Match Playing Over ADV :- We Will Settle this Market after Whole Match gets
+                                Completed<ul>
+                                    Criteria :- We Will Count Only Round- Off Over For Both the Innings While Settling
+                                    (For Ex
+                                    :- If 1st Batting team gets all out at 17.3 , 18.4 or 19.5 we Will Count Such Overs
+                                    as 17,
+                                    18 and 19 Respectively and if Match gets Ended at 17.2 , 18.3 or 19.3 Overs then we
+                                    will
+                                    Count that as 17 , 18 and 19 Over Respectively... and this Will Remain Same For Both
+                                    the
+                                    Innings ..</ul>
+                                <ul>In Case Of Rain or if Over gets Reduced then this Market will get Voided</ul>
+                            </li>
+                            <li>3 WKT OR MORE BY BOWLER IN MATCH ADV :-<ul>We Will Settle this Market after Whole Match
+                                    gets
+                                    Completed .</ul>
+                                <ul>In Case Of Rain or if Over Gets Reduced then this Market Will get Voided</ul>
+                            </li>
+                            <li>KHADDA :-<ul>ADV Khadda Fancy is Valid Only for First Innings of the Match</ul>
+                                <ul>In Case of Rain or If Over Gets Reduced then this Market Will get Voided</ul>
+                                <ul>Incomplete Session Bet will be Cancelled but Complete Session Will be Settled</ul>
+                            </li>
+                            <li>LOTTERY :-<ul>In Case of Rain or If Over Gets Reduced then this Market Will get Voided
+                                </ul>
+                                <ul>Incomplete Session Bet will be Cancelled but Complete Session Will be Settled</ul>
+                                <ul>Criteria :- We will Only Count Last Digit of Sessions Total while settling ..For
+                                    Example if
+                                    in 6 Overs Market the Score is 37 ...so we will Settle the Market for 6 Over Lottery
+                                    @ 7
+                                </ul>
+                            </li>
+                            <li>BIG BASH LEAGUE 2020-21 RULES :-<ul>If Over Reduced in Match, We will not count the
+                                    actual
+                                    scores of the Over Reduced Matches instead we will count the Market’s Average Scores
+                                    .</ul>
+                                <ul>If Match is Abandoned , We will not count the actual scores of the Abandoned Matches
+                                    instead
+                                    we will count the Market’s Average Scores .</ul>
+                                <ul>NOTE :- . These rules are for the following Markets of ENTIRE BBL 2020-21 61 Matches
+                                    :-
+                                </ul>
+                                <ul>Total Fours :- Average 24 Fours will be given if the match is abandoned or over
+                                    reduced.
+                                </ul>
+                                <ul>Total Sixes :- Average 10 Sixes will be given if the match is abandoned or over
+                                    reduced.
+                                </ul>
+                                <ul>Total Caught &amp; Bowled Out :- Average 0 Caught &amp; Bowled Out will be given if
+                                    the
+                                    match is abandoned or over reduced.</ul>
+                                <ul>Total Wide :- Average 8 Wides will be given if the match is abandoned or over
+                                    reduced.</ul>
+                                <ul>Total Extra :- Average 14 Extras will be given if the match is abandoned or over
+                                    reduced.
+                                </ul>
+                                <ul>Total No Ball :- Average 1 No Ball will be given if the match is abandoned or over
+                                    reduced.
+                                </ul>
+                                <ul>Total duck :- Average 1 Duck will be given if the match is abandoned or over
+                                    reduced.</ul>
+                                <ul>Total Fifties :- Average 2 Fifties will be given if the match is abandoned or over
+                                    reduced.
+                                </ul>
+                                <ul>Total Century :-Average 0 Century will be given if the match is abandoned or over
+                                    reduced.
+                                </ul>
+                                <ul>Total Run Out :- Average 1 Run Out will be given if the match is abandoned or over
+                                    reduced.
+                                </ul>
+                                <ul>Total Caught out :- Average 8 Caught Out will be given if the match is abandoned or
+                                    over
+                                    reduced</ul>
+                                <ul>Total Stump Out :- Average 0 Stump Out will be given if the match is abandoned or
+                                    over
+                                    reduced.</ul>
+                                <ul>Total Maiden Over :- Average 0 Maiden Over will be given if the match is abandoned
+                                    or over
+                                    reduced.</ul>
+                                <ul>Total LBW :- Average 1 LBW will be given if the match is abandoned or over reduced.
+                                </ul>
+                                <ul>Total Bowled :- Average 2 Bowled will be given if the match is abandoned or over
+                                    reduced.
+                                </ul>
+                                <ul>• In case BBL Matches Gets Stopped Or Interrupted Due to "COVID-19" or Any "ACT OF
+                                    GOD"
+                                    Reasons, Under 45 Matches then All BBL 2020-21 Tournament Fancy Markets will be
+                                    Voided, But
+                                    if 45 or Above Matches are Being Played then we will Settle all the Fancy Markets
+                                    and Also
+                                    If there are NON Played Matches Above 45 then we will settle the markets as per our
+                                    Markets
+                                    Average.</ul>
+                            </li>
+                        </ol>
+                        <ol id="electionRules" style="display: none;">
+                            <li>Election result declared by Election Commission of India will be valid in our Exchange.
+                            </li>
+                            <li>Accidental issues in Election will Not Be counted in our Exchange.</li>
+                        </ol>
+                    </div>
+                    <ul class="btn-wrap break">
+                        <li><a class="btn" (click)="hideFancyRules()">OK</a></li>
+                    </ul>
+                </div>
+
+                <div id="sportsBookRulesWrap_1" class="rules-wrap" style="display: none;">
+
+                    <h3 id="owRulesTitle">Rules of Premium Tennis</h3>
+                    <div class="rules-content">
+                        <ol id="owTennisRulesContent" style="display: none;">
+                            <li>Handicap
+                                <ul>
+                                    <li>Set Handicap betting are settle based on the Sets</li>
+                                    <li>For Tennis Set hdp betting, the player you wager on must cover/beat the set
+                                        Spread. This
+                                        means that the favored player must win by more than the outlined number of sets
+                                        or the
+                                        underdog will receive that number of sets as a head start. In the above exmaple,
+                                        If you
+                                        wager on Andreas Seppi +1.5, he would need to win the match by any score or
+                                        alternately
+                                        lose by 1 set. If you wager on Daniil Medvedec -1.5, he would need to win by 2
+                                        set .
+                                    </li>
+                                    <li>If the scheduled number of sets required to win a match is changed from that
+                                        originally
+                                        scheduled then all bets will be void, except for those that have been
+                                        unconditionally
+                                        determined.</li>
+                                    <li>All bets will be consider void if the match is not completed.</li>
+                                </ul>
+                            </li>
+                            <li>Over/Under
+                                <ul>
+                                    <li>Game Total settle based on the total number of Games played of the match.</li>
+                                    <li>All bets will be consider void if the match is not completed.</li>
+                                </ul>
+                            </li>
+                            <li>Money Line
+                                <ul>
+                                    <li>Money line markets refer to the winner of the match or specified set.</li>
+                                    <li>If a player does not start a tournament or match , disqualified, retires during
+                                        the
+                                        match, then all bets on that player will be void.</li>
+                                    <li>If a match is postponed or suspended then all bets are still considered valid if
+                                        the
+                                        match is completed.</li>
+                                    <li>All bets will still be considered valid regardless of any change of venue or
+                                        court
+                                        surface (including moving matches from outdoor to indoor courts or vice versa).
+                                    </li>
+                                    <li>All bets will be consider void if the match is not completed.</li>
+                                </ul>
+                            </li>
+                            <li>Game Handicap (Tennis)
+                                <ul>
+                                    <li>Game Hdandicap betting are settled based on Games.</li>
+                                    <li>For Tennis Game Hdp betting , the player you wager on must cover/beat the game
+                                        spread.
+                                        This means that the favored player must win by more than the outlined number of
+                                        games or
+                                        the underdog will receive that number of games as a head start. In the above
+                                        example, if
+                                        you wager on Andreas Seppi +3.5, he would need to win the match by any score or
+                                        alternately lose by 3 games or less. If you wager on Daniil Medvedev -3.5, he
+                                        would need
+                                        to win by 4 games or more.</li>
+                                    <li>All bets will be consider void if the match is not completed.</li>
+                                </ul>
+                            </li>
+                            <li>Set x Winner (Tennis)
+                                <ul>
+                                    <li>Set X Winner refers to the result of the specified set. All bets will be
+                                        considered void
+                                        if the specified set is not completed.</li>
+                                </ul>
+                            </li>
+                            <li>Set x Total Game O/U (Tennis)
+                                <ul>
+                                    <li>Set X Total Game O/U refers to total Game of the specified set. All bets will be
+                                        considered void if the specified set is not completed.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <ol id="owSoccerRulesContent" style="display: none;">
+                            <li>FT.1X2:1X2 means betting in any one of three possible winning outcomes for an Event. 1
+                                refers to
+                                the team that is named first (usually the home team); X refers to the game resulting in
+                                a draw
+                                or tie; 2 refers to the team that is named second (usually the away team).</li>
+                            <li>1H 1X2:1st Half 1X2 means betting in any one of three possible winning outcomes of the
+                                first
+                                half for an Event. 1 refers to the team that is named first (usually the home team); X
+                                refers to
+                                the game resulting in a draw or tie; 2 refers to the team that is named second (usually
+                                the away
+                                team).</li>
+                            <li>Over/Under: Over/Under means betting that is determined by the total number of points
+                                (goals,
+                                games etc) in the final result of an Event. If the total is more than the Over/Under
+                                pre-designated line then the winning result is Over; if the total is less than the
+                                Over/Under
+                                pre-designated line then the winning result is Under.</li>
+                            <li>1H Over/Under: 1st Half Over/Under means betting that is determined by the total number
+                                of
+                                points in the result of the first half of an Event. If the total is more than the
+                                Over/Under
+                                pre-designated line then the winning result is Over; if the total is less than the
+                                Over/Under
+                                pre-designated line then the winning result is Under.</li>
+                            <li>
+                                Over/Under Guideline:
+                                <ul style="list-style-type: lower-roman">
+                                    <li>Goal line under 2
+                                        <div>
+                                            Bets win if there is either 0 or 1 goal scored in the match. If there are
+                                            two goals
+                                            exactly then the stake is returned. Bets lose if there are three or more
+                                            goals
+                                            scored in the match.
+                                        </div>
+                                    </li>
+
+                                    <li>Goal line over 2
+                                        <div>
+                                            Bets win if there are three or more goals scored in the match. If there are
+                                            two
+                                            goals exactly the stake is returned. Bets lose if there is 0 or 1 goal
+                                            scored in the
+                                            match.
+                                        </div>
+                                    </li>
+
+                                    <li>Goal line under 2.25
+                                        <div>
+                                            Bets win if there is either 0 or 1 goal scored in the match. If there are
+                                            two goals
+                                            exactly half the stake will win and half will be returned. Bets lose if
+                                            there are
+                                            three or more goals scored in the match.
+                                        </div>
+                                    </li>
+                                    <li>Goal line over 2.25
+                                        <div>
+                                            Bets win if there are three or more goals scored in the match. If there are
+                                            two
+                                            goals exactly half the stake will be returned and half will be lost. Bets
+                                            lose if
+                                            there is 0 or 1 goal scored in the match.
+                                        </div>
+                                    </li>
+                                    <li>Goal line under 2.5
+                                        <div>
+                                            Bets win if there are 0, 1 or 2 goals scored in the match. Bets lose if
+                                            there are
+                                            three or more goals scored in the match.
+                                        </div>
+                                    </li>
+                                    <li>Goal line over 2.5
+                                        <div>
+                                            Bets win if there are three or more goals scored in the match. Bets lose if
+                                            there
+                                            are 0, 1 or 2 goals scored in the match.
+                                        </div>
+                                    </li>
+                                    <li>Goal line under 2.75
+                                        <div>
+                                            Bets win if there are 0, 1 or 2 goals scored in the match. If there are
+                                            three goals
+                                            exactly half the stake will be returned and half will be lost. Bets lose if
+                                            there
+                                            are four or more goals scored in the match.
+                                        </div>
+                                    </li>
+                                    <li>Goal line over 2.75
+                                        <div>
+                                            Bets win if there are four or more goals scored in the match. If there are
+                                            three
+                                            goals exactly half the stake will win and half will be returned. Bets lose
+                                            if there
+                                            are 0, 1 or 2 goals scored in the match.
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+                            <li>Double Chance: The following options are available:
+                                <ul>
+                                    <li>1 or X - If the result is either a home or draw then bets on this option are
+                                        winners.
+                                    </li>
+                                    <li>X or 2 - If the result is either a draw or away then bets on this option are
+                                        winners.
+                                    </li>
+                                    <li>1 or 2 - If the result is either a home or away then bets on this option are
+                                        winners.
+                                    </li>
+                                    <li>If a match is played at a neutral venue the team listed first is deemed the home
+                                        team
+                                        for betting purposes.</li>
+                                </ul>
+                            </li>
+                            <li>Odd/Even: Odd/Even means betting that is determined by whether the total number of
+                                points
+                                (goals, games etc) in the final result of an Event is Odd or Even.</li>
+                            <li>1H Odd/Even: 1st Half Odd/Even means betting that is determined by whether the total
+                                number of
+                                points at the end of the first half of an Event is Odd or Even. 1st half bets will be
+                                void if an
+                                Event is abandoned before the end of the first half. But if an Event is abandoned after
+                                the end
+                                of the first half, all 1st half bets will be valid.</li>
+                            <li>Handicap: Handicap means betting when one competitor or team receives a virtual head
+                                start
+                                (effectively leading by that head start before the Event begins). The winner is the
+                                competitor
+                                or team with the better score after adding the given handicap to the result. Remaining
+                                Handicap
+                                rules are set out in the Specific Event Betting Rules.</li>
+                            <li>1H Handicap: 1st Half Handicap means betting on the team with the better score after
+                                adding the
+                                given handicap to the result of the first half of an Event.</li>
+                            <li>Correct Score (AOS) :
+                                <ul>
+                                    <li>Correct Score means betting to predict the final score at the end of full-time.
+                                    </li>
+                                    <li>First Half Correct Score means betting to predict the final score at the end of
+                                        First
+                                        Half.</li>
+                                    <li>Correct Score to win "AOS" means the selected team must win to a score not
+                                        listed in the
+                                        selection.</li>
+                                    <li>Example:
+                                        <ul>
+                                            <li>Result for 5-0UP - 5:1, 6:2 and etc (Lose) / 5:0, 6:1 and etc (Win)</li>
+                                            <li>Result for 0-5UP - 1:5, 2:6 and etc (Lose) / 0:5, 1:6 and etc (Win)</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>E-Soccer bets whenever applicable, are governed by the same rules for bets placed on
+                                real
+                                sporting events. The Company provides information (e.g. neutral ground, Red card, timer,
+                                statistical information, dates, commencement, etc) as a service and accepts no liability
+                                whatsoever. The timer and red card notices are given for reference purposes only. </li>
+                            <li>In case there is a technical issue or malfunction in a match, all placed bets will be
+                                voided and
+                                refunded in accordance with our general betting rules and regulations.</li>
+                            <li>The Company reserves its right to void any bet when it deems necessary under the
+                                circumstances.
+                                The decision of the Company with respect to any bet is final.</li>
+                        </ol>
+                    </div>
+                    <ul class="btn-wrap break">
+                        <li><a class="btn" href="#">OK</a></li>
+                    </ul>
+                </div>
+
+                <a id="openStreaming" class="open-tv-wrap" *ngIf="match.videoEnabled && isLogin"
+                    (click)="openTv(match)">Live</a>
+
+                <ng-container *ngFor="let market of match.markets; trackBy:trackByMkt">
+                    <dl *ngIf="selectedMarket==market.MarketId" class="game-matched" style="display: block;">
+                        <dt id="gameMatchedName">Matched</dt>
+                        <dd id="gameMatched">{{accountInfo?.currencyCode}} {{market?.TotalMatched |
+                            number:'1.2-2'}}</dd>
+                    </dl>
+                </ng-container>
+            </div>
+        </ng-container>
+
+
+
+
+    </div>
+
+    <div id="liveMatchGameHead" class="game-head"
+        *ngIf="!match.isRacing && match.sportradar_url && (!selectedMatch || isSportRadar)">
+
+
+        <div id="matchTrackerWrap" class="match-tracker-wrap"
+            *ngIf="(match.sportradar_url && !selectedMatch) || (match.sportradar_url && isSportRadar)">
+            <iframe #iframe allowfullscreen="true" [src]="match.sportradar_url" style="border: none; width: 100%"
+                [style.height.px]="scoreHeight" appIframeTracker (iframeClick)="onIframeClick()"></iframe>
+            <ul id="liveMatchTrackerBtn" class="match-btn">
+                <li><a id="liveMultiMarketPin" style="cursor:pointer" name="gameHeadPin" class="btn-pin"
+                        [ngClass]="{'select':checkIsMulti('market_'+match.eventId+'_'+selectedMarket)}"
+                        title="{{checkIsMulti('market_'+match.eventId+'_'+selectedMarket)?'Remove':'Add'}} to Multi Markets"
+                        (click)="toggleFavourite(match,'market_'+match.eventId+'_'+selectedMarket)">Pin</a></li>
+                <li><a style="cursor:pointer" class="btn-refresh"></a></li>
+            </ul>
+        </div>
+
+        <!-- Game Scroes Event -->
+        <div id="scoresEvent" class="match-odds" *ngIf="match.marketName">{{match.marketName}}<img
+                src="https://b2c.static112233.com/assets/images/transparent.gif"></div>
+
+
+        <div id="fancyBetRulesWrap" class="rules-wrap" style="display: none;">
+            <h3 id="fancyBetHeader">Rules of Fancy Bets</h3>
+            <h3 id="electionHeader" style="display: none;">Rules of Election Fancy Bets</h3>
+            <div class="rules-content">
+                <ol id="fancyBetRules" name="fancyBetRules">
+                    <li>Once all session/fancy bets are completed and settled there will be no reversal even if the
+                        Match is Tied or is Abandoned.</li>
+                    <li>Advance Session or Player Runs and all Fancy Bets are only valid for 20/50 overs full match each
+                        side. (Please Note this condition is applied only in case of Advance Fancy Bets only).</li>
+                    <li>All advance fancy bets market will be suspended 60 mins prior to match and will be settled.</li>
+                    <li>Under the rules of Session/Fancy Bets if a market gets Suspended for any reason whatsoever and
+                        does not resume then all previous Bets will remain Valid and become HAAR/JEET bets.</li>
+                    <li>Incomplete Session/Fancy Bet will be cancelled but Complete Session will be settled.</li>
+                    <li>In the case of Running Match getting Cancelled/ No Result/ Abandoned but the session is complete
+                        it will still be settled. Player runs / fall of wicket will be also settled at the figures where
+                        match gets stopped due to rain for the inning (D/L) , cancelled , abandoned , no result.</li>
+                    <li>If a player gets Retired Hurt and one ball is completed after you place your bets then all the
+                        betting till then is and will remain valid.</li>
+                    <li>Should a Technical Glitch in Software occur, we will not be held responsible for any losses.
+                    </li>
+                    <li>Should there be a power failure or a problem with the Internet connection at our end and
+                        session/fancy market does not get suspended then our decision on the outcome is final.</li>
+                    <li>All decisions relating to settlement of wrong market being offered will be taken by management.
+                        Management will consider all actual facts and decision taken will be full in final.</li>
+                    <li>Any bets which are deemed of being suspicious, including bets which have been placed from the
+                        stadium or from a source at the stadium maybe voided at anytime. The decision of whether to void
+                        the particular bet in question or to void the entire market will remain at the discretion of
+                        Company. The final decision of whether bets are suspicious will be taken by Company and that
+                        decision will be full and final.</li>
+                    <li>Any sort of cheating bet , any sort of Matching (Passing of funds), Court Siding (Ghaobaazi on
+                        commentary), Sharpening, Commission making is not allowed in Company, If any company User is
+                        caught in any of such act then all the funds belonging that account would be seized and
+                        confiscated. No argument or claim in that context would be entertained and the decision made by
+                        company management will stand as final authority.</li>
+                    <li>Fluke hunting/Seeking is prohibited in Company , All the fluke bets will be reversed. Cricket
+                        commentary is just an additional feature and facility for company user but company is not
+                        responsible for any delay or mistake in commentary.</li>
+                    <li>Valid for only 1st inning.<ul>• Highest Inning Run :- This fancy is valid only for first inning
+                            of the match.</ul>
+                        <ul>• Lowest Inning Run :- This fancy is valid only for first inning of the match.</ul>
+                    </li>
+                    <li>If any fancy value gets passed, we will settle that market after that match gets over. For
+                        example :- If any market value is ( 22-24 ) and incase the result is 23 than that market will be
+                        continued, but if the result is 24 or above then we will settle that market. This rule is for
+                        the following market.<ul>• Total Sixes In Single Match</ul>
+                        <ul>• Total Fours In Single Match</ul>
+                        <ul>• Highest Inning Run</ul>
+                        <ul>• Highest Over Run In Single Match</ul>
+                        <ul>• Highest Individual Score By Batsman</ul>
+                        <ul>• Highest Individual Wickets By Bowler</ul>
+                    </li>
+                    <li>If any fancy value gets passed, we will settle that market after that match gets over. For
+                        example :- If any market value is ( 22-24 ) and incase the result is 23 than that market will be
+                        continued, but if the result is 22 or below then we will settle that market. This rule is for
+                        the following market.<ul>• Lowest Inning Run</ul>
+                        <ul>• Fastest Fifty</ul>
+                        <ul>• Fastest Century</ul>
+                    </li>
+                    <li>If any case wrong rate has been given in fancy ,that particular bets will be cancelled (Wrong
+                        Commentary).</li>
+                    <li>In case customer make bets in wrong fancy we are not liable to delete, no changes will be made
+                        and bets will be considered as confirm bet.</li>
+                    <li>Dot Ball Market Rules<ul>Wides Ball - Not Count</ul>
+                        <ul>No Ball - Not Count</ul>
+                        <ul>Leg Bye - Not Count as A Dot Ball</ul>
+                        <ul>Bye Run - Not Count as A Dot Ball</ul>
+                        <ul>Run Out - On 1st Run Count as A Dot Ball</ul>
+                        <ul>Run Out - On 2nd n 3rd Run Not Count as a Dot Ball</ul>
+                        <ul>Out - Catch Out, Bowled, Stumped n LBW Count as A Dot Ball</ul>
+                    </li>
+                    <li>Bookmaker Rules<ul>• Due to any reason any team will be getting advantage or disadvantage we are
+                            not concerned.</ul>
+                        <ul>• We will simply compare both teams 25 overs score higher score team will be declared winner
+                            in ODI.</ul>
+                        <ul>• We will simply compare both teams 10 overs higher score team will be declared winner in
+                            T20 matches.</ul>
+                    </li>
+                    <li>Penalty Runs - Any Penalty Runs Awarded in the Match (In Any Running Fancy or ADV Fancy) Will
+                        Not be Counted While Settling in our Exchange.</li>
+                    <li>LIVE STREAMING OF ALL VIRTUAL CRICKET MATCHES IS AVAILABLE HERE
+                        https://www.youtube.com/channel/UCd837ZyyiO5KAPDXibynq_Q/featured</li>
+                    <li>CHECK SCORE OF VIRTUAL CRICKET ON
+                        https://sportcenter.sir.sportradar.com/simulated-reality/cricket</li>
+                    <li>Comparison Market<ul>In Comparison Market We Don't Consider Tie or Equal Runs on Both the
+                            Innings While Settling . Second Batting Team Must need to Surpass 1st Batting's team Total
+                            to win otherwise on Equal Score or Below We declare 1st Batting Team as Winner .</ul>
+                    </li>
+                    <li>Player Boundaries Fancy:- We will only consider Direct Fours and Sixes hit by BAT.</li>
+                    <li>BOWLER RUN SESSION RULE :-<ul>IF BOWLER BOWL 1.1 OVER,THEN VALID ( FOR BOWLER 2 OVER RUNS
+                            SESSION )</ul>
+                        <ul>IF BOWLER BOWL 2.1 OVER,THEN VALID ( FOR BOWLER 3 OVER RUNS SESSION )</ul>
+                        <ul>IF BOWLER BOWL 3.1 OVER,THEN VALID ( FOR BOWLER 4 OVER RUNS SESSION )</ul>
+                        <ul>IF BOWLER BOWL 4.1 OVER,THEN VALID ( FOR BOWLER 5 OVER RUNS SESSION )</ul>
+                        <ul>IF BOWLER BOWL 9.1 OVER,THEN VALID ( FOR BOWLER 10 OVER RUNS SESSION )</ul>
+                    </li>
+                    <li>Total Match Playing Over ADV :- We Will Settle this Market after Whole Match gets Completed<ul>
+                            Criteria :- We Will Count Only Round- Off Over For Both the Innings While Settling (For Ex
+                            :- If 1st Batting team gets all out at 17.3 , 18.4 or 19.5 we Will Count Such Overs as 17,
+                            18 and 19 Respectively and if Match gets Ended at 17.2 , 18.3 or 19.3 Overs then we will
+                            Count that as 17 , 18 and 19 Over Respectively... and this Will Remain Same For Both the
+                            Innings ..</ul>
+                        <ul>In Case Of Rain or if Over gets Reduced then this Market will get Voided</ul>
+                    </li>
+                    <li>3 WKT OR MORE BY BOWLER IN MATCH ADV :-<ul>We Will Settle this Market after Whole Match gets
+                            Completed .</ul>
+                        <ul>In Case Of Rain or if Over Gets Reduced then this Market Will get Voided</ul>
+                    </li>
+                    <li>KHADDA :-<ul>ADV Khadda Fancy is Valid Only for First Innings of the Match</ul>
+                        <ul>In Case of Rain or If Over Gets Reduced then this Market Will get Voided</ul>
+                        <ul>Incomplete Session Bet will be Cancelled but Complete Session Will be Settled</ul>
+                    </li>
+                    <li>LOTTERY :-<ul>In Case of Rain or If Over Gets Reduced then this Market Will get Voided</ul>
+                        <ul>Incomplete Session Bet will be Cancelled but Complete Session Will be Settled</ul>
+                        <ul>Criteria :- We will Only Count Last Digit of Sessions Total while settling ..For Example if
+                            in 6 Overs Market the Score is 37 ...so we will Settle the Market for 6 Over Lottery @ 7
+                        </ul>
+                    </li>
+                    <li>BIG BASH LEAGUE 2020-21 RULES :-<ul>If Over Reduced in Match, We will not count the actual
+                            scores of the Over Reduced Matches instead we will count the Market’s Average Scores .</ul>
+                        <ul>If Match is Abandoned , We will not count the actual scores of the Abandoned Matches instead
+                            we will count the Market’s Average Scores .</ul>
+                        <ul>NOTE :- . These rules are for the following Markets of ENTIRE BBL 2020-21 61 Matches :-
+                        </ul>
+                        <ul>Total Fours :- Average 24 Fours will be given if the match is abandoned or over reduced.
+                        </ul>
+                        <ul>Total Sixes :- Average 10 Sixes will be given if the match is abandoned or over reduced.
+                        </ul>
+                        <ul>Total Caught &amp; Bowled Out :- Average 0 Caught &amp; Bowled Out will be given if the
+                            match is abandoned or over reduced.</ul>
+                        <ul>Total Wide :- Average 8 Wides will be given if the match is abandoned or over reduced.</ul>
+                        <ul>Total Extra :- Average 14 Extras will be given if the match is abandoned or over reduced.
+                        </ul>
+                        <ul>Total No Ball :- Average 1 No Ball will be given if the match is abandoned or over reduced.
+                        </ul>
+                        <ul>Total duck :- Average 1 Duck will be given if the match is abandoned or over reduced.</ul>
+                        <ul>Total Fifties :- Average 2 Fifties will be given if the match is abandoned or over reduced.
+                        </ul>
+                        <ul>Total Century :-Average 0 Century will be given if the match is abandoned or over reduced.
+                        </ul>
+                        <ul>Total Run Out :- Average 1 Run Out will be given if the match is abandoned or over reduced.
+                        </ul>
+                        <ul>Total Caught out :- Average 8 Caught Out will be given if the match is abandoned or over
+                            reduced</ul>
+                        <ul>Total Stump Out :- Average 0 Stump Out will be given if the match is abandoned or over
+                            reduced.</ul>
+                        <ul>Total Maiden Over :- Average 0 Maiden Over will be given if the match is abandoned or over
+                            reduced.</ul>
+                        <ul>Total LBW :- Average 1 LBW will be given if the match is abandoned or over reduced.</ul>
+                        <ul>Total Bowled :- Average 2 Bowled will be given if the match is abandoned or over reduced.
+                        </ul>
+                        <ul>• In case BBL Matches Gets Stopped Or Interrupted Due to "COVID-19" or Any "ACT OF GOD"
+                            Reasons, Under 45 Matches then All BBL 2020-21 Tournament Fancy Markets will be Voided, But
+                            if 45 or Above Matches are Being Played then we will Settle all the Fancy Markets and Also
+                            If there are NON Played Matches Above 45 then we will settle the markets as per our Markets
+                            Average.</ul>
+                    </li>
+                </ol>
+                <ol id="electionRules" style="display: none;">
+                    <li>Election result declared by Election Commission of India will be valid in our Exchange.</li>
+                    <li>Accidental issues in Election will Not Be counted in our Exchange.</li>
+                </ol>
+            </div>
+            <ul class="btn-wrap break">
+                <li><a class="btn" (click)="hideFancyRules()">OK</a></li>
+            </ul>
+        </div>
+
+        <div id="sportsBookRulesWrap_1" class="rules-wrap" style="display: none;">
+
+            <h3 id="owRulesTitle">Rules of Premium Tennis</h3>
+            <div class="rules-content">
+                <ol id="owTennisRulesContent" style="display: none;">
+                    <li>Handicap
+                        <ul>
+                            <li>Set Handicap betting are settle based on the Sets</li>
+                            <li>For Tennis Set hdp betting, the player you wager on must cover/beat the set Spread. This
+                                means that the favored player must win by more than the outlined number of sets or the
+                                underdog will receive that number of sets as a head start. In the above exmaple, If you
+                                wager on Andreas Seppi +1.5, he would need to win the match by any score or alternately
+                                lose by 1 set. If you wager on Daniil Medvedec -1.5, he would need to win by 2 set .
+                            </li>
+                            <li>If the scheduled number of sets required to win a match is changed from that originally
+                                scheduled then all bets will be void, except for those that have been unconditionally
+                                determined.</li>
+                            <li>All bets will be consider void if the match is not completed.</li>
+                        </ul>
+                    </li>
+                    <li>Over/Under
+                        <ul>
+                            <li>Game Total settle based on the total number of Games played of the match.</li>
+                            <li>All bets will be consider void if the match is not completed.</li>
+                        </ul>
+                    </li>
+                    <li>Money Line
+                        <ul>
+                            <li>Money line markets refer to the winner of the match or specified set.</li>
+                            <li>If a player does not start a tournament or match , disqualified, retires during the
+                                match, then all bets on that player will be void.</li>
+                            <li>If a match is postponed or suspended then all bets are still considered valid if the
+                                match is completed.</li>
+                            <li>All bets will still be considered valid regardless of any change of venue or court
+                                surface (including moving matches from outdoor to indoor courts or vice versa).</li>
+                            <li>All bets will be consider void if the match is not completed.</li>
+                        </ul>
+                    </li>
+                    <li>Game Handicap (Tennis)
+                        <ul>
+                            <li>Game Hdandicap betting are settled based on Games.</li>
+                            <li>For Tennis Game Hdp betting , the player you wager on must cover/beat the game spread.
+                                This means that the favored player must win by more than the outlined number of games or
+                                the underdog will receive that number of games as a head start. In the above example, if
+                                you wager on Andreas Seppi +3.5, he would need to win the match by any score or
+                                alternately lose by 3 games or less. If you wager on Daniil Medvedev -3.5, he would need
+                                to win by 4 games or more.</li>
+                            <li>All bets will be consider void if the match is not completed.</li>
+                        </ul>
+                    </li>
+                    <li>Set x Winner (Tennis)
+                        <ul>
+                            <li>Set X Winner refers to the result of the specified set. All bets will be considered void
+                                if the specified set is not completed.</li>
+                        </ul>
+                    </li>
+                    <li>Set x Total Game O/U (Tennis)
+                        <ul>
+                            <li>Set X Total Game O/U refers to total Game of the specified set. All bets will be
+                                considered void if the specified set is not completed.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <ol id="owSoccerRulesContent" style="display: none;">
+                    <li>FT.1X2:1X2 means betting in any one of three possible winning outcomes for an Event. 1 refers to
+                        the team that is named first (usually the home team); X refers to the game resulting in a draw
+                        or tie; 2 refers to the team that is named second (usually the away team).</li>
+                    <li>1H 1X2:1st Half 1X2 means betting in any one of three possible winning outcomes of the first
+                        half for an Event. 1 refers to the team that is named first (usually the home team); X refers to
+                        the game resulting in a draw or tie; 2 refers to the team that is named second (usually the away
+                        team).</li>
+                    <li>Over/Under: Over/Under means betting that is determined by the total number of points (goals,
+                        games etc) in the final result of an Event. If the total is more than the Over/Under
+                        pre-designated line then the winning result is Over; if the total is less than the Over/Under
+                        pre-designated line then the winning result is Under.</li>
+                    <li>1H Over/Under: 1st Half Over/Under means betting that is determined by the total number of
+                        points in the result of the first half of an Event. If the total is more than the Over/Under
+                        pre-designated line then the winning result is Over; if the total is less than the Over/Under
+                        pre-designated line then the winning result is Under.</li>
+                    <li>
+                        Over/Under Guideline:
+                        <ul style="list-style-type: lower-roman">
+                            <li>Goal line under 2
+                                <div>
+                                    Bets win if there is either 0 or 1 goal scored in the match. If there are two goals
+                                    exactly then the stake is returned. Bets lose if there are three or more goals
+                                    scored in the match.
+                                </div>
+                            </li>
+
+                            <li>Goal line over 2
+                                <div>
+                                    Bets win if there are three or more goals scored in the match. If there are two
+                                    goals exactly the stake is returned. Bets lose if there is 0 or 1 goal scored in the
+                                    match.
+                                </div>
+                            </li>
+
+                            <li>Goal line under 2.25
+                                <div>
+                                    Bets win if there is either 0 or 1 goal scored in the match. If there are two goals
+                                    exactly half the stake will win and half will be returned. Bets lose if there are
+                                    three or more goals scored in the match.
+                                </div>
+                            </li>
+                            <li>Goal line over 2.25
+                                <div>
+                                    Bets win if there are three or more goals scored in the match. If there are two
+                                    goals exactly half the stake will be returned and half will be lost. Bets lose if
+                                    there is 0 or 1 goal scored in the match.
+                                </div>
+                            </li>
+                            <li>Goal line under 2.5
+                                <div>
+                                    Bets win if there are 0, 1 or 2 goals scored in the match. Bets lose if there are
+                                    three or more goals scored in the match.
+                                </div>
+                            </li>
+                            <li>Goal line over 2.5
+                                <div>
+                                    Bets win if there are three or more goals scored in the match. Bets lose if there
+                                    are 0, 1 or 2 goals scored in the match.
+                                </div>
+                            </li>
+                            <li>Goal line under 2.75
+                                <div>
+                                    Bets win if there are 0, 1 or 2 goals scored in the match. If there are three goals
+                                    exactly half the stake will be returned and half will be lost. Bets lose if there
+                                    are four or more goals scored in the match.
+                                </div>
+                            </li>
+                            <li>Goal line over 2.75
+                                <div>
+                                    Bets win if there are four or more goals scored in the match. If there are three
+                                    goals exactly half the stake will win and half will be returned. Bets lose if there
+                                    are 0, 1 or 2 goals scored in the match.
+                                </div>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li>Double Chance: The following options are available:
+                        <ul>
+                            <li>1 or X - If the result is either a home or draw then bets on this option are winners.
+                            </li>
+                            <li>X or 2 - If the result is either a draw or away then bets on this option are winners.
+                            </li>
+                            <li>1 or 2 - If the result is either a home or away then bets on this option are winners.
+                            </li>
+                            <li>If a match is played at a neutral venue the team listed first is deemed the home team
+                                for betting purposes.</li>
+                        </ul>
+                    </li>
+                    <li>Odd/Even: Odd/Even means betting that is determined by whether the total number of points
+                        (goals, games etc) in the final result of an Event is Odd or Even.</li>
+                    <li>1H Odd/Even: 1st Half Odd/Even means betting that is determined by whether the total number of
+                        points at the end of the first half of an Event is Odd or Even. 1st half bets will be void if an
+                        Event is abandoned before the end of the first half. But if an Event is abandoned after the end
+                        of the first half, all 1st half bets will be valid.</li>
+                    <li>Handicap: Handicap means betting when one competitor or team receives a virtual head start
+                        (effectively leading by that head start before the Event begins). The winner is the competitor
+                        or team with the better score after adding the given handicap to the result. Remaining Handicap
+                        rules are set out in the Specific Event Betting Rules.</li>
+                    <li>1H Handicap: 1st Half Handicap means betting on the team with the better score after adding the
+                        given handicap to the result of the first half of an Event.</li>
+                    <li>Correct Score (AOS) :
+                        <ul>
+                            <li>Correct Score means betting to predict the final score at the end of full-time.</li>
+                            <li>First Half Correct Score means betting to predict the final score at the end of First
+                                Half.</li>
+                            <li>Correct Score to win "AOS" means the selected team must win to a score not listed in the
+                                selection.</li>
+                            <li>Example:
+                                <ul>
+                                    <li>Result for 5-0UP - 5:1, 6:2 and etc (Lose) / 5:0, 6:1 and etc (Win)</li>
+                                    <li>Result for 0-5UP - 1:5, 2:6 and etc (Lose) / 0:5, 1:6 and etc (Win)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>E-Soccer bets whenever applicable, are governed by the same rules for bets placed on real
+                        sporting events. The Company provides information (e.g. neutral ground, Red card, timer,
+                        statistical information, dates, commencement, etc) as a service and accepts no liability
+                        whatsoever. The timer and red card notices are given for reference purposes only. </li>
+                    <li>In case there is a technical issue or malfunction in a match, all placed bets will be voided and
+                        refunded in accordance with our general betting rules and regulations.</li>
+                    <li>The Company reserves its right to void any bet when it deems necessary under the circumstances.
+                        The decision of the Company with respect to any bet is final.</li>
+                </ol>
+            </div>
+            <ul class="btn-wrap break">
+                <li><a onclick="$j('[id^=sportsBookRulesWrap_1]').fadeOut()" class="btn" href="#">OK</a></li>
+            </ul>
+        </div>
+
+        <!-- Game Information -->
+        <ul class="game-info" style="display: block;">
+            <li id="gameInfoDate" [ngClass]="{'green':match.inplay}">
+                <ng-container *ngIf="!match.inplay">
+                    <img class="icon-time" src="https://b2c.static112233.com/assets/images/transparent.gif">
+                    {{match.time | date:'yyyy-MM-dd HH:mm'}}
+                </ng-container>
+                <ng-container *ngIf="match.inplay">
+                    <img class="icon-irun" src="https://b2c.static112233.com/assets/images/transparent.gif"> In-Play
+                </ng-container>
+
+            </li>
+            <li><span id="lowLiquidityTag" class="game-low_liq" style="display: none;">Low Liquidity</span></li>
+        </ul>
+
+        <a id="lmtOpenStreaming" class="open-tv-wrap" *ngIf="match.videoEnabled && isLogin"
+            (click)="openTv(match)">Live</a>
+
+        <ng-container *ngFor="let market of match.markets; trackBy:trackByMkt">
+            <dl *ngIf="selectedMarket==market.MarketId" class="game-matched" style="display: block;">
+                <dt id="gameMatchedName">Matched</dt>
+                <dd id="gameMatched">{{accountInfo?.currencyCode}} {{market?.TotalMatched |
+                    number:'1.2-2'}}</dd>
+            </dl>
+        </ng-container>
+        <dl id="minMaxBox" class="fancy-info">
+            <dt id="minMaxDt">Min/Max </dt>
+            <dt id="maxDt" style="display: none;">Max</dt>
+            <dd id="minMaxInfo"> - {{bfMin | number:'1.0-0'}}/{{bfMax | number:'1.0-0'}}</dd>
+        </dl>
+    </div>
+
+
+    <ng-container *ngIf="selectedMatch && match.isData && (fundInfo?.balance>0 || fundInfo?.exposure>1)">
+        <div id="tv-wrap" class="game-streaming-wrap" style="display: block;" (click)="hideTvControl()">
+            <div id="tv" class="tv">
+                <ul class="tv-control">
+                    <li><a class="close" id="closeStreamingBox" style="display: none;"
+                            (click)="openTv(selectedMatch)">Close</a></li>
+                </ul>
+
+                <ul class="tv-control" style="display: none;">
+                    <li>
+                        <!-- btn-volume_on btn-volume_off -->
+                        <a class="btn-volume_off" id="mute" style="display: none;">volume</a>
+                    </li>
+                    <li>
+                        <a class="btn-line" id="changeLineBtn" style="display: none;"><span id="tvLine">1</span></a>
+                    </li>
+                </ul>
+                <ng-container *ngIf="liveUrlSafe">
+                    <iframe *ngIf="activeTab=='liveVideo'" allowfullscreen="true" [src]="liveUrlSafe"
+                        style="background-color:#000000; width: 100%; height: 99%" (click)="hideTvControl()"></iframe>
+                </ng-container>
+                <!-- <video autoplay="" preload="" playsinline="" id="video" poster="https://b2c.static112233.com/assets/images/cover-live.png"
+                style="background-color:#000000; width: 100%; height: 100%"></video> -->
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="match.isRacing">
+        <ng-container *ngFor="let market of match.markets; trackBy:trackByMkt">
+
+            <div id="fullMarketBetsWrap" class="bets-wrap">
+
+                <h3 id="lineMarketName" class="line_market-name" style="display:none;">
+                    <span>1st Innings 10 Over Line</span>
+                </h3>
+
+                <span id="selectionCounts" class="refer_only">8 selections</span>
+
+                <table id="fullMarketBoard" class="bets-HS">
+                    <tbody>
+                        <tr class="bet-all">
+                            <td></td>
+                            <td id="backPercent" class="refer-bet" colspan="2">201.3%</td>
+                            <td>
+                                <a id="backAll" class="back-all"><img
+                                        src="https://b2c.static112233.com/assets/images/transparent.gif"><span>Back
+                                        all</span></a>
+                            </td>
+                            <td>
+                                <a id="layAll" class="lay-all">
+                                    <img src="https://b2c.static112233.com/assets/images/transparent.gif"><span>Lay
+                                        all</span></a>
+                            </td>
+                            <td id="layPercent" class="refer-book" colspan="2"></td>
+                        </tr>
+
+                        <tr id="fullSelectionTemplate" style="display: none;">
+                            <th>
+
+                                <dl id="horseInfo" class="horse-info" style="display: none;">
+                                    <dt>
+                                        <a id="marketDepthBtn" href="#"><img class="icon-predict"
+                                                src="https://b2c.static112233.com/assets/images/transparent.gif"></a>
+                                        <ul id="horseBox" class="horse-box">
+                                            <li id="clothNumberAlpha"></li>
+                                            <li id="stallDraw"></li>
+                                        </ul>
+                                        <div id="uniform" class="uniform"><img src=""></div>
+                                    </dt>
+                                    <dd>
+                                        <ul id="horseName" class="horse-name">
+                                            <li id="runnerName"></li>
+                                            <li id="jockyName"></li>
+                                        </ul>
+                                        <dl id="horseInfoHover" class="horse_info-hover">
+                                            <dt>Trainer:</dt>
+                                            <dd id="trainerName"></dd>
+                                            <dt>Age/Weight:</dt>
+                                            <dd id="ageWeight"></dd>
+                                            <dt>Form:</dt>
+                                            <dd id="form"></dd>
+                                            <dt>Days since last run:</dt>
+                                            <dd id="daysSinceLastRun"></dd>
+                                            <dt>Jockey claim:</dt>
+                                            <dd id="jockeyClam"></dd>
+                                            <dt>Wearning:</dt>
+                                            <dd id="wearing"></dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+
+                                <p></p>
+                                <span id="withoutBet" class="win" style="display: none;"></span>
+                                <span id="lossWithoutBet" class="win" style="display: none;"></span>
+                                <span id="withBet" class="win" style="display: none;"></span>
+                                <span id="lossWithBet" class="win" style="display: none;"></span>
+                                <span id="zeroProfit" class="win" style="display: none;"></span>
+                                <span id="zeroLiability" class="win" style="display: none;"></span>
+                                <span id="zeroProfitWithBet" class="win" style="display: none;"></span>
+                                <span id="zeroLiabilityWithBet" class="win" style="display: none;"></span>
+                            </th>
+                            <td id="suspend" colspan="6" class="suspend" style="display: none;">
+                                <span>Suspend</span>
+                            </td>
+                            <td id="closed" colspan="6" class="suspend" style="display: none;">
+                                <span>Closed</span>
+                            </td>
+                            <td id="nonRunner" colspan="6" class="suspend" style="display: none;">
+                                <span>Non Runner</span>
+                            </td>
+                            <td id="back_3" class="back-3" side="Back"><a><span></span></a></td>
+                            <td id="back_2" class="back-2" side="Back"><a><span></span></a></td>
+                            <td id="back_1" class="back-1" side="Back"><a><span></span></a></td>
+                            <td id="lay_1" class="lay-1" side="Lay"><a><span></span></a></td>
+                            <td id="lay_2" class="lay-2" side="Lay"><a><span></span></a></td>
+                            <td id="lay_3" class="lay-3" side="Lay"><a><span></span></a></td>
+                            <td id="horseGreyOut" colspan="3" class="suspend" style="display: none;"></td>
+                        </tr>
+                        <tr id="fullSelection_{{market.MarketId | removeSpace}}_{{runner.selectionId}}"
+                            style="display: table-row;" *ngFor="let runner of market.Runners; trackBy:trackByRunner">
+                            <th>
+
+                                <dl id="horseInfo" class="horse-info" *ngIf="match.eventTypeId==7">
+                                    <dt *ngIf="runner?.description">
+                                        <a id="marketDepthBtn">
+                                            <img class="icon-predict"
+                                                src="https://b2c.static112233.com/assets/images/transparent.gif"></a>
+                                        <ul id="horseBox" class="horse-box tooltip1"
+                                            *ngIf="runner?.description?.metadata?.COLOURS_FILENAME?.indexOf('saddle_')==-1">
+                                            <li id="clothNumberAlpha">{{runner.description.metadata.CLOTH_NUMBER_ALPHA}}
+                                            </li>
+
+                                            <li id="stallDraw" style="display: none;"></li>
+
+                                        </ul>
+                                        <div id="uniform"
+                                            class="uniform saddle_{{runner.description.metadata.COLOURS_FILENAME.indexOf('saddle_')>-1?runner.description.metadata.CLOTH_NUMBER_ALPHA:''}}"
+                                            *ngIf="runner.description.metadata.COLOURS_FILENAME">
+                                            <img *ngIf="runner.description.metadata.COLOURS_FILENAME.indexOf('saddle_')==-1"
+                                                src="https://content-cache.cdnbf.net/feeds_images/Horses/SilkColours/{{runner.description.metadata.COLOURS_FILENAME}}">
+                                        </div>
+                                    </dt>
+                                    <dd *ngIf="runner?.description" class="tooltip1">
+                                        <ul id="horseName" class="horse-name">
+                                            <li id="runnerName">{{runner.description.runnerName}}</li>
+                                            <li id="jockyName">{{runner.description.metadata.JOCKEY_NAME}}</li>
+
+                                        </ul>
+                                        <span class="tooltip1text" id="runnername-{{ runner.selectionId }}"
+                                            *ngIf="runner?.description?.metadata">
+                                            <span class="tooltip1-container">
+                                                <b>Trainer: </b>{{
+                                                runner?.description?.metadata
+                                                ?.TRAINER_NAME
+                                                }}<br />
+                                                <b>Age/weight: </b>{{
+                                                runner?.description?.metadata?.AGE
+                                                }}/{{
+                                                runner?.description?.metadata
+                                                ?.WEIGHT_VALUE
+                                                }}
+                                                {{
+                                                runner?.description?.metadata
+                                                ?.WEIGHT_UNITS
+                                                }}<br />
+                                                <b>From: </b>{{
+                                                runner?.description?.metadata?.FORM
+                                                }}<br />
+                                                <b>Days since last run: </b>{{
+                                                runner?.description?.metadata
+                                                ?.DAYS_SINCE_LAST_RUN
+                                                }}<br />
+                                                <b>Jockey claim: </b>{{
+                                                runner?.description?.metadata
+                                                ?.JOCKEY_CLAIM
+                                                }}<br /><b>Wearing: </b>{{
+                                                runner?.description?.metadata
+                                                ?.WEARING
+                                                }}
+                                            </span>
+                                        </span>
+                                        <!-- <dl id="horseInfoHover" class="horse_info-hover">
+                                            <dt>Trainer:</dt>
+                                            <dd id="trainerName">{{runner.description.metadata.TRAINER_NAME}}</dd>
+                                            <dt>Age/Weight:</dt>
+                                            <dd id="ageWeight">{{runner.description.metadata.AGE}} /
+                                                {{runner.description.metadata.FORECASTPRICE_NUMERATOR}}-{{runner.description.metadata.FORECASTPRICE_DENOMINATOR}}
+                                            </dd>
+                                            <dt>Form:</dt>
+                                            <dd id="form">{{runner.description.metadata.FORM}}</dd>
+                                            <dt>Days since last run:</dt>
+                                            <dd id="daysSinceLastRun">
+                                                {{runner.description.metadata.DAYS_SINCE_LAST_RUN}}</dd>
+                                            <dt>Jockey claim:</dt>
+                                            <dd id="jockeyClam">N/A</dd>
+                                            <dt>Wearning:</dt>
+                                            <dd id="wearing">N/A</dd>
+                                        </dl> -->
+                                    </dd>
+                                </dl>
+
+                                <p *ngIf="match.eventTypeId!=7"><a><img class="icon-predict"
+                                            src="https://b2c.static112233.com/assets/images/transparent.gif"></a>{{runner?.description?.runnerName}}
+                                </p>
+
+                                <span id="withoutBet" *ngIf="!market.newpnl" [ngClass]="getPnlClass(runner,market.pnl)">
+                                    {{getPnlValue(runner,market.pnl) | number:'1.2-2'}}</span>
+                                <span id="lossWithoutBet" class="win" style="display: none;"></span>
+                                <span id="withBet" *ngIf="market.newpnl" [ngClass]="getPnl2Class(runner,market.newpnl)">
+                                    {{getPnlValue(runner,market.newpnl) | number:'1.2-2'}}</span>
+                                <span id="lossWithBet" class="win" style="display: none;"></span>
+                                <span id="zeroProfit" class="win" style="display: none;"></span>
+                                <span id="zeroLiability" class="win" style="display: none;"></span>
+                                <span id="zeroProfitWithBet" class="win" style="display: none;"></span>
+                                <span id="zeroLiabilityWithBet" class="win" style="display: none;"></span>
+                            </th>
+                            <td id="suspend" colspan="6" class="suspend"
+                                *ngIf="market.Status!='OPEN' && runner.state.status!='WINNER'">
+                                <span>{{market.Status}}</span>
+                            </td>
+                            <td id="suspend" colspan="6" class="suspend"
+                                *ngIf="market.Status!='OPEN' && runner.state.status=='WINNER'">
+                                <span>{{runner.state.status}}</span>
+                            </td>
+
+                            <td id="nonRunner" colspan="6" class="suspend"
+                                *ngIf="market.Status=='OPEN' && runner.state.status!='ACTIVE'">
+                                <span>{{runner.state.status}}</span>
+                            </td>
+                            <td id="back_3" class="back-3"
+                                *ngIf="market.Status=='OPEN' && runner.state.status=='ACTIVE'"
+                                (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventTypes?.eventNodes?.event?.eventName,market.marketName,match.inplay,runner?.description?.runnerName,runner.ExchangePrices?.AvailableToBack[2]?.price,'back',null,null,null,null,null,null)">
+                                <a>{{runner.ExchangePrices?.AvailableToBack[2]?.price}}<span>{{runner.ExchangePrices?.AvailableToBack[2]?.size}}</span></a>
+                            </td>
+                            <td id="back_2" class="back-2"
+                                *ngIf="market.Status=='OPEN' && runner.state.status=='ACTIVE'"
+                                (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventTypes?.eventNodes?.event?.eventName,market.marketName,match.inplay,runner?.description?.runnerName,runner.ExchangePrices?.AvailableToBack[1]?.price,'back',null,null,null,null,null,null)">
+                                <a>{{runner.ExchangePrices?.AvailableToBack[1]?.price}}<span>{{runner.ExchangePrices?.AvailableToBack[1]?.size}}</span></a>
+                            </td>
+                            <td id="back_1" class="back-1"
+                                *ngIf="market.Status=='OPEN' && runner.state.status=='ACTIVE'"
+                                (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventTypes?.eventNodes?.event?.eventName,market.marketName,match.inplay,runner?.description?.runnerName,runner.ExchangePrices?.AvailableToBack[0]?.price,'back',null,null,null,null,null,null)">
+                                <a>{{runner.ExchangePrices?.AvailableToBack[0]?.price}}<span>{{runner.ExchangePrices?.AvailableToBack[0]?.size}}</span></a>
+                            </td>
+                            <td id="lay_1" class="lay-1" *ngIf="market.Status=='OPEN' && runner.state.status=='ACTIVE'">
+                                <a><span></span></a>
+                            </td>
+                            <td id="lay_2" class="lay-2" *ngIf="market.Status=='OPEN' && runner.state.status=='ACTIVE'">
+                                <a><span></span></a>
+                            </td>
+                            <td id="lay_3" class="lay-3" *ngIf="market.Status=='OPEN' && runner.state.status=='ACTIVE'">
+                                <a><span></span></a>
+                            </td>
+                            <!-- <td id="lay_1" class="lay-1" *ngIf="market.Status=='OPEN' && runner.state.status=='ACTIVE'"
+                                (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventTypes?.eventNodes?.event?.eventName,market.marketName,match.inplay,runner?.description?.runnerName,runner.ExchangePrices?.AvailableToLay[0]?.price,'lay',null,null,null,null,null,null)">
+                                <a>{{runner.ExchangePrices?.AvailableToLay[0]?.price}}<span>{{runner.ExchangePrices?.AvailableToLay[0]?.size}}</span></a>
+                            </td>
+                            <td id="lay_2" class="lay-2" *ngIf="market.Status=='OPEN' && runner.state.status=='ACTIVE'"
+                                (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventTypes?.eventNodes?.event?.eventName,market.marketName,match.inplay,runner?.description?.runnerName,runner.ExchangePrices?.AvailableToLay[1]?.price,'lay',null,null,null,null,null,null)">
+                                <a>{{runner.ExchangePrices?.AvailableToLay[1]?.price}}<span>{{runner.ExchangePrices?.AvailableToLay[1]?.size}}</span></a>
+                            </td>
+                            <td id="lay_3" class="lay-3" *ngIf="market.Status=='OPEN' && runner.state.status=='ACTIVE'"
+                                (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventTypes?.eventNodes?.event?.eventName,market.marketName,match.inplay,runner?.description?.runnerName,runner.ExchangePrices?.AvailableToLay[2]?.price,'lay',null,null,null,null,null,null)">
+                                <a>{{runner.ExchangePrices?.AvailableToLay[2]?.price}}<span>{{runner.ExchangePrices?.AvailableToLay[2]?.size}}</span></a>
+                            </td> -->
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </ng-container>
+    </ng-container>
+
+    <!-- Game Bets Table -->
+    <ng-container *ngIf="!match.isVir && !match.isSrl && !match.isRacing && !match.isKabaddi && match.isMarketData">
+        <ng-container *ngFor="let market of match.markets; trackBy:trackByMkt;index as index">
+            <div id="fullMarketBetsWrap_{{market.MarketId}}" class="bets-wrap cooldown1"
+                [ngClass]="{'cooldowns':market.isBettable}" *ngIf="index==0">
+
+                <span id="selectionCounts" class="refer_only">{{market.Runners?.length}} selections -
+                    <b>{{market.marketName}}</b></span>
+
+                <table id="fullMarketBoard" class="bets" [ngClass]="{'disabled':!market.isBettable}">
+                    <tbody>
+                        <tr class="bet-all">
+                            <td></td>
+                            <td id="backPercent" class="refer-bet" colspan="2"></td>
+                            <td>
+                                <a id="backAll" class="back-all">
+                                    <img src="https://b2c.static112233.com/assets/images/transparent.gif">
+                                    <span>{{Update?.back}} {{Update?.all}}</span>
+                                </a>
+                            </td>
+                            <td>
+                                <a id="layAll" class="lay-all">
+                                    <img src="https://b2c.static112233.com/assets/images/transparent.gif">
+                                    <span>{{Update?.lay}} {{Update?.all}}</span>
+                                </a>
+                            </td>
+                            <td id="layPercent" class="refer-book" colspan="2"></td>
+                        </tr>
+                        <ng-container *ngIf="!match.isManualEvent && !market.removeMarket">
+                            <ng-container *ngFor="let runner of market.Runners; trackBy:trackByRunner">
+                                <tr id="selection_{{market.MarketId | removeSpace}}_{{runner.SelectionId}}"
+                                    style="display: table-row;">
+                                    <th [ngClass]="{'predict':market.pnl?.length>0 || market.newpnl}">
+
+                                        <p>
+                                            <a><img class="icon-predict"
+                                                    src="https://b2c.static112233.com/assets/images/transparent.gif"></a>
+                                            {{runner.runnerName}}
+                                        </p>
+                                        <span id="withoutBet" *ngIf="!market.newpnl && market.pnl?.length>0"
+                                            [ngClass]="getPnlClass(runner,market.pnl)" style="display: inline-flex;">
+                                            {{getPnlValue(runner,market.pnl) | number:'1.2-2'}}</span>
+                                        <span id="lossWithoutBet" class="win" style="display: none;"></span>
+                                        <span id="withBet" *ngIf="market.newpnl"
+                                            [ngClass]="getPnl2Class(runner,market.newpnl)"
+                                            style="display: inline-flex;">
+                                            {{getPnlValue(runner,market.newpnl) | number:'1.2-2'}}</span>
+                                        <span id="lossWithBet" class="win" style="display: none;"></span>
+                                        <span id="zeroProfit" class="win" style="display: none;"></span>
+                                        <span id="zeroLiability" class="win" style="display: none;"></span>
+                                        <span id="zeroProfitWithBet" class="win" style="display: none;"></span>
+                                        <span id="zeroLiabilityWithBet" class="win" style="display: none;"></span>
+                                    </th>
+                                    <td id="suspend" colspan="6" class="suspend" *ngIf="market.Status!='OPEN'">
+                                        <span>{{market.Status}}</span>
+                                    </td>
+
+                                    <td id="back_3" class="back-3" *ngIf="market.Status=='OPEN'"
+                                        (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToBack[2]?.price,'back',null,null,null,null,null,null)">
+                                        <a>{{runner.ExchangePrices?.AvailableToBack[2]?.price}}<span>{{runner.ExchangePrices?.AvailableToBack[2]?.size}}</span></a>
+                                    </td>
+                                    <td id="back_2" class="back-2" *ngIf="market.Status=='OPEN'"
+                                        (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToBack[1]?.price,'back',null,null,null,null,null,null)">
+                                        <a>{{runner.ExchangePrices?.AvailableToBack[1]?.price}}<span>{{runner.ExchangePrices?.AvailableToBack[1]?.size}}</span></a>
+                                    </td>
+                                    <td id="back_1" class="back-1" *ngIf="market.Status=='OPEN'"
+                                        (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToBack[0]?.price,'back',null,null,null,null,null,null)">
+                                        <a>{{runner.ExchangePrices?.AvailableToBack[0]?.price}}<span>{{runner.ExchangePrices?.AvailableToBack[0]?.size}}</span></a>
+                                    </td>
+                                    <td id="lay_1" class="lay-1" *ngIf="market.Status=='OPEN'"
+                                        (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToLay[0]?.price,'lay',null,null,null,null,null,null)">
+                                        <a>{{runner.ExchangePrices?.AvailableToLay[0]?.price}}<span>{{runner.ExchangePrices?.AvailableToLay[0]?.size}}</span></a>
+                                    </td>
+                                    <td id="lay_2" class="lay-2" *ngIf="market.Status=='OPEN'"
+                                        (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToLay[1]?.price,'lay',null,null,null,null,null,null)">
+                                        <a>{{runner.ExchangePrices?.AvailableToLay[1]?.price}}<span>{{runner.ExchangePrices?.AvailableToLay[1]?.size}}</span></a>
+                                    </td>
+                                    <td id="lay_3" class="lay-3" *ngIf="market.Status=='OPEN'"
+                                        (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToLay[2]?.price,'lay',null,null,null,null,null,null)">
+                                        <a>{{runner.ExchangePrices?.AvailableToLay[2]?.price}}<span>{{runner.ExchangePrices?.AvailableToLay[2]?.size}}</span></a>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </ng-container>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="match.BMmarket && match.isBookData">
+        <div id="bookMakerWrap" class="bets-wrap  bookmaker_bet" *ngIf="match.BMmarket.bm1">
+            <table id="bookMakerMarketList" class="bets bets-bookmaker">
+                <colgroup>
+                    <col span="1" width="280">
+                    <col span="1" width="70">
+                    <col span="1" width="70">
+                    <col span="1" width="70">
+                    <col span="1" width="70">
+                    <col span="1" width="70">
+                    <col span="1" width="70">
+                </colgroup>
+
+
+                <tbody id="bookMakerMarket_{{match.eventId}}_" style="display: table-row-group;">
+                    <tr id="bookMakerSpecialBet" class="special_bet">
+                        <td colspan="7">
+                            <h3>
+                                <a id="multiMarketPin"
+                                    [ngClass]="{'delete-pin':match.isBmMulti,'add-pin':!match.isBmMulti}"
+                                    title="{{match.isBmMulti?'Remove':'Add'}} to Multi Markets"
+                                    (click)="toggleFavourite(match,'bookmaker_'+match.eventId+'_'+match.BMmarket.bm1[0].mid)">Add
+                                    Pin</a>
+                                Bookmaker
+                                <p>| Zero Commission</p>
+                            </h3>
+                            <dl class="fancy-info">
+                                <dt><span>Min</span></dt>
+                                <dd id="min"> {{bmMin | number:'1.0-0'}}</dd>
+                                <dt><span>Max</span></dt>
+                                <dd id="max"> {{bmMax | number:'1.0-0'}}</dd>
+                                <dt id="rebateName" style="display: none;"><span>Rebate</span></dt>
+                                <dd id="rebate" style="display: none;"></dd>
+                            </dl>
+                        </td>
+                    </tr>
+                    <tr class="bet-all">
+                        <td colspan="3"></td>
+                        <!-- <td class="refer-bet"></td> -->
+                        <td>{{Update?.back}}</td>
+                        <td>{{Update?.lay}}</td>
+                        <td class="refer-book" colspan="2"></td>
+                    </tr>
+                    <ng-container *ngFor="let runner of match.BMmarket.bm1 | orderByBook; trackBy:trackByBookRunner">
+                        <tr id="bookMakerSuspend_{{match.eventId}}_{{runner.mid}}_{{runner.sid}}"
+                            class="fancy-suspend-tr" *ngIf="runner.s!='ACTIVE'">
+                            <th colspan=""></th>
+                            <td class="fancy-suspend-td" colspan="6">
+                                <div id="suspendClass" class="fancy-suspend"><span class="info">{{runner.s}}</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <ng-container *ngIf="openBet">
+                            <tr id="delayBetting_{{match.eventId}}_{{runner.mid}}_{{runner.sid}}"
+                                class="fancy-suspend-tr"
+                                *ngIf="showLoader && openBet.runnerName==runner.nat && openBet.mtype=='book'">
+                                <th></th>
+                                <td colspan="2"></td>
+                                <td class="fancy-suspend-td" colspan="2">
+                                    <div class="fancy-suspend"><span class="info"></span></div>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                        </ng-container>
+                        <tr id="bookMakerSelection_{{match.eventId}}_{{runner.mid}}_{{runner.sid}}"
+                            style="display: table-row;">
+                            <th class="predict">
+                                <p id="runnerName">{{runner.nat}}</p>
+                                <span id="before" *ngIf="!match.BMmarket.newpnl"
+                                    [ngClass]="getPnlClass(runner,match.BMmarket.pnl)">
+                                    {{getPnlValue(runner,match.BMmarket.pnl) | number:'1.2-2'}}</span>
+                                <span id="after" *ngIf="match.BMmarket.newpnl"
+                                    [ngClass]="getPnl2Class(runner,match.BMmarket.newpnl)">
+                                    {{getPnlValue(runner,match.BMmarket.newpnl) | number:'1.2-2'}}</span>
+                            </th>
+                            <td class="" colspan="3">
+                                <dl class="back-gradient">
+                                    <dd id="back_3" style="cursor: pointer">
+                                        <p></p>
+                                    </dd>
+                                    <dd id="back_2" style="cursor: pointer">
+                                        <p></p>
+                                    </dd>
+                                    <dd id="back_1" style="cursor: pointer"
+                                        (click)="(runner.s=='ACTIVE' && runner.b1!='0')?OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,runner.mid,runner.sid,match.eventName,runner.mname,match.inplay,runner.nat,runner.b1,'back',null,null,null,'bm_'+runner.mid,runner.sid,runner.mname):''">
+                                        <a>{{runner.b1.replace('.00','')}}</a>
+                                    </dd>
+                                </dl>
+                            </td>
+                            <td class="" colspan="3">
+                                <dl class="lay-gradient">
+                                    <dd id="lay_1" style="cursor: pointer"
+                                        (click)="(runner.s=='ACTIVE' && runner.l1!='0')?OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,runner.mid,runner.sid,match.eventName,runner.mname,match.inplay,runner.nat,runner.l1,'lay',null,null,null,'bm_'+runner.mid,runner.sid,runner.mname):''">
+                                        <a>{{runner.l1.replace('.00','')}}</a>
+                                    </dd>
+                                    <dd id="lay_2" style="cursor: pointer">
+                                        <p></p>
+                                    </dd>
+                                    <dd id="lay_3" style="cursor: pointer">
+                                        <p></p>
+                                    </dd>
+                                </dl>
+                            </td>
+                        </tr>
+                        <ng-container *ngIf="openBet">
+                            <tr id="bookMakerBetBar_{{match.eventId}}_{{runner.mid}}_{{runner.sid}}"
+                                class="fancy-quick-tr"
+                                *ngIf="showLoader && openBet.runnerName==runner.nat && openBet.mtype=='book'">
+                                <td colspan="7">
+                                    <dl class="quick_bet-wrap quick_bet-progress">
+                                        <dd id="progressBar" class="progress-bar" style="width: 100%;"></dd>
+                                        <dd class="progress-bar-txt">Placing your bets, Please wait
+                                            <!-- <span id="secRemain">0 sec remaining…</span> -->
+                                        </dd>
+                                    </dl>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        <ng-container *ngIf="msgData">
+                            <tr id="bookMakerBetMessage_{{runner.mid}}_{{runner.sid}}" class="fancy-quick-tr"
+                                *ngIf="!showLoader && msgData.runnerName==runner.nat && msgData.mtype=='book'">
+                                <td colspan="7">
+                                    <dl id="classWrap" class="quick_bet-wrap quick_bet-message {{status}}">
+                                        <dd class="info">
+                                            <strong id="header">{{!msgData.msg?msgData:msgData.msg}}</strong>
+                                            <a id="close" class="btn-close" style="cursor:pointer;"
+                                                (click)="removeMsg()">Close</a>
+                                        </dd>
+                                    </dl>
+                                </td>
+                            </tr>
+                        </ng-container>
+
+                        <ng-container *ngIf="openBet && !showLoader">
+
+                            <tr id="bookMakerBetBoard{{match.eventId}}_{{runner.mid}}_{{runner.sid}}"
+                                class="fancy-quick-tr" style="display: table-row;"
+                                *ngIf="openBet.runnerName==runner.nat && openBet.mtype=='book'">
+                                <td colspan="7">
+                                    <form [formGroup]="OpenBetForm" (ngSubmit)="BetSubmit()">
+                                        <dl id="classWrap" class="quick_bet-wrap slip-{{f.backlay.value}}">
+                                            <dt id="bookMakerBetHeader" class="">
+
+                                                <span id="bookMakerBetAcceptCheck" class="bet-check"
+                                                    style="display: none;">
+                                                    <input id="bookMakerBetAcceptAnyOdds" type="checkbox">
+                                                    <label for="bookMakerBetAcceptAnyOdds">Accept Any Odds</label>
+                                                </span>
+
+                                            </dt>
+                                            <dd class="col-btn"><a id="cancel" class="btn" style="cursor:pointer;"
+                                                    (click)="ClearAllSelection();">Cancel</a>
+                                            </dd>
+                                            <dd id="oddsHeader" class="col-odd">
+                                                <ul class="quick-bet-confirm">
+                                                    <li id="odds">{{f.odds.value}}</li>
+                                                </ul>
+                                            </dd>
+                                            <dd class="col-stake">
+                                                <input id="inputStake" type="text" value="" formControlName="stake"
+                                                    numberOnly>
+                                            </dd>
+                                            <dd class="col-send">
+                                                <a id="placeBet" class="btn-send" style="cursor:pointer;"
+                                                    (click)="!f.odds.value || !f.stake.value?'':BetSubmit()"
+                                                    [ngClass]="{'disable':!f.odds.value || !f.stake.value}">Place
+                                                    Bets</a>
+                                            </dd>
+                                            <dd id="stakePopupList" class="col-stake_list" style="display: block;">
+                                                <ul>
+                                                    <ng-container *ngFor="let stake of stakeSetting;let index=index;">
+                                                        <li *ngIf="index<6">
+                                                            <a class="btn" id="selectStake_{{index}}"
+                                                                stake="{{stakeSetting[index]}}" style="cursor:pointer;"
+                                                                (click)="addStake(stake);">{{stakeSetting[index]}}</a>
+                                                        </li>
+                                                    </ng-container>
+
+                                                </ul>
+                                                <p id="totalStakeP" style="display: none;">Total Stake: <strong
+                                                        id="totalStake"></strong></p>
+                                            </dd>
+                                        </dl>
+                                    </form>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="match.Fancymarket && !isSportBook && match.isFancyData">
+        <div id="fancyBetPosition" style="display: none;"></div>
+        <div id="fancyBetTable_{{match.eventTypeId}}" class="bets-wrap fancy_bet" name="multiMarketItem"
+            *ngIf="match.Fancymarket.length>0">
+
+            <div id="fancyBetHead" class="fancy-head">
+                <h4 class="in-play">
+                    <!-- a id="multiMarketPin" class="add-pin" name="te" style="cursor: pointer" title="Add to Multi Markets"></a-->
+                    <span id="headerName">Fancy Bet</span>
+
+                    <a class="btn-fancybet_rules" (click)="showFancyRules(match)"></a>
+
+                </h4>
+                <a id="showSportsBookBtn" class="other-tab" (click)="activeSportsBook(true)"
+                    *ngIf="match.sportsBookMarket">
+                    <span class="tag-new tag-news">New</span>
+                    Premium Cricket
+                </a>
+            </div>
+
+            <div id="fancyBetTabWrap" class="fancy_bet_tab-wrap" style="display: none;">
+                <ul class="special_bets-tab">
+                    <li class="select"><a fancybettabtype="1">All</a></li>
+                    <li><a fancybettabtype="2">Fancy</a></li>
+                    <li><a fancybettabtype="3">Khadda</a></li>
+                    <li><a fancybettabtype="4">Lottery</a></li>
+                    <li><a fancybettabtype="5">Odd/Even</a></li>
+                </ul>
+            </div>
+
+            <p id="fancyBetNoBet" class="no_bet" style="display: none;">has no markets</p>
+
+            <table id="fancyBetMarketList" class="bets">
+                <colgroup>
+                    <col span="1" width="280">
+                    <col span="1" width="70">
+                    <col span="1" width="70">
+                    <col span="1" width="70">
+                    <col span="1" width="70">
+                    <col span="1" width="70">
+                    <col span="1" width="70">
+                </colgroup>
+                <tbody>
+                    <tr id="fancyBetSpecialBet" class="special_bet">
+                        <td colspan="7">
+                            <h3>
+                                <a id="multiMarketPin"
+                                    [ngClass]="{'delete-pin':match.isFancyMulti,'add-pin':!match.isFancyMulti}"
+                                    title="{{match.isFancyMulti?'Remove':'Add'}} to Multi Markets"
+                                    (click)="toggleFavourite(match,'fancy_'+match.eventId+'_'+match.Fancymarket[0].mid)">Add
+                                    Pin</a>
+                                Fancy Bet
+                            </h3>
+                        </td>
+                    </tr>
+                    <tr class="bet-all">
+                        <td></td>
+                        <td class="refer-bet" colspan="2"></td>
+                        <td>{{Update?.no}}</td>
+                        <td>{{Update?.yes}}</td>
+                        <td class="refer-book" colspan="2"></td>
+                    </tr>
+                    <ng-container
+                        *ngFor="let fancy of match.Fancymarket | orderByFancy:fSource; trackBy:trackByFancy;let isFirst=first">
+                        <tr id="suspend_{{fancy.sid}}" class="fancy-suspend-tr" *ngIf="fancy.gstatus!=''">
+                            <th></th>
+                            <td colspan="2"></td>
+                            <td class="fancy-suspend-td" colspan="2">
+                                <div id="suspendClass" class="fancy-suspend"><span class="info">{{fancy.gstatus}}</span>
+                                </div>
+                            </td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <ng-container *ngIf="openBet">
+                            <tr id="delayBetting_{{fancy.sid}}" class="fancy-suspend-tr"
+                                *ngIf="showLoader && openBet.runnerName==fancy.nat && openBet.mtype=='fancy'">
+                                <th></th>
+                                <td colspan="2"></td>
+                                <td class="fancy-suspend-td" colspan="2">
+                                    <div class="fancy-suspend"><span class="info"></span></div>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                        </ng-container>
+                        <tr id="fancyBetMarket_{{fancy.sid}}">
+                            <th colspan="3">
+                                <dl class="fancy-th-layout">
+                                    <dt>
+                                        <p id="marketName">{{fancy.nat}}</p>
+                                        <span id="before"
+                                            [ngClass]="{'win': fancy.pnl >= 0, 'lose': fancy.pnl < 0}">{{fancy.pnl |
+                                            number:'1.2-2'}}</span>
+                                        <span id="after" class="to-lose" style="display: none;"></span>
+                                    </dt>
+                                    <dd class="dd-tips">
+                                        <ul class="fancy-tips">
+                                            <li id="remarkFirstRow" style="display: none;"></li>
+                                            <li id="remarkSecondRow" style="display: none;"></li>
+                                        </ul>
+                                        <a id="fancyBetBookBtn" class="btn-book" *ngIf="fancy.pnl"
+                                            (click)="getFancyBook(fancy)">Book</a>
+                                    </dd>
+                                </dl>
+                            </th>
+                            <td id="lay_1" class="lay-1"
+                                (click)="fancy.gstatus!=''?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,fancy.mid,fancy.sid,match.eventName,null,match.inplay,fancy.nat,null,'lay',fancy.l1,fancy.ls1,fancy.sid,null,null,null)">
+                                <a id="runsInfo" style="cursor: pointer">{{fancy.l1 | number}}<span>{{fancy.ls1 |
+                                        number}}</span></a>
+                            </td>
+                            <td id="back_1" class="back-1"
+                                (click)="fancy.gstatus!=''?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,fancy.mid,fancy.sid,match.eventName,null,match.inplay,fancy.nat,null,'back',fancy.b1,fancy.bs1,fancy.sid,null,null,null)">
+                                <a id="runsInfo" style="cursor: pointer">{{fancy.b1 | number}}<span>{{fancy.bs1 |
+                                        number}}</span></a>
+                            </td>
+                            <td class="td-fancy_merge" colspan="2">
+                                <dl class="fancy-info">
+                                    <dt>Min/Max</dt>
+                                    <dd id="minMax"> {{fMin}} / {{fMax}}</dd>
+                                </dl>
+                                <dl class="fancy-info">
+                                    <dt id="rebateName" style="display: none;">Rebate</dt>
+                                    <dd id="rebate" style="display: none;"></dd>
+                                </dl>
+                            </td>
+                        </tr>
+                        <ng-container *ngIf="openBet">
+                            <tr id="fancyBetBar_{{match.eventId}}_{{fancy.sid}}" class="fancy-quick-tr"
+                                *ngIf="showLoader && openBet.runnerName==fancy.nat && openBet.mtype=='fancy'">
+                                <td colspan="7">
+                                    <dl class="quick_bet-wrap quick_bet-progress">
+                                        <dd id="progressBar" class="progress-bar" style="width: 100%;"></dd>
+                                        <dd class="progress-bar-txt">Placing your bets, Please wait
+                                            <!-- <span id="secRemain">0 sec remaining…</span> -->
+                                        </dd>
+                                    </dl>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        <ng-container *ngIf="msgData">
+                            <tr id="fancyBetMessage_{{fancy.sid}}" class="fancy-quick-tr"
+                                *ngIf="!showLoader && msgData.runnerName==fancy.nat && msgData.mtype=='fancy'">
+                                <td colspan="7">
+                                    <dl id="classWrap" class="quick_bet-wrap quick_bet-message {{status}}">
+                                        <dd class="info">
+                                            <strong id="header">{{!msgData.msg?msgData:msgData.msg}}</strong>
+                                            <a id="close" class="btn-close" style="cursor:pointer;"
+                                                (click)="removeMsg()">Close</a>
+                                        </dd>
+                                    </dl>
+                                </td>
+                            </tr>
+                        </ng-container>
+
+                        <ng-container *ngIf="openBet && fancy.gstatus=='' && !showLoader">
+
+                            <tr id="fancyBetBoard_{{match.eventId}}_{{match.eventId}}_{{fancy.sid}}"
+                                class="fancy-quick-tr" style="display: table-row;"
+                                *ngIf="openBet.runnerName==fancy.nat && openBet.mtype=='fancy'">
+                                <td colspan="7">
+                                    <form [formGroup]="OpenBetForm" (ngSubmit)="BetSubmit()">
+                                        <dl id="classWrap" class="quick_bet-wrap slip-{{f.backlay.value}}">
+                                            <dt id="fancyBetHeader" class="">
+
+                                                <span id="fancyBetAcceptCheck" class="bet-check" style="display: none;">
+                                                    <input id="fancyBetAcceptAnyOdds" type="checkbox">
+                                                    <label for="fancyBetAcceptAnyOdds">Accept Any Odds</label>
+                                                </span>
+
+                                            </dt>
+                                            <dd class="col-btn"><a id="cancel" class="btn" style="cursor:pointer;"
+                                                    (click)="ClearAllSelection();">Cancel</a>
+                                            </dd>
+                                            <dd id="oddsHeader" class="col-odd">
+                                                <ul class="quick-bet-confirm">
+                                                    <li id="runs">{{f.score.value}}</li>
+                                                    <li id="odds" class="quick-bet-confirm-title">{{f.rate.value}}</li>
+                                                </ul>
+                                            </dd>
+                                            <dd class="col-stake">
+                                                <input id="inputStake" type="text" value="" formControlName="stake"
+                                                    numberOnly>
+                                            </dd>
+                                            <dd class="col-send">
+                                                <a id="placeBet" class="btn-send" style="cursor:pointer;"
+                                                    (click)="!f.score.value || !f.stake.value?'':BetSubmit()"
+                                                    [ngClass]="{'disable':!f.score.value || !f.stake.value}">Place
+                                                    Bets</a>
+                                            </dd>
+                                            <dd id="stakePopupList" class="col-stake_list" style="display: block;">
+                                                <ul>
+                                                    <ng-container *ngFor="let stake of stakeSetting;let index=index;">
+                                                        <li *ngIf="index<6">
+                                                            <a class="btn" id="selectStake_{{index}}"
+                                                                stake="{{stakeSetting[index]}}" style="cursor:pointer;"
+                                                                (click)="addStake(stake);">{{stakeSetting[index]}}</a>
+                                                        </li>
+                                                    </ng-container>
+
+                                                </ul>
+                                                <p id="totalStakeP" style="display: none;">Total Stake: <strong
+                                                        id="totalStake"></strong></p>
+                                            </dd>
+                                        </dl>
+                                    </form>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="match.sportsBookMarket && isSportBook">
+        <div id="sportsBookWrap" class="bets-wrap sportsbook_bet" style="display: block;">
+
+            <!-- Sportsbook bet head start -->
+            <div id="sportsBookHead" class="sportsbook-head">
+                <h4 class="in-play">
+                    <span id="sportsBookName">Premium {{match.sportsName | titlecase}}</span>
+                    <a id="sportsBookRules" class="btn-sportsbook_rules" (click)="showpremiumRules()">Rules</a>
+                </h4>
+                <a id="showFancyBetBtn" class="other-tab" *ngIf="match.Fancymarket.length>0"
+                    (click)="activeSportsBook(false)">Fancy Bet</a>
+                <div id="sportsBookRulesWrap_2" class="rules-wrap" *ngIf="match.eventTypeId==4">
+                    <h3 id="sportsbookRulesTitle">Rules of Premium Cricket</h3>
+                    <div id="sportradarCricketRules" class="rules-content">
+                        <dl class="download-list">
+                            <dt class="icon-pdf"><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=1rkKwnG8Sv09iANXNYriOXOm0e0wjoQqf', '_blank', config = 'location=no'));">Pre
+                                    Match Market Details</a></dt>
+                            <dd><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=1rkKwnG8Sv09iANXNYriOXOm0e0wjoQqf', '_blank', config = 'location=no'));">download</a>
+                            </dd>
+                        </dl>
+                        <dl class="download-list">
+                            <dt class="icon-pdf"><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=13rBX3LjmSfNNKPbCyCxkqnvHZPdmIgLf', '_blank', config = 'location=no'));">In
+                                    Play Market Details</a></dt>
+                            <dd><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=13rBX3LjmSfNNKPbCyCxkqnvHZPdmIgLf', '_blank', config = 'location=no'));">download</a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div id="sportradarTennisRules" class="rules-content" style="display: none;">
+                        <p>General Rules:</p>
+                        <ol>
+                            <li>In case of default, retirement or walkover of any player, all undecided bets are
+                                considered void.</li>
+                            <li>In case of any delay (rain, darkness…) all markets remain unsettled and the trading will
+                                be continued as soon as the match
+                                continues.
+                            </li>
+                            <li>If penalty point(s) are awarded by the umpire, all bets on that game will stand.</li>
+                            <li>In case of a match is finished before certain points/games were finished, all affected
+                                point/game related markets are
+                                considered void.
+                            </li>
+                        </ol>
+                        <p>Settlement and Cancellation Rules:</p>
+                        <ol>
+                            <li>If markets remain open with an incorrect score which has a significant impact on the
+                                prices, we reserve the right to void
+                                betting.
+                            </li>
+                            <li>If the players/teams are displayed incorrectly, we reserve the right to void betting.
+                            </li>
+                            <li>If a player retires all undecided markets are considered void.</li>
+                            <li>If a match tie-break is played as a deciding set in Bo3 format, it will be considered as
+                                the 3rd set</li>
+                            <li>Every tie-break or Match tie-break counts as 1 game</li>
+                        </ol>
+                    </div>
+                    <div id="sportradarSoccerRules" class="rules-content" style="display: none;">
+                        <dl class="download-list">
+                            <dt class="icon-pdf"><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=1ixfrIZd5ApPrs6Qe9lDny0ONb6SroRNi', '_blank', config = 'location=no'));">Market
+                                    Details</a></dt>
+                            <dd><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=1ixfrIZd5ApPrs6Qe9lDny0ONb6SroRNi', '_blank', config = 'location=no'));">download</a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div id="sportradarKabaddiRules" class="rules-content" style="display: none;">
+                    </div>
+                    <ul class="btn-wrap break">
+                        <li><a (click)="hidepremiumRules()" class="btn">OK</a></li>
+                    </ul>
+                </div>
+                <div id="sportsBookRulesWrap_2" class="rules-wrap" *ngIf="match.eventTypeId==1">
+                    <h3 id="sportsbookRulesTitle">Rules of Premium Soccer</h3>
+                    <div id="sportradarCricketRules" class="rules-content" style="display: none;">
+                        <dl class="download-list">
+                            <dt class="icon-pdf"><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=1rkKwnG8Sv09iANXNYriOXOm0e0wjoQqf', '_blank', config = 'location=no'));">Pre
+                                    Match Market Details</a></dt>
+                            <dd><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=1rkKwnG8Sv09iANXNYriOXOm0e0wjoQqf', '_blank', config = 'location=no'));">download</a>
+                            </dd>
+                        </dl>
+                        <dl class="download-list">
+                            <dt class="icon-pdf"><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=13rBX3LjmSfNNKPbCyCxkqnvHZPdmIgLf', '_blank', config = 'location=no'));">In
+                                    Play Market Details</a></dt>
+                            <dd><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=13rBX3LjmSfNNKPbCyCxkqnvHZPdmIgLf', '_blank', config = 'location=no'));">download</a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div id="sportradarTennisRules" class="rules-content" style="display: none;">
+                        <p>General Rules:</p>
+                        <ol>
+                            <li>In case of default, retirement or walkover of any player, all undecided bets are
+                                considered void.</li>
+                            <li>In case of any delay (rain, darkness…) all markets remain unsettled and the trading will
+                                be continued as soon as the match
+                                continues.
+                            </li>
+                            <li>If penalty point(s) are awarded by the umpire, all bets on that game will stand.</li>
+                            <li>In case of a match is finished before certain points/games were finished, all affected
+                                point/game related markets are
+                                considered void.
+                            </li>
+                        </ol>
+                        <p>Settlement and Cancellation Rules:</p>
+                        <ol>
+                            <li>If markets remain open with an incorrect score which has a significant impact on the
+                                prices, we reserve the right to void
+                                betting.
+                            </li>
+                            <li>If the players/teams are displayed incorrectly, we reserve the right to void betting.
+                            </li>
+                            <li>If a player retires all undecided markets are considered void.</li>
+                            <li>If a match tie-break is played as a deciding set in Bo3 format, it will be considered as
+                                the 3rd set</li>
+                            <li>Every tie-break or Match tie-break counts as 1 game</li>
+                        </ol>
+                    </div>
+                    <div id="sportradarSoccerRules" class="rules-content">
+                        <dl class="download-list">
+                            <dt class="icon-pdf"><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=1ixfrIZd5ApPrs6Qe9lDny0ONb6SroRNi', '_blank', config = 'location=no'));">Market
+                                    Details</a></dt>
+                            <dd><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=1ixfrIZd5ApPrs6Qe9lDny0ONb6SroRNi', '_blank', config = 'location=no'));">download</a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div id="sportradarKabaddiRules" class="rules-content" style="display: none;">
+                    </div>
+                    <ul class="btn-wrap break">
+                        <li><a (click)="hidepremiumRules()" class="btn">OK</a></li>
+                    </ul>
+                </div>
+                <div id="sportsBookRulesWrap_2" class="rules-wrap" *ngIf="match.eventTypeId==2">
+                    <h3 id="sportsbookRulesTitle">Rules of Premium Tennis</h3>
+                    <div id="sportradarCricketRules" class="rules-content" style="display: none;">
+                        <dl class="download-list">
+                            <dt class="icon-pdf"><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=1rkKwnG8Sv09iANXNYriOXOm0e0wjoQqf', '_blank', config = 'location=no'));">Pre
+                                    Match Market Details</a></dt>
+                            <dd><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=1rkKwnG8Sv09iANXNYriOXOm0e0wjoQqf', '_blank', config = 'location=no'));">download</a>
+                            </dd>
+                        </dl>
+                        <dl class="download-list">
+                            <dt class="icon-pdf"><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=13rBX3LjmSfNNKPbCyCxkqnvHZPdmIgLf', '_blank', config = 'location=no'));">In
+                                    Play Market Details</a></dt>
+                            <dd><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=13rBX3LjmSfNNKPbCyCxkqnvHZPdmIgLf', '_blank', config = 'location=no'));">download</a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div id="sportradarTennisRules" class="rules-content">
+                        <p>General Rules:</p>
+                        <ol>
+                            <li>In case of default, retirement or walkover of any player, all undecided bets are
+                                considered void.</li>
+                            <li>In case of any delay (rain, darkness…) all markets remain unsettled and the trading will
+                                be continued as soon as the match
+                                continues.
+                            </li>
+                            <li>If penalty point(s) are awarded by the umpire, all bets on that game will stand.</li>
+                            <li>In case of a match is finished before certain points/games were finished, all affected
+                                point/game related markets are
+                                considered void.
+                            </li>
+                        </ol>
+                        <p>Settlement and Cancellation Rules:</p>
+                        <ol>
+                            <li>If markets remain open with an incorrect score which has a significant impact on the
+                                prices, we reserve the right to void
+                                betting.
+                            </li>
+                            <li>If the players/teams are displayed incorrectly, we reserve the right to void betting.
+                            </li>
+                            <li>If a player retires all undecided markets are considered void.</li>
+                            <li>If a match tie-break is played as a deciding set in Bo3 format, it will be considered as
+                                the 3rd set</li>
+                            <li>Every tie-break or Match tie-break counts as 1 game</li>
+                        </ol>
+                    </div>
+                    <div id="sportradarSoccerRules" class="rules-content" style="display: none;">
+                        <dl class="download-list">
+                            <dt class="icon-pdf"><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=1ixfrIZd5ApPrs6Qe9lDny0ONb6SroRNi', '_blank', config = 'location=no'));">Market
+                                    Details</a></dt>
+                            <dd><a
+                                    href="javascript: void(window.open('https://drive.google.com/open?id=1ixfrIZd5ApPrs6Qe9lDny0ONb6SroRNi', '_blank', config = 'location=no'));">download</a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div id="sportradarKabaddiRules" class="rules-content" style="display: none;">
+                    </div>
+                    <ul class="btn-wrap break">
+                        <li><a (click)="hidepremiumRules()" class="btn">OK</a></li>
+                    </ul>
+                </div>
+                <dl id="minMaxWrap_1" class="fancy-info" style="display: none">
+                    <dt><span>Min/Max</span></dt>
+                    <dd id="minMaxInfo_1">0</dd>
+                    <dt id="rebateName_1">Rebate</dt>
+                    <dd id="rebateRatio_1">0.00%</dd>
+                </dl>
+                <dl id="minMaxWrap_2" class="fancy-info">
+                    <ng-container *ngIf="siteName!='cricbuzzer' || siteName != 'cricbuzzerlive'">
+                        <dt><span>Min</span></dt>
+                        <dd id="minMaxInfo_2"> 10.00</dd>
+                    </ng-container>
+                    <ng-container *ngIf="siteName=='cricbuzzer' || siteName == 'cricbuzzerlive' ">
+                        <dt><span>Min / Max</span></dt>
+                        <dd id="minMax"> {{pMin}} / {{pMax}}</dd>
+                    </ng-container>
+                    <dt id="rebateName_2" style="display: none;">Rebate</dt>
+                    <dd id="rebateRatio_2" style="display: none;">0.00%</dd>
+                </dl>
+            </div>
+
+            <div id="sportsBookTab_2_4" class="special_bets-tab-wrap">
+                <ul class="special_bets-tab">
+                    <li><a id="tab_All">All</a></li>
+                    <li><a id="tab_Popular">Popular</a></li>
+                    <li><a id="tab_Match">Match</a></li>
+                    <li><a id="tab_Innings">Innings</a></li>
+                    <li><a id="tab_Over">Over</a></li>
+                    <li class="tab_more_drop">
+                        <a id="moreDropBtn">More</a>
+                        <ul id="moreDropList" class="more_drop-list">
+                            <li><a id="tab_Batsman">Batsman</a></li>
+                            <li><a id="tab_Partnership">Partnership</a></li>
+                            <li><a id="tab_Group">Group</a></li>
+                            <li><a id="tab_Range">Range</a></li>
+                            <li><a id="tab_HeadtoHead">Head-to-Head</a></li>
+                            <li><a id="tab_Player">Player</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Sportsbook bet head end -->
+            <table id="sportsBookMarket_2_1997739_126701310" class="bets" [ngClass]="{'close':sportBook.isExpand==0}"
+                *ngFor="let sportBook of match.sportsBookMarket; trackBy:trackBySportBook;let isFirst=first"
+                style="display: table;">
+                <colgroup>
+                    <col span="1" width="280">
+                    <col span="1" width="70">
+                    <col span="1" width="70">
+                    <col span="1" width="70">
+                    <col span="1" width="70">
+                    <col span="1" width="70">
+                    <col span="1" width="70">
+                </colgroup>
+                <tbody>
+                    <tr class="colgroup-adjust">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="special_bet">
+                        <td colspan="7">
+                            <h3 id="marketHeader">
+                                <a id="multiMarketPin"
+                                    [ngClass]="{'delete-pin':sportBook.isMulti,'add-pin':!sportBook.isMulti}"
+                                    title="{{sportBook.isMulti?'Remove':'Add'}} to Multi Markets"
+                                    (click)="toggleFavourite(match,'premium_'+match.eventId+'_'+sportBook.id)">Add
+                                    Pin</a>
+                                <a id="marketName" class="to-expand"
+                                    (click)="OpneClosePreMarkets(sportBook)">{{sportBook.marketName}}</a>
+                            </h3>
+                        </td>
+                    </tr>
+                    <ng-container *ngIf="sportBook.isExpand==1">
+                        <ng-container
+                            *ngFor="let selection of sportBook.sportsBookSelection; trackBy:trackBySportBook;">
+                            <tr id="sportsBookSuspend_{{sportBook.betfairEventId}}_{{selection.id}}"
+                                class="fancy-suspend-tr" style="display: none;" eventid="1997739"
+                                isactive="{{selection.isActive}}" status="1" *ngIf="selection.isActive==1">
+                                <th colspan="3"></th>
+                                <td class="fancy-suspend-td" colspan="2">
+                                    <div id="suspendClass" class="fancy-suspend-white"><span>Suspend</span></div>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr id="sportsBookSuspend_{{sportBook.betfairEventId}}_{{selection.id}}"
+                                class="fancy-suspend-tr" eventid="1997739" isactive="{{selection.isActive}}" status="1"
+                                *ngIf="(sportBook.marketStatus==2 || sportBook.marketStatus==3) && sportBook.marketStatus!=4">
+                                <th colspan="3"></th>
+                                <td class="fancy-suspend-td" colspan="2">
+                                    <div id="suspendClass" class="fancy-suspend-white"><span>Ball Run</span></div>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr id="sportsBookSelection_{{sportBook.betfairEventId}}_{{selection.id}}"
+                                style="display: table-row;" isactive="{{selection.isActive}}" status="1"
+                                *ngIf="selection.isActive==1">
+                                <th class="" colspan="3">
+                                    <dl class="fancy-th-layout">
+                                        <dt>
+                                            <p id="selectionName">{{selection.selectionName}}</p>
+                                            <span id="after" *ngIf="!sportBook.newpnl"
+                                                [ngClass]="getPnlClass(selection,sportBook.pnl)">
+                                                {{getPnlValue(selection,sportBook.pnl) | number:'1.2-2'}}</span>
+                                            <span id="before" class="win" style="display: none;"></span>
+                                            <span id="after" class="to-lose" style="display: none;"></span>
+                                        </dt>
+                                    </dl>
+                                </th>
+                                <td id="back_1" class="back-1 no-liq" colspan="2"
+                                    (click)="selection.isActive!=1?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,selection.marketId,selection.id,match.eventName,sportBook.marketName,match.inplay,selection.selectionName,selection.odds,'back',null,null,null,null,null,null,'premium')">
+                                    <a id="info">{{selection.odds}}</a>
+                                </td>
+                                <td class="refer-book" colspan="2"></td>
+                            </tr>
+                            <ng-container *ngIf="openBet">
+                                <tr id="sportsBookBetBar_{{sportBook.betfairEventId}}_{{selection.id}}"
+                                    class="fancy-quick-tr"
+                                    *ngIf="showLoader && openBet.SelectionId==selection.id && openBet.mtype=='premium'">
+                                    <td colspan="7">
+                                        <dl class="quick_bet-wrap quick_bet-progress">
+                                            <dd id="progressBar" class="progress-bar" style="width: 100%;"></dd>
+                                            <dd class="progress-bar-txt">Placing your bets, Please wait
+                                                <!-- <span id="secRemain">0 sec remaining…</span> -->
+                                            </dd>
+                                        </dl>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                            <ng-container *ngIf="msgData">
+                                <tr id="sportsBookBetMessage_{{selection.id}}" class="fancy-quick-tr"
+                                    *ngIf="!showLoader && msgData.selId==selection.id && msgData.mtype=='premium'">
+                                    <td colspan="7">
+                                        <dl id="classWrap" class="quick_bet-wrap quick_bet-message {{status}}">
+                                            <dd class="info">
+                                                <strong id="header">{{!msgData.msg?msgData:msgData.msg}}</strong>
+                                                <a id="close" class="btn-close" style="cursor:pointer;"
+                                                    (click)="removeMsg()">Close</a>
+                                            </dd>
+                                        </dl>
+                                    </td>
+                                </tr>
+                            </ng-container>
+
+                            <ng-container *ngIf="openBet && !showLoader">
+
+                                <tr id="sportsBookBetBoard_{{sportBook.betfairEventId}}_{{match.eventId}}_{{selection.id}}"
+                                    class="fancy-quick-tr" style="display: table-row;"
+                                    *ngIf="openBet.SelectionId==selection.id && openBet.mtype=='premium'">
+                                    <td colspan="7">
+                                        <form [formGroup]="OpenBetForm" (ngSubmit)="BetSubmit()">
+                                            <dl id="classWrap" class="quick_bet-wrap slip-{{f.backlay.value}}">
+                                                <dt id="fancyBetHeader" class="">
+
+                                                    <span id="fancyBetAcceptCheck" class="bet-check"
+                                                        style="display: none;">
+                                                        <input id="fancyBetAcceptAnyOdds" type="checkbox">
+                                                        <label for="fancyBetAcceptAnyOdds">Accept Any Odds</label>
+                                                    </span>
+
+                                                </dt>
+                                                <dd class="col-btn"><a id="cancel" class="btn" style="cursor:pointer;"
+                                                        (click)="ClearAllSelection();">Cancel</a>
+                                                </dd>
+                                                <dd id="oddsHeader" class="col-odd">
+                                                    <ul class="quick-bet-confirm">
+                                                        <li id="odds">{{f.odds.value}}</li>
+                                                        <li class="quick-bet-confirm-title">odds</li>
+                                                    </ul>
+                                                </dd>
+                                                <dd class="col-stake">
+                                                    <input id="inputStake" type="text" value="" formControlName="stake"
+                                                        numberOnly>
+                                                </dd>
+                                                <dd class="col-send">
+                                                    <a id="placeBet" class="btn-send" style="cursor:pointer;"
+                                                        (click)="!f.odds.value || !f.stake.value?'':BetSubmit()"
+                                                        [ngClass]="{'disable':!f.odds.value || !f.stake.value}">Place
+                                                        Bets</a>
+                                                </dd>
+                                                <dd id="stakePopupList" class="col-stake_list" style="display: block;">
+                                                    <ul>
+                                                        <ng-container
+                                                            *ngFor="let stake of stakeSetting;let index=index;">
+                                                            <li *ngIf="index<6">
+                                                                <a class="btn" id="selectStake_{{index}}"
+                                                                    stake="{{stakeSetting[index]}}"
+                                                                    style="cursor:pointer;"
+                                                                    (click)="addStake(stake);">{{stakeSetting[index]}}</a>
+                                                            </li>
+                                                        </ng-container>
+
+                                                    </ul>
+                                                    <p id="totalStakeP" style="display: none;">Total Stake: <strong
+                                                            id="totalStake"></strong></p>
+                                                </dd>
+                                            </dl>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </ng-container>
+
+                        </ng-container>
+                    </ng-container>
+
+                </tbody>
+            </table>
+
+            <p id="sportsBookNoBet" class="no_bet" *ngIf="match.sportsBookMarket.length==0">has no Sports Book market
+            </p>
+
+
+
+        </div>
+    </ng-container>
+    <ng-container *ngIf="!match.isVir && !match.isRacing && match.isMarketData">
+        <ng-container *ngFor="let market of match.markets; trackBy:trackByMkt;index as index">
+            <div id="fullMarketBetsWrap_{{market.MarketId}}" class="bets-wrap cooldown1"
+                [ngClass]="{'cooldowns':market.isBettable}" *ngIf="index!=0">
+
+                <span id="selectionCounts" class="refer_only">{{market.Runners?.length}} selections -
+                    <b>{{market.marketName}}</b></span>
+
+                <table id="fullMarketBoard" class="bets" [ngClass]="{'disabled':!market.isBettable}">
+                    <tbody>
+                        <tr class="bet-all">
+                            <td></td>
+                            <td id="backPercent" class="refer-bet" colspan="2"></td>
+                            <td>
+                                <a id="backAll" class="back-all">
+                                    <img src="https://b2c.static112233.com/assets/images/transparent.gif">
+                                    <span>{{Update?.back}} {{Update?.all}}</span>
+                                </a>
+                            </td>
+                            <td>
+                                <a id="layAll" class="lay-all">
+                                    <img src="https://b2c.static112233.com/assets/images/transparent.gif">
+                                    <span>{{Update?.lay}} {{Update?.all}}</span>
+                                </a>
+                            </td>
+                            <td id="layPercent" class="refer-book" colspan="2"></td>
+                        </tr>
+                        <ng-container *ngIf="!match.isManualEvent && !market.removeMarket">
+                            <ng-container *ngFor="let runner of market.Runners; trackBy:trackByRunner">
+                                <tr id="selection_{{market.MarketId | removeSpace}}_{{runner.SelectionId}}"
+                                    style="display: table-row;">
+                                    <th [ngClass]="{'predict':market.pnl?.length>0 || market.newpnl}">
+
+                                        <p>
+                                            <a><img class="icon-predict"
+                                                    src="https://b2c.static112233.com/assets/images/transparent.gif"></a>
+                                            {{runner.runnerName}}
+                                        </p>
+                                        <span id="withoutBet" *ngIf="!market.newpnl && market.pnl?.length>0"
+                                            [ngClass]="getPnlClass(runner,market.pnl)" style="display: inline-flex;">
+                                            {{getPnlValue(runner,market.pnl) | number:'1.2-2'}}</span>
+                                        <span id="lossWithoutBet" class="win" style="display: none;"></span>
+                                        <span id="withBet" *ngIf="market.newpnl"
+                                            [ngClass]="getPnl2Class(runner,market.newpnl)"
+                                            style="display: inline-flex;">
+                                            {{getPnlValue(runner,market.newpnl) | number:'1.2-2'}}</span>
+                                        <span id="lossWithBet" class="win" style="display: none;"></span>
+                                        <span id="zeroProfit" class="win" style="display: none;"></span>
+                                        <span id="zeroLiability" class="win" style="display: none;"></span>
+                                        <span id="zeroProfitWithBet" class="win" style="display: none;"></span>
+                                        <span id="zeroLiabilityWithBet" class="win" style="display: none;"></span>
+                                    </th>
+                                    <td id="suspend" colspan="6" class="suspend" *ngIf="market.Status!='OPEN'">
+                                        <span>{{market.Status}}</span>
+                                    </td>
+
+                                    <td id="back_3" class="back-3" *ngIf="market.Status=='OPEN'"
+                                        (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToBack[2]?.price,'back',null,null,null,null,null,null)">
+                                        <a>{{runner.ExchangePrices?.AvailableToBack[2]?.price}}<span>{{runner.ExchangePrices?.AvailableToBack[2]?.size}}</span></a>
+                                    </td>
+                                    <td id="back_2" class="back-2" *ngIf="market.Status=='OPEN'"
+                                        (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToBack[1]?.price,'back',null,null,null,null,null,null)">
+                                        <a>{{runner.ExchangePrices?.AvailableToBack[1]?.price}}<span>{{runner.ExchangePrices?.AvailableToBack[1]?.size}}</span></a>
+                                    </td>
+                                    <td id="back_1" class="back-1" *ngIf="market.Status=='OPEN'"
+                                        (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToBack[0]?.price,'back',null,null,null,null,null,null)">
+                                        <a>{{runner.ExchangePrices?.AvailableToBack[0]?.price}}<span>{{runner.ExchangePrices?.AvailableToBack[0]?.size}}</span></a>
+                                    </td>
+                                    <td id="lay_1" class="lay-1" *ngIf="market.Status=='OPEN'"
+                                        (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToLay[0]?.price,'lay',null,null,null,null,null,null)">
+                                        <a>{{runner.ExchangePrices?.AvailableToLay[0]?.price}}<span>{{runner.ExchangePrices?.AvailableToLay[0]?.size}}</span></a>
+                                    </td>
+                                    <td id="lay_2" class="lay-2" *ngIf="market.Status=='OPEN'"
+                                        (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToLay[1]?.price,'lay',null,null,null,null,null,null)">
+                                        <a>{{runner.ExchangePrices?.AvailableToLay[1]?.price}}<span>{{runner.ExchangePrices?.AvailableToLay[1]?.size}}</span></a>
+                                    </td>
+                                    <td id="lay_3" class="lay-3" *ngIf="market.Status=='OPEN'"
+                                        (click)="!market.isBettable || market.Status!='OPEN'?'':OpenBetSlip($event,match.eventTypeId,match.competitionId,match.eventId,market.MarketId,runner.SelectionId,match.eventName,market.marketName,match.inplay,runner.runnerName,runner.ExchangePrices?.AvailableToLay[2]?.price,'lay',null,null,null,null,null,null)">
+                                        <a>{{runner.ExchangePrices?.AvailableToLay[2]?.price}}<span>{{runner.ExchangePrices?.AvailableToLay[2]?.size}}</span></a>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </ng-container>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </ng-container>
+    </ng-container>
+
+</div>
+
+<div id="tvError" class="overlay" style="display: none;">
+    <div class="dialog-wrap-w login_to_go" style=" height: auto;top: 35% !important;background-color: antiquewhite;">
+        <a style="cursor: pointer" class="close" (click)="closeLowBalance()" style="right: 6px"></a>
+        <div style="display: flex;">
+            <div class="depositblock dwblock scroll" style="width: 77%;">
+                <div style="padding: 20px 20px 12px 20px;">
+                    <h3 style="padding: 9px 0;">Insufficient balance to view live stream</h3>
+                    Deposit balance to continue watching and playing.
+                </div>
+                <div style="padding: 0px 48% 20px 20px;">
+                    <a class="btn-send" style="width: -webkit-fill-available;" (click)="gotoDeposit()">Deposit
+                        Balance</a>
+                </div>
+            </div>
+            <img style="height: 87px;align-self: center;float: right;"
+                src="https://b2c.static112233.com/assets/images/cricbuzzer/wallet.png">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,202 @@
+<h2>{{Update?.mybet}}</h2>
+<ul class="tab col3">
+    <li><a routerLink="/current_bets">{{Update?.currentbets}}</a></li>
+    <li><a class="select" routerLink="/bet_history">{{Update?.betshistory}}</a></li>
+
+    <li><a routerLink="/profit_loss">{{Update?.profitandloss}}</a></li>
+
+</ul>
+<ul class="report-tab-wrap" style="display:block">
+
+
+
+
+    <li class="report-tab " [ngClass]="{'select':stype==''}" id="reportType_exchange" (click)="changeSport('')" data-reporttabtype="0">
+        {{Update?.all}}
+    </li>
+    <li class="report-tab " [ngClass]="{'select':stype!='' && stype<'6'}" id="reportType_exchange" (click)="changeSport('0')" data-reporttabtype="0">
+        {{Update?.exchange}}
+    </li>
+    <li class="report-tab " [ngClass]="{'select':stype=='8'}" id="reportType_casino" (click)="changeSport('8')" data-reporttabtype="8">
+        {{Update?.casino}}
+    </li>
+    <li class="report-tab " [ngClass]="{'select':stype=='6'}" id="reportType_fancyBet" (click)="changeSport('6')" data-reporttabtype="6">
+        {{Update?.fancybet}}
+    </li>
+    <li class="report-tab " [ngClass]="{'select':stype=='7'}" id="reportType_bookMaker" (click)="changeSport('7')" data-reporttabtype="7">
+        {{Update?.bookmaker}}
+    </li>
+
+    <li class="report-tab " [ngClass]="{'select':stype=='-1'}" (click)="changeSport('-1')" id="reportType_sportsBook" data-reporttabtype="4">
+        {{Update?.sportsbook}}
+    </li>
+
+    <li class="report-tab " [ngClass]="{'select':stype=='-2'}" (click)="changeSport('-2')" id="reportType_binary" data-reporttabtype="2">
+        {{Update?.binary}}
+    </li>
+
+
+
+</ul>
+<div class="function-wrap">
+    <ul class="input-list">
+        <div id="statusCondition">
+            <li><label>{{Update?.betstatus}}:</label></li>
+            <li>
+                <select [(ngModel)]="BETSTATUS" name="betStatus" id="betStatus">
+                    <option value="1">{{Update?.settled}}</option>
+                    <!-- <option value="3">Cancelled</option> -->
+                    <option value="3">{{Update?.voided}}</option>
+                </select>
+            </li>
+        </div>
+
+
+
+
+        <li><label>{{Update?.period}}</label></li>
+        <li>
+            <input id="startDate" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                [(ngModel)]="selectfromdate" [minDate]="month"  [maxDate]="selectfromdate"
+                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-default', isAnimated: true }">
+            <input id="startTime" class="time-input" type="text" placeholder="09:00" maxlength="5" readonly>
+            to
+            <input id="endDate" class="cal-input" type="text" placeholder="YYYY-MM-DD" bsDatepicker
+                [(ngModel)]="selecttodate" [minDate]="month"  [maxDate]="selecttodate"
+                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-default', isAnimated: true }">
+            <input id="endTime" class="time-input" type="text" placeholder="08:59" maxlength="5" readonly>
+        </li>
+        <li style="display: none;">({{Update?.timezone}}:IST)</li>
+    </ul>
+
+    <ul class="input-list">
+        <li><a id="today" (click)="selectTab('today')" class="btn">{{Update?.justfortoday}}</a></li>
+        <li><a id="yesterday" (click)="selectTab('yesterday')" class="btn">{{Update?.fromyesterday}}</a></li>
+        <li style="display: none;"><a id="last7days" (click)="selectTab('last7days')" class="btn">{{Update?.last7days}}</a></li>
+        <li style="display: none;"><a id="last30days" (click)="selectTab('last30days')" class="btn">{{Update?.last30days}}</a></li>
+        <li style="display: none;"><a id="last2months" (click)="selectTab('last2months')" class="btn">{{Update?.last2months}}</a></li>
+        <li style="display: none;"><a id="last3months" (click)="selectTab('last3months')" class="btn">{{Update?.last3months}}</a></li>
+        <li><a id="getPL" (click)="GetBetHistory()" class="btn-send">{{Update?.gethistory}}</a></li>
+    </ul>
+</div>
+<div id="noReportMessage" *ngIf="bets.length==0 && !loader">
+    <p>{{Updata?.bethistoryenableyou}} <br>{{Update?.specifythetimeperiodduringwhichyour}}</p>
+    <p>{{Update?.bettinghistoryisavailableonlineforthepast30days}}</p>
+</div>
+
+<div id="report" style="display: block;" *ngIf="bets.length>0">
+
+    <table id="matchTable" class="table-s" style="display: table;">
+        <tbody>
+            <tr>
+                <th width="11%" class="align-L">{{Update?.betid}}
+                </th>
+                <!-- <th width="9%" class="align-L">PL ID
+                </th> -->
+                <th width="7%" class="align-L" id="siteTitle" style="display: none;">Site
+                </th>
+                <th width="" class="align-L">{{Update?.market}}
+                </th>
+                <th width="12%">{{Update?.selection}}
+                </th>
+                <th width="4%">{{Update?.type}}
+                </th>
+                <th width="8%">{{Update?.betplaced}}
+                </th>
+                <th width="7%">{{Update?.oddsreq}}
+                </th>
+                <th width="8%">{{Update?.stake}}
+                </th>
+                <th width="8%">{{Update?.avgoddsmatched}}
+                </th>
+                <th width="10%">{{Update?.profitloss}}
+                </th>
+                <th width="10%" id="userCancelTitle" style="display: none;">{{Update?.usercancel}}
+                </th>
+            </tr>
+
+            <ng-container *ngFor="let bet of bets;let index=index">
+                <tr id="matchRow{{index}}" style="display: table-row;">
+                    <td class="align-L">
+                        <a id="betID" href="javascript: void(0);" style="white-space: nowrap;"
+                            [ngClass]="{'expand-open':betId==bet.betId,'expand-close':betId!=bet.betId}"
+                            (click)="betId==bet.betId?toggleTx(null):toggleTx(bet.betId)">{{bet.betId}}</a>
+                    </td>
+                    <!-- <td class="align-L" id="playerID">{{bet.userName}}</td> -->
+                    <td class="align-L" id="siteName" style="display: none;">{{Update?.skyexchange}}</td>
+                    <td id="matchTitle" class="align-L">{{bet.sportName}}
+                        <img class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">
+                        <strong>{{bet.eventName}}</strong>
+                        <img class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">{{bet.betType=='yes' || bet.betType=='no'?'Fancy
+                        Bet':bet.marketName}}
+                    </td>
+                    <td id="matchSelection">{{bet.selName}}</td>
+                    <td><span id="matchType" class="{{bet.betType}}">{{bet.betType}}</span></td>
+                    <td><span id="betPlaced" class="small-date">{{bet.betTime | date:'yyyy-MM-dd HH:mm:ss'}}</span></td>
+                    <td id="matchOddsReq">{{bet.odds}}</td>
+                    <td id="matchStake">{{bet.stake | number:'1.2-2'}}</td>
+                    <td id="matchAvgOdds">{{bet.odds}}</td>
+                    <td *ngIf="this.betstatus=='1'"><span id="pol" class="small-date" [ngClass]="{'win':bet.PL>0,'lose':bet.PL<0}" >{{bet.PL | number:'1.2-2'}}</span></td>
+                    <td *ngIf="this.betstatus=='3' || this.betstatus=='2'"><span id="pol" class="small-date lose" >0.00</span></td>
+
+
+                    <td id="userCancel" style="display: none;"></td>
+                </tr>
+                <tr id="expand{{index}}" [ngClass]="{'expand':bet.betId==betId}" *ngIf="bet.betId==betId">
+                    <td colspan="2"></td>
+                    <td colspan="9">
+                        <img class="expand-arrow" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">
+                        <table id="txTable0">
+                            <tbody>
+                                <tr>
+                                    <th>Bet taken
+                                    </th>
+                                    <th width="16%">Odds req.
+                                    </th>
+                                    <th width="17%">Stake
+                                    </th>
+                                    <th width="24%">Liability
+                                    </th>
+                                    <th width="24%">Odds matched
+                                    </th>
+                                </tr>
+
+                                <tr id="txRow0" style="display: table-row;" class="even">
+                                    <td><span id="betTaken" class="small-date">{{bet.betTime | date:'yyyy-MM-dd HH:mm:ss'}}</span></td>
+                                    <td id="txOddsReq">{{bet.odds}}</td>
+                                    <td id="txStake">{{bet.stake | number:'1.2-2'}}</td>
+                                    <td id="txLiability"><span class="red">{{bet.liability | number:'1.2-2'}}</span>
+                                    </td>
+                                    <td id="txOddsMatched">{{bet.odds}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+
+
+    <!-- <p class="table-other">Betting History is shown net of commission.</p> -->
+
+
+    <!-- <div>
+        <ul style="display: none">
+            <li id="prev"><a href="javascript:void(0);">Prev</a></li>
+            <li id="next"><a href="javascript:void(0);">Next</a></li>
+            <li id="pageNumber"><a href="javascript:void(0);"></a></li>
+            <li id="more"><a href="javascript:void(0);">...</a></li>
+            <input type="text" id="goToPageNumber" onkeyup="return PageHandler.validatePageNumber(this)" maxlength="6"
+                size="4">
+            <li><a id="goPageBtn">GO</a></li>
+        </ul>
+
+        <ul id="pageNumberContent" class="pages">
+            <li id="prev"><a href="javascript:void(0);" class="disable" style="pointer-events: none;">Prev</a></li>
+            <li id="pageNumber"><a href="javascript:void(0);" class="select" style="pointer-events: none;">1</a></li>
+            <li id="next"><a href="javascript:void(0);" class="disable" style="pointer-events: none;">Next</a></li>
+        </ul>
+    </div> -->
+
+</div>

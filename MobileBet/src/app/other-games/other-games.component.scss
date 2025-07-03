@@ -1,0 +1,269 @@
+.tp_image {
+    // height: 106px;
+  }
+  .mian-wrap .gamehall .entrance-half:before {
+    padding-top: 68.77778%;
+  }
+  .entrance-title {
+    background-image: linear-gradient(270deg, rgb(41 42 42 / 62%) 4%, #000 97%);
+  }
+  #coming_soon img {
+    // height: 125px;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  #coming_soon .news-wrap.news-wrap-frame{
+    height: auto;
+  }
+  #Evolution img {
+    // height: 125px;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  #Evolution .news-wrap.news-wrap-frame{
+    height: auto;
+    margin-left: 20px;
+    margin-top: 100px;
+  }
+  
+  #marketing img {
+    // height: 125px;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  #marketing .news-wrap.news-wrap-frame{
+    height: auto;
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+  
+  .baji{
+    margin-top: 3px;
+  }
+  
+  // .overlay1 {
+  //   position: fixed;
+  //   top: 20%;
+  //   left: 10px;
+  //   width: 95vw;
+  //   height: 100%;
+  //   background-color: rgba(0, 0, 0, 0);
+  //   z-index: 99;
+  //   justify-content: center;
+  //   align-items: center;
+  //   animation: fadeIn 0.5s ease
+  // }
+  
+  .main {
+    width: 100%;
+    margin: 0px auto;
+    padding: 10px 10px;
+    background-image: url("https://b2c.static112233.com/m/assets/images/bgimg.jpg");
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  .main::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    height: 95%;
+    // background-color: #fff;
+  }
+  .main::after {
+    // content: "or";
+    position: absolute;
+    left: 50.25%;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    margin-left: -25px;
+    margin-top: -25px;
+    background-color: #fff;
+    border-radius: 50%;
+    text-transform: uppercase;
+    color: #20bfa9;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .main .prod {
+    width: 100%;
+    height: 95%;
+    background-color: #fff;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+  }
+  .main .prod div:not(.features) {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 100px;
+    background-color: #282828;
+    color: #fff;
+    font-weight: bold;
+    font-size: 19px;
+    border-radius: 15px 15px 0 0;
+    -webkit-border-radius: 15px 15px 0 0;
+    -moz-border-radius: 15px 15px 0 0;
+    -ms-border-radius: 15px 15px 0 0;
+    -o-border-radius: 15px 15px 0 0;
+  }
+  .main .prod div:not(.features) label {
+    margin-top: 15px;
+    font-size: 17px;
+  }
+  .main .prod div:not(.features) label span {
+    color: #4caf50;
+    margin-left: 6px;
+  }
+  .main .prod .features {
+    width: 81%;
+    height: 95%;
+    margin: -50px auto 40px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: #282828;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+  }
+  .main .prod .features h4 {
+    font-size: 20px;
+    margin-block: 20px;
+    text-align: center;
+  }
+  .main .prod .features ul li {
+    list-style: none;
+    font-size: 16px;
+    padding-bottom: 10px;
+  }
+  .main .prod .features ul li::before {
+    content: "\2022";
+    position: relative;
+    top: 4px;
+    right: 5px;
+    color: #f73859;
+    font-weight: bold;
+    font-size: 30px;
+  }
+  .main .prod .features .btncls {
+    width: 80%;
+    padding: 10px;
+    margin: 20px auto;
+    background-color: #f73859;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+  }
+  .main .prod .features .btncls::before,
+  .main .prod .features .btncls::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background-color: inherit;
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+  }
+  .main .prod .features .btncls::before {
+    top: -4px;
+    left: 0;
+  }
+  .main .prod .features .btncls::after {
+    bottom: -4px;
+    right: 0;
+  }
+  .main .prod .features .btncls:hover {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+  }
+  .main .prod .features .btncls:hover::before,
+  .main .prod .features .btncls:hover::after {
+    width: 100%;
+  }
+  @media (max-width: 1099px) {
+    .main {
+      // margin: 10px auto;
+      // flex-direction: column;
+      // justify-content: center !important;
+      gap: 60px;
+    }
+    .main::before {
+      left: 7.5%;
+      width: 85%;
+      height: 2px;
+    }
+    .main .prod {
+      width: 95%;
+    }
+  }
+  .features h2{
+    font-size: 12px ;
+  }
+   .info i {
+    font-size: 20px;
+    color: #47b2e4;
+    float: left;
+    width: 44px;
+    height: 44px;
+    background: #e7f5fb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    transition: all .3s ease-in-out;
+  }
+  .fa-phone:before {
+    content: "\f095";
+  }
+  .mobfont{
+    padding-top: 12px;
+    color: #000;
+    font-size: 25px;
+    padding-left: 10px;
+    font-family: fantasy;
+  }
+  .fa-skype:before {
+    content: "\f17e";
+  }
+  .side-content h3{
+    background-image: none !important;
+    color: #000 !important;
+  }
+  #marketing .frame-wrap{
+    width: 100% !important;
+    height: 90%;
+  }
+  /* Generated by http://responsive-css.spritegen.com Responsive CSS Sprite Generator */
+   
+  /* Generated by http://responsive-css.spritegen.com Responsive CSS Sprite Generator */
+  

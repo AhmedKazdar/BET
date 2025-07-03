@@ -1,0 +1,356 @@
+[
+    {
+        "siteName": "lionbook247",
+        "games": [
+            {
+                "sr": 2,
+                "name": "betgame",
+                "Route": "betgames",
+                "isbetgame": true,
+                "isBig": true
+            },
+            {
+                "sr": 2,
+                "name": "Diamond Casino",
+                "Route": "casino/cas/dia",
+                "isbetgame": true
+            },
+            {
+                "sr": 4,
+                "name": "JILI",
+                "Platform": "JILI",
+                "Route": "cas/JILI",
+                "isProvider": true
+            },
+            {
+                "sr": 2,
+                "name": "Sexy",
+                "Platform": "SEXYBCRT",
+                "Route": "cas/SEXYBCRT",
+                "isProvider": true
+            },
+            {
+                "sr": 9,
+                "name": "Horse Racing",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-048",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Sicbo",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-015",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 2,
+                "name": "Ezugi",
+                "providerName": "Ezugi",
+                "providerCode": "EZ",
+                "isStatic": true
+            },
+            {
+                "sr": 9,
+                "name": "Rummy",
+                "Platform": "JILI",
+                "gameCode": "JILI-TABLE-004",
+                "gameType": "TABLE",
+                "images": "rummygame",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "BACCARAT",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-026",
+                "gameType": "TABLE",
+                "images": "jilibacarat",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Big Small",
+                "Platform": "JILI",
+                "gameCode": "JILI-TABLE-007",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Dragon Tiger",
+                "Platform": "JILI",
+                "gameCode": "JILI-TABLE-012",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Ludo Quick",
+                "Platform": "JILI",
+                "gameCode": "JILI-TABLE-021",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Number King",
+                "Platform": "JILI",
+                "gameCode": "JILI-TABLE-005",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Sicbo",
+                "Platform": "JILI",
+                "gameCode": "JILI-TABLE-017",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Teenpatti 2020",
+                "Platform": "JILI",
+                "gameCode": "JILI-TABLE-016",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Teenpatti Joker",
+                "Platform": "JILI",
+                "gameCode": "JILI-TABLE-010",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "32 Cards",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-039",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "7up 7down",
+                "Platform": "JILI",
+                "gameCode": "JILI-TABLE-011",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Number Matka",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-021",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Rocket Cash",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-041",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "HEIST",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-047",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Cock Fighting",
+                "Platform": "SV388",
+                "gameCode": "SV-LIVE-001",
+                "gameType": "LIVE",
+                "isAWC": true,
+                "isBig": true
+            },
+           
+            {
+                "sr": 9,
+                "name": "Hound Racing",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-055",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Card Matka",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-022",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "BlackJack",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-038",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Andar Bahar",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-032",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "LUDO",
+                "isStatic": true,
+                "isBig": true
+            },
+          
+            {
+                "sr": 9,
+                "name": "Teen Patti",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-046",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Coin Toss",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-036",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "BONUS DICE",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-043",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Card Hilow",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-037",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Mime Sweeper",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-042",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "JHANDI MUNDA",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-030",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "TAI XIU",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-017",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Thai",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-009",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Bai Cao",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-020",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Bola Golek",
+                "Platform": "KINGMAKER",
+                "gameCode": "KM-TABLE-035",
+                "gameType": "TABLE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "BGLobby",
+                "Platform": "BG",
+                "gameCode": "BG-LIVE-001",
+                "gameType": "LIVE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "WinThreeCards",
+                "Platform": "BG",
+                "gameCode": "BG-LIVE-010",
+                "gameType": "LIVE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Red Black",
+                "Platform": "BG",
+                "gameCode": "BG-LIVE-011",
+                "gameType": "LIVE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "SicBo",
+                "Platform": "BG",
+                "gameCode": "BG-LIVE-004",
+                "gameType": "LIVE",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Fire Bull",
+                "Platform": "JDB",
+                "gameCode": "JDB-SLOT-078",
+                "gameType": "SLOT",
+                "isAWC": true
+            },
+            {
+                "sr": 9,
+                "name": "Candy Land",
+                "Platform": "JDB",
+                "gameCode": "JDB-SLOT-005",
+                "gameType": "SLOT",
+                "isAWC": true
+            },
+            {
+                "sr": 2,
+                "name": "twain",
+                "Route": "twain",
+                "istwain": true,
+                "isBig": true
+            }
+         
+        ]
+    }
+]

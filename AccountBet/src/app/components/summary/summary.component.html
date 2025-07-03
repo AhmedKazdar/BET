@@ -1,0 +1,53 @@
+<h2>{{Update?.summary}}</h2>
+
+<div class="white-wrap">
+    <dl class="head-balance">
+        <dt>{{Update?.yourbalance}}</dt>
+        <dd id="summaryTotalBalance">{{fundInfo?.balance | number:'1.2-2'}} <span>{{accountInfo?.currencyCode}}</span></dd>
+    </dl>
+
+    <h3>{{Update?.welcome}},</h3>
+    <p>{{Update?.Viewyouraccountdetailshere}}</p>
+</div>
+
+<table class="table01">
+    <tbody>
+        <tr>
+            <th width="13%" class="align-L">{{Update?.date}}</th>
+            <th width="13%">{{Update?.transaction}}</th>
+            <th width="13%">{{Update?.debits}}</th>
+            <th width="13%">{{Update?.credits}}</th>
+            <th width="13%">{{Update?.balance}}</th>
+            <th width="14%">{{Update?.remark}}</th>
+
+            <th>{{Update?.fromto}}</th>
+
+        </tr>
+
+        <tr id="dataTemplate" *ngFor="let report of transactionList">
+            <td id="date" class="align-L">{{report.dateTime | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td id="statementSerial">{{report.txnNumber}}</td>
+            <td id="debits"><span *ngIf="report.txnType === 2">{{report.amount}} </span></td>
+            <td id="credits"><span *ngIf="report.txnType != 2">{{report.amount}} </span></td>
+            <td id="balance">{{report.balance}}</td>
+            <td id="remarks">{{report.description}}</td>
+
+            <td id="fromTo">{{report.from_to}}<img class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif">{{accountInfo.userName}}</td>
+
+        </tr>
+
+        <tr id="dataTemplate" style="display: none">
+            <td id="date" class="align-L"></td>
+            <td id="statementSerial"></td>
+            <td id="debits"></td>
+            <td id="credits"></td>
+            <td id="balance"></td>
+            <td id="remarks"></td>
+
+            <td id="fromTo"><img class="fromto" src="https://b2c.static112233.com/myAccount/assets/images/transparent.gif"></td>
+
+        </tr>
+
+    </tbody>
+    <tbody id="content"></tbody>
+</table>

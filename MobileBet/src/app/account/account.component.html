@@ -1,0 +1,91 @@
+<div class="mian-wrap">
+
+    <div class="path-wrap">
+        <p class="account-id">
+            <span>{{accountInfo?.userName}}</span>
+            <span class="time-zone">GMT+5:30</span>
+        </p>
+    </div>
+
+    <ul class="menu-list">
+        <li *ngIf="isTraslate" >
+            <a>
+            <select id="select" (change)="selectlanguage($event.target.value)" style="-webkit-appearance: none;">
+                <option value="en" selected>Select language</option>
+                <option value="en">English</option>
+                <option value="bd">Bangla</option>
+                <option value="sp">Spanish</option>
+                <option value="pg">portuguese</option>
+                <option value="tu">Turkish</option>
+            </select>
+        </a>
+        </li>
+            <li (click)="ourdesign = !ourdesign" *ngIf="siteName !='cricbuzzercom'"><a>{{Update?.Interface}}
+                </a></li>
+    
+                <div class="container"  [style.display]="ourdesign? 'block': 'none'">
+                    <a>
+                        <span>
+                            <div class="radio" [ngClass]="{'checked': clickevent=='sky'}" (click)="changeExpo('sky')">
+                                <input id="radio-1" name="radio" type="radio" checked>
+                                <label for="radio-1" class="radio-label"
+                                style="display: flex;align-items: center;">
+                                
+                                <span style="padding: 2px;"><img src="https://b2c.static112233.com/m/assets/images/sky.png" alt="" width="25px"></span>
+                                <a style="display: contents;">{{Update?.SKYInterface}}</a></label>
+                            </div>
+                        </span>
+                    </a>
+    
+                    <a>
+                        <div class="radio" [ngClass]="{'checked': clickevent=='diamond'}" (click)="changeExpo('diamond')">
+                            <input id="radio-2" name="radio" type="radio">
+                            <label for="radio-2" class="radio-label"  style="display: flex;;align-items: center;">
+                                <span style="padding: 2px;"><img src="https://b2c.static112233.com/m/assets/images/diamond.png" alt="" width="25px"></span>
+    
+                                <a style="display: contents;">{{Update?.DiamondInterface}}</a></label>
+                        </div>
+                    </a>
+                    <a>
+                        <div class="radio" [ngClass]="{'checked': clickevent=='lotus'}" (click)="changeExpo('lotus')">
+                            <input id="radio-3" name="radio" type="radio">
+                            <label for="radio-3" class="radio-label"  style="display: flex;;align-items: center;">
+                                <span style="    padding: 2px;"><img src="https://b2c.static112233.com/m/assets/images/lotus.png" alt="" width="20px"></span>
+    
+                                
+                                <a style="display: contents;"
+                                >{{Update?.LotusInterface}}</a></label>
+                        </div>
+                    </a>
+                    <a [ngClass]="{'checked': clickevent=='lc'}" (click)="changeExpo('lc')">
+                        <div class="radio">
+                            <input id="radio-4" name="radio" type="radio">
+                            <label for="radio-4" class="radio-label"  style="display: flex;;align-items: center;">
+                                <span style="    padding: 2px;"><img src="https://b2c.static112233.com/m/assets/images/lc.png" alt="" width="25px"></span>
+    
+                                <a style="display: contents;"
+                                   >{{Update?.LcInterface}}</a></label>
+                        </div>
+                    </a>
+                </div>
+
+            
+            
+
+        <li class=""><a href="myAccount/#/detail" target="_blank">{{Update?.myprofile || 'My Profile'}}</a></li>
+        <li *ngIf="isb2c" class=""><a [routerLink]="['/withdrawaldetails']">{{Update?.withdrawaldetails || 'Withdrawal Details'}}</a></li>
+        <li *ngIf="isb2c" class=""><a href="myAccount/#/dw_requests" target="_blank">{{Update?.DwRequests || 'Deposit/Withdraw'}}</a></li>
+        <li class=""><a href="myAccount/#/summary" target="_blank">{{Update?.BalanceOverview || 'Balance Overview'}}</a></li>   
+        <li class=""><a href="myAccount/#/current_bets" target="_blank">{{Update?.mybet || 'My Bets'}}</a></li>
+        <li class=""><a href="myAccount/#/bet_history" target="_blank">{{Update?.betshistory || 'Bet History'}}</a></li>
+        <li class=""><a href="myAccount/#/profit_loss" target="_blank">{{Update?.profitandloss || 'Profit & Loss'}}</a></li>
+        <li class=""><a href="myAccount/#/activity_log" target="_blank">{{Update?.activitylog || 'Activity Log'}}</a></li>
+        <li *ngIf="isb2c" class=""><a [routerLink]="['/feedback']">{{Update?.feedback || 'Feedback'}}</a></li>
+        <li *ngIf="isb2c" class=""><a [routerLink]="['/dispute']">{{Update?.dispute || 'Dispute'}}</a></li>
+
+    </ul>
+
+    <a id="logout" class="logout" (click)="Logout()">{{Update?.logout}}
+    </a>
+
+</div>

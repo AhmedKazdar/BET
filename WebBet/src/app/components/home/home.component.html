@@ -1,0 +1,86 @@
+<div id="overWrap" class="over-wrap" style="height: calc(100% - 26px)">
+
+
+    <app-promote-banner></app-promote-banner>
+
+
+    <div class="gamehall-wrap-simple">
+        <a routerLink="/running" style="cursor: pointer">
+            <dl id="onLiveBoard" class="on_live">
+                <dt>
+                    <p class="live_icon"><span></span> LIVE</p>
+                </dt>
+
+                <ng-container *ngFor="let sport of sportList;trackBy:trackBySport; let index = index">
+                    <dd id="onLiveCount_{{sport.sportsName}}" *ngIf="index<7">
+                        <p>{{sport.sportsName | titlecase}}</p><span id="count">{{sport.inplayCounts}}</span>
+                    </dd>
+                </ng-container>
+
+            </dl>
+            <dl class="entrance-title">
+                <dt>Sports</dt>
+                <dd>
+                    <span>Play Now</span>
+                </dd>
+            </dl>
+
+            <ng-container>
+                <img src="https://b2c.static112233.com/assets/images/mobile/gamehall/banner_sports.png" alt="" draggable="false">
+            </ng-container>
+        </a>
+        <ng-container *ngFor="let awc of AWC_games">
+            <ng-container *ngIf="awc.isEnable">
+                <a class="entrance" [ngClass]="{'entrance-half':!awc.isBig}" style="cursor: pointer"
+                    (click)="openTable(awc)">
+                    <dl class="entrance-title">
+                        <dt>{{awc.name | titlecase}}</dt>
+                        <dd>
+                            <span>Play Now</span>
+                        </dd>
+                    </dl>
+                    <img *ngIf="awc.isAWC"
+                        src="https://b2c.static112233.com/assets/images/awc_images/{{awc.gameCode}}.webp?v=85249685">
+                    <img *ngIf="!awc.isAWC"
+                        src="https://b2c.static112233.com/assets/images/awc_banner/sitename_home/{{siteName}}/{{awc.name}}.webp?v=85249685">
+                </a>
+            </ng-container>
+        </ng-container>
+    </div>
+
+
+    <app-footer></app-footer>
+</div>
+
+
+<div id="coming_soon" class="overlay" style="display: none;">
+    <div class="frame-wrap">
+        <div class="news-wrap news-wrap-frame">
+            <div class="side-content">
+                <h1 class="aligh">Notice</h1>
+                <p class="para" *ngIf="accountInfo?.currencyCode == 'INR'">
+                    1 MYR = 100 INR
+                </p>
+                <p class="para" *ngIf="accountInfo?.currencyCode == 'BDT'">
+                    100 BDT = 1 MYR
+                </p>
+                <p class="para" *ngIf="accountInfo?.currencyCode == 'USD'">
+                    1 USD = 1  / 0.66 = 1.66 MYR
+                </p>
+            </div>
+            <footer><a class="btn-send" (click)="hideOverlayInfo('#coming_soon')">OK</a></footer>
+        </div>
+    </div>
+</div>
+<!-- 
+<div id="coming_soon" class="overlay" style="display: none;">
+    <div class="frame-wrap">
+        <div class="news-wrap news-wrap-frame">
+            <div class="side-content">
+                <img src="https://b2c.static112233.com/assets/images/promo/coming_soon.jpg" alt="coming_soon"
+                    draggable="false">
+            </div>
+            <footer><a class="btn-send" (click)="hideOverlayInfo('#coming_soon')">CLOSE</a></footer>
+        </div>
+    </div>
+</div> -->
