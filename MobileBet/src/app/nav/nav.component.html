@@ -63,8 +63,8 @@
           <img class="icon-casino" src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="Casinos">{{Update?.casino}}
         </a>
       </li>
-      <li id="account" [routerLinkActive]="['select']">
-        <a class="ui-link" [routerLink]="isLogin?['/account']:['/login']">
+      <li id="account" [routerLinkActive]="['select']" [routerLink]="isLogin?['/account']:['/login']">
+        <a class="ui-link" >
           <img class="icon-account" src="https://b2c.static112233.com/m/assets/images/mobile/transparent.gif" alt="transparent" alt="Account">Account
         </a>
       </li>
