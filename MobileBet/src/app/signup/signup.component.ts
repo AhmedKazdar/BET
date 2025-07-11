@@ -480,16 +480,54 @@ export class SignupComponent implements OnInit {
     );
   }
 
-  getOtp() {
-    if (this.pf.phoneNumber == null) {
-      this.phoneError = "Phone Number is Required";
+  async getOtp(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    // Reset previous errors
+    this.phoneError = "";
+    
+    // Mark the field as touched to trigger validation
+    this.pf.phoneNumber.markAsTouched();
+    
+    // Get the phone number value
+    const phoneNumber = this.pf.phoneNumber.value ? this.pf.phoneNumber.value.toString().trim() : '';
+    
+    // Validate phone number
+    if (!phoneNumber) {
+      this.phoneError = this.Update?.PhoneNumberRequired || "Phone number is required";
+      return;
     }
-    else {
+    
+    if (phoneNumber.length < 10) {
+      this.phoneError = this.Update?.InvalidPhoneNumber || "Please enter a valid 10-digit phone number";
+      return;
+    }
+    
+    // If we get here, the phone number is valid
+    try {
+      // Show loader
       $('#login_loading').css('display', 'flex');
-      this.phoneError = "";
+      
+      // Prepare phone number
+      const fullPhoneNumber = this.selectedCountry + phoneNumber;
+      console.log('Requesting OTP for:', fullPhoneNumber);
+      
+      // Get recaptcha verifier
       const appVerifier = this.windowRef.recaptchaVerifier;
-      console.log(this.selectedCountry.split('+')[1] + this.pf.phoneNumber.value)
-      this.authService.phoneLogin(this.selectedCountry + this.pf.phoneNumber.value, appVerifier);
+      if (!appVerifier) {
+        throw new Error('Recaptcha verifier not initialized');
+      }
+      
+      // Make the OTP request
+      await this.authService.phoneLogin(fullPhoneNumber, appVerifier);
+      
+    } catch (error) {
+      console.error('Error in getOtp:', error);
+      this.phoneError = this.Update?.OTPError || "Failed to send OTP. Please try again.";
+    } finally {
+      // Always hide the loader when done
+      $('#login_loading').css('display', 'none');
     }
   }
 

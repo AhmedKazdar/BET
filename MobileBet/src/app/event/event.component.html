@@ -410,12 +410,10 @@
                                         {{runner.description.metadata.STALL_DRAW}}</li>
 
                                 </ul>
-                                <div id="uniform"
-                                    class="uniform saddle_{{runner.description.metadata.COLOURS_FILENAME.indexOf('saddle_')>-1?runner.description.metadata.CLOTH_NUMBER_ALPHA:''}}"
-                                    *ngIf="runner.description.metadata.COLOURS_FILENAME">
-                                    <img *ngIf="runner.description.metadata.COLOURS_FILENAME.indexOf('saddle_')==-1"
-                                        src="https://content-cache.cdnbf.net/feeds_images/Horses/SilkColours/{{runner.description.metadata.COLOURS_FILENAME}}">
-                                </div>
+                                <div id="uniform" class="saddle_ uniform" *ngIf="runner.description.metadata.COLOURS_FILENAME">
+    <img loading="lazy" alt="cloths number" style="display: none;" 
+         src="https://content-cache.cdnbf.net/feeds_images/Horses/SilkColours/{{runner.description.metadata.COLOURS_FILENAME}}">
+</div>
                                 <ul id="horseName" class="horse-name tooltip1">
                                     <li id="runnerName">{{runner.description.runnerName}}</li>
                                     <li id="jockyName" *ngIf="runner.description.metadata.JOCKEY_NAME">

@@ -645,6 +645,14 @@ footer .pages a,
     white-space: nowrap;
 }
 
+.policy-link,
+.policy-link a,
+.policy-link li,
+.policy-link li a {
+    color: rgb(255, 255, 255) !important;
+    text-decoration: none;
+}
+
 .bets-back .col-ref ul li,
 .bets-lay .col-ref ul li,
 .bets-book .col-ref ul li,
@@ -684,11 +692,11 @@ footer .pages a,
 }
 
 .bg_login .policy-link {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgb(255, 255, 255);
 }
 
 .bg_login .policy-link a {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgb(255, 255, 255);
 }
 
 .cricbuzzer .policy-link a,
@@ -700,7 +708,7 @@ footer .pages a,
 .cricbuzzerlive .policy-link a,
 .cricbuzzerlive .policy-link
 {
-    color: rgba(0, 0, 0, 0.5);
+    color: rgb(255, 255, 255);
 }
 
 

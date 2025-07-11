@@ -92,15 +92,15 @@ export class CasinoApiService {
   }
   amanAuthNew(data:any){
     if(this.siteName=="cricbuzzercom"){
-      return this.http.post(`https://casino.cricity.net/pad=93/api/poker/auth/`, data);
+      return this.http.post(`https://1877.space/pad=93/api/poker/auth/`, data);
     }else{
-    return this.http.post(`https://aura.vrnl.net/pad=93/api/poker/auth/`, data);
+    return this.http.post(`https://1877.space/pad=93/api/poker/auth/`, data);
     }
   }
 
   getAuraOperators() {
     const domain = origin.replace(/(^\w+:|^)\/\/(www\.)?/, '');
-    return this.http.get(`https://api3.vrnlapi.live:3479/api/getAuraOperators/${domain}`);
+    return this.http.get(`https://cricity.net/api/getAuraOperators/${domain}`);
   }
 
 }

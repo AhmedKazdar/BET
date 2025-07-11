@@ -2,7 +2,7 @@
 
     <header class="login-head">
         <a routerLink="{{highCom}}" class="close ui-link"></a>
-        <h1>{{siteName}}</h1>
+        <h1 class="login-logo" [style.backgroundImage]="'url(/assets/images/Cricity.png)'"></h1>
         <div id="powerWrap" class="betfair-wrap">
             <p>{{Update?.poweredby}}</p>
             <span>
@@ -26,7 +26,7 @@
                 <button type="submit" style="display: none;"></button>
             </dd>
             <dd *ngIf="LoginWithPhone">
-                <p style="color: black;">NOTE:-  Please Include Country Code If You Are Login With Phone Number.</p>
+                <p style="color: white;">NOTE:-  Please Include Country Code If You Are Login With Phone Number.</p>
             </dd>
             <dd id="errorMsg" class="state"  style="color: #f00;">
                 <ng-container *ngIf="f.userName.invalid && (f.userName.touched || submitted) && !result">
@@ -69,7 +69,7 @@
         z-index: 1;
         pointer-events: none;"> <a class="telegramFakeButton" ><i class="fa fa-telegram" style="font-size:36px;color:red"></i>Login with Telegram</a></div> -->
     </dl>
-    <app-cricbuzzer-policy></app-cricbuzzer-policy>
+    <app-cricbuzzer-policy class="login-policy"></app-cricbuzzer-policy>
 
     <app-support-wrap ></app-support-wrap>
 

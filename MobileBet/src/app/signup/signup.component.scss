@@ -235,6 +235,19 @@ input {
     flex-wrap: wrap;
     justify-content: center;
   }
+
+  /* Policy links styling for signup page */
+  app-cricbuzzer-policy .policy-link,
+  app-cricbuzzer-policy .policy-link a,
+  app-cricbuzzer-policy .policy-link li,
+  app-cricbuzzer-policy .policy-link li a,
+  .policy-link,
+  .policy-link a,
+  .policy-link li,
+  .policy-link li a {
+    color: #000000 !important;
+    text-decoration: none !important;
+  }
   .footer-bottom ul li{
     padding-right :2px; 
     padding-left: 2px;

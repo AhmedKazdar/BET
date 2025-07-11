@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,7 +48,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { ToastrModule } from 'ngx-toastr';
 import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
 import { AuthService } from './socialshared/auth.service';
 import { DepositwithdrawComponent } from './depositwithdraw/depositwithdraw.component';
 import { WithdrawaldetailsComponent } from './withdrawaldetails/withdrawaldetails.component';
@@ -111,11 +112,13 @@ let firebase = {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
     FooterModule,
     GoogleChartsModule,
     DirectivesModule,
     AngularFireModule.initializeApp(firebase),
     AngularFireAuthModule,
+    RecaptchaV3Module,
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     ToastrModule.forRoot(),
@@ -130,7 +133,7 @@ let firebase = {
     },
     {
       provide: RECAPTCHA_V3_SITE_KEY,
-      useValue: environment.recaptcha.siteKey,
+      useValue: environment.recaptcha.siteKey
     },
     AuthService,
     // {provide: ErrorHandler, useClass: GlobalErrorHandler},

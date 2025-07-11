@@ -1,8 +1,11 @@
-let siteName = 'cricbuzzercom';
+let siteName = 'cricity';
 let hostname = window.origin;
 let apisUrl = "https://cricity.net/all_apis.json";
+export const recaptcha = {
+  siteKey: '6Lc6KH4rAAAAAEhIEONfFCCJ2Jr8jZ3aYGxFe1cK' // reCAPTCHA v3 site key
+};
 
-let isCaptcha = true;
+let isCaptcha = false;
 let isallSports = true;
 let isIcasino = false;
 let isEtgcasino = true;
@@ -57,7 +60,7 @@ let sitekey = ""
 
 
 if (hostname.indexOf('cricity.net') > -1) {
-  siteName = 'cricbuzzercom';
+  siteName = 'cricity';
   origin = "cricity.net"
   isCaptcha = false;
   whatsapp = "+919819052222"
@@ -79,15 +82,17 @@ if (hostname.indexOf('cricity.net') > -1) {
     storageBucket: 'cricbuzzer-d42fe.appspot.com',
     apiKey: 'AIzaSyBdHBIDzWEcUaF4fQLv8xFzyAL7M3XbCPg',
     authDomain: 'cricbuzzer-d42fe.firebaseapp.com',
-    messagingSenderId: '445142658279',
-    
-  }
+    messagingSenderId: '445142658279'
+  },
+  
+  recaptcha.siteKey = '6Lc6KH4rAAAAAEhIEONfFCCJ2Jr8jZ3aYGxFe1cK';
+  
 }
 
 
 
 if (hostname.indexOf('cricity.net') > -1) {
-  siteName = 'cricbuzzercom';
+  siteName = 'cricity';
   origin = "cricity.net"
   isCaptcha = false;
   whatsapp = "+7977522278"
@@ -109,11 +114,12 @@ if (hostname.indexOf('cricity.net') > -1) {
     storageBucket: "cricity-fcda6.firebasestorage.app",
     messagingSenderId: "131700140117",
     appId: "1:131700140117:web:9af0ed1cf25090d1e08cdc"
-  }
+  },
+  recaptcha.siteKey = '6Lc6KH4rAAAAAEhIEONfFCCJ2Jr8jZ3aYGxFe1cK';
 }
 
 if (hostname.indexOf('cricity.net') > -1) {
-  siteName = 'cricbuzzercom';
+  siteName = 'cricity';
   origin = "cricity.net"
   isCaptcha = false;
   whatsapp = "+919819052222"
@@ -130,7 +136,8 @@ if (hostname.indexOf('cricity.net') > -1) {
     authDomain: 'cricbuzzer-d42fe.firebaseapp.com',
     messagingSenderId: '445142658279',
     
-  }
+  },
+  recaptcha.siteKey = '6Lc6KH4rAAAAAEhIEONfFCCJ2Jr8jZ3aYGxFe1cK';
 }
 
 if (hostname.indexOf('cricbuzzer.pro') > -1) {
@@ -177,7 +184,7 @@ if (hostname.indexOf('lionbook247.com') > -1) {
 export const environment = {
   firebase: firebase,
   recaptcha: {
-    siteKey: '6LfXPpcjAAAAAHRJr1TKRVDyrQ7d5g-ZNdt-KgAB',
+    siteKey: '6Lc6KH4rAAAAAEhIEONfFCCJ2Jr8jZ3aYGxFe1cK',
   },
   production: true,
   apisUrl: apisUrl,

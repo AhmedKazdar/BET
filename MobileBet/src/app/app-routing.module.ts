@@ -29,7 +29,7 @@ let homeCom = 'dash';
 let inplayCom = 'running';
 let highCom = 'highlight';
 let eventCom = 'event';
-let useHashData = true;
+let useHashData = false;
 
 const routes: Routes = [
   {

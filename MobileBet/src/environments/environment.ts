@@ -1,13 +1,18 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-let siteName = "cricbuzzercom";
+let siteName = "cricity";
 let hostname = window.origin;
 let origin = "";
 let domain = "cricity.net";
 let apisUrl = "https://cricity.net/all_apis.json";
 
 let isCaptcha = false;
+
+// reCAPTCHA configuration
+export const recaptcha = {
+  siteKey: '6Lc6KH4rAAAAAEhIEONfFCCJ2Jr8jZ3aYGxFe1cK' // This is a placeholder key - replace with your actual reCAPTCHA v3 site key
+};
 let isallSports = true;
 let isEtgcasino = true;
 let isLcRouting = false;

@@ -18,7 +18,7 @@
         </div>
     </header>
 
-    <form [formGroup]="PhoneForm" class="form">
+    <form [formGroup]="PhoneForm" class="form" (submit)="$event.preventDefault()">
         <div class="buttonIn">
             <select class="country-code" (change)="selectCountry($event.target.value)">
                 <option value="+91" selected>+91</option>
@@ -27,11 +27,14 @@
                 </option>
             </select>
             <input style="margin-left: 4px;" id="signupBoxPhone" type="number" placeholder="{{Update?.EnterPhoneNumber}}"
-                formControlName="phoneNumber">
+                formControlName="phoneNumber" (blur)="pf.phoneNumber.markAsTouched()">
+        </div>
+        <div *ngIf="(pf.phoneNumber.touched || phoneSubmitted) && phoneError" class="error-message" style="color: #f00; margin: 5px 0;">
+            {{ phoneError }}
         </div>
         <div class="buttonIn">
             <input style="margin-right: 4px;" type="text" placeholder="{{Update?.EntervalidOTP}}" formControlName="otp">
-            <button class="otp btn-send" (click)="getOtp()">{{Update?.GetOTP}}</button>
+            <button type="button" class="otp btn-send" (click)="getOtp($event)" [disabled]="!pf.phoneNumber?.value || pf.phoneNumber?.invalid">{{Update?.GetOTP}}</button>
         </div>
         <dd>
             <input [type]="!visiblePassword ? 'password' : 'text'" id="password" data-role="none"

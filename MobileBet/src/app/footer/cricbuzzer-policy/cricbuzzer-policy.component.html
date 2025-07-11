@@ -1,5 +1,30 @@
 <div data-role="page" tabindex="0" class="ui-page ui-page-theme-a ui-page-active">
     <!-- <app-policy-link></app-policy-link> -->
+    <style>
+        /* Default black color for all policy links */
+        .policy-link,
+        .policy-link a,
+        .policy-link li,
+        .policy-link li a {
+            color: #000000 !important;
+        }
+        
+        /* White color only for login page */
+        .bg_login .policy-link,
+        .bg_login .policy-link a,
+        .bg_login .policy-link li,
+        .bg_login .policy-link li a,
+        .cricbuzzer .policy-link,
+        .cricbuzzer .policy-link a,
+        .cricbuzzer .policy-link li,
+        .cricbuzzer .policy-link li a,
+        .cricbuzzerlive .policy-link,
+        .cricbuzzerlive .policy-link a,
+        .cricbuzzerlive .policy-link li,
+        .cricbuzzerlive .policy-link li a {
+            color: #ffffff !important;
+        }
+    </style>
     <div>
         <ul class="policy-link">
             <li (click)="showOverlayInfo('#footer-policy1');"><a>{{Update?.PrivacyPolicy}}</a></li>
