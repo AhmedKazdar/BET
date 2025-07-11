@@ -1,4 +1,4 @@
-let siteName = "cricbuzzercom";
+let siteName = "cricity";
 let hostname = window.origin;
 let apisUrl = "https://cricity.net/all_apis.json";
 
@@ -65,14 +65,14 @@ if (hostname.indexOf('cricbuzzer.io') > -1) {
 }
 
 if (hostname.indexOf('cricity.net') > -1) {
-  siteName = 'cricbuzzercom';
+  siteName = 'cricity';
   origin = "cricity.net"
   //isRemoveBfMarket = false;
   isCaptcha = false;
   whatsapp = "+7977522278"
   whatsapp1 = "+9321362287";
   whatsappChat = '7977522278';
-  domain = 'cricbuzzer.live';
+  domain = 'cricity.net';
   telegramBotName = "cricbuzzerlive_bot"
   currency = "INR";
   LoginWithPhone =true;
@@ -90,22 +90,29 @@ if (hostname.indexOf('cricity.net') > -1) {
 
 
 if (hostname.indexOf('cric365.site') > -1) {
-  siteName = 'lionbook247';
-  origin = "lionbook247.site"
-  //isRemoveBfMarket = false;
+  siteName = 'cric365';
+  origin = "cric365.site";
   isCaptcha = false;
-  whatsapp = "+919819052222"
-  whatsapp1 = "+919819062222";
-  whatsappChat = '9819052222';
+  whatsapp = "+7977522278"
+  whatsapp1 = "+9321362287";
+  whatsappChat = '7977522278';
+  domain = 'cric365.site';
+  telegramBotName = "cricbuzzerlive_bot"
+  currency = "INR";
+  LoginWithPhone =true;
+  isBlueOcean = true;
   firebase = {
-    projectId: 'cricbuzzer-d42fe',
-    appId: '1:445142658279:web:f367e9700079ec84160642',
-    storageBucket: 'cricbuzzer-d42fe.appspot.com',
-    apiKey: 'AIzaSyBdHBIDzWEcUaF4fQLv8xFzyAL7M3XbCPg',
-    authDomain: 'cricbuzzer-d42fe.firebaseapp.com',
-    messagingSenderId: '445142658279',
-    measurementId: 'G-DGDYH1GVXW',
-  }
+    apiKey: "AIzaSyBjUNe1QHWagDa9D2nnAmfYcRIHwECATDs",
+    authDomain: "cricity-fcda6.firebaseapp.com",
+    projectId: "cricity-fcda6",
+    storageBucket: "cricity-fcda6.firebasestorage.app",
+    messagingSenderId: "131700140117",
+    appId: "1:131700140117:web:9af0ed1cf25090d1e08cdc",
+    measurementId: "G-DGDYH1GVXW"
+  };
+
+  
+  apisUrl = "https://cric365.site/all_apis.json";
 }
 
 if (hostname.indexOf('cricbuzzer.io') > -1) {

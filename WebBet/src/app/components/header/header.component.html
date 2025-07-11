@@ -13,7 +13,7 @@
     <div class="header full-wrap" >
 
         <h1 >
-            <a routerLink="/dash">{{siteName}}</a>
+            <a routerLink="/en">{{siteName}}</a>
         </h1>
 
 
@@ -108,7 +108,7 @@
             </li>
             <li *ngIf="isb2c && currency == 'USD' " class="deposit" (click)="opendepositepopup()">
                 <a class="rajbet" style="cursor: pointer"><img style="width: 24px;"
-                        src="https://b2c.static112233.com/assets/images/cricbuzzer/shinydollar.gif"></a>
+                        src="https://b2c.static112233.com/assets/images/cricbuzzer/shinydollagifr."></a>
             </li>
             <li *ngIf="isb2c && currency == 'INR'" class="deposit " (click)="opendepositepopup()">
                 <a class="rajbet" style="cursor: pointer"><img class="rotating-rupee" style="width: 18px;"
@@ -188,7 +188,7 @@
             <ul id="tabMenu" class="menu" *ngIf="siteName!='lionbook247'&& siteName!='cricbuzzercom'">
 
                 <li>
-                    <a id="menu_Home" routerLink="/dash" [routerLinkActive]="['select']">{{Update?.home}}</a>
+                    <a id="menu_Home" routerLink="/en" [routerLinkActive]="['select']">{{Update?.home}}</a>
                 </li>
 
                 <li><a id="menu_InPlay" routerLink="/running" [routerLinkActive]="['select']">{{Update?.inplay}}</a>
@@ -271,7 +271,7 @@
                                 </a></li> -->
                         </ul>
                     </li>
-                    <li *ngIf="isLogin  && siteName!='cricbuzzercom'">
+                  <!--   <li *ngIf="isLogin  && siteName!='cricbuzzercom'">
                         <a class="menu-drop">
                             {{Update?.Interface}}
                         </a>
@@ -332,7 +332,7 @@
 
 
                         </ul>
-                    </li>
+                    </li> -->
 
 
 

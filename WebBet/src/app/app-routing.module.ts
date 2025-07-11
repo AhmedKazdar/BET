@@ -33,7 +33,7 @@ const routes: Routes = [
   {
     path: 'announcement',
     loadChildren: () => import('./announcement/announcement.module').then((m) => m.AnnouncementModule),
-    canActivate: [AuthMaintananceGuard],
+    canActivate: [AuthMaintananceGuard]
   },
   {
     path: 'maintenance',
@@ -44,8 +44,12 @@ const routes: Routes = [
     path: '',
     component: FullWrapComponent,
     children: [
-      { path: '', pathMatch: 'full', redirectTo: 'dash' },
-      { path: 'dash', component: HomeComponent },
+      { path: '', pathMatch: 'full', redirectTo: 'en' },
+      { path: 'en', component: HomeComponent },
+      { path: 'bd', component: HomeComponent },
+      { path: 'sp', component: HomeComponent },
+      { path: 'tu', component: HomeComponent },
+      { path: 'pg', component: HomeComponent },
       { path: 'virtuals', component: VirtualsComponent },
       { path: 'running', component: InplayComponent },
       { path: 'sport', component: HighlightsComponent },
@@ -89,7 +93,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(routes, { useHash: true, scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

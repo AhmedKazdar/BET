@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { MainService } from 'src/app/services/main.service';
 import { ShareDataService } from 'src/app/services/share-data.service';
@@ -24,6 +25,7 @@ export class MarqueeComponent implements OnInit {
   Update: any;
 
   constructor(
+    private router: Router,
     private userService: ClientApiService,
     private main: MainService,
     private tokenService: TokenService,
@@ -118,7 +120,10 @@ export class MarqueeComponent implements OnInit {
   }
 
   openAnnouncementPopUp() {
-    window.open('#announcement', '_blank', "toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=0,width=850,height=650");
+    // For hash-based routing, we need to manually construct the URL
+    const baseUrl = window.location.origin + window.location.pathname;
+    const url = `${baseUrl}#/announcement`;
+    window.open(url, '_blank', "toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=0,width=850,height=650");
   }
 
 

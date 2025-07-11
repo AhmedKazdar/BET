@@ -2427,9 +2427,21 @@ table .calendarTable_inputBox textarea,
 }
 
 .header h1 {
-    width: 143px;
-    height: 34px;
-    background: url(https://b2c.static112233.com/assets/images/Logo.png) no-repeat
+    width: 162px;
+    height: 57px;
+    background-size: contain !important;
+    background: url(/assets/images/Cricity.png) no-repeat;
+    margin-top: -16px !important;
+    margin-left: 12px;
+}
+
+.cric365 .header h1 {
+    width: 160px;
+    height: 50px;
+    background-size: contain !important;
+    background: url(/assets/images/cric365.png) no-repeat;
+    margin-top: -17px !important;
+
 }
 
 .cricbuzzer .header h1 {

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavigationStart, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { filter } from 'rxjs/operators';
 import { forkJoin, Subscription } from 'rxjs';
 import { CasinoApiService } from 'src/app/services/casino-api.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
@@ -12,6 +12,7 @@ import { ShareDataService } from 'src/app/services/share-data.service';
 import { TokenService } from 'src/app/services/token.service';
 import { environment } from 'src/environments/environment';
 import { DepositWithdrawService } from '../../services/depositwithdraw.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -68,6 +69,7 @@ export class HeaderComponent implements OnInit {
     isOneClickBet: false,
     oneClickBetStakeIndex: 0
   }
+  public langx:any;
 
 
   pingPending: boolean = false;
@@ -79,6 +81,7 @@ export class HeaderComponent implements OnInit {
   isTrnNo = environment.isTrnNo
 
   sportSubscription!: Subscription;
+  private routeSubscription: Subscription = new Subscription();
   eventBetsSubscription!: Subscription;
   mainInterval;
   cricbuzzerheader: boolean = true;
@@ -100,20 +103,62 @@ export class HeaderComponent implements OnInit {
     private dfService: DataFormatsService,
     private shareService: ShareDataService,
     private loginService: LoginService,
-    public router: Router,
+    private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private depositWithdrawService: DepositWithdrawService,
     public toastr: ToastrService,
     private casinoapiService: CasinoApiService,
+    
   ) {
-    if (this.tokenService.getLanguage()) {
-      this.selectedlang = this.tokenService.getLanguage()
-      this.selectlanguage(this.selectedlang)
+    // Get the current URL
+    const currentUrl = window.location.href;
+    
+    // Check if we're using hash-based routing
+    if (currentUrl.includes('#/')) {
+      const parts = currentUrl.split('#/');
+      if (parts.length > 1) {
+        // Get the first part after #/ and split by / to get the language
+        const pathParts = parts[1].split('/');
+        this.langx = pathParts[0];
+      }
     } else {
-      this.selectlanguage('en')
+      // Fallback to path-based routing
+      const pathParts = window.location.pathname.split('/').filter(part => part);
+      this.langx = pathParts[0] || 'en';
     }
-    this.listAWCLocal()
-    this.shareService.getgameStatus$.subscribe((resp) =>{
+    
+    // Map language codes - 'pg' should be treated as 'pt' for Portuguese
+    const languageMap: {[key: string]: string} = {
+      'pg': 'pg',  // Map 'pg' to 'pt' for Portuguese
+      'en': 'en',
+      'es': 'es',
+      'tu': 'tu',
+      'bd': 'bd',
+    };
+    
+    // Get the mapped language or default to 'en'
+    this.langx = languageMap[this.langx] || 'en';
+    
+    console.log("Detected language:", this.langx);
+    
+    // Set the language
+    if (this.tokenService.getLanguage()) {
+      this.selectedlang = this.tokenService.getLanguage();
+      this.selectlanguage(this.langx);
+    } else {
+      this.selectlanguage(this.langx);
+    }
+    this.listAWCLocal();
+    
+    // Listen for route changes
+    this.routeSubscription = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.updateLanguageFromUrl();
+    });
+    
+    this.shareService.getgameStatus$.subscribe((resp) => {
       this.GameStatus = resp
     })
 
@@ -183,6 +228,42 @@ export class HeaderComponent implements OnInit {
       }
     })
 
+  }
+
+  // Extract and update language from URL
+  private updateLanguageFromUrl() {
+    const currentUrl = window.location.href;
+    
+    // Check if we're using hash-based routing
+    if (currentUrl.includes('#/')) {
+      const parts = currentUrl.split('#/');
+      if (parts.length > 1) {
+        const pathParts = parts[1].split('/');
+        this.langx = pathParts[0];
+      }
+    } else {
+      const pathParts = window.location.pathname.split('/').filter(part => part);
+      this.langx = pathParts[0] || 'en';
+    }
+    
+    const languageMap: {[key: string]: string} = {
+      'pg': 'pg',
+      'en': 'en',
+      'es': 'es',
+      'tu': 'tu',
+      'bd': 'bd',
+    };
+    
+    this.langx = languageMap[this.langx] || 'en';
+    
+    console.log("Updated language from URL:", this.langx);
+    
+    if (this.tokenService.getLanguage()) {
+      this.selectedlang = this.tokenService.getLanguage();
+      this.selectlanguage(this.langx);
+    } else {
+      this.selectlanguage(this.langx);
+    }
   }
 
   ngOnInit(): void {
@@ -445,6 +526,9 @@ export class HeaderComponent implements OnInit {
     if (this.fundInterval) {
       clearInterval(this.fundInterval);
     }
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
+    }
     if (this.lowBalanceInterval) {
       clearInterval(this.lowBalanceInterval);
     }
@@ -671,6 +755,7 @@ export class HeaderComponent implements OnInit {
       }
     }
     this.tokenService.setLanguage(this.range);
+    
   }
   getLanguage() {
     let L = []

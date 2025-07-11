@@ -63,10 +63,10 @@ export class CasinoApiService {
     return this.http.get(`${this.baseUrl}/listBOGCasinoPlatforms`);
   }
   boAuth(params) {
-    return this.http.post(`https://blueocean.vrnl.net/pad=700/api/auth`, params);
+    return this.http.post(`https://1877.space/pad=700/api/auth`, params);
   }
   boGames(provider: string) {
-    return this.http.get(`https://blueocean.vrnl.net/pad=700/api/Games/${provider}`);
+    return this.http.get(`https://1877.space/pad=700/api/Games/${provider}`);
   }
   awclist() {
     return this.http.get(`${this.baseUrl}/listAWCCasinoPlatforms`);
@@ -82,14 +82,14 @@ export class CasinoApiService {
   }
   amanAuthNew(data:any){
     if(this.siteName=="cricbuzzercom"){
-      return this.http.post(`https://casino.cricbuzzer.io/pad=93/api/poker/auth/`, data);
+      return this.http.post(`https://1877.space/pad=93/api/poker/auth/`, data);
     }else{
-    return this.http.post(`https://aura.vrnl.net/pad=93/api/poker/auth/`, data);
+    return this.http.post(`https://1877.space/pad=93/api/poker/auth/`, data);
     }
   }
   getAuraOperators() {
     const domain = origin.replace(/(^\w+:|^)\/\/(www\.)?/, '');
-    return this.http.get(`https://api3.vrnlapi.live:3479/api/getAuraOperators/${domain}`);
+    return this.http.get(`https://cricity.net/api/getAuraOperators/${domain}`);
   }
 
 }

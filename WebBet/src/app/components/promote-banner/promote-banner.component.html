@@ -2,6 +2,25 @@
 <div id="promoteWrap" class="promo-banner-wrap">
     <div class="promo-banner">
         <ul class="slides">
+            <ng-container *ngIf="siteName == 'cricity'">
+                <li class="banner"><a href="#"  target="_blank"><img src="/assets/images/CricityBanner1.jpg" alt="slider1" /></a>
+                </li>
+                <li class="banner"><a href="#"  target="_blank"><img src="/assets/images/CricityBanner2.jpg" alt="slider2" /></a>
+                </li>
+                <li class="banner"><a href="#"  target="_blank"><img src="/assets/images/CricityBanner3.jpg" alt="slider3" /></a>
+                </li>
+                <li class="banner"><a href="#"  target="_blank"><img src="/assets/images/CricityBanner4.jpg" alt="slider4" /></a>
+                </li>
+            </ng-container> <ng-container *ngIf="siteName == 'cric365'">
+                <li class="banner"><a href="#"  target="_blank"><img src="/assets/images/cricBanner1.jpg" alt="slider1" /></a>
+                </li>
+                <li class="banner"><a href="#"  target="_blank"><img src="/assets/images/cricBanner2.jpg" alt="slider2" /></a>
+                </li>
+                <li class="banner"><a href="#"  target="_blank"><img src="/assets/images/cricBanner3.jpg" alt="slider3" /></a>
+                </li>
+                <li class="banner"><a href="#"  target="_blank"><img src="/assets/images/cricBanner4.jpg" alt="slider4" /></a>
+                </li>
+            </ng-container>
             <ng-container *ngIf="siteName == 'cricbuzzerlive'">
                 <li class="banner"><a href="#"  target="_blank"><img src="https://b2c.static112233.com/assets/images/mobile/promo/cricbuzzer/slider1.webp" alt="slider1" /></a>
                 </li>

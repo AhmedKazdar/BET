@@ -4,10 +4,16 @@
     </div>
     <div class="function-wrap">
     </div>
-    <div class="announce-content" id="announcementContent" *ngIf="isLogin">
-        <div id="announcementTemplate" class="article-wrap">
-            <p id="textByLanguageType_0">{{news}} {{vnews?' | '+vnews:''}}</p>
+    <div class="announce-content" id="announcementContent">
+        <div *ngIf="isLogin">
+            <div *ngFor="let announcement of announcements; let i = index" id="announcementTemplate" class="article-wrap">
+                <dl class="article-date">
+                    <dt id="date_{{i}}">{{announcement.date}}</dt>
+                    <dd id="month_{{i}}">{{announcement.month}}</dd>
+                    <dd id="year_{{i}}">{{announcement.year}}</dd>
+                </dl>
+                <p id="textByLanguageType_{{i}}" [innerHTML]="announcement.text"></p>
+            </div>
         </div>
     </div>
-
 </div>

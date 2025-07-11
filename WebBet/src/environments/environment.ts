@@ -3,11 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 
-let siteName = "cricity";
+let siteName = "cric365";
 let hostname = window.origin;
 let origin = "";
 let domain = "cricity.net";
-let apisUrl = "/assets/apilical.json";
+let apisUrl = "https://cricity.net/all_apis.json";
 let isCaptcha = false;
 let isallSports = true;
 let whatsapp = "+21623237006";
@@ -18,7 +18,7 @@ let isCasinoTab = true;
 let isExchangeGames = true
 let ishorseRace = true
 let telegramBotName = ""
-let currency=""
+let currency="INR"
 let auto = true
 let isb2c = true
 let isEtgcasino = true;

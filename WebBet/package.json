@@ -20,6 +20,8 @@
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
     "@metamask/detect-provider": "^2.0.0",
+    "@ngx-translate/core": "^16.0.4",
+    "@ngx-translate/http-loader": "^16.0.1",
     "@types/jquery": "^3.5.10",
     "angular-google-charts": "^2.2.2",
     "firebase": "^9.1.3",

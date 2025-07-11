@@ -1338,21 +1338,34 @@
                         <tr id="fullSelectionTemplate" style="display: none;">
                             <th>
 
-                                <dl id="horseInfo" class="horse-info" style="display: none;">
+                                <dl id="horseInfo" class="horse-info">
                                     <dt>
-                                        <a id="marketDepthBtn" href="#"><img class="icon-predict"
-                                                src="https://b2c.static112233.com/assets/images/transparent.gif"></a>
-                                        <ul id="horseBox" class="horse-box">
+                                        <a id="marketDepthBtn">
+                                            <img class="icon-predict" src="assets/images/transparent.gif" alt="transparent" loading="lazy">
+                                        </a>
+                                        <ul id="horseBox" class="horse-box tooltip1">
                                             <li id="clothNumberAlpha"></li>
-                                            <li id="stallDraw"></li>
+                                            <li id="stallDraw" style="display: none;"></li>
                                         </ul>
-                                        <div id="uniform" class="uniform"><img src=""></div>
+                                        <div id="uniform" class="saddle_ uniform">
+                                            <img alt="COLOURS_FILENAME" loading="lazy" style="display: none;" src="https://content-cache.cdnbf.net/feeds_images/Horses/SilkColours/c20250708-Leeton (AUS)-H/1984267.png">
+                                        </div>
                                     </dt>
-                                    <dd>
+                                    <dd class="tooltip1">
                                         <ul id="horseName" class="horse-name">
                                             <li id="runnerName"></li>
                                             <li id="jockyName"></li>
                                         </ul>
+                                        <span class="tooltip1text" id="runnername-50888663">
+                                            <span class="tooltip1-container">
+                                                <b>Trainer: </b><span id="trainerName"></span><br>
+                                                <b>Age/weight: </b><span id="ageWeight"></span><br>
+                                                <b>From: </b><span id="form"></span><br>
+                                                <b>Days since last run: </b><span id="daysSinceLastRun"></span><br>
+                                                <b>Jockey claim: </b><span id="jockeyClaim"></span><br>
+                                                <b>Wearing: </b><span id="wearing"></span>
+                                            </span>
+                                        </span>
                                         <dl id="horseInfoHover" class="horse_info-hover">
                                             <dt>Trainer:</dt>
                                             <dd id="trainerName"></dd>
